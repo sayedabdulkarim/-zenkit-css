@@ -2,6 +2,7 @@
 // ZenKit - Tables
 // ========================================
 
+@use 'sass:map';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -188,8 +189,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-@each $breakpoint in map-keys($breakpoints) {
-  $infix: if($breakpoint == xs, "", "-#{$breakpoint}");
+@each $breakpoint in map.keys($breakpoints) {
+  $infix: "";
+  @if $breakpoint != xs {
+    $infix: "-#{$breakpoint}";
+  }
 
   @include breakpoint-down($breakpoint) {
     .table-responsive#{$infix} {

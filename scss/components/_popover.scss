@@ -2,6 +2,7 @@
 // ZenKit - Popover
 // ========================================
 
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 
 // ----------------------------------------
@@ -224,7 +225,7 @@
 .popover-primary {
   --popover-bg: var(--primary);
   --popover-border-color: var(--primary);
-  --popover-header-bg: #{darken($primary, 5%)};
+  --popover-header-bg: #{color.adjust($primary, $lightness: -5%)};
   --popover-header-color: var(--white);
   --popover-body-color: var(--white);
 }
@@ -240,7 +241,7 @@
 .popover-success {
   --popover-bg: var(--success);
   --popover-border-color: var(--success);
-  --popover-header-bg: #{darken($success, 5%)};
+  --popover-header-bg: #{color.adjust($success, $lightness: -5%)};
   --popover-header-color: var(--white);
   --popover-body-color: var(--white);
 }
@@ -248,7 +249,7 @@
 .popover-danger {
   --popover-bg: var(--danger);
   --popover-border-color: var(--danger);
-  --popover-header-bg: #{darken($danger, 5%)};
+  --popover-header-bg: #{color.adjust($danger, $lightness: -5%)};
   --popover-header-color: var(--white);
   --popover-body-color: var(--white);
 }
@@ -256,7 +257,7 @@
 .popover-warning {
   --popover-bg: var(--warning);
   --popover-border-color: var(--warning);
-  --popover-header-bg: #{darken($warning, 5%)};
+  --popover-header-bg: #{color.adjust($warning, $lightness: -5%)};
   --popover-header-color: var(--gray-900);
   --popover-body-color: var(--gray-900);
 }
@@ -264,7 +265,7 @@
 .popover-info {
   --popover-bg: var(--info);
   --popover-border-color: var(--info);
-  --popover-header-bg: #{darken($info, 5%)};
+  --popover-header-bg: #{color.adjust($info, $lightness: -5%)};
   --popover-header-color: var(--white);
   --popover-body-color: var(--white);
 }

@@ -2,6 +2,7 @@
 // ZenKit - Color Utilities
 // ========================================
 
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -129,19 +130,19 @@
 }
 
 .bg-gradient-success {
-  background: linear-gradient(135deg, $success, darken($success, 15%));
+  background: linear-gradient(135deg, $success, color.adjust($success, $lightness: -15%));
 }
 
 .bg-gradient-danger {
-  background: linear-gradient(135deg, $danger, darken($danger, 15%));
+  background: linear-gradient(135deg, $danger, color.adjust($danger, $lightness: -15%));
 }
 
 .bg-gradient-warning {
-  background: linear-gradient(135deg, $warning, darken($warning, 15%));
+  background: linear-gradient(135deg, $warning, color.adjust($warning, $lightness: -15%));
 }
 
 .bg-gradient-info {
-  background: linear-gradient(135deg, $info, darken($info, 15%));
+  background: linear-gradient(135deg, $info, color.adjust($info, $lightness: -15%));
 }
 
 // Gradient directions

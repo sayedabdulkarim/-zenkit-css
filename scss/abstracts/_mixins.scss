@@ -2,13 +2,15 @@
 // ZenKit - Mixins
 // ========================================
 
+@use 'sass:map';
+@use 'sass:math';
 @use 'variables' as *;
 
 // ----------------------------------------
 // Breakpoint Mixins (Mobile First)
 // ----------------------------------------
 @mixin breakpoint-up($name) {
-  $min: map-get($breakpoints, $name);
+  $min: map.get($breakpoints, $name);
   @if $min and $min > 0 {
     @media (min-width: $min) {
       @content;
@@ -19,7 +21,7 @@
 }
 
 @mixin breakpoint-down($name) {
-  $max: map-get($breakpoints, $name);
+  $max: map.get($breakpoints, $name);
   @if $max and $max > 0 {
     @media (max-width: ($max - 0.02px)) {
       @content;
@@ -75,8 +77,8 @@
 }
 
 @mixin make-col($size, $columns: $grid-columns) {
-  flex: 0 0 percentage(calc($size / $columns));
-  max-width: percentage(calc($size / $columns));
+  flex: 0 0 math.percentage(math.div($size, $columns));
+  max-width: math.percentage(math.div($size, $columns));
   padding-right: calc($grid-gutter / 2);
   padding-left: calc($grid-gutter / 2);
 }
@@ -258,7 +260,7 @@
 
   &::before {
     display: block;
-    padding-top: percentage(calc($height / $width));
+    padding-top: math.percentage(math.div($height, $width));
     content: "";
   }
 

@@ -2,6 +2,7 @@
 // ZenKit - Dropdown
 // ========================================
 
+@use 'sass:map';
 @use '../abstracts/variables' as *;
 
 // ----------------------------------------
@@ -280,7 +281,7 @@
 
 // Responsive alignment
 @each $breakpoint in (sm, md, lg, xl, 2xl) {
-  @media (min-width: map-get($breakpoints, $breakpoint)) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
     .dropdown-menu-#{$breakpoint}-start {
       --position: start;
       right: auto;

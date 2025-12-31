@@ -165,14 +165,22 @@
 // ----------------------------------------
 @for $i from 0 through ($grid-columns - 1) {
   .offset-#{$i} {
-    margin-left: if($i == 0, 0, percentage(math.div($i, $grid-columns)));
+    @if $i == 0 {
+      margin-left: 0;
+    } @else {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
   }
 }
 
 @include sm {
   @for $i from 0 through ($grid-columns - 1) {
     .offset-sm-#{$i} {
-      margin-left: if($i == 0, 0, percentage(math.div($i, $grid-columns)));
+      @if $i == 0 {
+        margin-left: 0;
+      } @else {
+        margin-left: math.percentage(math.div($i, $grid-columns));
+      }
     }
   }
 }
@@ -180,7 +188,11 @@
 @include md {
   @for $i from 0 through ($grid-columns - 1) {
     .offset-md-#{$i} {
-      margin-left: if($i == 0, 0, percentage(math.div($i, $grid-columns)));
+      @if $i == 0 {
+        margin-left: 0;
+      } @else {
+        margin-left: math.percentage(math.div($i, $grid-columns));
+      }
     }
   }
 }
@@ -188,7 +200,11 @@
 @include lg {
   @for $i from 0 through ($grid-columns - 1) {
     .offset-lg-#{$i} {
-      margin-left: if($i == 0, 0, percentage(math.div($i, $grid-columns)));
+      @if $i == 0 {
+        margin-left: 0;
+      } @else {
+        margin-left: math.percentage(math.div($i, $grid-columns));
+      }
     }
   }
 }
@@ -196,7 +212,11 @@
 @include xl {
   @for $i from 0 through ($grid-columns - 1) {
     .offset-xl-#{$i} {
-      margin-left: if($i == 0, 0, percentage(math.div($i, $grid-columns)));
+      @if $i == 0 {
+        margin-left: 0;
+      } @else {
+        margin-left: math.percentage(math.div($i, $grid-columns));
+      }
     }
   }
 }
