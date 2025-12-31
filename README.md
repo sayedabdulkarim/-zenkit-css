@@ -1,13 +1,16 @@
 <p align="center">
   <a href="https://sayedabdulkarim.github.io/-zenkit-css/docs/">
-    <img src="https://raw.githubusercontent.com/sayedabdulkarim/-zenkit-css/main/docs/zenkit-logo.svg" alt="ZenKit" width="120" height="120">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/npm/zenkit-css@latest/docs/zenkit-logo.svg">
+      <img src="https://cdn.jsdelivr.net/npm/zenkit-css@latest/docs/zenkit-logo.svg" alt="ZenKit" width="120">
+    </picture>
   </a>
 </p>
 
 <h3 align="center">ZenKit</h3>
 
 <p align="center">
-  A minimal, modern CSS framework for peaceful development.
+  Sleek, intuitive, and lightweight CSS framework for faster web development.
   <br>
   <a href="https://sayedabdulkarim.github.io/-zenkit-css/docs/"><strong>Explore ZenKit docs »</strong></a>
   <br>
