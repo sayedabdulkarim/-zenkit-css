@@ -27,7 +27,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sayedabdulkarim/zenkit"
+    "url": "https://github.com/sayedabdulkarim/-zenkit-css"
   },
   "devDependencies": {
     "sass": "^1.69.0",

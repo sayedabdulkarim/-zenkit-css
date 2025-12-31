@@ -1,6 +1,10 @@
 # ZenKit
 
+[![GitHub](https://img.shields.io/github/stars/sayedabdulkarim/-zenkit-css?style=social)](https://github.com/sayedabdulkarim/-zenkit-css)
+
 > A minimal, modern CSS framework for peaceful development
+
+[Documentation](https://sayedabdulkarim.github.io/-zenkit-css/docs/) | [GitHub](https://github.com/sayedabdulkarim/-zenkit-css)
 
 ## Features
 
