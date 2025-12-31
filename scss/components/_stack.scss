@@ -1,0 +1,196 @@
+// ========================================
+// ZenKit - Stack Component (VStack/HStack)
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Stack Base
+// ----------------------------------------
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// Vertical Stack (VStack)
+// ----------------------------------------
+.vstack {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+// ----------------------------------------
+// Horizontal Stack (HStack)
+// ----------------------------------------
+.hstack {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+// ----------------------------------------
+// Stack Alignment
+// ----------------------------------------
+.stack-start {
+  align-items: flex-start;
+}
+
+.stack-center {
+  align-items: center;
+}
+
+.stack-end {
+  align-items: flex-end;
+}
+
+.stack-stretch {
+  align-items: stretch;
+}
+
+.stack-baseline {
+  align-items: baseline;
+}
+
+// ----------------------------------------
+// Stack Justify
+// ----------------------------------------
+.stack-justify-start {
+  justify-content: flex-start;
+}
+
+.stack-justify-center {
+  justify-content: center;
+}
+
+.stack-justify-end {
+  justify-content: flex-end;
+}
+
+.stack-justify-between {
+  justify-content: space-between;
+}
+
+.stack-justify-around {
+  justify-content: space-around;
+}
+
+.stack-justify-evenly {
+  justify-content: space-evenly;
+}
+
+// ----------------------------------------
+// Stack Gap
+// ----------------------------------------
+.stack-gap-0 { gap: 0; }
+.stack-gap-1 { gap: var(--space-1); }
+.stack-gap-2 { gap: var(--space-2); }
+.stack-gap-3 { gap: var(--space-3); }
+.stack-gap-4 { gap: var(--space-4); }
+.stack-gap-5 { gap: var(--space-5); }
+.stack-gap-6 { gap: var(--space-6); }
+.stack-gap-8 { gap: var(--space-8); }
+.stack-gap-10 { gap: var(--space-10); }
+.stack-gap-12 { gap: var(--space-12); }
+
+// ----------------------------------------
+// Stack Wrap
+// ----------------------------------------
+.stack-wrap {
+  flex-wrap: wrap;
+}
+
+.stack-nowrap {
+  flex-wrap: nowrap;
+}
+
+.stack-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+// ----------------------------------------
+// Stack Divider
+// ----------------------------------------
+.stack-divider {
+  > *:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+}
+
+.hstack-divider {
+  > *:not(:last-child) {
+    border-right: 1px solid var(--border);
+    padding-right: var(--space-3);
+    margin-right: var(--space-3);
+  }
+}
+
+// ----------------------------------------
+// Stack Responsive
+// ----------------------------------------
+@include sm {
+  .stack-sm-row {
+    flex-direction: row;
+  }
+
+  .stack-sm-col {
+    flex-direction: column;
+  }
+}
+
+@include md {
+  .stack-md-row {
+    flex-direction: row;
+  }
+
+  .stack-md-col {
+    flex-direction: column;
+  }
+}
+
+@include lg {
+  .stack-lg-row {
+    flex-direction: row;
+  }
+
+  .stack-lg-col {
+    flex-direction: column;
+  }
+}
+
+// ----------------------------------------
+// Stack Reverse
+// ----------------------------------------
+.stack-reverse {
+  flex-direction: column-reverse;
+}
+
+.hstack-reverse {
+  flex-direction: row-reverse;
+}
+
+// ----------------------------------------
+// Spacer (for Stack)
+// ----------------------------------------
+.spacer {
+  flex: 1 1 auto;
+}
+
+// ----------------------------------------
+// Stack Item Utilities
+// ----------------------------------------
+.stack-item-grow {
+  flex-grow: 1;
+}
+
+.stack-item-shrink {
+  flex-shrink: 1;
+}
+
+.stack-item-noshrink {
+  flex-shrink: 0;
+}

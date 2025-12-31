@@ -1,0 +1,154 @@
+// ========================================
+// ZenKit - Kbd (Keyboard Key) Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Kbd Base
+// ----------------------------------------
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  padding: 0.15em 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: $font-weight-medium;
+  line-height: 1.4;
+  color: var(--text);
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: $border-radius-sm;
+  box-shadow:
+    0 1px 0 1px var(--gray-200),
+    0 2px 0 0 var(--gray-100),
+    inset 0 -1px 0 0 var(--gray-200);
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+// ----------------------------------------
+// Kbd Dark Theme
+// ----------------------------------------
+[data-theme="dark"] .kbd,
+.kbd-dark {
+  background-color: var(--gray-800);
+  border-color: var(--gray-600);
+  color: var(--gray-100);
+  box-shadow:
+    0 1px 0 1px var(--gray-700),
+    0 2px 0 0 var(--gray-800),
+    inset 0 -1px 0 0 var(--gray-700);
+}
+
+// ----------------------------------------
+// Kbd Sizes
+// ----------------------------------------
+.kbd-sm {
+  font-size: 0.75em;
+  padding: 0.1em 0.3em;
+  min-width: 1.25em;
+}
+
+.kbd-lg {
+  font-size: 1em;
+  padding: 0.2em 0.5em;
+  min-width: 1.75em;
+}
+
+// ----------------------------------------
+// Kbd Variants
+// ----------------------------------------
+.kbd-outline {
+  background: transparent;
+  box-shadow: none;
+}
+
+.kbd-flat {
+  box-shadow: none;
+  border-bottom-width: 2px;
+}
+
+// ----------------------------------------
+// Kbd Group (Shortcut)
+// ----------------------------------------
+.kbd-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.kbd-separator {
+  color: var(--text-muted);
+  font-size: 0.75em;
+  margin: 0 0.125rem;
+
+  &::before {
+    content: "+";
+  }
+}
+
+.kbd-then {
+  color: var(--text-muted);
+  font-size: 0.75em;
+  margin: 0 0.25rem;
+
+  &::before {
+    content: "then";
+  }
+}
+
+// ----------------------------------------
+// Kbd Icons (for special keys)
+// ----------------------------------------
+.kbd-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+// ----------------------------------------
+// Common Key Symbols
+// ----------------------------------------
+.kbd-cmd::before { content: "⌘"; }
+.kbd-shift::before { content: "⇧"; }
+.kbd-option::before { content: "⌥"; }
+.kbd-ctrl::before { content: "⌃"; }
+.kbd-enter::before { content: "↵"; }
+.kbd-tab::before { content: "⇥"; }
+.kbd-backspace::before { content: "⌫"; }
+.kbd-delete::before { content: "⌦"; }
+.kbd-escape::before { content: "⎋"; }
+.kbd-up::before { content: "↑"; }
+.kbd-down::before { content: "↓"; }
+.kbd-left::before { content: "←"; }
+.kbd-right::before { content: "→"; }
+.kbd-space::before { content: "␣"; }
+.kbd-caps::before { content: "⇪"; }
+
+// ----------------------------------------
+// Kbd in Text
+// ----------------------------------------
+p .kbd,
+span .kbd,
+li .kbd {
+  margin: 0 0.125rem;
+}
+
+// ----------------------------------------
+// Kbd Tooltip Style
+// ----------------------------------------
+.kbd-tooltip {
+  background-color: var(--gray-900);
+  color: var(--white);
+  border-color: var(--gray-700);
+  box-shadow: none;
+  font-size: 0.7em;
+}

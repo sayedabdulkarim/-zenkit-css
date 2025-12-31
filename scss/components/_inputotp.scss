@@ -1,0 +1,254 @@
+// ========================================
+// ZenKit - Input OTP Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// OTP Container
+// ----------------------------------------
+.otp {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.otp-group {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+// ----------------------------------------
+// OTP Input Base
+// ----------------------------------------
+.otp-input {
+  width: 2.5rem;
+  height: 3rem;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+  color: var(--text);
+  background-color: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: $border-radius;
+  transition: border-color $transition-base $transition-timing,
+              box-shadow $transition-base $transition-timing;
+  caret-color: var(--primary);
+
+  &::placeholder {
+    color: var(--gray-300);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+// ----------------------------------------
+// OTP Sizes
+// ----------------------------------------
+.otp-sm .otp-input {
+  width: 2rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
+.otp-lg .otp-input {
+  width: 3rem;
+  height: 3.5rem;
+  font-size: 1.5rem;
+}
+
+// ----------------------------------------
+// OTP Separator
+// ----------------------------------------
+.otp-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+
+  &::before {
+    content: "-";
+  }
+}
+
+.otp-separator-dot::before {
+  content: "•";
+}
+
+// ----------------------------------------
+// OTP States
+// ----------------------------------------
+.otp-input:disabled {
+  background-color: var(--bg-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.otp-input[readonly] {
+  background-color: var(--bg-muted);
+  cursor: default;
+}
+
+// ----------------------------------------
+// OTP Validation States
+// ----------------------------------------
+.otp-error .otp-input {
+  border-color: var(--danger);
+
+  &:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba($danger, 0.15);
+  }
+}
+
+.otp-success .otp-input {
+  border-color: var(--success);
+
+  &:focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba($success, 0.15);
+  }
+}
+
+// ----------------------------------------
+// OTP Filled State
+// ----------------------------------------
+.otp-input.filled,
+.otp-input:not(:placeholder-shown) {
+  border-color: var(--primary-300);
+  background-color: var(--primary-50);
+}
+
+// ----------------------------------------
+// OTP Variants
+// ----------------------------------------
+
+// Underline variant
+.otp-underline .otp-input {
+  border-width: 0 0 2px 0;
+  border-radius: 0;
+  background: transparent;
+
+  &:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+  }
+}
+
+// Rounded variant
+.otp-rounded .otp-input {
+  border-radius: $border-radius-full;
+}
+
+// Ghost variant
+.otp-ghost .otp-input {
+  border-color: transparent;
+  background-color: var(--gray-100);
+
+  &:focus {
+    background-color: var(--bg);
+    border-color: var(--primary);
+  }
+}
+
+// ----------------------------------------
+// OTP with Mask
+// ----------------------------------------
+.otp-mask .otp-input {
+  -webkit-text-security: disc;
+  text-security: disc;
+}
+
+// ----------------------------------------
+// OTP Help Text
+// ----------------------------------------
+.otp-help {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.otp-error .otp-help {
+  color: var(--danger);
+}
+
+// ----------------------------------------
+// OTP Resend
+// ----------------------------------------
+.otp-resend {
+  display: block;
+  margin-top: 1rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.otp-resend-link {
+  color: var(--primary);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+}
+
+// ----------------------------------------
+// OTP Timer
+// ----------------------------------------
+.otp-timer {
+  font-weight: $font-weight-medium;
+  color: var(--text);
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .otp-input {
+    background-color: var(--gray-800);
+    border-color: var(--gray-600);
+
+    &:focus {
+      background-color: var(--gray-900);
+    }
+  }
+
+  .otp-ghost .otp-input {
+    background-color: var(--gray-700);
+
+    &:focus {
+      background-color: var(--gray-800);
+    }
+  }
+
+  .otp-input.filled,
+  .otp-input:not(:placeholder-shown) {
+    background-color: var(--gray-700);
+  }
+}

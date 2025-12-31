@@ -1,0 +1,199 @@
+// ========================================
+// ZenKit - Scroll Area Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Scroll Area Base
+// ----------------------------------------
+.scroll-area {
+  --scrollbar-size: 10px;
+  --scrollbar-thumb: var(--gray-400);
+  --scrollbar-track: var(--gray-100);
+  --scrollbar-radius: 9999px;
+
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+// ----------------------------------------
+// Webkit Scrollbar Styling
+// ----------------------------------------
+.scroll-area::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+.scroll-area::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--scrollbar-radius);
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--scrollbar-radius);
+  border: 2px solid var(--scrollbar-track);
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+.scroll-area::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+// ----------------------------------------
+// Scroll Area Variants
+// ----------------------------------------
+.scroll-area-thin {
+  --scrollbar-size: 6px;
+}
+
+.scroll-area-thick {
+  --scrollbar-size: 14px;
+}
+
+// ----------------------------------------
+// Scroll Area Colors
+// ----------------------------------------
+.scroll-area-dark {
+  --scrollbar-thumb: var(--gray-600);
+  --scrollbar-track: var(--gray-800);
+}
+
+.scroll-area-primary {
+  --scrollbar-thumb: var(--primary);
+  --scrollbar-track: var(--primary-100);
+}
+
+// ----------------------------------------
+// Scroll Direction
+// ----------------------------------------
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scroll-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.scroll-both {
+  overflow: auto;
+}
+
+// ----------------------------------------
+// Hide Scrollbar (but keep scroll)
+// ----------------------------------------
+.scroll-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Scroll on Hover
+// ----------------------------------------
+.scroll-hover {
+  overflow: hidden;
+
+  &:hover {
+    overflow: auto;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+}
+
+// ----------------------------------------
+// Scroll Snap
+// ----------------------------------------
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+
+  > * {
+    scroll-snap-align: start;
+  }
+}
+
+.scroll-snap-y {
+  scroll-snap-type: y mandatory;
+
+  > * {
+    scroll-snap-align: start;
+  }
+}
+
+.scroll-snap-center > * {
+  scroll-snap-align: center;
+}
+
+.scroll-snap-end > * {
+  scroll-snap-align: end;
+}
+
+// ----------------------------------------
+// Smooth Scroll
+// ----------------------------------------
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+// ----------------------------------------
+// Max Height Scroll
+// ----------------------------------------
+.scroll-max-h-sm {
+  max-height: 200px;
+}
+
+.scroll-max-h-md {
+  max-height: 400px;
+}
+
+.scroll-max-h-lg {
+  max-height: 600px;
+}
+
+.scroll-max-h-screen {
+  max-height: 100vh;
+}
+
+// ----------------------------------------
+// Scroll Shadow (Fade Edges)
+// ----------------------------------------
+.scroll-shadow {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: sticky;
+    left: 0;
+    right: 0;
+    height: 20px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg), transparent);
+  }
+}

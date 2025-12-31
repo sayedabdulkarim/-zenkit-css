@@ -1,0 +1,185 @@
+// ========================================
+// ZenKit - Aspect Ratio Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Aspect Ratio Base
+// ----------------------------------------
+.aspect-ratio {
+  position: relative;
+  width: 100%;
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  > img,
+  > video,
+  > iframe {
+    object-fit: cover;
+  }
+}
+
+// ----------------------------------------
+// Common Aspect Ratios
+// ----------------------------------------
+
+// Square (1:1)
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+// Video (16:9)
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+// Wide (21:9)
+.aspect-wide {
+  aspect-ratio: 21 / 9;
+}
+
+// Cinema (2.35:1)
+.aspect-cinema {
+  aspect-ratio: 2.35 / 1;
+}
+
+// Portrait (3:4)
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+// Classic TV (4:3)
+.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+// Photo (3:2)
+.aspect-3-2 {
+  aspect-ratio: 3 / 2;
+}
+
+// Golden Ratio
+.aspect-golden {
+  aspect-ratio: 1.618 / 1;
+}
+
+// ----------------------------------------
+// Aspect Ratio with Fallback (older browsers)
+// ----------------------------------------
+.aspect-ratio-box {
+  position: relative;
+  width: 100%;
+  height: 0;
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.aspect-ratio-box-square {
+  padding-bottom: 100%; // 1:1
+}
+
+.aspect-ratio-box-video {
+  padding-bottom: 56.25%; // 16:9
+}
+
+.aspect-ratio-box-4-3 {
+  padding-bottom: 75%; // 4:3
+}
+
+.aspect-ratio-box-3-2 {
+  padding-bottom: 66.67%; // 3:2
+}
+
+.aspect-ratio-box-21-9 {
+  padding-bottom: 42.86%; // 21:9
+}
+
+// ----------------------------------------
+// Object Fit Options
+// ----------------------------------------
+.aspect-contain > * {
+  object-fit: contain;
+}
+
+.aspect-cover > * {
+  object-fit: cover;
+}
+
+.aspect-fill > * {
+  object-fit: fill;
+}
+
+.aspect-none > * {
+  object-fit: none;
+}
+
+.aspect-scale-down > * {
+  object-fit: scale-down;
+}
+
+// ----------------------------------------
+// Object Position
+// ----------------------------------------
+.aspect-top > * {
+  object-position: top;
+}
+
+.aspect-bottom > * {
+  object-position: bottom;
+}
+
+.aspect-left > * {
+  object-position: left;
+}
+
+.aspect-right > * {
+  object-position: right;
+}
+
+.aspect-center > * {
+  object-position: center;
+}
+
+// ----------------------------------------
+// Aspect Ratio with Background
+// ----------------------------------------
+.aspect-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// ----------------------------------------
+// Responsive Aspect Ratios
+// ----------------------------------------
+@media (min-width: 640px) {
+  .sm\:aspect-square { aspect-ratio: 1 / 1; }
+  .sm\:aspect-video { aspect-ratio: 16 / 9; }
+  .sm\:aspect-4-3 { aspect-ratio: 4 / 3; }
+}
+
+@media (min-width: 768px) {
+  .md\:aspect-square { aspect-ratio: 1 / 1; }
+  .md\:aspect-video { aspect-ratio: 16 / 9; }
+  .md\:aspect-4-3 { aspect-ratio: 4 / 3; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:aspect-square { aspect-ratio: 1 / 1; }
+  .lg\:aspect-video { aspect-ratio: 16 / 9; }
+  .lg\:aspect-4-3 { aspect-ratio: 4 / 3; }
+}
