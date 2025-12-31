@@ -1,5 +1,5 @@
 {
-  "name": "zenkit",
+  "name": "zenkit-css",
   "version": "1.0.0",
   "description": "A minimal, modern CSS framework for peaceful development",
   "main": "dist/zenkit.css",

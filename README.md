@@ -20,7 +20,7 @@
 ### NPM
 
 ```bash
-npm install zenkit
+npm install zenkit-css
 ```
 
 ### CDN
@@ -32,7 +32,7 @@ npm install zenkit
 ### SCSS Import
 
 ```scss
-@use 'zenkit/scss/zenkit';
+@use 'zenkit-css/scss/zenkit';
 ```
 
 ## Quick Start
@@ -147,7 +147,7 @@ Or customize with SCSS:
 $primary: #your-color;
 $border-radius: 8px;
 
-@use 'zenkit/scss/zenkit';
+@use 'zenkit-css/scss/zenkit';
 ```
 
 ## Development
