@@ -1,0 +1,289 @@
+// ========================================
+// ZenKit - Masonry Layout Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// CSS Columns Masonry (Pure CSS)
+// ----------------------------------------
+.masonry {
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+// ----------------------------------------
+// Column Count Variants
+// ----------------------------------------
+.masonry-1 { column-count: 1; }
+.masonry-2 { column-count: 2; }
+.masonry-3 { column-count: 3; }
+.masonry-4 { column-count: 4; }
+.masonry-5 { column-count: 5; }
+.masonry-6 { column-count: 6; }
+
+// ----------------------------------------
+// Gap Variants
+// ----------------------------------------
+.masonry-gap-0 {
+  column-gap: 0;
+  .masonry-item { margin-bottom: 0; }
+}
+
+.masonry-gap-1 {
+  column-gap: 0.25rem;
+  .masonry-item { margin-bottom: 0.25rem; }
+}
+
+.masonry-gap-2 {
+  column-gap: 0.5rem;
+  .masonry-item { margin-bottom: 0.5rem; }
+}
+
+.masonry-gap-3 {
+  column-gap: 0.75rem;
+  .masonry-item { margin-bottom: 0.75rem; }
+}
+
+.masonry-gap-4 {
+  column-gap: 1rem;
+  .masonry-item { margin-bottom: 1rem; }
+}
+
+.masonry-gap-5 {
+  column-gap: 1.25rem;
+  .masonry-item { margin-bottom: 1.25rem; }
+}
+
+.masonry-gap-6 {
+  column-gap: 1.5rem;
+  .masonry-item { margin-bottom: 1.5rem; }
+}
+
+.masonry-gap-8 {
+  column-gap: 2rem;
+  .masonry-item { margin-bottom: 2rem; }
+}
+
+// ----------------------------------------
+// Responsive Masonry
+// ----------------------------------------
+@media (max-width: 639px) {
+  .masonry-sm-1 { column-count: 1; }
+  .masonry-sm-2 { column-count: 2; }
+}
+
+@media (min-width: 640px) {
+  .sm\:masonry-1 { column-count: 1; }
+  .sm\:masonry-2 { column-count: 2; }
+  .sm\:masonry-3 { column-count: 3; }
+}
+
+@media (min-width: 768px) {
+  .md\:masonry-1 { column-count: 1; }
+  .md\:masonry-2 { column-count: 2; }
+  .md\:masonry-3 { column-count: 3; }
+  .md\:masonry-4 { column-count: 4; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:masonry-1 { column-count: 1; }
+  .lg\:masonry-2 { column-count: 2; }
+  .lg\:masonry-3 { column-count: 3; }
+  .lg\:masonry-4 { column-count: 4; }
+  .lg\:masonry-5 { column-count: 5; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:masonry-1 { column-count: 1; }
+  .xl\:masonry-2 { column-count: 2; }
+  .xl\:masonry-3 { column-count: 3; }
+  .xl\:masonry-4 { column-count: 4; }
+  .xl\:masonry-5 { column-count: 5; }
+  .xl\:masonry-6 { column-count: 6; }
+}
+
+// ----------------------------------------
+// CSS Grid Masonry (Modern browsers)
+// ----------------------------------------
+@supports (grid-template-rows: masonry) {
+  .masonry-grid {
+    display: grid;
+    grid-template-rows: masonry;
+    gap: 1rem;
+  }
+
+  .masonry-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .masonry-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .masonry-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// ----------------------------------------
+// Flexbox Masonry (JS-assisted)
+// ----------------------------------------
+.masonry-flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem;
+}
+
+.masonry-flex-item {
+  padding: 0.5rem;
+}
+
+.masonry-flex-2 .masonry-flex-item {
+  width: 50%;
+}
+
+.masonry-flex-3 .masonry-flex-item {
+  width: 33.333%;
+}
+
+.masonry-flex-4 .masonry-flex-item {
+  width: 25%;
+}
+
+@media (max-width: 767px) {
+  .masonry-flex-item {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .masonry-flex-3 .masonry-flex-item,
+  .masonry-flex-4 .masonry-flex-item {
+    width: 50%;
+  }
+}
+
+// ----------------------------------------
+// Masonry Card (Common Content Style)
+// ----------------------------------------
+.masonry-card {
+  background-color: var(--bg);
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform $transition-base $transition-timing,
+              box-shadow $transition-base $transition-timing;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.masonry-card-image {
+  width: 100%;
+  display: block;
+}
+
+.masonry-card-content {
+  padding: 1rem;
+}
+
+.masonry-card-title {
+  font-weight: $font-weight-semibold;
+  margin-bottom: 0.5rem;
+}
+
+.masonry-card-text {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Masonry with Overlay
+// ----------------------------------------
+.masonry-overlay {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    display: block;
+    transition: transform $transition-base $transition-timing;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.masonry-overlay-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  color: var(--white);
+  opacity: 0;
+  transition: opacity $transition-base $transition-timing;
+}
+
+.masonry-overlay:hover .masonry-overlay-content {
+  opacity: 1;
+}
+
+// ----------------------------------------
+// Loading State
+// ----------------------------------------
+.masonry-loading .masonry-item {
+  animation: masonry-fade-in 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes masonry-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Staggered animation
+.masonry-item:nth-child(1) { animation-delay: 0ms; }
+.masonry-item:nth-child(2) { animation-delay: 50ms; }
+.masonry-item:nth-child(3) { animation-delay: 100ms; }
+.masonry-item:nth-child(4) { animation-delay: 150ms; }
+.masonry-item:nth-child(5) { animation-delay: 200ms; }
+.masonry-item:nth-child(6) { animation-delay: 250ms; }
+.masonry-item:nth-child(7) { animation-delay: 300ms; }
+.masonry-item:nth-child(8) { animation-delay: 350ms; }
+.masonry-item:nth-child(9) { animation-delay: 400ms; }
+.masonry-item:nth-child(10) { animation-delay: 450ms; }
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .masonry-card {
+    background-color: var(--gray-800);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+}

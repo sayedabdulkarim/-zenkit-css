@@ -1,0 +1,329 @@
+// ========================================
+// ZenKit - QR Code Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// QR Code Container
+// ----------------------------------------
+.qrcode {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.qrcode-canvas {
+  display: block;
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// QR Code Wrapper
+// ----------------------------------------
+.qrcode-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 1rem;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: $border-radius-lg;
+}
+
+// ----------------------------------------
+// QR Code Sizes
+// ----------------------------------------
+.qrcode-sm .qrcode-canvas {
+  width: 100px;
+  height: 100px;
+}
+
+.qrcode-md .qrcode-canvas {
+  width: 150px;
+  height: 150px;
+}
+
+.qrcode-lg .qrcode-canvas {
+  width: 200px;
+  height: 200px;
+}
+
+.qrcode-xl .qrcode-canvas {
+  width: 256px;
+  height: 256px;
+}
+
+// ----------------------------------------
+// QR Code with Logo
+// ----------------------------------------
+.qrcode-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  padding: 4px;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+}
+
+.qrcode-lg .qrcode-logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.qrcode-xl .qrcode-logo img {
+  width: 48px;
+  height: 48px;
+}
+
+// ----------------------------------------
+// QR Code Label
+// ----------------------------------------
+.qrcode-label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 200px;
+  word-break: break-all;
+}
+
+// ----------------------------------------
+// QR Code Actions
+// ----------------------------------------
+.qrcode-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.qrcode-download,
+.qrcode-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  background-color: var(--gray-100);
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: all $transition-fast $transition-timing;
+
+  &:hover {
+    background-color: var(--gray-200);
+    color: var(--text);
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+// ----------------------------------------
+// QR Code States
+// ----------------------------------------
+.qrcode-loading {
+  .qrcode-canvas {
+    opacity: 0.3;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+.qrcode-expired {
+  .qrcode-canvas {
+    filter: blur(3px);
+    opacity: 0.5;
+  }
+}
+
+.qrcode-expired-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.qrcode-refresh {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-xs);
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: all $transition-fast $transition-timing;
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+}
+
+.qrcode-error {
+  .qrcode-canvas {
+    opacity: 0.3;
+  }
+}
+
+.qrcode-error-message {
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+// ----------------------------------------
+// QR Code Variants
+// ----------------------------------------
+
+// Bordered
+.qrcode-bordered .qrcode-wrapper {
+  border: 2px solid var(--gray-300);
+}
+
+// Shadow
+.qrcode-shadow .qrcode-wrapper {
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+// Rounded
+.qrcode-rounded .qrcode-wrapper {
+  border-radius: $border-radius-xl;
+}
+
+.qrcode-rounded .qrcode-canvas {
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// QR Code Colors
+// ----------------------------------------
+.qrcode-primary .qrcode-wrapper {
+  border-color: var(--primary);
+}
+
+.qrcode-success .qrcode-wrapper {
+  border-color: var(--success);
+}
+
+.qrcode-warning .qrcode-wrapper {
+  border-color: var(--warning);
+}
+
+.qrcode-danger .qrcode-wrapper {
+  border-color: var(--danger);
+}
+
+// ----------------------------------------
+// QR Code Card
+// ----------------------------------------
+.qrcode-card {
+  padding: 1.5rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius-lg;
+  text-align: center;
+}
+
+.qrcode-card-title {
+  font-size: var(--text-lg);
+  font-weight: $font-weight-semibold;
+  margin-bottom: 0.5rem;
+}
+
+.qrcode-card-description {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+// ----------------------------------------
+// Scan Animation
+// ----------------------------------------
+.qrcode-scan-line {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  animation: qrcode-scan 2s ease-in-out infinite;
+}
+
+@keyframes qrcode-scan {
+  0%, 100% {
+    top: 1rem;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 1rem);
+    opacity: 0;
+  }
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .qrcode-wrapper {
+    background-color: var(--white);
+    border-color: var(--gray-600);
+  }
+
+  .qrcode-logo {
+    background-color: var(--white);
+  }
+
+  .qrcode-download,
+  .qrcode-copy {
+    background-color: var(--gray-800);
+    border-color: var(--gray-600);
+    color: var(--gray-300);
+
+    &:hover {
+      background-color: var(--gray-700);
+      color: var(--gray-100);
+    }
+  }
+
+  .qrcode-card {
+    background-color: var(--gray-800);
+    border-color: var(--gray-700);
+  }
+}

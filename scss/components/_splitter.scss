@@ -1,0 +1,413 @@
+// ========================================
+// ZenKit - Splitter Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Splitter Container
+// ----------------------------------------
+.splitter {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.splitter-horizontal {
+  flex-direction: row;
+}
+
+.splitter-vertical {
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// Splitter Panel
+// ----------------------------------------
+.splitter-panel {
+  overflow: auto;
+  position: relative;
+}
+
+.splitter-panel-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+// ----------------------------------------
+// Splitter Gutter (Handle)
+// ----------------------------------------
+.splitter-gutter {
+  flex-shrink: 0;
+  background-color: var(--gray-100);
+  position: relative;
+  transition: background-color $transition-fast $transition-timing;
+
+  &:hover {
+    background-color: var(--gray-200);
+  }
+
+  &:active {
+    background-color: var(--primary-100);
+  }
+}
+
+// Horizontal gutter (vertical split)
+.splitter-horizontal > .splitter-gutter {
+  width: 6px;
+  cursor: col-resize;
+}
+
+// Vertical gutter (horizontal split)
+.splitter-vertical > .splitter-gutter {
+  height: 6px;
+  cursor: row-resize;
+}
+
+// ----------------------------------------
+// Gutter Handle Icon
+// ----------------------------------------
+.splitter-gutter-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.splitter-horizontal .splitter-gutter-handle {
+  width: 4px;
+  height: 24px;
+  border-radius: 2px;
+  background-color: var(--gray-400);
+}
+
+.splitter-vertical .splitter-gutter-handle {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--gray-400);
+}
+
+// Dots style
+.splitter-gutter-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.splitter-horizontal .splitter-gutter-dots {
+  flex-direction: column;
+}
+
+.splitter-gutter-dots::before,
+.splitter-gutter-dots::after,
+.splitter-gutter-dots span {
+  width: 4px;
+  height: 4px;
+  background-color: var(--gray-400);
+  border-radius: 50%;
+  content: "";
+}
+
+// ----------------------------------------
+// Gutter Sizes
+// ----------------------------------------
+.splitter-gutter-sm {
+  &.splitter-horizontal > .splitter-gutter {
+    width: 4px;
+  }
+
+  &.splitter-vertical > .splitter-gutter {
+    height: 4px;
+  }
+}
+
+.splitter-gutter-lg {
+  &.splitter-horizontal > .splitter-gutter {
+    width: 10px;
+  }
+
+  &.splitter-vertical > .splitter-gutter {
+    height: 10px;
+  }
+}
+
+// ----------------------------------------
+// Gutter Variants
+// ----------------------------------------
+
+// Minimal (line only)
+.splitter-minimal .splitter-gutter {
+  background-color: transparent;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: var(--border);
+    transition: background-color $transition-fast $transition-timing;
+  }
+
+  &:hover::after {
+    background-color: var(--primary);
+  }
+}
+
+.splitter-minimal.splitter-horizontal .splitter-gutter::after {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.splitter-minimal.splitter-vertical .splitter-gutter::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+// Bordered
+.splitter-bordered .splitter-gutter {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.splitter-bordered.splitter-horizontal .splitter-gutter {
+  border-top: none;
+  border-bottom: none;
+}
+
+.splitter-bordered.splitter-vertical .splitter-gutter {
+  border-left: none;
+  border-right: none;
+}
+
+// ----------------------------------------
+// Splitter States
+// ----------------------------------------
+.splitter-dragging {
+  user-select: none;
+}
+
+.splitter-dragging .splitter-gutter {
+  background-color: var(--primary-100);
+}
+
+.splitter-dragging .splitter-gutter-handle,
+.splitter-dragging .splitter-gutter-dots::before,
+.splitter-dragging .splitter-gutter-dots::after,
+.splitter-dragging .splitter-gutter-dots span {
+  background-color: var(--primary);
+}
+
+// Disabled
+.splitter-disabled .splitter-gutter {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+// ----------------------------------------
+// Collapse Button
+// ----------------------------------------
+.splitter-collapse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: all $transition-fast $transition-timing;
+
+  &:hover {
+    background-color: var(--gray-100);
+    border-color: var(--primary);
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+    color: var(--text-muted);
+    transition: transform $transition-fast $transition-timing;
+  }
+}
+
+.splitter-panel-collapsed + .splitter-gutter .splitter-collapse svg {
+  transform: rotate(180deg);
+}
+
+// ----------------------------------------
+// Collapsed Panel
+// ----------------------------------------
+.splitter-panel-collapsed {
+  flex: 0 0 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transition: flex $transition-base $transition-timing,
+              opacity $transition-base $transition-timing;
+}
+
+// ----------------------------------------
+// Nested Splitter
+// ----------------------------------------
+.splitter-nested {
+  width: 100%;
+  height: 100%;
+}
+
+// ----------------------------------------
+// Splitter with Border
+// ----------------------------------------
+.splitter-panel-bordered {
+  border: 1px solid var(--border);
+
+  &:first-child {
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+
+  &:last-child {
+    border-radius: 0 $border-radius $border-radius 0;
+  }
+}
+
+.splitter-vertical .splitter-panel-bordered {
+  &:first-child {
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+}
+
+// ----------------------------------------
+// Min/Max Indicators
+// ----------------------------------------
+.splitter-gutter.at-min,
+.splitter-gutter.at-max {
+  .splitter-gutter-handle {
+    background-color: var(--warning);
+  }
+}
+
+// ----------------------------------------
+// Layout Presets
+// ----------------------------------------
+.splitter-layout-sidebar {
+  .splitter-panel:first-child {
+    flex: 0 0 250px;
+    min-width: 200px;
+    max-width: 400px;
+  }
+
+  .splitter-panel:last-child {
+    flex: 1;
+  }
+}
+
+.splitter-layout-equal {
+  .splitter-panel {
+    flex: 1;
+  }
+}
+
+.splitter-layout-main-detail {
+  .splitter-panel:first-child {
+    flex: 2;
+  }
+
+  .splitter-panel:last-child {
+    flex: 1;
+    min-width: 300px;
+  }
+}
+
+// ----------------------------------------
+// Full Height Container
+// ----------------------------------------
+.splitter-full-height {
+  height: 100vh;
+}
+
+.splitter-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.splitter-header {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--gray-50);
+  border-bottom: 1px solid var(--border);
+  font-weight: $font-weight-medium;
+}
+
+.splitter-body {
+  flex: 1;
+  overflow: auto;
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .splitter-gutter {
+    background-color: var(--gray-800);
+
+    &:hover {
+      background-color: var(--gray-700);
+    }
+
+    &:active {
+      background-color: rgba($primary, 0.2);
+    }
+  }
+
+  .splitter-gutter-handle,
+  .splitter-gutter-dots::before,
+  .splitter-gutter-dots::after,
+  .splitter-gutter-dots span {
+    background-color: var(--gray-500);
+  }
+
+  .splitter-minimal .splitter-gutter::after {
+    background-color: var(--gray-700);
+  }
+
+  .splitter-bordered .splitter-gutter {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+  }
+
+  .splitter-collapse {
+    background-color: var(--gray-800);
+    border-color: var(--gray-600);
+
+    &:hover {
+      background-color: var(--gray-700);
+    }
+  }
+
+  .splitter-panel-bordered {
+    border-color: var(--gray-700);
+  }
+
+  .splitter-header {
+    background-color: var(--gray-800);
+    border-color: var(--gray-700);
+  }
+}
