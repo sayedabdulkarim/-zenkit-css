@@ -1,0 +1,475 @@
+// ========================================
+// ZenKit - InputNumber Component
+// Number input with +/- controls
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// InputNumber Wrapper
+// ----------------------------------------
+.input-number {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+
+// ----------------------------------------
+// InputNumber Field
+// ----------------------------------------
+.input-number-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  padding-right: 2.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  // Hide native spin buttons
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--bg-secondary);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  &:read-only {
+    background-color: var(--bg-secondary);
+  }
+}
+
+// ----------------------------------------
+// InputNumber Controls (Stacked - Default)
+// ----------------------------------------
+.input-number-controls {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  display: flex;
+  flex-direction: column;
+  width: 1.75rem;
+  border-left: 1px solid var(--border-color);
+  border-radius: 0 $border-radius $border-radius 0;
+  overflow: hidden;
+}
+
+.input-number-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--primary);
+    background-color: var(--bg-tertiary);
+  }
+
+  &:active {
+    background-color: var(--bg-tertiary);
+  }
+
+  &:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.input-number-btn-up {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.input-number-btn-down {
+  // No additional styles needed
+}
+
+// ----------------------------------------
+// InputNumber Controls (Side by Side)
+// ----------------------------------------
+.input-number-controls-horizontal {
+  position: static;
+  flex-direction: row;
+  width: auto;
+  border: none;
+  border-radius: 0;
+
+  .input-number-btn {
+    width: 2rem;
+    border-radius: 0;
+  }
+
+  .input-number-btn-down {
+    order: -1;
+    border-right: 1px solid var(--border-color);
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+
+  .input-number-btn-up {
+    border-bottom: none;
+    border-left: 1px solid var(--border-color);
+    border-radius: 0 $border-radius $border-radius 0;
+  }
+}
+
+.input-number-horizontal {
+  .input-number-input {
+    padding-right: 0.75rem;
+    border-radius: 0;
+    text-align: center;
+  }
+}
+
+// ----------------------------------------
+// InputNumber Controls (Outside)
+// ----------------------------------------
+.input-number-outside {
+  gap: 0.5rem;
+
+  .input-number-input {
+    padding-right: 0.75rem;
+    text-align: center;
+    border-radius: $border-radius;
+  }
+
+  .input-number-controls {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    border: none;
+    gap: 0.5rem;
+  }
+
+  .input-number-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    background-color: var(--bg-primary);
+
+    &:hover {
+      border-color: var(--primary);
+    }
+  }
+
+  .input-number-btn-up,
+  .input-number-btn-down {
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+// ----------------------------------------
+// InputNumber Sizes
+// ----------------------------------------
+.input-number-sm {
+  .input-number-input {
+    padding: 0.25rem 0.5rem;
+    padding-right: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .input-number-controls {
+    width: 1.5rem;
+  }
+
+  &.input-number-horizontal .input-number-btn,
+  &.input-number-outside .input-number-btn {
+    width: 1.75rem;
+    height: 1.875rem;
+  }
+}
+
+.input-number-lg {
+  .input-number-input {
+    padding: 0.75rem 1rem;
+    padding-right: 3rem;
+    font-size: 1.125rem;
+  }
+
+  .input-number-controls {
+    width: 2.25rem;
+  }
+
+  &.input-number-horizontal .input-number-btn,
+  &.input-number-outside .input-number-btn {
+    width: 2.75rem;
+    height: 3rem;
+  }
+}
+
+// ----------------------------------------
+// InputNumber States
+// ----------------------------------------
+.input-number-error {
+  .input-number-input {
+    border-color: var(--danger);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--danger-rgb), 0.25);
+    }
+  }
+}
+
+.input-number-warning {
+  .input-number-input {
+    border-color: var(--warning);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--warning-rgb), 0.25);
+    }
+  }
+}
+
+.input-number-success {
+  .input-number-input {
+    border-color: var(--success);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--success-rgb), 0.25);
+    }
+  }
+}
+
+// ----------------------------------------
+// InputNumber Variants
+// ----------------------------------------
+// Borderless
+.input-number-borderless {
+  .input-number-input {
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+      background-color: var(--bg-secondary);
+      box-shadow: none;
+    }
+  }
+
+  .input-number-controls {
+    border-left-color: transparent;
+  }
+
+  .input-number-btn {
+    background-color: transparent;
+  }
+}
+
+// Filled
+.input-number-filled {
+  .input-number-input {
+    border-color: transparent;
+    background-color: var(--bg-secondary);
+
+    &:hover {
+      background-color: var(--bg-tertiary);
+    }
+
+    &:focus {
+      border-color: var(--primary);
+      background-color: var(--bg-primary);
+    }
+  }
+
+  .input-number-controls {
+    border-left-color: var(--border-color);
+  }
+}
+
+// ----------------------------------------
+// InputNumber with Prefix/Suffix
+// ----------------------------------------
+.input-number-affix-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+  }
+
+  .input-number-input {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .input-number {
+    flex: 1;
+  }
+}
+
+.input-number-prefix,
+.input-number-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// InputNumber with Addon
+// ----------------------------------------
+.input-number-group {
+  display: flex;
+  width: 100%;
+}
+
+.input-number-addon {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.input-number-addon-before {
+  border-right: none;
+  border-radius: $border-radius 0 0 $border-radius;
+}
+
+.input-number-addon-after {
+  border-left: none;
+  border-radius: 0 $border-radius $border-radius 0;
+}
+
+.input-number-group .input-number-input {
+  border-radius: 0;
+}
+
+.input-number-group .input-number:first-child .input-number-input {
+  border-radius: $border-radius 0 0 $border-radius;
+}
+
+.input-number-group .input-number:last-child .input-number-input {
+  border-radius: 0 $border-radius $border-radius 0;
+}
+
+// ----------------------------------------
+// InputNumber Keyboard Control Indicator
+// ----------------------------------------
+.input-number-keyboard {
+  position: relative;
+
+  &::after {
+    content: '↑↓';
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &:focus-within::after {
+    opacity: 1;
+  }
+
+  .input-number-input {
+    padding-right: 2rem;
+  }
+}
+
+// ----------------------------------------
+// InputNumber Formatter Display
+// ----------------------------------------
+.input-number-formatted {
+  position: relative;
+
+  .input-number-display {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--text-primary);
+    pointer-events: none;
+  }
+
+  .input-number-input {
+    color: transparent;
+
+    &:focus {
+      color: var(--text-primary);
+    }
+
+    &:focus + .input-number-display {
+      display: none;
+    }
+  }
+}
+
+// ----------------------------------------
+// InputNumber Read Only Display
+// ----------------------------------------
+.input-number-readonly-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+// ----------------------------------------
+// InputNumber Stepper Buttons Hidden
+// ----------------------------------------
+.input-number-no-controls {
+  .input-number-input {
+    padding-right: 0.75rem;
+  }
+
+  .input-number-controls {
+    display: none;
+  }
+}

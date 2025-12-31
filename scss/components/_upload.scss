@@ -1,0 +1,510 @@
+// ========================================
+// ZenKit - Upload / File Upload
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Upload Dropzone
+// ----------------------------------------
+.upload {
+  --upload-border-color: var(--border);
+  --upload-bg: var(--bg-secondary);
+  --upload-hover-bg: var(--gray-50);
+  --upload-active-border: var(--primary);
+  --upload-active-bg: var(--primary-50);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 200px;
+  border: 2px dashed var(--upload-border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--upload-bg);
+  cursor: pointer;
+  transition: all var(--transition-base) ease-in-out;
+
+  &:hover {
+    border-color: var(--gray-400);
+    background-color: var(--upload-hover-bg);
+  }
+}
+
+// ----------------------------------------
+// Upload Input (Hidden)
+// ----------------------------------------
+.upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+// ----------------------------------------
+// Upload Icon
+// ----------------------------------------
+.upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  color: var(--gray-400);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base) ease-in-out;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+// ----------------------------------------
+// Upload Content
+// ----------------------------------------
+.upload-content {
+  text-align: center;
+}
+
+.upload-title {
+  font-size: var(--text-base);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+
+  span {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+}
+
+.upload-description {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.upload-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+// ----------------------------------------
+// Upload States
+// ----------------------------------------
+
+// Drag Over State
+.upload-dragover,
+.upload.dragover {
+  border-color: var(--upload-active-border);
+  background-color: var(--upload-active-bg);
+
+  .upload-icon {
+    color: var(--primary);
+    background-color: var(--primary-100);
+    transform: scale(1.1);
+  }
+}
+
+// Disabled State
+.upload-disabled,
+.upload:disabled,
+.upload.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// Error State
+.upload-error {
+  --upload-border-color: var(--danger);
+  --upload-bg: var(--danger-light);
+
+  .upload-icon {
+    color: var(--danger);
+    background-color: rgba($danger, 0.1);
+  }
+}
+
+// Success State
+.upload-success {
+  --upload-border-color: var(--success);
+  --upload-bg: var(--success-light);
+
+  .upload-icon {
+    color: var(--success);
+    background-color: rgba($success, 0.1);
+  }
+}
+
+// ----------------------------------------
+// Upload Sizes
+// ----------------------------------------
+.upload-sm {
+  padding: 1rem;
+  min-height: 120px;
+
+  .upload-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.75rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .upload-title {
+    font-size: var(--text-sm);
+  }
+
+  .upload-description {
+    font-size: var(--text-xs);
+  }
+}
+
+.upload-lg {
+  padding: 3rem;
+  min-height: 280px;
+
+  .upload-icon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .upload-title {
+    font-size: var(--text-lg);
+  }
+}
+
+// ----------------------------------------
+// Upload Variants
+// ----------------------------------------
+
+// Compact / Inline Upload
+.upload-compact {
+  flex-direction: row;
+  padding: 1rem;
+  min-height: auto;
+  gap: 1rem;
+
+  .upload-icon {
+    margin-bottom: 0;
+  }
+
+  .upload-content {
+    text-align: left;
+    flex: 1;
+  }
+}
+
+// Button Style Upload
+.upload-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  min-height: auto;
+  border: $border-width solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--bg);
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+
+  &:hover {
+    background-color: var(--gray-50);
+    border-color: var(--gray-300);
+  }
+
+  .upload-icon {
+    width: auto;
+    height: auto;
+    margin: 0;
+    background: none;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}
+
+// Avatar Upload (Circular)
+.upload-avatar {
+  width: 8rem;
+  height: 8rem;
+  min-height: auto;
+  padding: 0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+
+  .upload-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .upload-title,
+  .upload-description {
+    font-size: var(--text-xs);
+  }
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &:hover .upload-overlay {
+    opacity: 1;
+  }
+}
+
+.upload-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  opacity: 0;
+  transition: opacity var(--transition-base) ease-in-out;
+  z-index: 0;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+// ----------------------------------------
+// File List
+// ----------------------------------------
+.upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.upload-file {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: var(--gray-50);
+  border: $border-width solid var(--border);
+  border-radius: var(--radius);
+}
+
+.upload-file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary);
+  background-color: var(--primary-50);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.upload-file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-file-name {
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-file-size {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.upload-file-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.upload-file-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--gray-500);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease-in-out;
+
+  &:hover {
+    color: var(--danger);
+    background-color: var(--danger-light);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Upload Progress
+// ----------------------------------------
+.upload-file-progress {
+  margin-top: 0.5rem;
+}
+
+.upload-progress-bar {
+  height: 4px;
+  background-color: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base) ease-in-out;
+}
+
+.upload-progress-text {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+// ----------------------------------------
+// Upload File States
+// ----------------------------------------
+.upload-file-uploading {
+  .upload-file-icon {
+    color: var(--info);
+    background-color: var(--info-light);
+  }
+}
+
+.upload-file-success {
+  .upload-file-icon {
+    color: var(--success);
+    background-color: var(--success-light);
+  }
+
+  .upload-progress-fill {
+    background-color: var(--success);
+  }
+}
+
+.upload-file-error {
+  border-color: var(--danger);
+  background-color: var(--danger-light);
+
+  .upload-file-icon {
+    color: var(--danger);
+    background-color: rgba($danger, 0.15);
+  }
+
+  .upload-file-name {
+    color: var(--danger);
+  }
+}
+
+// ----------------------------------------
+// Image Preview Grid
+// ----------------------------------------
+.upload-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.upload-preview-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--gray-100);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover .upload-preview-overlay {
+    opacity: 1;
+  }
+}
+
+.upload-preview-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity var(--transition-fast) ease-in-out;
+}
+
+.upload-preview-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--white);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition-fast) ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}

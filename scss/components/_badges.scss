@@ -1,0 +1,266 @@
+// ========================================
+// ZenKit - Badges
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Base Badge
+// ----------------------------------------
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25em 0.5em;
+  font-size: 0.75em;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--radius);
+}
+
+// ----------------------------------------
+// Badge Variants
+// ----------------------------------------
+.badge-primary {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.badge-secondary {
+  color: var(--white);
+  background-color: var(--gray-500);
+}
+
+.badge-success {
+  color: var(--white);
+  background-color: var(--success);
+}
+
+.badge-danger {
+  color: var(--white);
+  background-color: var(--danger);
+}
+
+.badge-warning {
+  color: var(--gray-900);
+  background-color: var(--warning);
+}
+
+.badge-info {
+  color: var(--white);
+  background-color: var(--info);
+}
+
+.badge-dark {
+  color: var(--white);
+  background-color: var(--gray-800);
+}
+
+.badge-light {
+  color: var(--gray-800);
+  background-color: var(--gray-100);
+}
+
+// ----------------------------------------
+// Soft/Light Badge Variants
+// ----------------------------------------
+.badge-soft-primary {
+  color: var(--primary-700);
+  background-color: var(--primary-100);
+}
+
+.badge-soft-success {
+  color: $success-dark;
+  background-color: var(--success-light);
+}
+
+.badge-soft-danger {
+  color: $danger-dark;
+  background-color: var(--danger-light);
+}
+
+.badge-soft-warning {
+  color: $warning-dark;
+  background-color: var(--warning-light);
+}
+
+.badge-soft-info {
+  color: $info-dark;
+  background-color: var(--info-light);
+}
+
+// ----------------------------------------
+// Outline Badges
+// ----------------------------------------
+.badge-outline-primary {
+  color: var(--primary);
+  background-color: transparent;
+  border: $border-width solid var(--primary);
+}
+
+.badge-outline-secondary {
+  color: var(--gray-600);
+  background-color: transparent;
+  border: $border-width solid var(--gray-400);
+}
+
+.badge-outline-success {
+  color: var(--success);
+  background-color: transparent;
+  border: $border-width solid var(--success);
+}
+
+.badge-outline-danger {
+  color: var(--danger);
+  background-color: transparent;
+  border: $border-width solid var(--danger);
+}
+
+.badge-outline-warning {
+  color: var(--warning);
+  background-color: transparent;
+  border: $border-width solid var(--warning);
+}
+
+.badge-outline-info {
+  color: var(--info);
+  background-color: transparent;
+  border: $border-width solid var(--info);
+}
+
+// ----------------------------------------
+// Badge Sizes
+// ----------------------------------------
+.badge-sm {
+  padding: 0.15em 0.375em;
+  font-size: 0.65em;
+}
+
+.badge-lg {
+  padding: 0.35em 0.65em;
+  font-size: 0.85em;
+}
+
+// ----------------------------------------
+// Pill Badge
+// ----------------------------------------
+.badge-pill {
+  border-radius: var(--radius-full);
+  padding-left: 0.65em;
+  padding-right: 0.65em;
+}
+
+// ----------------------------------------
+// Badge with Icon
+// ----------------------------------------
+.badge-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+
+  svg {
+    width: 0.875em;
+    height: 0.875em;
+  }
+}
+
+// ----------------------------------------
+// Badge with Dot
+// ----------------------------------------
+.badge-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375em;
+  padding: 0;
+  background-color: transparent;
+  font-weight: $font-weight-normal;
+  font-size: inherit;
+  color: var(--text);
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background-color: var(--gray-400);
+  }
+
+  &.badge-dot-primary::before { background-color: var(--primary); }
+  &.badge-dot-success::before { background-color: var(--success); }
+  &.badge-dot-danger::before { background-color: var(--danger); }
+  &.badge-dot-warning::before { background-color: var(--warning); }
+  &.badge-dot-info::before { background-color: var(--info); }
+}
+
+// ----------------------------------------
+// Notification Badge (Position)
+// ----------------------------------------
+.badge-notification {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.625rem;
+  border-radius: var(--radius-full);
+}
+
+// Empty notification dot
+.badge-notification-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.625rem;
+  height: 0.625rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+// ----------------------------------------
+// Tag (Removable Badge)
+// ----------------------------------------
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-normal;
+  color: var(--text);
+  background-color: var(--bg-muted);
+  border-radius: var(--radius);
+}
+
+.tag-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  margin-left: 0.125em;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast) ease-in-out,
+              background-color var(--transition-fast) ease-in-out;
+
+  &:hover {
+    color: var(--danger);
+    background-color: var(--danger-light);
+  }
+
+  svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}

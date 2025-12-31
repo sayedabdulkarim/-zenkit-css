@@ -1,0 +1,3540 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenKit - Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../dist/zenkit.css">
+  <style>
+    :root {
+      --docs-sidebar-width: 280px;
+      --docs-toc-width: 220px;
+      --docs-navbar-height: 60px;
+    }
+
+    /* Docs Layout */
+    .docs-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--docs-navbar-height);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 1030;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    .docs-navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .docs-navbar-brand span {
+      color: var(--primary);
+    }
+
+    .docs-navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-left: 2rem;
+    }
+
+    .docs-navbar-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: color 0.15s;
+    }
+
+    .docs-navbar-nav a:hover {
+      color: var(--text);
+    }
+
+    .docs-search {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 2rem;
+    }
+
+    .docs-search-input {
+      width: 100%;
+      padding: 0.5rem 1rem 0.5rem 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-muted);
+      color: var(--text);
+      font-size: 0.875rem;
+    }
+
+    .docs-search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .docs-search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .docs-navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+
+    .docs-sidebar {
+      position: fixed;
+      top: var(--docs-navbar-height);
+      left: 0;
+      width: var(--docs-sidebar-width);
+      height: calc(100vh - var(--docs-navbar-height));
+      overflow-y: auto;
+      padding: 1.5rem;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      z-index: 1020;
+    }
+
+    .docs-sidebar-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .docs-sidebar-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      padding-left: 0.75rem;
+    }
+
+    .docs-sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .docs-sidebar-nav a {
+      display: block;
+      padding: 0.375rem 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: var(--radius);
+      transition: all 0.15s;
+    }
+
+    .docs-sidebar-nav a:hover {
+      color: var(--text);
+      background: var(--bg-muted);
+    }
+
+    .docs-sidebar-nav a.active {
+      color: var(--primary);
+      background: var(--primary-50);
+      font-weight: 500;
+    }
+
+    .docs-main {
+      margin-left: var(--docs-sidebar-width);
+      margin-right: var(--docs-toc-width);
+      padding-top: var(--docs-navbar-height);
+      min-height: 100vh;
+    }
+
+    .docs-content {
+      max-width: 900px;
+      padding: 2rem 3rem;
+    }
+
+    .docs-toc {
+      position: fixed;
+      top: var(--docs-navbar-height);
+      right: 0;
+      width: var(--docs-toc-width);
+      height: calc(100vh - var(--docs-navbar-height));
+      overflow-y: auto;
+      padding: 1.5rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .docs-toc-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .docs-toc-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-left: 1px solid var(--border);
+    }
+
+    .docs-toc-nav a {
+      display: block;
+      padding: 0.25rem 0 0.25rem 1rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      transition: all 0.15s;
+    }
+
+    .docs-toc-nav a:hover {
+      color: var(--text);
+    }
+
+    .docs-toc-nav a.active {
+      color: var(--primary);
+      border-left: 2px solid var(--primary);
+      margin-left: -1px;
+    }
+
+    /* Content Styles */
+    .docs-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .docs-lead {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .docs-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: calc(var(--docs-navbar-height) + 1rem);
+    }
+
+    .docs-section:last-child {
+      border-bottom: none;
+    }
+
+    .docs-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      scroll-margin-top: calc(var(--docs-navbar-height) + 1rem);
+    }
+
+    .docs-section h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .docs-example {
+      padding: 1.5rem;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    /* Ensure light background demos have dark text in dark mode */
+    .docs-example [class*="bg-primary-100"],
+    .docs-example [class*="bg-light"],
+    .docs-example .shadow-none,
+    .docs-example .shadow-sm,
+    .docs-example .shadow,
+    .docs-example .shadow-md,
+    .docs-example .shadow-lg,
+    .docs-example .shadow-xl {
+      color: #1e293b !important;
+    }
+
+    .docs-code {
+      position: relative;
+      background: #1e293b !important;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .docs-code pre {
+      margin: 0;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: #e2e8f0 !important;
+      background: transparent !important;
+    }
+
+    .docs-code code {
+      color: #e2e8f0 !important;
+      background: transparent !important;
+    }
+
+    .docs-code-copy {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.375rem 0.75rem;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: var(--radius);
+      color: #94a3b8;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .docs-code-copy:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .docs-callout {
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--primary);
+      background: var(--primary-50);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0;
+    }
+
+    .docs-callout-warning {
+      border-color: var(--warning);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .docs-callout-danger {
+      border-color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .docs-table {
+      width: 100%;
+      margin: 1rem 0;
+      border-collapse: collapse;
+    }
+
+    .docs-table th,
+    .docs-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .docs-table th {
+      background: var(--bg-muted);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .docs-table td {
+      font-size: 0.875rem;
+    }
+
+    .docs-table code {
+      background: #f1f5f9;
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      color: #dc2626;
+    }
+
+    [data-theme="dark"] .docs-table code {
+      background: #334155;
+      color: #f87171;
+    }
+
+    /* Inline code in content */
+    .docs-content p code,
+    .docs-content li code {
+      background: #f1f5f9;
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875em;
+      color: #dc2626;
+    }
+
+    [data-theme="dark"] .docs-content p code,
+    [data-theme="dark"] .docs-content li code {
+      background: #334155;
+      color: #f87171;
+    }
+
+    /* Color Swatches */
+    .docs-color-swatch {
+      height: 3rem;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Mobile Responsive */
+    .docs-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1200px) {
+      .docs-toc {
+        display: none;
+      }
+      .docs-main {
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .docs-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+      .docs-sidebar.show {
+        transform: translateX(0);
+      }
+      .docs-main {
+        margin-left: 0;
+      }
+      .docs-content {
+        padding: 1.5rem;
+      }
+      .docs-mobile-toggle {
+        display: block;
+      }
+      .docs-navbar-nav {
+        display: none;
+      }
+      .docs-search {
+        display: none;
+      }
+    }
+
+    /* Scrollbar */
+    .docs-sidebar::-webkit-scrollbar,
+    .docs-toc::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .docs-sidebar::-webkit-scrollbar-thumb,
+    .docs-toc::-webkit-scrollbar-thumb {
+      background: var(--gray-300);
+      border-radius: 3px;
+    }
+
+    [data-theme="dark"] .docs-sidebar::-webkit-scrollbar-thumb,
+    [data-theme="dark"] .docs-toc::-webkit-scrollbar-thumb {
+      background: var(--gray-600);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="docs-navbar">
+    <button class="docs-mobile-toggle" id="sidebarToggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <a href="#" class="docs-navbar-brand">
+      <span>Zen</span>Kit
+    </a>
+    <div class="docs-navbar-nav">
+      <a href="#introduction" class="active">Docs</a>
+      <a href="#buttons">Components</a>
+      <a href="#animations">Utilities</a>
+    </div>
+    <div class="docs-search">
+      <input type="search" class="docs-search-input" placeholder="Search docs... (Ctrl+K)" id="docsSearch">
+    </div>
+    <div class="docs-navbar-actions">
+      <a href="https://github.com" class="btn btn-icon btn-ghost" title="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+      <button class="btn btn-icon btn-ghost" id="themeToggle" title="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon d-none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <span class="badge badge-primary">v1.0.0</span>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar" id="sidebar">
+    <!-- Getting Started -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Getting Started</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#introduction" class="active">Introduction</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#contents">Contents</a></li>
+        <li><a href="#browsers">Browsers & Devices</a></li>
+        <li><a href="#javascript">JavaScript</a></li>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#rtl">RTL</a></li>
+      </ul>
+    </div>
+
+    <!-- Customize -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Customize</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#sass">Sass</a></li>
+        <li><a href="#color">Color</a></li>
+        <li><a href="#color-modes">Color Modes</a></li>
+        <li><a href="#css-variables">CSS Variables</a></li>
+      </ul>
+    </div>
+
+    <!-- Layout -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Layout</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#breakpoints">Breakpoints</a></li>
+        <li><a href="#containers">Containers</a></li>
+        <li><a href="#grid">Grid</a></li>
+        <li><a href="#columns">Columns</a></li>
+        <li><a href="#gutters">Gutters</a></li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Content</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#images">Images</a></li>
+        <li><a href="#tables">Tables</a></li>
+        <li><a href="#figures">Figures</a></li>
+      </ul>
+    </div>
+
+    <!-- Forms -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Forms</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#form-control">Form Control</a></li>
+        <li><a href="#select">Select</a></li>
+        <li><a href="#checks-radios">Checks & Radios</a></li>
+        <li><a href="#range">Range</a></li>
+        <li><a href="#input-group">Input Group</a></li>
+        <li><a href="#floating-labels">Floating Labels</a></li>
+      </ul>
+    </div>
+
+    <!-- Components -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Components</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#accordion">Accordion</a></li>
+        <li><a href="#alerts">Alerts</a></li>
+        <li><a href="#avatar">Avatar</a></li>
+        <li><a href="#badge">Badge</a></li>
+        <li><a href="#breadcrumb">Breadcrumb</a></li>
+        <li><a href="#buttons">Buttons</a></li>
+        <li><a href="#button-group">Button Group</a></li>
+        <li><a href="#card">Card</a></li>
+        <li><a href="#carousel">Carousel</a></li>
+        <li><a href="#close-button">Close Button</a></li>
+        <li><a href="#collapse">Collapse</a></li>
+        <li><a href="#divider">Divider</a></li>
+        <li><a href="#dropdowns">Dropdowns</a></li>
+        <li><a href="#empty">Empty State</a></li>
+        <li><a href="#list-group">List Group</a></li>
+        <li><a href="#modal">Modal</a></li>
+        <li><a href="#navbar">Navbar</a></li>
+        <li><a href="#navs-tabs">Navs & Tabs</a></li>
+        <li><a href="#offcanvas">Offcanvas</a></li>
+        <li><a href="#pagination">Pagination</a></li>
+        <li><a href="#placeholders">Placeholders</a></li>
+        <li><a href="#popovers">Popovers</a></li>
+        <li><a href="#progress">Progress</a></li>
+        <li><a href="#rating">Rating</a></li>
+        <li><a href="#spinners">Spinners</a></li>
+        <li><a href="#steps">Steps</a></li>
+        <li><a href="#toasts">Toasts</a></li>
+        <li><a href="#tooltips">Tooltips</a></li>
+        <li><a href="#upload">Upload</a></li>
+      </ul>
+    </div>
+
+    <!-- Helpers -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Helpers</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#clearfix">Clearfix</a></li>
+        <li><a href="#ratio">Ratio</a></li>
+        <li><a href="#stacks">Stacks</a></li>
+        <li><a href="#stretched-link">Stretched Link</a></li>
+        <li><a href="#visually-hidden">Visually Hidden</a></li>
+      </ul>
+    </div>
+
+    <!-- Utilities -->
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-title">Utilities</div>
+      <ul class="docs-sidebar-nav">
+        <li><a href="#animations">Animations</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#borders">Borders</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#display">Display</a></li>
+        <li><a href="#filters">Filters</a></li>
+        <li><a href="#flex">Flex</a></li>
+        <li><a href="#opacity">Opacity</a></li>
+        <li><a href="#shadows">Shadows</a></li>
+        <li><a href="#sizing">Sizing</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+        <li><a href="#text">Text</a></li>
+        <li><a href="#transforms">Transforms</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="docs-main">
+    <div class="docs-content">
+
+      <!-- ==================== GETTING STARTED ==================== -->
+
+      <!-- Introduction -->
+      <section id="introduction" class="docs-section">
+        <h1 class="docs-title">Get started with ZenKit</h1>
+        <p class="docs-lead">ZenKit is a powerful, feature-packed frontend toolkit with 100% Bootstrap 5.3 feature parity. Build anything from prototype to production.</p>
+
+        <h3>Quick start</h3>
+        <p>Get started by including ZenKit's production-ready CSS and JavaScript via CDN without any build steps.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;ZenKit demo&lt;/title&gt;
+    &lt;link rel="stylesheet" href="path/to/zenkit.min.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;script src="path/to/zenkit.umd.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Download -->
+      <section id="download" class="docs-section">
+        <h2>Download</h2>
+        <p>Download ZenKit to get the compiled CSS and JavaScript, source code, or include it with npm.</p>
+
+        <h3>Compiled CSS and JS</h3>
+        <p>Download ready-to-use compiled code to easily drop into your project.</p>
+
+        <div class="docs-example">
+          <a href="#" class="btn btn-primary btn-lg">Download ZenKit</a>
+        </div>
+
+        <h3>Package managers</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code># npm
+npm install zenkit
+
+# yarn
+yarn add zenkit
+
+# pnpm
+pnpm add zenkit</code></pre>
+        </div>
+      </section>
+
+      <!-- Contents -->
+      <section id="contents" class="docs-section">
+        <h2>Contents</h2>
+        <p>Discover what's included in ZenKit.</p>
+
+        <h3>CSS files</h3>
+        <table class="docs-table">
+          <thead>
+            <tr><th>File</th><th>Size</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>zenkit.css</code></td><td>286 KB</td><td>Full expanded CSS</td></tr>
+            <tr><td><code>zenkit.min.css</code></td><td>233 KB</td><td>Minified CSS</td></tr>
+          </tbody>
+        </table>
+
+        <h3>JS files</h3>
+        <table class="docs-table">
+          <thead>
+            <tr><th>File</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>zenkit.umd.js</code></td><td>UMD bundle for browsers</td></tr>
+            <tr><td><code>zenkit.js</code></td><td>ES Modules entry point</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Browsers -->
+      <section id="browsers" class="docs-section">
+        <h2>Browsers & Devices</h2>
+        <p>ZenKit supports the latest, stable releases of all major browsers and platforms.</p>
+
+        <h3>Supported browsers</h3>
+        <table class="docs-table">
+          <thead>
+            <tr><th>Browser</th><th>Supported Versions</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chrome</td><td>Latest</td></tr>
+            <tr><td>Firefox</td><td>Latest, ESR</td></tr>
+            <tr><td>Safari</td><td>Latest</td></tr>
+            <tr><td>Edge</td><td>Latest</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- JavaScript -->
+      <section id="javascript" class="docs-section">
+        <h2>JavaScript</h2>
+        <p>Bring ZenKit to life with our JavaScript plugins. Learn about each plugin and our data and programmatic API options.</p>
+
+        <h3>Individual or compiled</h3>
+        <p>Plugins can be included individually or all at once using <code>zenkit.umd.js</code>.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>// ES Modules
+import { Modal, Dropdown, Toast } from './js/zenkit.js';
+
+// UMD (browser global)
+&lt;script src="zenkit.umd.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const modal = new ZenKit.Modal('#myModal');
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>Data attributes</h3>
+        <p>Nearly all plugins can be enabled via data attributes. You can enable with <code>data-toggle</code>.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="modal" data-target="#myModal"&gt;Launch modal&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Accessibility -->
+      <section id="accessibility" class="docs-section">
+        <h2>Accessibility</h2>
+        <p>ZenKit provides accessible components out of the box.</p>
+
+        <h3>Reduced motion</h3>
+        <p>ZenKit respects the <code>prefers-reduced-motion</code> media query.</p>
+
+        <h3>Visually hidden</h3>
+        <p>Use <code>.visually-hidden</code> to hide elements visually while keeping them accessible to screen readers.</p>
+
+        <div class="docs-example">
+          <span class="visually-hidden">This text is hidden visually but read by screen readers</span>
+          <p>The span above is visually hidden but accessible.</p>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;span class="visually-hidden"&gt;Screen reader only&lt;/span&gt;</code></pre>
+        </div>
+
+        <h3>Skip link</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;a class="skip-link" href="#main-content"&gt;Skip to main content&lt;/a&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- RTL -->
+      <section id="rtl" class="docs-section">
+        <h2>RTL</h2>
+        <p>ZenKit supports right-to-left text with utility classes.</p>
+
+        <div class="docs-example">
+          <div dir="rtl" class="p-3 bg-muted rounded mb-3">
+            <p class="mb-0">This text is right-to-left</p>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary float-start">Float Start</button>
+            <button class="btn btn-secondary float-end">Float End</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div dir="rtl"&gt;...&lt;/div&gt;
+&lt;div class="float-start"&gt;...&lt;/div&gt;
+&lt;div class="float-end"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== CUSTOMIZE ==================== -->
+
+      <!-- Sass -->
+      <section id="sass" class="docs-section">
+        <h2>Sass</h2>
+        <p>Utilize source Sass files to take advantage of variables, maps, mixins, and functions.</p>
+
+        <h3>File structure</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>scss/
+├── abstracts/
+│   ├── _variables.scss
+│   ├── _mixins.scss
+│   └── _functions.scss
+├── base/
+│   ├── _reset.scss
+│   ├── _typography.scss
+│   └── _root.scss
+├── components/
+├── layout/
+├── utilities/
+└── zenkit.scss</code></pre>
+        </div>
+
+        <h3>Importing</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>// Custom.scss
+// Override variables first
+$primary: #6366f1;
+$danger: #ef4444;
+
+// Then import ZenKit
+@import "zenkit/scss/zenkit";</code></pre>
+        </div>
+      </section>
+
+      <!-- Color -->
+      <section id="color" class="docs-section">
+        <h2>Color</h2>
+        <p>ZenKit is supported by an extensive color system.</p>
+
+        <h3>Theme colors</h3>
+        <div class="docs-example">
+          <div class="row g-3">
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-primary text-white">Primary</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-secondary text-white">Secondary</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-success text-white">Success</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-danger text-white">Danger</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-warning text-dark">Warning</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="docs-color-swatch bg-info text-white">Info</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color Modes -->
+      <section id="color-modes" class="docs-section">
+        <h2>Color Modes</h2>
+        <p>ZenKit supports light and dark color modes.</p>
+
+        <h3>Dark mode</h3>
+        <p>Enable dark mode by setting <code>data-theme="dark"</code> on the <code>&lt;html&gt;</code> element.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;html data-theme="dark"&gt;
+  ...
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <h3>JavaScript toggle</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>document.documentElement.setAttribute('data-theme', 'dark');
+// or
+document.documentElement.setAttribute('data-theme', 'light');</code></pre>
+        </div>
+      </section>
+
+      <!-- CSS Variables -->
+      <section id="css-variables" class="docs-section">
+        <h2>CSS Variables</h2>
+        <p>ZenKit includes CSS custom properties (variables) for easy customization.</p>
+
+        <h3>Root variables</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>:root {
+  --primary: #4F46E5;
+  --secondary: #64748B;
+  --success: #10B981;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --info: #06B6D4;
+  --bg: #ffffff;
+  --text: #0F172A;
+  --border: #E2E8F0;
+  --radius: 0.375rem;
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== LAYOUT ==================== -->
+
+      <!-- Breakpoints -->
+      <section id="breakpoints" class="docs-section">
+        <h2>Breakpoints</h2>
+        <p>ZenKit uses mobile-first responsive breakpoints.</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr><th>Breakpoint</th><th>Class infix</th><th>Dimensions</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Extra small</td><td><em>None</em></td><td>&lt;576px</td></tr>
+            <tr><td>Small</td><td><code>sm</code></td><td>&ge;576px</td></tr>
+            <tr><td>Medium</td><td><code>md</code></td><td>&ge;768px</td></tr>
+            <tr><td>Large</td><td><code>lg</code></td><td>&ge;1024px</td></tr>
+            <tr><td>Extra large</td><td><code>xl</code></td><td>&ge;1280px</td></tr>
+            <tr><td>Extra extra large</td><td><code>2xl</code></td><td>&ge;1536px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Containers -->
+      <section id="containers" class="docs-section">
+        <h2>Containers</h2>
+        <p>Containers are a fundamental building block that contain and pad your content.</p>
+
+        <div class="docs-example">
+          <div class="container bg-primary-100 p-3 rounded mb-3">.container</div>
+          <div class="container-fluid bg-primary-200 p-3 rounded">.container-fluid</div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="container"&gt;...&lt;/div&gt;
+&lt;div class="container-fluid"&gt;...&lt;/div&gt;
+&lt;div class="container-md"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Grid -->
+      <section id="grid" class="docs-section">
+        <h2>Grid system</h2>
+        <p>Use our powerful mobile-first flexbox grid to build layouts with a twelve column system.</p>
+
+        <h3>Example</h3>
+        <div class="docs-example">
+          <div class="row mb-3">
+            <div class="col"><div class="bg-primary-100 p-3 text-center rounded">Column</div></div>
+            <div class="col"><div class="bg-primary-100 p-3 text-center rounded">Column</div></div>
+            <div class="col"><div class="bg-primary-100 p-3 text-center rounded">Column</div></div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4"><div class="bg-primary-200 p-3 text-center rounded">col-4</div></div>
+            <div class="col-4"><div class="bg-primary-200 p-3 text-center rounded">col-4</div></div>
+            <div class="col-4"><div class="bg-primary-200 p-3 text-center rounded">col-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-8"><div class="bg-primary-300 p-3 text-center rounded">col-12 col-md-8</div></div>
+            <div class="col-12 col-md-4"><div class="bg-primary-300 p-3 text-center rounded">col-12 col-md-4</div></div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col"&gt;Column&lt;/div&gt;
+  &lt;div class="col"&gt;Column&lt;/div&gt;
+  &lt;div class="col"&gt;Column&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Columns -->
+      <section id="columns" class="docs-section">
+        <h2>Columns</h2>
+        <p>Learn how to modify columns with options for alignment, ordering, and offsetting.</p>
+
+        <h3>Offset classes</h3>
+        <div class="docs-example">
+          <div class="row mb-3">
+            <div class="col-md-4"><div class="bg-primary-100 p-3 rounded">col-md-4</div></div>
+            <div class="col-md-4 offset-md-4"><div class="bg-primary-100 p-3 rounded">col-md-4 offset-md-4</div></div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="col-md-4 offset-md-4"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Order classes</h3>
+        <div class="docs-example">
+          <div class="row">
+            <div class="col order-3"><div class="bg-primary-100 p-3 rounded">First (order-3)</div></div>
+            <div class="col order-1"><div class="bg-primary-200 p-3 rounded">Second (order-1)</div></div>
+            <div class="col order-2"><div class="bg-primary-300 p-3 rounded">Third (order-2)</div></div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="col order-3"&gt;First&lt;/div&gt;
+&lt;div class="col order-1"&gt;Second&lt;/div&gt;
+&lt;div class="col order-2"&gt;Third&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Gutters -->
+      <section id="gutters" class="docs-section">
+        <h2>Gutters</h2>
+        <p>Gutters are the gaps between columns, used to space and align content.</p>
+
+        <div class="docs-example">
+          <div class="row g-3">
+            <div class="col-6"><div class="bg-primary-100 p-3 rounded">g-3</div></div>
+            <div class="col-6"><div class="bg-primary-100 p-3 rounded">g-3</div></div>
+            <div class="col-6"><div class="bg-primary-100 p-3 rounded">g-3</div></div>
+            <div class="col-6"><div class="bg-primary-100 p-3 rounded">g-3</div></div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="row g-3"&gt;...&lt;/div&gt;
+&lt;div class="row gx-5"&gt;...&lt;/div&gt; &lt;!-- Horizontal gutters --&gt;
+&lt;div class="row gy-5"&gt;...&lt;/div&gt; &lt;!-- Vertical gutters --&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== CONTENT ==================== -->
+
+      <!-- Typography -->
+      <section id="typography" class="docs-section">
+        <h2>Typography</h2>
+        <p>Documentation and examples for typography, including headings, paragraphs, and more.</p>
+
+        <h3>Headings</h3>
+        <div class="docs-example">
+          <h1>h1. ZenKit heading</h1>
+          <h2>h2. ZenKit heading</h2>
+          <h3>h3. ZenKit heading</h3>
+          <h4>h4. ZenKit heading</h4>
+          <h5>h5. ZenKit heading</h5>
+          <h6>h6. ZenKit heading</h6>
+        </div>
+
+        <h3>Lead text</h3>
+        <div class="docs-example">
+          <p class="lead">This is a lead paragraph. It stands out from regular paragraphs.</p>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;p class="lead"&gt;Lead paragraph&lt;/p&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Images -->
+      <section id="images" class="docs-section">
+        <h2>Images</h2>
+        <p>Documentation and examples for opting images into responsive behavior and styling.</p>
+
+        <h3>Responsive images</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;img src="..." class="img-fluid" alt="..."&gt;</code></pre>
+        </div>
+
+        <h3>Image thumbnails</h3>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;img src="..." class="img-thumbnail" alt="..."&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Tables -->
+      <section id="tables" class="docs-section">
+        <h2>Tables</h2>
+        <p>Documentation and examples for opt-in styling of tables with ZenKit.</p>
+
+        <div class="docs-example">
+          <table class="table">
+            <thead>
+              <tr><th>#</th><th>First</th><th>Last</th><th>Handle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td></tr>
+              <tr><td>2</td><td>Jacob</td><td>Thornton</td><td>@fat</td></tr>
+              <tr><td>3</td><td>Larry</td><td>Bird</td><td>@twitter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;table class="table"&gt;...&lt;/table&gt;
+&lt;table class="table table-striped"&gt;...&lt;/table&gt;
+&lt;table class="table table-bordered"&gt;...&lt;/table&gt;
+&lt;table class="table table-hover"&gt;...&lt;/table&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Figures -->
+      <section id="figures" class="docs-section">
+        <h2>Figures</h2>
+        <p>Documentation and examples for displaying images with captions.</p>
+
+        <div class="docs-example">
+          <figure class="figure">
+            <div class="bg-primary-100 rounded" style="width: 200px; height: 150px; display: flex; align-items: center; justify-content: center;">Image</div>
+            <figcaption class="figure-caption">A caption for the above image.</figcaption>
+          </figure>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;figure class="figure"&gt;
+  &lt;img src="..." class="figure-img img-fluid rounded" alt="..."&gt;
+  &lt;figcaption class="figure-caption"&gt;A caption&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== FORMS ==================== -->
+
+      <!-- Form Control -->
+      <section id="form-control" class="docs-section">
+        <h2>Form Control</h2>
+        <p>Give textual form controls an upgrade with custom styles, sizing, focus states.</p>
+
+        <div class="docs-example">
+          <div class="form-group mb-3">
+            <label class="form-label" for="exampleEmail">Email address</label>
+            <input type="email" class="form-control" id="exampleEmail" placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleTextarea">Textarea</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;input type="email" class="form-control" placeholder="name@example.com"&gt;</code></pre>
+        </div>
+
+        <h3>Sizing</h3>
+        <div class="docs-example">
+          <input class="form-control form-control-lg mb-3" type="text" placeholder=".form-control-lg">
+          <input class="form-control mb-3" type="text" placeholder="Default">
+          <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
+        </div>
+      </section>
+
+      <!-- Select -->
+      <section id="select" class="docs-section">
+        <h2>Select</h2>
+        <p>Customize the native <code>&lt;select&gt;</code> with custom CSS.</p>
+
+        <div class="docs-example">
+          <select class="form-select mb-3">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;select class="form-select"&gt;
+  &lt;option selected&gt;Open this select menu&lt;/option&gt;
+  &lt;option value="1"&gt;One&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Checks & Radios -->
+      <section id="checks-radios" class="docs-section">
+        <h2>Checks & Radios</h2>
+        <p>Create consistent cross-browser checkboxes and radio buttons.</p>
+
+        <h3>Checkboxes</h3>
+        <div class="docs-example">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="check1">
+            <label class="form-check-label" for="check1">Default checkbox</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="check2" checked>
+            <label class="form-check-label" for="check2">Checked checkbox</label>
+          </div>
+        </div>
+
+        <h3>Radios</h3>
+        <div class="docs-example">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="radio1" id="radio1" checked>
+            <label class="form-check-label" for="radio1">Default radio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio1" id="radio2">
+            <label class="form-check-label" for="radio2">Second radio</label>
+          </div>
+        </div>
+
+        <h3>Switches</h3>
+        <div class="docs-example">
+          <div class="form-switch mb-2">
+            <input class="form-switch-input" type="checkbox" id="switch1">
+            <label for="switch1">Default switch</label>
+          </div>
+          <div class="form-switch">
+            <input class="form-switch-input" type="checkbox" id="switch2" checked>
+            <label for="switch2">Checked switch</label>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="form-switch"&gt;
+  &lt;input class="form-switch-input" type="checkbox" id="switch"&gt;
+  &lt;label for="switch"&gt;Toggle&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Range -->
+      <section id="range" class="docs-section">
+        <h2>Range</h2>
+        <p>Use custom range inputs for consistent cross-browser styling.</p>
+
+        <div class="docs-example">
+          <label for="customRange1" class="form-label">Example range</label>
+          <input type="range" class="form-range" id="customRange1">
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;input type="range" class="form-range"&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Input Group -->
+      <section id="input-group" class="docs-section">
+        <h2>Input Group</h2>
+        <p>Extend form controls by adding text, buttons, or button groups.</p>
+
+        <div class="docs-example">
+          <div class="input-group mb-3">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username">
+            <span class="input-group-text">@example.com</span>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="input-group"&gt;
+  &lt;span class="input-group-text"&gt;@&lt;/span&gt;
+  &lt;input type="text" class="form-control" placeholder="Username"&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Floating Labels -->
+      <section id="floating-labels" class="docs-section">
+        <h2>Floating Labels</h2>
+        <p>Create beautifully simple form labels that float over your input fields.</p>
+
+        <div class="docs-example">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="form-floating"&gt;
+  &lt;input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"&gt;
+  &lt;label for="floatingInput"&gt;Email address&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== COMPONENTS ==================== -->
+
+      <!-- Accordion -->
+      <section id="accordion" class="docs-section">
+        <h2>Accordion</h2>
+        <p>Build vertically collapsing accordions.</p>
+
+        <div class="docs-example">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" data-toggle="collapse" data-target="#collapse1">
+                  Accordion Item #1
+                </button>
+              </h2>
+              <div id="collapse1" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                  This is the first item's accordion body.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" data-toggle="collapse" data-target="#collapse2">
+                  Accordion Item #2
+                </button>
+              </h2>
+              <div id="collapse2" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  This is the second item's accordion body.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="accordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;h2 class="accordion-header"&gt;
+      &lt;button class="accordion-button" data-toggle="collapse" data-target="#collapse1"&gt;
+        Accordion Item #1
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div id="collapse1" class="accordion-collapse collapse show"&gt;
+      &lt;div class="accordion-body"&gt;Content here...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Alerts -->
+      <section id="alerts" class="docs-section">
+        <h2>Alerts</h2>
+        <p>Provide contextual feedback messages for typical user actions.</p>
+
+        <div class="docs-example">
+          <div class="alert alert-primary mb-3">A simple primary alert!</div>
+          <div class="alert alert-success mb-3">A simple success alert!</div>
+          <div class="alert alert-danger mb-3">A simple danger alert!</div>
+          <div class="alert alert-warning mb-3">A simple warning alert!</div>
+          <div class="alert alert-info">A simple info alert!</div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="alert alert-primary"&gt;A simple primary alert!&lt;/div&gt;
+&lt;div class="alert alert-success"&gt;A simple success alert!&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Dismissible</h3>
+        <div class="docs-example">
+          <div class="alert alert-warning alert-dismissible">
+            <strong>Warning!</strong> Better check yourself.
+            <button type="button" class="btn-close" aria-label="Close"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Avatar -->
+      <section id="avatar" class="docs-section">
+        <h2>Avatar</h2>
+        <p>Display user profile pictures, initials, or placeholder icons.</p>
+
+        <h3>Sizes</h3>
+        <div class="docs-example">
+          <div class="d-flex align-items-center gap-3">
+            <div class="avatar avatar-xs">XS</div>
+            <div class="avatar avatar-sm">SM</div>
+            <div class="avatar avatar-md">MD</div>
+            <div class="avatar avatar-lg">LG</div>
+            <div class="avatar avatar-xl">XL</div>
+            <div class="avatar avatar-2xl">2X</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="avatar avatar-sm"&gt;SM&lt;/div&gt;
+&lt;div class="avatar avatar-md"&gt;MD&lt;/div&gt;
+&lt;div class="avatar avatar-lg"&gt;LG&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Colors</h3>
+        <div class="docs-example">
+          <div class="d-flex align-items-center gap-3">
+            <div class="avatar avatar-primary">AB</div>
+            <div class="avatar avatar-success">CD</div>
+            <div class="avatar avatar-danger">EF</div>
+            <div class="avatar avatar-warning">GH</div>
+            <div class="avatar avatar-info">IJ</div>
+            <div class="avatar avatar-dark">KL</div>
+          </div>
+        </div>
+
+        <h3>With Status</h3>
+        <div class="docs-example">
+          <div class="d-flex align-items-center gap-3">
+            <div class="avatar avatar-status avatar-status-online">JD</div>
+            <div class="avatar avatar-status avatar-status-offline">AB</div>
+            <div class="avatar avatar-status avatar-status-busy">CD</div>
+            <div class="avatar avatar-status avatar-status-away">EF</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="avatar avatar-status avatar-status-online"&gt;JD&lt;/div&gt;
+&lt;div class="avatar avatar-status avatar-status-busy"&gt;AB&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Avatar Group</h3>
+        <div class="docs-example">
+          <div class="avatar-group">
+            <div class="avatar avatar-primary">A</div>
+            <div class="avatar avatar-success">B</div>
+            <div class="avatar avatar-danger">C</div>
+            <div class="avatar avatar-warning">D</div>
+            <div class="avatar-group-counter">+5</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar avatar-primary"&gt;A&lt;/div&gt;
+  &lt;div class="avatar avatar-success"&gt;B&lt;/div&gt;
+  &lt;div class="avatar-group-counter"&gt;+5&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Shapes</h3>
+        <div class="docs-example">
+          <div class="d-flex align-items-center gap-3">
+            <div class="avatar avatar-lg">RD</div>
+            <div class="avatar avatar-lg avatar-rounded">RD</div>
+            <div class="avatar avatar-lg avatar-square">SQ</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badge -->
+      <section id="badge" class="docs-section">
+        <h2>Badges</h2>
+        <p>Small count and labeling component.</p>
+
+        <div class="docs-example">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-danger">Danger</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-info">Info</span>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;span class="badge badge-primary"&gt;Primary&lt;/span&gt;</code></pre>
+        </div>
+
+        <h3>Pill badges</h3>
+        <div class="docs-example">
+          <span class="badge badge-primary badge-pill">Primary</span>
+          <span class="badge badge-success badge-pill">Success</span>
+          <span class="badge badge-danger badge-pill">Danger</span>
+        </div>
+
+        <h3>Soft badges</h3>
+        <div class="docs-example">
+          <span class="badge badge-soft-primary">Primary</span>
+          <span class="badge badge-soft-success">Success</span>
+          <span class="badge badge-soft-danger">Danger</span>
+        </div>
+      </section>
+
+      <!-- Breadcrumb -->
+      <section id="breadcrumb" class="docs-section">
+        <h2>Breadcrumb</h2>
+        <p>Indicate the current page's location within a navigational hierarchy.</p>
+
+        <div class="docs-example">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Library</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;nav aria-label="breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active"&gt;Library&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section id="buttons" class="docs-section">
+        <h2>Buttons</h2>
+        <p>Use ZenKit's button styles for actions in forms, dialogs, and more.</p>
+
+        <h3>Variants</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-success">Success</button>
+            <button class="btn btn-danger">Danger</button>
+            <button class="btn btn-warning">Warning</button>
+            <button class="btn btn-info">Info</button>
+            <button class="btn btn-light">Light</button>
+            <button class="btn btn-dark">Dark</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary&lt;/button&gt;</code></pre>
+        </div>
+
+        <h3>Outline buttons</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-primary">Primary</button>
+            <button class="btn btn-outline-secondary">Secondary</button>
+            <button class="btn btn-outline-success">Success</button>
+            <button class="btn btn-outline-danger">Danger</button>
+          </div>
+        </div>
+
+        <h3>Sizes</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap items-center gap-2">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Button Group -->
+      <section id="button-group" class="docs-section">
+        <h2>Button Group</h2>
+        <p>Group a series of buttons together on a single line.</p>
+
+        <div class="docs-example">
+          <div class="btn-group">
+            <button class="btn btn-primary">Left</button>
+            <button class="btn btn-primary">Middle</button>
+            <button class="btn btn-primary">Right</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-primary"&gt;Left&lt;/button&gt;
+  &lt;button class="btn btn-primary"&gt;Middle&lt;/button&gt;
+  &lt;button class="btn btn-primary"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Card -->
+      <section id="card" class="docs-section">
+        <h2>Cards</h2>
+        <p>Flexible and extensible content container with multiple variants.</p>
+
+        <div class="docs-example">
+          <div class="card" style="max-width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Some text.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Go&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Header and footer</h3>
+        <div class="docs-example">
+          <div class="card" style="max-width: 18rem;">
+            <div class="card-header">Featured</div>
+            <div class="card-body">
+              <h5 class="card-title">Special title</h5>
+              <p class="card-text">With supporting text below.</p>
+            </div>
+            <div class="card-footer text-muted">2 days ago</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Carousel -->
+      <section id="carousel" class="docs-section">
+        <h2>Carousel</h2>
+        <p>A slideshow component for cycling through elements.</p>
+
+        <div class="docs-example">
+          <div class="carousel" data-ride="carousel" id="carouselDemo">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="bg-primary d-flex align-items-center justify-content-center text-white" style="height: 200px;">
+                  <h3>First slide</h3>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 200px;">
+                  <h3>Second slide</h3>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="bg-success d-flex align-items-center justify-content-center text-white" style="height: 200px;">
+                  <h3>Third slide</h3>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" data-target="#carouselDemo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" data-target="#carouselDemo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="carousel" data-ride="carousel"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;...&lt;/div&gt;
+    &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Close Button -->
+      <section id="close-button" class="docs-section">
+        <h2>Close Button</h2>
+        <p>A generic close button for dismissing content.</p>
+
+        <div class="docs-example">
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button type="button" class="btn-close" aria-label="Close"&gt;&lt;/button&gt;</code></pre>
+        </div>
+
+        <h3>White variant</h3>
+        <div class="docs-example bg-dark p-3">
+          <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+      </section>
+
+      <!-- Collapse -->
+      <section id="collapse" class="docs-section">
+        <h2>Collapse</h2>
+        <p>Toggle the visibility of content with a few classes and JavaScript plugins.</p>
+
+        <div class="docs-example">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
+            Toggle collapse
+          </button>
+          <div class="collapse mt-3" id="collapseExample">
+            <div class="card card-body">
+              This is some placeholder content for the collapse component.
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="collapse" data-target="#demo"&gt;Toggle&lt;/button&gt;
+&lt;div class="collapse" id="demo"&gt;Content&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <section id="divider" class="docs-section">
+        <h2>Divider</h2>
+        <p>Visual separator for content sections, horizontally or vertically.</p>
+
+        <h3>Basic Divider</h3>
+        <div class="docs-example">
+          <p>Content above</p>
+          <div class="divider"></div>
+          <p>Content below</p>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="divider"&gt;&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Divider with Text</h3>
+        <div class="docs-example">
+          <div class="divider">OR</div>
+          <div class="divider">Section Title</div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="divider"&gt;OR&lt;/div&gt;
+&lt;div class="divider"&gt;Section Title&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Divider Styles</h3>
+        <div class="docs-example">
+          <div class="divider">Solid (Default)</div>
+          <div class="divider divider-dashed">Dashed</div>
+          <div class="divider divider-dotted">Dotted</div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="divider divider-dashed"&gt;Dashed&lt;/div&gt;
+&lt;div class="divider divider-dotted"&gt;Dotted&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Divider Colors</h3>
+        <div class="docs-example">
+          <div class="divider divider-primary">Primary</div>
+          <div class="divider divider-success">Success</div>
+          <div class="divider divider-danger">Danger</div>
+        </div>
+
+        <h3>Text Alignment</h3>
+        <div class="docs-example">
+          <div class="divider divider-left">Left aligned</div>
+          <div class="divider">Center (default)</div>
+          <div class="divider divider-right">Right aligned</div>
+        </div>
+
+        <h3>Vertical Divider</h3>
+        <div class="docs-example">
+          <div class="d-flex align-items-center gap-3" style="height: 50px;">
+            <span>Item 1</span>
+            <div class="divider-vertical"></div>
+            <span>Item 2</span>
+            <div class="divider-vertical"></div>
+            <span>Item 3</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="d-flex align-items-center"&gt;
+  &lt;span&gt;Item 1&lt;/span&gt;
+  &lt;div class="divider-vertical"&gt;&lt;/div&gt;
+  &lt;span&gt;Item 2&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Dropdowns -->
+      <section id="dropdowns" class="docs-section">
+        <h2>Dropdowns</h2>
+        <p>Toggle contextual overlays for displaying lists of links and more.</p>
+
+        <div class="docs-example">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="dropdown"&gt;
+  &lt;button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"&gt;
+    Dropdown
+  &lt;/button&gt;
+  &lt;div class="dropdown-menu"&gt;
+    &lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Directions</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-2">
+            <div class="dropup">
+              <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Dropup</button>
+              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a></div>
+            </div>
+            <div class="dropend">
+              <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Dropend</button>
+              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a></div>
+            </div>
+            <div class="dropstart">
+              <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Dropstart</button>
+              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Empty State -->
+      <section id="empty" class="docs-section">
+        <h2>Empty State</h2>
+        <p>Placeholder for when there's no data to display.</p>
+
+        <h3>Basic Empty State</h3>
+        <div class="docs-example">
+          <div class="empty empty-bordered">
+            <div class="empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+            </div>
+            <h3 class="empty-title">No files found</h3>
+            <p class="empty-description">You haven't uploaded any files yet. Start by uploading your first file.</p>
+            <div class="empty-actions">
+              <button class="btn btn-primary">Upload File</button>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="empty empty-bordered"&gt;
+  &lt;div class="empty-icon"&gt;...&lt;/div&gt;
+  &lt;h3 class="empty-title"&gt;No files found&lt;/h3&gt;
+  &lt;p class="empty-description"&gt;Description text&lt;/p&gt;
+  &lt;div class="empty-actions"&gt;
+    &lt;button class="btn btn-primary"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Sizes</h3>
+        <div class="docs-example">
+          <div class="empty empty-sm empty-bordered mb-4">
+            <div class="empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <h3 class="empty-title">No results</h3>
+            <p class="empty-description">Try different keywords</p>
+          </div>
+        </div>
+
+        <h3>Color Variants</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-3 flex-wrap">
+            <div class="empty empty-sm empty-primary empty-bordered" style="width: 200px;">
+              <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3 class="empty-title">Primary</h3>
+            </div>
+            <div class="empty empty-sm empty-success empty-bordered" style="width: 200px;">
+              <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3 class="empty-title">Success</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- List Group -->
+      <section id="list-group" class="docs-section">
+        <h2>List Group</h2>
+        <p>Display a series of content flexibly.</p>
+
+        <div class="docs-example">
+          <ul class="list-group" style="max-width: 300px;">
+            <li class="list-group-item active">An active item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">A fourth item</li>
+            <li class="list-group-item disabled">A disabled item</li>
+          </ul>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;ul class="list-group"&gt;
+  &lt;li class="list-group-item active"&gt;Active item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;Second item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Modal -->
+      <section id="modal" class="docs-section">
+        <h2>Modal</h2>
+        <p>Add dialogs for lightboxes, user notifications, or custom content.</p>
+
+        <div class="docs-example">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+          </button>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="modal" data-target="#myModal"&gt;Open&lt;/button&gt;
+
+&lt;div class="modal" id="myModal"&gt;
+  &lt;div class="modal-dialog"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;h5 class="modal-title"&gt;Modal title&lt;/h5&gt;
+        &lt;button class="btn-close" data-dismiss="modal"&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;Content&lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button class="btn btn-secondary" data-dismiss="modal"&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Navbar -->
+      <section id="navbar" class="docs-section">
+        <h2>Navbar</h2>
+        <p>Responsive navigation header with branding, navigation, and more.</p>
+
+        <div class="docs-example">
+          <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;nav class="navbar navbar-expand-lg bg-light"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Navbar&lt;/a&gt;
+    &lt;ul class="navbar-nav"&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Navs & Tabs -->
+      <section id="navs-tabs" class="docs-section">
+        <h2>Navs & Tabs</h2>
+        <p>Documentation and examples for navigation components.</p>
+
+        <h3>Tabs</h3>
+        <div class="docs-example">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tab1">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab2">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab3">Contact</a>
+            </li>
+          </ul>
+          <div class="tab-content p-3 border border-top-0 rounded-bottom">
+            <div class="tab-pane fade show active" id="tab1">Home content</div>
+            <div class="tab-pane fade" id="tab2">Profile content</div>
+            <div class="tab-pane fade" id="tab3">Contact content</div>
+          </div>
+        </div>
+
+        <h3>Pills</h3>
+        <div class="docs-example">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Offcanvas -->
+      <section id="offcanvas" class="docs-section">
+        <h2>Offcanvas</h2>
+        <p>Build hidden sidebars into your project.</p>
+
+        <div class="docs-example">
+          <button class="btn btn-primary" data-toggle="offcanvas" data-target="#offcanvasExample">
+            Open offcanvas
+          </button>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="offcanvas" data-target="#offcanvas"&gt;Open&lt;/button&gt;
+
+&lt;div class="offcanvas offcanvas-start" id="offcanvas"&gt;
+  &lt;div class="offcanvas-header"&gt;
+    &lt;h5 class="offcanvas-title"&gt;Offcanvas&lt;/h5&gt;
+    &lt;button class="btn-close" data-dismiss="offcanvas"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="offcanvas-body"&gt;Content here...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Pagination -->
+      <section id="pagination" class="docs-section">
+        <h2>Pagination</h2>
+        <p>Pagination to indicate a series of related content exists across multiple pages.</p>
+
+        <div class="docs-example">
+          <nav>
+            <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;ul class="pagination"&gt;
+  &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;Previous&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="page-item active"&gt;&lt;a class="page-link" href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;Next&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Placeholders -->
+      <section id="placeholders" class="docs-section">
+        <h2>Placeholders</h2>
+        <p>Use loading placeholders for components or pages.</p>
+
+        <div class="docs-example">
+          <div class="d-flex flex-column gap-2" style="max-width: 300px;">
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-8"></span>
+            <span class="placeholder col-4"></span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;span class="placeholder col-6"&gt;&lt;/span&gt;
+&lt;span class="placeholder col-8"&gt;&lt;/span&gt;</code></pre>
+        </div>
+
+        <h3>Animation</h3>
+        <div class="docs-example">
+          <div class="placeholder-glow d-flex flex-column gap-2" style="max-width: 300px;">
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-8"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popovers -->
+      <section id="popovers" class="docs-section">
+        <h2>Popovers</h2>
+        <p>Add popovers to any element for housing secondary information.</p>
+
+        <div class="docs-example">
+          <button class="btn btn-lg btn-danger" data-toggle="popover" data-title="Popover title" data-content="And here's some amazing content.">
+            Click to toggle popover
+          </button>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="popover" data-title="Title" data-content="Content"&gt;
+  Click me
+&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Progress -->
+      <section id="progress" class="docs-section">
+        <h2>Progress</h2>
+        <p>Use progress components built with two HTML elements and CSS.</p>
+
+        <div class="docs-example">
+          <div class="progress mb-3">
+            <div class="progress-bar" style="width: 25%"></div>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-success" style="width: 50%"></div>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-info" style="width: 75%"></div>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-danger" style="width: 100%"></div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="progress"&gt;
+  &lt;div class="progress-bar" style="width: 25%"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Striped</h3>
+        <div class="docs-example">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" style="width: 50%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rating -->
+      <section id="rating" class="docs-section">
+        <h2>Rating</h2>
+        <p>Star rating component for reviews and feedback.</p>
+
+        <h3>Basic Rating</h3>
+        <div class="docs-example">
+          <div class="rating">
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item">&#9733;</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="rating"&gt;
+  &lt;span class="rating-item rating-item-active"&gt;&amp;#9733;&lt;/span&gt;
+  &lt;span class="rating-item rating-item-active"&gt;&amp;#9733;&lt;/span&gt;
+  &lt;span class="rating-item"&gt;&amp;#9733;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Sizes</h3>
+        <div class="docs-example">
+          <div class="mb-3">
+            <div class="rating rating-sm">
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item">&#9733;</span>
+              <span class="rating-item">&#9733;</span>
+            </div>
+            <span class="ms-2 text-muted text-sm">Small</span>
+          </div>
+          <div class="mb-3">
+            <div class="rating rating-lg">
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item">&#9733;</span>
+            </div>
+            <span class="ms-2 text-muted">Large</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="rating rating-sm"&gt;...&lt;/div&gt;
+&lt;div class="rating rating-lg"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>With Count</h3>
+        <div class="docs-example">
+          <div class="rating-with-count">
+            <div class="rating rating-sm">
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item rating-item-active">&#9733;</span>
+              <span class="rating-item">&#9733;</span>
+            </div>
+            <span class="rating-average">4.0</span>
+            <span class="rating-count">(128 reviews)</span>
+          </div>
+        </div>
+
+        <h3>Read Only</h3>
+        <div class="docs-example">
+          <div class="rating rating-readonly">
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item rating-item-active">&#9733;</span>
+            <span class="rating-item">&#9733;</span>
+            <span class="rating-item">&#9733;</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spinners -->
+      <section id="spinners" class="docs-section">
+        <h2>Spinners</h2>
+        <p>Indicate the loading state of a component or page.</p>
+
+        <h3>Border spinner</h3>
+        <div class="docs-example">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="spinner-border" role="status"&gt;
+  &lt;span class="visually-hidden"&gt;Loading...&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Colors</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-3">
+            <div class="spinner-border text-primary"></div>
+            <div class="spinner-border text-secondary"></div>
+            <div class="spinner-border text-success"></div>
+            <div class="spinner-border text-danger"></div>
+            <div class="spinner-border text-warning"></div>
+            <div class="spinner-border text-info"></div>
+          </div>
+        </div>
+
+        <h3>Growing spinner</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-3">
+            <div class="spinner-grow text-primary"></div>
+            <div class="spinner-grow text-success"></div>
+            <div class="spinner-grow text-danger"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Steps -->
+      <section id="steps" class="docs-section">
+        <h2>Steps</h2>
+        <p>Guide users through a multi-step process with progress indicators.</p>
+
+        <h3>Basic Steps</h3>
+        <div class="docs-example">
+          <div class="steps">
+            <div class="step step-completed">
+              <div class="step-icon">&#10003;</div>
+              <div class="step-content">
+                <div class="step-title">Account</div>
+                <div class="step-description">Create your account</div>
+              </div>
+            </div>
+            <div class="step step-active">
+              <div class="step-icon">2</div>
+              <div class="step-content">
+                <div class="step-title">Profile</div>
+                <div class="step-description">Add your details</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-icon">3</div>
+              <div class="step-content">
+                <div class="step-title">Review</div>
+                <div class="step-description">Review and submit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="steps"&gt;
+  &lt;div class="step step-completed"&gt;
+    &lt;div class="step-icon"&gt;&amp;#10003;&lt;/div&gt;
+    &lt;div class="step-content"&gt;
+      &lt;div class="step-title"&gt;Account&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="step step-active"&gt;...&lt;/div&gt;
+  &lt;div class="step"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Vertical Steps</h3>
+        <div class="docs-example">
+          <div class="steps steps-vertical">
+            <div class="step step-completed">
+              <div class="step-icon">&#10003;</div>
+              <div class="step-content">
+                <div class="step-title">Order Placed</div>
+                <div class="step-description">Your order has been placed</div>
+              </div>
+            </div>
+            <div class="step step-completed">
+              <div class="step-icon">&#10003;</div>
+              <div class="step-content">
+                <div class="step-title">Processing</div>
+                <div class="step-description">Order is being processed</div>
+              </div>
+            </div>
+            <div class="step step-active">
+              <div class="step-icon">3</div>
+              <div class="step-content">
+                <div class="step-title">Shipped</div>
+                <div class="step-description">Package is on the way</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-icon">4</div>
+              <div class="step-content">
+                <div class="step-title">Delivered</div>
+                <div class="step-description">Package delivered</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="steps steps-vertical"&gt;
+  &lt;div class="step step-completed"&gt;...&lt;/div&gt;
+  &lt;div class="step step-active"&gt;...&lt;/div&gt;
+  &lt;div class="step"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Sizes</h3>
+        <div class="docs-example">
+          <div class="steps steps-sm mb-4">
+            <div class="step step-completed"><div class="step-icon">&#10003;</div></div>
+            <div class="step step-active"><div class="step-icon">2</div></div>
+            <div class="step"><div class="step-icon">3</div></div>
+          </div>
+          <div class="steps steps-lg">
+            <div class="step step-completed"><div class="step-icon">&#10003;</div></div>
+            <div class="step step-active"><div class="step-icon">2</div></div>
+            <div class="step"><div class="step-icon">3</div></div>
+          </div>
+        </div>
+
+        <h3>Dot Style</h3>
+        <div class="docs-example">
+          <div class="steps steps-dot">
+            <div class="step step-completed"><div class="step-icon"></div></div>
+            <div class="step step-completed"><div class="step-icon"></div></div>
+            <div class="step step-active"><div class="step-icon"></div></div>
+            <div class="step"><div class="step-icon"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Toasts -->
+      <section id="toasts" class="docs-section">
+        <h2>Toasts</h2>
+        <p>Push notifications to your visitors with a lightweight toast.</p>
+
+        <div class="docs-example">
+          <div class="toast show" role="alert">
+            <div class="toast-header">
+              <strong class="me-auto">ZenKit</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="toast show"&gt;
+  &lt;div class="toast-header"&gt;
+    &lt;strong class="me-auto"&gt;ZenKit&lt;/strong&gt;
+    &lt;button class="btn-close" data-dismiss="toast"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="toast-body"&gt;Hello, world!&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Tooltips -->
+      <section id="tooltips" class="docs-section">
+        <h2>Tooltips</h2>
+        <p>Add tooltips to any element.</p>
+
+        <div class="docs-example">
+          <div class="d-flex gap-2">
+            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Top</button>
+            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Right</button>
+            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Bottom</button>
+            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Left</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;button data-toggle="tooltip" title="Tooltip text"&gt;Hover me&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Upload -->
+      <section id="upload" class="docs-section">
+        <h2>Upload</h2>
+        <p>File upload dropzone and file list components.</p>
+
+        <h3>Basic Upload Dropzone</h3>
+        <div class="docs-example">
+          <div class="upload">
+            <input type="file" class="upload-input" id="upload1">
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <div class="upload-content">
+              <div class="upload-title"><span>Click to upload</span> or drag and drop</div>
+              <div class="upload-description">SVG, PNG, JPG or GIF (max. 800x400px)</div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="upload"&gt;
+  &lt;input type="file" class="upload-input"&gt;
+  &lt;div class="upload-icon"&gt;...&lt;/div&gt;
+  &lt;div class="upload-content"&gt;
+    &lt;div class="upload-title"&gt;Click to upload&lt;/div&gt;
+    &lt;div class="upload-description"&gt;Supported formats&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Compact Upload</h3>
+        <div class="docs-example">
+          <div class="upload upload-compact">
+            <input type="file" class="upload-input">
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <div class="upload-content">
+              <div class="upload-title">Upload a file</div>
+              <div class="upload-description">PNG, JPG up to 10MB</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Button Style Upload</h3>
+        <div class="docs-example">
+          <div class="upload upload-button">
+            <input type="file" class="upload-input">
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            Upload File
+          </div>
+        </div>
+
+        <h3>File List</h3>
+        <div class="docs-example">
+          <div class="upload-list" style="max-width: 400px;">
+            <div class="upload-file">
+              <div class="upload-file-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              </div>
+              <div class="upload-file-info">
+                <div class="upload-file-name">document.pdf</div>
+                <div class="upload-file-size">2.4 MB</div>
+              </div>
+              <div class="upload-file-actions">
+                <button class="upload-file-remove">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+            <div class="upload-file upload-file-success">
+              <div class="upload-file-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="upload-file-info">
+                <div class="upload-file-name">image.png</div>
+                <div class="upload-file-size">1.2 MB - Uploaded</div>
+              </div>
+              <div class="upload-file-actions">
+                <button class="upload-file-remove">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>States</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-3 flex-wrap">
+            <div class="upload upload-sm upload-success" style="width: 200px;">
+              <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="upload-content">
+                <div class="upload-title">Success</div>
+              </div>
+            </div>
+            <div class="upload upload-sm upload-error" style="width: 200px;">
+              <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+              </div>
+              <div class="upload-content">
+                <div class="upload-title">Error</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== HELPERS ==================== -->
+
+      <!-- Clearfix -->
+      <section id="clearfix" class="docs-section">
+        <h2>Clearfix</h2>
+        <p>Clear floated content within a container.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="clearfix"&gt;
+  &lt;button class="btn btn-secondary float-start"&gt;Float left&lt;/button&gt;
+  &lt;button class="btn btn-secondary float-end"&gt;Float right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Ratio -->
+      <section id="ratio" class="docs-section">
+        <h2>Ratio</h2>
+        <p>Create responsive video or slideshow embeds.</p>
+
+        <div class="docs-example">
+          <div class="ratio ratio-16x9" style="max-width: 400px;">
+            <div class="bg-primary d-flex align-items-center justify-content-center text-white">
+              16x9
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="ratio ratio-16x9"&gt;
+  &lt;iframe src="..."&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- Available ratios --&gt;
+.ratio-1x1
+.ratio-4x3
+.ratio-16x9
+.ratio-21x9</code></pre>
+        </div>
+      </section>
+
+      <!-- Stacks -->
+      <section id="stacks" class="docs-section">
+        <h2>Stacks</h2>
+        <p>Shorthand helpers for flexbox layouts.</p>
+
+        <h3>Vertical stack</h3>
+        <div class="docs-example">
+          <div class="vstack gap-3">
+            <div class="bg-primary-100 p-2 rounded">First item</div>
+            <div class="bg-primary-100 p-2 rounded">Second item</div>
+            <div class="bg-primary-100 p-2 rounded">Third item</div>
+          </div>
+        </div>
+
+        <h3>Horizontal stack</h3>
+        <div class="docs-example">
+          <div class="hstack gap-3">
+            <div class="bg-primary-100 p-2 rounded">First</div>
+            <div class="bg-primary-100 p-2 rounded">Second</div>
+            <div class="bg-primary-100 p-2 rounded">Third</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;div class="vstack gap-3"&gt;...&lt;/div&gt;
+&lt;div class="hstack gap-3"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Stretched Link -->
+      <section id="stretched-link" class="docs-section">
+        <h2>Stretched Link</h2>
+        <p>Make any HTML element or component clickable by "stretching" a nested link.</p>
+
+        <div class="docs-example">
+          <div class="card" style="max-width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card with stretched link</h5>
+              <p class="card-text">The entire card is clickable.</p>
+              <a href="#" class="stretched-link">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;a href="#" class="stretched-link"&gt;Link&lt;/a&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Visually Hidden -->
+      <section id="visually-hidden" class="docs-section">
+        <h2>Visually Hidden</h2>
+        <p>Hide elements visually while keeping them accessible to screen readers.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>&lt;span class="visually-hidden"&gt;Title for screen readers&lt;/span&gt;
+&lt;a class="visually-hidden-focusable" href="#content"&gt;Skip to main content&lt;/a&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ==================== UTILITIES ==================== -->
+
+      <!-- Animations -->
+      <section id="animations" class="docs-section">
+        <h2>Animations</h2>
+        <p>Animate elements with a comprehensive set of animation utilities including fades, slides, bounces, and more.</p>
+
+        <h3>Fade Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-fade-in'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-fade-in');">Play Fade In</button>
+            <div class="p-3 bg-primary text-white rounded animate-fade-in">.animate-fade-in</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-fade-in-up'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-fade-in-up');">Play Fade In Up</button>
+            <div class="p-3 bg-success text-white rounded animate-fade-in-up">.animate-fade-in-up</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-fade-in-down'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-fade-in-down');">Play Fade In Down</button>
+            <div class="p-3 bg-info text-white rounded animate-fade-in-down">.animate-fade-in-down</div>
+          </div>
+        </div>
+
+        <h3>Slide Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-slide-in-left'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-slide-in-left');">Play Slide In Left</button>
+            <div class="p-3 bg-warning text-dark rounded animate-slide-in-left">.animate-slide-in-left</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-slide-in-right'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-slide-in-right');">Play Slide In Right</button>
+            <div class="p-3 bg-danger text-white rounded animate-slide-in-right">.animate-slide-in-right</div>
+          </div>
+        </div>
+
+        <h3>Bounce Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-start">
+            <div class="p-3 bg-primary text-white rounded animate-bounce">.animate-bounce</div>
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-bounce-in'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-bounce-in');">Play Bounce In</button>
+            <div class="p-3 bg-success text-white rounded animate-bounce-in">.animate-bounce-in</div>
+          </div>
+        </div>
+
+        <h3>Pulse & Heartbeat</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-start">
+            <div class="p-3 bg-danger text-white rounded animate-pulse">.animate-pulse</div>
+            <div class="p-3 bg-warning text-dark rounded animate-heartbeat">.animate-heartbeat</div>
+            <div class="p-3 bg-info text-white rounded animate-pulse-ring">.animate-pulse-ring</div>
+          </div>
+        </div>
+
+        <h3>Spin Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center">
+            <div class="p-3 bg-primary text-white rounded animate-spin" style="width: 60px; text-align: center;">.spin</div>
+            <div class="p-3 bg-success text-white rounded animate-spin-slow" style="width: 60px; text-align: center;">.spin-slow</div>
+            <div class="p-3 bg-danger text-white rounded animate-spin-fast" style="width: 60px; text-align: center;">.spin-fast</div>
+          </div>
+        </div>
+
+        <h3>Attention Seekers</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-shake'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-shake');">Play Shake</button>
+            <div class="p-3 bg-danger text-white rounded">.animate-shake</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-wiggle'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-wiggle');">Play Wiggle</button>
+            <div class="p-3 bg-warning text-dark rounded">.animate-wiggle</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-rubber-band'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-rubber-band');">Play Rubber Band</button>
+            <div class="p-3 bg-success text-white rounded">.animate-rubber-band</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-jello'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-jello');">Play Jello</button>
+            <div class="p-3 bg-info text-white rounded">.animate-jello</div>
+          </div>
+        </div>
+
+        <h3>Float & Glow</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-start">
+            <div class="p-3 bg-primary text-white rounded animate-float">.animate-float</div>
+            <div class="p-3 bg-success text-white rounded animate-glow">.animate-glow</div>
+          </div>
+        </div>
+
+        <h3>Zoom Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-zoom-in'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-zoom-in');">Play Zoom In</button>
+            <div class="p-3 bg-primary text-white rounded animate-zoom-in">.animate-zoom-in</div>
+          </div>
+        </div>
+
+        <h3>Flip Animations</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-flip-x'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-flip-x');">Play Flip X</button>
+            <div class="p-3 bg-info text-white rounded animate-flip-x">.animate-flip-x</div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button class="btn btn-outline-primary" onclick="this.nextElementSibling.classList.remove('animate-flip-y'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('animate-flip-y');">Play Flip Y</button>
+            <div class="p-3 bg-warning text-dark rounded animate-flip-y">.animate-flip-y</div>
+          </div>
+        </div>
+
+        <h3>Animation Duration</h3>
+        <p>Control animation duration with these utility classes:</p>
+        <div class="docs-code">
+          <pre><code>.duration-75    { animation-duration: 75ms; }
+.duration-100   { animation-duration: 100ms; }
+.duration-150   { animation-duration: 150ms; }
+.duration-200   { animation-duration: 200ms; }
+.duration-300   { animation-duration: 300ms; }
+.duration-500   { animation-duration: 500ms; }
+.duration-700   { animation-duration: 700ms; }
+.duration-1000  { animation-duration: 1000ms; }
+.duration-2000  { animation-duration: 2000ms; }</code></pre>
+        </div>
+
+        <h3>Animation Delay</h3>
+        <p>Add delays to your animations:</p>
+        <div class="docs-code">
+          <pre><code>.delay-75   { animation-delay: 75ms; }
+.delay-100  { animation-delay: 100ms; }
+.delay-150  { animation-delay: 150ms; }
+.delay-200  { animation-delay: 200ms; }
+.delay-300  { animation-delay: 300ms; }
+.delay-500  { animation-delay: 500ms; }
+.delay-700  { animation-delay: 700ms; }
+.delay-1000 { animation-delay: 1000ms; }</code></pre>
+        </div>
+
+        <h3>Timing Functions</h3>
+        <p>Control the easing of animations:</p>
+        <div class="docs-code">
+          <pre><code>.ease-linear   { animation-timing-function: linear; }
+.ease-in       { animation-timing-function: ease-in; }
+.ease-out      { animation-timing-function: ease-out; }
+.ease-in-out   { animation-timing-function: ease-in-out; }
+.ease-bounce   { animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.ease-elastic  { animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6); }</code></pre>
+        </div>
+
+        <h3>Animation Control</h3>
+        <p>Control iteration, direction, and play state:</p>
+        <div class="docs-code">
+          <pre><code>// Iteration
+.animate-once     { animation-iteration-count: 1; }
+.animate-twice    { animation-iteration-count: 2; }
+.animate-infinite { animation-iteration-count: infinite; }
+
+// Direction
+.animate-normal            { animation-direction: normal; }
+.animate-reverse           { animation-direction: reverse; }
+.animate-alternate         { animation-direction: alternate; }
+.animate-alternate-reverse { animation-direction: alternate-reverse; }
+
+// Fill Mode
+.animate-fill-none      { animation-fill-mode: none; }
+.animate-fill-forwards  { animation-fill-mode: forwards; }
+.animate-fill-backwards { animation-fill-mode: backwards; }
+.animate-fill-both      { animation-fill-mode: both; }
+
+// Play State
+.animate-running { animation-play-state: running; }
+.animate-paused  { animation-play-state: paused; }
+.hover\:animate-paused:hover { animation-play-state: paused; }</code></pre>
+        </div>
+
+        <h3>Transitions</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <div class="p-3 bg-primary text-white rounded transition-all" style="cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">.transition-all (hover me)</div>
+            <div class="p-3 bg-success text-white rounded transition-transform" style="cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">.transition-transform</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Background -->
+      <section id="background" class="docs-section">
+        <h2>Background</h2>
+        <p>Convey meaning through background-color utilities.</p>
+
+        <div class="docs-example">
+          <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+          <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+          <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+          <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+          <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+          <div class="p-3 mb-2 bg-info text-white">.bg-info</div>
+        </div>
+      </section>
+
+      <!-- Borders -->
+      <section id="borders" class="docs-section">
+        <h2>Borders</h2>
+        <p>Use border utilities to add or remove borders from an element.</p>
+
+        <div class="docs-example">
+          <div class="d-flex gap-3">
+            <span class="border p-3 bg-light">border</span>
+            <span class="border-top p-3 bg-light">border-top</span>
+            <span class="border-end p-3 bg-light">border-end</span>
+            <span class="border-bottom p-3 bg-light">border-bottom</span>
+            <span class="border-start p-3 bg-light">border-start</span>
+          </div>
+        </div>
+
+        <h3>Border radius</h3>
+        <div class="docs-example">
+          <div class="d-flex gap-3">
+            <span class="p-3 bg-primary text-white rounded">rounded</span>
+            <span class="p-3 bg-primary text-white rounded-pill">rounded-pill</span>
+            <span class="p-3 bg-primary text-white rounded-circle" style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;">O</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="docs-section">
+        <h2>Colors</h2>
+        <p>Convey meaning through color utilities.</p>
+
+        <div class="docs-example">
+          <p class="text-primary">.text-primary</p>
+          <p class="text-secondary">.text-secondary</p>
+          <p class="text-success">.text-success</p>
+          <p class="text-danger">.text-danger</p>
+          <p class="text-warning">.text-warning</p>
+          <p class="text-info">.text-info</p>
+          <p class="text-muted">.text-muted</p>
+        </div>
+      </section>
+
+      <!-- Display -->
+      <section id="display" class="docs-section">
+        <h2>Display</h2>
+        <p>Quickly change the display value of components.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>.d-none
+.d-inline
+.d-inline-block
+.d-block
+.d-flex
+.d-inline-flex
+.d-grid
+
+// Responsive
+.d-sm-none
+.d-md-block
+.d-lg-flex</code></pre>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section id="filters" class="docs-section">
+        <h2>Filters</h2>
+        <p>Apply visual effects like blur, brightness, contrast, and more with CSS filter utilities.</p>
+
+        <h3>Blur</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-primary text-white rounded blur-none">blur-none</div>
+            <div class="p-3 bg-primary text-white rounded blur-sm">blur-sm</div>
+            <div class="p-3 bg-primary text-white rounded blur">blur</div>
+            <div class="p-3 bg-primary text-white rounded blur-md">blur-md</div>
+            <div class="p-3 bg-primary text-white rounded blur-lg">blur-lg</div>
+          </div>
+        </div>
+
+        <h3>Brightness</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-primary text-white rounded brightness-50">50%</div>
+            <div class="p-3 bg-primary text-white rounded brightness-75">75%</div>
+            <div class="p-3 bg-primary text-white rounded brightness-100">100%</div>
+            <div class="p-3 bg-primary text-white rounded brightness-125">125%</div>
+            <div class="p-3 bg-primary text-white rounded brightness-150">150%</div>
+          </div>
+        </div>
+
+        <h3>Contrast</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-primary text-white rounded contrast-50">50%</div>
+            <div class="p-3 bg-primary text-white rounded contrast-75">75%</div>
+            <div class="p-3 bg-primary text-white rounded contrast-100">100%</div>
+            <div class="p-3 bg-primary text-white rounded contrast-125">125%</div>
+            <div class="p-3 bg-primary text-white rounded contrast-150">150%</div>
+          </div>
+        </div>
+
+        <h3>Grayscale</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-success text-white rounded grayscale-0">0%</div>
+            <div class="p-3 bg-success text-white rounded grayscale-25">25%</div>
+            <div class="p-3 bg-success text-white rounded grayscale-50">50%</div>
+            <div class="p-3 bg-success text-white rounded grayscale-75">75%</div>
+            <div class="p-3 bg-success text-white rounded grayscale">100%</div>
+          </div>
+        </div>
+
+        <h3>Saturate</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-danger text-white rounded saturate-0">0%</div>
+            <div class="p-3 bg-danger text-white rounded saturate-50">50%</div>
+            <div class="p-3 bg-danger text-white rounded saturate-100">100%</div>
+            <div class="p-3 bg-danger text-white rounded saturate-150">150%</div>
+            <div class="p-3 bg-danger text-white rounded saturate-200">200%</div>
+          </div>
+        </div>
+
+        <h3>Sepia & Invert</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-info text-white rounded sepia">sepia</div>
+            <div class="p-3 bg-info text-white rounded sepia-50">sepia-50</div>
+            <div class="p-3 bg-warning text-dark rounded invert">invert</div>
+            <div class="p-3 bg-warning text-dark rounded invert-50">invert-50</div>
+          </div>
+        </div>
+
+        <h3>Hue Rotate</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-primary text-white rounded hue-rotate-0">0deg</div>
+            <div class="p-3 bg-primary text-white rounded hue-rotate-30">30deg</div>
+            <div class="p-3 bg-primary text-white rounded hue-rotate-60">60deg</div>
+            <div class="p-3 bg-primary text-white rounded hue-rotate-90">90deg</div>
+            <div class="p-3 bg-primary text-white rounded hue-rotate-180">180deg</div>
+          </div>
+        </div>
+
+        <h3>Drop Shadow</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-light rounded drop-shadow-sm">drop-shadow-sm</div>
+            <div class="p-3 bg-light rounded drop-shadow">drop-shadow</div>
+            <div class="p-3 bg-light rounded drop-shadow-md">drop-shadow-md</div>
+            <div class="p-3 bg-light rounded drop-shadow-lg">drop-shadow-lg</div>
+            <div class="p-3 bg-light rounded drop-shadow-xl">drop-shadow-xl</div>
+          </div>
+        </div>
+
+        <h3>Backdrop Blur (Glassmorphism)</h3>
+        <div class="docs-example" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 8px;">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 text-white rounded backdrop-blur-sm" style="background: rgba(255,255,255,0.1);">backdrop-blur-sm</div>
+            <div class="p-3 text-white rounded backdrop-blur" style="background: rgba(255,255,255,0.1);">backdrop-blur</div>
+            <div class="p-3 text-white rounded backdrop-blur-lg" style="background: rgba(255,255,255,0.1);">backdrop-blur-lg</div>
+          </div>
+        </div>
+
+        <h3>Glass Helper Classes</h3>
+        <div class="docs-example" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); padding: 2rem; border-radius: 8px;">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 rounded glass">.glass</div>
+            <div class="p-3 rounded glass-dark">.glass-dark</div>
+            <div class="p-3 rounded glass-strong">.glass-strong</div>
+          </div>
+        </div>
+
+        <h3>Filter Presets</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-warning text-dark rounded filter-vintage">vintage</div>
+            <div class="p-3 bg-warning text-dark rounded filter-cool">cool</div>
+            <div class="p-3 bg-warning text-dark rounded filter-warm">warm</div>
+            <div class="p-3 bg-warning text-dark rounded filter-dramatic">dramatic</div>
+            <div class="p-3 bg-warning text-dark rounded filter-muted">muted</div>
+            <div class="p-3 bg-warning text-dark rounded filter-noir">noir</div>
+            <div class="p-3 bg-warning text-dark rounded filter-vivid">vivid</div>
+          </div>
+        </div>
+
+        <h3>Hover Filter Utilities</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="p-3 bg-primary text-white rounded hover:brightness-110" style="cursor: pointer;">hover:brightness-110</div>
+            <div class="p-3 bg-success text-white rounded hover:saturate-150" style="cursor: pointer;">hover:saturate-150</div>
+            <div class="p-3 bg-info text-white rounded grayscale hover:grayscale-0" style="cursor: pointer;">hover:grayscale-0</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flex -->
+      <section id="flex" class="docs-section">
+        <h2>Flex</h2>
+        <p>Manage layout, alignment, and sizing of components with flexbox utilities.</p>
+
+        <div class="docs-example">
+          <div class="d-flex justify-content-between p-3 bg-primary-100 rounded">
+            <div class="p-2 bg-primary text-white rounded">Flex item 1</div>
+            <div class="p-2 bg-primary text-white rounded">Flex item 2</div>
+            <div class="p-2 bg-primary text-white rounded">Flex item 3</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>.d-flex
+.flex-row / .flex-column
+.justify-content-start / center / end / between / around
+.align-items-start / center / end / stretch
+.flex-wrap / .flex-nowrap
+.gap-1 / .gap-2 / .gap-3 / .gap-4 / .gap-5</code></pre>
+        </div>
+      </section>
+
+      <!-- Opacity -->
+      <section id="opacity" class="docs-section">
+        <h2>Opacity</h2>
+        <p>Control the opacity of elements.</p>
+
+        <div class="docs-example">
+          <div class="d-flex gap-3">
+            <div class="opacity-100 p-3 bg-primary text-white rounded">100%</div>
+            <div class="opacity-75 p-3 bg-primary text-white rounded">75%</div>
+            <div class="opacity-50 p-3 bg-primary text-white rounded">50%</div>
+            <div class="opacity-25 p-3 bg-primary text-white rounded">25%</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>.opacity-0
+.opacity-25
+.opacity-50
+.opacity-75
+.opacity-100</code></pre>
+        </div>
+      </section>
+
+      <!-- Shadows -->
+      <section id="shadows" class="docs-section">
+        <h2>Shadows</h2>
+        <p>Add or remove shadows from elements.</p>
+
+        <div class="docs-example">
+          <div class="d-flex gap-4 flex-wrap">
+            <div class="shadow-none p-3 bg-white rounded">No shadow</div>
+            <div class="shadow-sm p-3 bg-white rounded">Small shadow</div>
+            <div class="shadow p-3 bg-white rounded">Regular shadow</div>
+            <div class="shadow-lg p-3 bg-white rounded">Large shadow</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>.shadow-none
+.shadow-sm
+.shadow
+.shadow-md
+.shadow-lg
+.shadow-xl</code></pre>
+        </div>
+      </section>
+
+      <!-- Sizing -->
+      <section id="sizing" class="docs-section">
+        <h2>Sizing</h2>
+        <p>Easily make an element as wide or as tall with width and height utilities.</p>
+
+        <div class="docs-code">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>// Width
+.w-25 / .w-50 / .w-75 / .w-100 / .w-auto
+
+// Height
+.h-25 / .h-50 / .h-75 / .h-100 / .h-auto
+
+// Max width/height
+.mw-100 / .mh-100
+
+// Viewport
+.vw-100 / .vh-100
+.min-vw-100 / .min-vh-100</code></pre>
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section id="spacing" class="docs-section">
+        <h2>Spacing</h2>
+        <p>Wide range of shorthand responsive margin, padding, and gap utilities.</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr><th>Property</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>m</code></td><td>margin</td></tr>
+            <tr><td><code>p</code></td><td>padding</td></tr>
+          </tbody>
+        </table>
+
+        <table class="docs-table mt-3">
+          <thead>
+            <tr><th>Sides</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>t</code></td><td>top</td></tr>
+            <tr><td><code>b</code></td><td>bottom</td></tr>
+            <tr><td><code>l/s</code></td><td>left/start</td></tr>
+            <tr><td><code>r/e</code></td><td>right/end</td></tr>
+            <tr><td><code>x</code></td><td>left and right</td></tr>
+            <tr><td><code>y</code></td><td>top and bottom</td></tr>
+          </tbody>
+        </table>
+
+        <div class="docs-code mt-3">
+          <button class="docs-code-copy">Copy</button>
+          <pre><code>.mt-0 / .mt-1 / .mt-2 / .mt-3 / .mt-4 / .mt-5
+.mb-3 / .mx-auto / .p-4 / .px-3 / .py-2</code></pre>
+        </div>
+      </section>
+
+      <!-- Text -->
+      <section id="text" class="docs-section">
+        <h2>Text</h2>
+        <p>Documentation and examples for text utilities.</p>
+
+        <h3>Text alignment</h3>
+        <div class="docs-example">
+          <p class="text-start">Start aligned text.</p>
+          <p class="text-center">Center aligned text.</p>
+          <p class="text-end">End aligned text.</p>
+        </div>
+
+        <h3>Font weight and italics</h3>
+        <div class="docs-example">
+          <p class="fw-bold">Bold text.</p>
+          <p class="fw-semibold">Semibold text.</p>
+          <p class="fw-normal">Normal weight text.</p>
+          <p class="fw-light">Light weight text.</p>
+          <p class="fst-italic">Italic text.</p>
+        </div>
+
+        <h3>Text transform</h3>
+        <div class="docs-example">
+          <p class="text-lowercase">Lowercased text.</p>
+          <p class="text-uppercase">Uppercased text.</p>
+          <p class="text-capitalize">CapiTaLiZed text.</p>
+        </div>
+      </section>
+
+      <!-- Transforms -->
+      <section id="transforms" class="docs-section">
+        <h2>Transforms</h2>
+        <p>Transform elements with rotate, scale, skew, and translate utilities.</p>
+
+        <h3>Rotate</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 150px;">
+            <div class="p-3 bg-primary text-white rounded rotate-0">0deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-3">3deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-6">6deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-12">12deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-45">45deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-90">90deg</div>
+            <div class="p-3 bg-primary text-white rounded rotate-180">180deg</div>
+          </div>
+        </div>
+
+        <h3>Negative Rotate</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 150px;">
+            <div class="p-3 bg-success text-white rounded -rotate-3">-3deg</div>
+            <div class="p-3 bg-success text-white rounded -rotate-6">-6deg</div>
+            <div class="p-3 bg-success text-white rounded -rotate-12">-12deg</div>
+            <div class="p-3 bg-success text-white rounded -rotate-45">-45deg</div>
+            <div class="p-3 bg-success text-white rounded -rotate-90">-90deg</div>
+          </div>
+        </div>
+
+        <h3>Scale</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 120px;">
+            <div class="p-3 bg-danger text-white rounded scale-50">50%</div>
+            <div class="p-3 bg-danger text-white rounded scale-75">75%</div>
+            <div class="p-3 bg-danger text-white rounded scale-100">100%</div>
+            <div class="p-3 bg-danger text-white rounded scale-110">110%</div>
+            <div class="p-3 bg-danger text-white rounded scale-125">125%</div>
+          </div>
+        </div>
+
+        <h3>Scale X / Y</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 120px;">
+            <div class="p-3 bg-info text-white rounded scale-x-150">scale-x-150</div>
+            <div class="p-3 bg-info text-white rounded scale-y-150">scale-y-150</div>
+            <div class="p-3 bg-warning text-dark rounded scale-x-50">scale-x-50</div>
+            <div class="p-3 bg-warning text-dark rounded scale-y-50">scale-y-50</div>
+          </div>
+        </div>
+
+        <h3>Skew</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 120px;">
+            <div class="p-3 bg-primary text-white rounded skew-x-3">skew-x-3</div>
+            <div class="p-3 bg-primary text-white rounded skew-x-6">skew-x-6</div>
+            <div class="p-3 bg-primary text-white rounded skew-x-12">skew-x-12</div>
+            <div class="p-3 bg-success text-white rounded skew-y-3">skew-y-3</div>
+            <div class="p-3 bg-success text-white rounded skew-y-6">skew-y-6</div>
+          </div>
+        </div>
+
+        <h3>Translate</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-start" style="min-height: 150px; padding: 2rem;">
+            <div class="p-3 bg-warning text-dark rounded translate-x-4">translate-x-4</div>
+            <div class="p-3 bg-warning text-dark rounded translate-y-4">translate-y-4</div>
+            <div class="p-3 bg-danger text-white rounded -translate-x-2">-translate-x-2</div>
+            <div class="p-3 bg-danger text-white rounded -translate-y-2">-translate-y-2</div>
+          </div>
+        </div>
+
+        <h3>Flip</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center">
+            <div class="p-3 bg-info text-white rounded">Normal</div>
+            <div class="p-3 bg-info text-white rounded flip-x">flip-x</div>
+            <div class="p-3 bg-info text-white rounded flip-y">flip-y</div>
+            <div class="p-3 bg-info text-white rounded flip-both">flip-both</div>
+          </div>
+        </div>
+
+        <h3>Transform Origin</h3>
+        <div class="docs-code">
+          <pre><code>.origin-center       { transform-origin: center; }
+.origin-top          { transform-origin: top; }
+.origin-top-right    { transform-origin: top right; }
+.origin-right        { transform-origin: right; }
+.origin-bottom-right { transform-origin: bottom right; }
+.origin-bottom       { transform-origin: bottom; }
+.origin-bottom-left  { transform-origin: bottom left; }
+.origin-left         { transform-origin: left; }
+.origin-top-left     { transform-origin: top left; }</code></pre>
+        </div>
+
+        <h3>3D Transforms</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center justify-content-center" style="min-height: 150px;">
+            <div class="perspective">
+              <div class="p-3 bg-primary text-white rounded rotate-x-45">rotate-x-45</div>
+            </div>
+            <div class="perspective">
+              <div class="p-3 bg-success text-white rounded rotate-y-45">rotate-y-45</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Hover Transforms</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-4 align-items-center">
+            <div class="p-3 bg-primary text-white rounded transition-transform hover:scale-110" style="cursor: pointer;">hover:scale-110</div>
+            <div class="p-3 bg-success text-white rounded transition-transform hover:-translate-y-2" style="cursor: pointer;">hover:-translate-y-2</div>
+            <div class="p-3 bg-danger text-white rounded transition-transform hover:rotate-6" style="cursor: pointer;">hover:rotate-6</div>
+          </div>
+        </div>
+
+        <h3>Active Transforms</h3>
+        <div class="docs-example">
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-primary transition-transform active:scale-95">Click me (active:scale-95)</button>
+          </div>
+        </div>
+
+        <h3>GPU Acceleration</h3>
+        <div class="docs-code">
+          <pre><code>// Force GPU acceleration for smoother animations
+.transform-gpu { transform: translateZ(0); }
+
+// Remove all transforms
+.transform-none { transform: none; }</code></pre>
+        </div>
+
+        <h3>Backface Visibility</h3>
+        <div class="docs-code">
+          <pre><code>// For card flip effects
+.backface-visible { backface-visibility: visible; }
+.backface-hidden  { backface-visibility: hidden; }
+
+// 3D transform style
+.transform-flat { transform-style: flat; }
+.transform-3d   { transform-style: preserve-3d; }</code></pre>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-5 mt-5 border-t">
+        <p class="text-muted text-center mb-0">
+          Made with ❤️ by Sayed Abdul Karim. ZenKit &copy; 2024
+        </p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Table of Contents (updates dynamically) -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On this page</div>
+    <ul class="docs-toc-nav" id="tocNav">
+    </ul>
+  </aside>
+
+  <!-- Modal for demo -->
+  <div class="modal" id="exampleModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is the modal body content.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas for demo -->
+  <div class="offcanvas offcanvas-start" id="offcanvasExample">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Offcanvas</h5>
+      <button type="button" class="btn-close" data-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Content for the offcanvas goes here.</p>
+    </div>
+  </div>
+
+  <script src="../js/zenkit.umd.js"></script>
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      sunIcon.classList.add('d-none');
+      moonIcon.classList.remove('d-none');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      sunIcon.classList.toggle('d-none');
+      moonIcon.classList.toggle('d-none');
+    });
+
+    // Sidebar Toggle (Mobile)
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+    });
+
+    // Smooth scroll & active states for sidebar
+    document.querySelectorAll('.docs-sidebar-nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const target = document.querySelector(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          sidebar.classList.remove('show');
+
+          // Update active state
+          document.querySelectorAll('.docs-sidebar-nav a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // TOC navigation click handler
+    document.getElementById('tocNav').addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+
+    // Copy button functionality
+    document.querySelectorAll('.docs-code-copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.textContent;
+        navigator.clipboard.writeText(code);
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    });
+
+    // Active sidebar link on scroll
+    const observerOptions = { rootMargin: '-20% 0px -80% 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Update sidebar active
+          document.querySelectorAll('.docs-sidebar-nav a').forEach(a => a.classList.remove('active'));
+          const activeLink = document.querySelector(`.docs-sidebar-nav a[href="#${entry.target.id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+
+          // Update TOC
+          updateTOC(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+
+    // Update TOC based on current section
+    function updateTOC(section) {
+      const tocNav = document.getElementById('tocNav');
+      const h3s = section.querySelectorAll('h3');
+
+      tocNav.innerHTML = '';
+
+      // Add section title
+      const h2 = section.querySelector('h2');
+      if (h2) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + section.id;
+        a.textContent = h2.textContent;
+        a.classList.add('active');
+        li.appendChild(a);
+        tocNav.appendChild(li);
+      }
+
+      // Add subsections
+      h3s.forEach(h3 => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        const id = h3.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        h3.id = id;
+        a.href = '#' + id;
+        a.textContent = h3.textContent;
+        li.appendChild(a);
+        tocNav.appendChild(li);
+      });
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById('docsSearch');
+    const sections = document.querySelectorAll('.docs-section');
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar-nav a');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+
+      if (query === '') {
+        // Show all sections and links
+        sections.forEach(s => s.style.display = '');
+        sidebarLinks.forEach(l => l.parentElement.style.display = '');
+        return;
+      }
+
+      // Filter sidebar links
+      sidebarLinks.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        const matches = text.includes(query);
+        link.parentElement.style.display = matches ? '' : 'none';
+      });
+
+      // Filter sections
+      sections.forEach(section => {
+        const text = section.textContent.toLowerCase();
+        const matches = text.includes(query);
+        section.style.display = matches ? '' : 'none';
+      });
+    });
+
+    // Ctrl+K to focus search
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+      // Escape to clear search
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+        searchInput.blur();
+      }
+    });
+
+    // Initialize components
+    ZenKit.init();
+  </script>
+</body>
+</html>

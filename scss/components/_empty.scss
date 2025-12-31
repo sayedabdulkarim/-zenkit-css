@@ -1,0 +1,321 @@
+// ========================================
+// ZenKit - Empty State
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Empty State
+// ----------------------------------------
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  min-height: 200px;
+}
+
+// ----------------------------------------
+// Empty Icon/Image
+// ----------------------------------------
+.empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  color: var(--gray-400);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-full);
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.empty-image {
+  max-width: 200px;
+  max-height: 150px;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+
+  img,
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// ----------------------------------------
+// Empty Content
+// ----------------------------------------
+.empty-title {
+  font-size: var(--text-lg);
+  font-weight: $font-weight-semibold;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.empty-description {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  max-width: 320px;
+  margin-bottom: 1.5rem;
+  line-height: $line-height-relaxed;
+}
+
+// ----------------------------------------
+// Empty Actions
+// ----------------------------------------
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+// ----------------------------------------
+// Empty State Sizes
+// ----------------------------------------
+.empty-sm {
+  padding: 2rem 1rem;
+  min-height: 150px;
+
+  .empty-icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .empty-image {
+    max-width: 120px;
+    max-height: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .empty-title {
+    font-size: var(--text-base);
+  }
+
+  .empty-description {
+    font-size: var(--text-xs);
+    margin-bottom: 1rem;
+  }
+}
+
+.empty-lg {
+  padding: 4rem 2rem;
+  min-height: 300px;
+
+  .empty-icon {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 2rem;
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  .empty-image {
+    max-width: 280px;
+    max-height: 200px;
+    margin-bottom: 2rem;
+  }
+
+  .empty-title {
+    font-size: var(--text-xl);
+  }
+
+  .empty-description {
+    font-size: var(--text-base);
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+}
+
+// ----------------------------------------
+// Empty State Variants
+// ----------------------------------------
+
+// Bordered
+.empty-bordered {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-secondary);
+}
+
+// Compact (inline)
+.empty-compact {
+  flex-direction: row;
+  text-align: left;
+  padding: 1.5rem;
+  gap: 1rem;
+
+  .empty-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .empty-content {
+    flex: 1;
+  }
+
+  .empty-description {
+    margin-bottom: 0;
+  }
+
+  .empty-actions {
+    flex-shrink: 0;
+    justify-content: flex-end;
+  }
+}
+
+// ----------------------------------------
+// Empty State Colors
+// ----------------------------------------
+.empty-primary {
+  .empty-icon {
+    color: var(--primary);
+    background-color: var(--primary-50);
+  }
+}
+
+.empty-success {
+  .empty-icon {
+    color: var(--success);
+    background-color: var(--success-light);
+  }
+}
+
+.empty-warning {
+  .empty-icon {
+    color: var(--warning);
+    background-color: var(--warning-light);
+  }
+}
+
+.empty-danger {
+  .empty-icon {
+    color: var(--danger);
+    background-color: var(--danger-light);
+  }
+}
+
+.empty-info {
+  .empty-icon {
+    color: var(--info);
+    background-color: var(--info-light);
+  }
+}
+
+// ----------------------------------------
+// Common Empty States (Pre-styled)
+// ----------------------------------------
+
+// No Data
+.empty-no-data {
+  .empty-icon {
+    color: var(--gray-400);
+    background-color: var(--gray-100);
+  }
+}
+
+// No Results (Search)
+.empty-no-results {
+  .empty-icon {
+    color: var(--info);
+    background-color: var(--info-light);
+  }
+}
+
+// Error State
+.empty-error {
+  .empty-icon {
+    color: var(--danger);
+    background-color: var(--danger-light);
+  }
+
+  .empty-title {
+    color: var(--danger);
+  }
+}
+
+// Success State
+.empty-success-state {
+  .empty-icon {
+    color: var(--success);
+    background-color: var(--success-light);
+  }
+
+  .empty-title {
+    color: var(--success-dark);
+  }
+}
+
+// No Permission
+.empty-no-permission {
+  .empty-icon {
+    color: var(--warning);
+    background-color: var(--warning-light);
+  }
+}
+
+// ----------------------------------------
+// Empty with Background Pattern
+// ----------------------------------------
+.empty-pattern {
+  background-image: radial-gradient(var(--gray-200) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.empty-pattern-lines {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--gray-100),
+    var(--gray-100) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+}
+
+// ----------------------------------------
+// Full Page Empty State
+// ----------------------------------------
+.empty-fullpage {
+  min-height: 100vh;
+  padding: 2rem;
+
+  .empty-image {
+    max-width: 320px;
+    max-height: 240px;
+  }
+
+  .empty-title {
+    font-size: var(--text-2xl);
+  }
+
+  .empty-description {
+    font-size: var(--text-base);
+    max-width: 480px;
+  }
+}
+
+// ----------------------------------------
+// Empty State in Card
+// ----------------------------------------
+.card .empty {
+  padding: 2rem 1rem;
+  min-height: auto;
+}

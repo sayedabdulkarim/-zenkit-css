@@ -1,0 +1,328 @@
+// ========================================
+// ZenKit - Filter Utilities
+// Brightness, contrast, saturate, blur, and other filter utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Blur
+// ----------------------------------------
+.blur-none { filter: blur(0); }
+.blur-sm { filter: blur(4px); }
+.blur { filter: blur(8px); }
+.blur-md { filter: blur(12px); }
+.blur-lg { filter: blur(16px); }
+.blur-xl { filter: blur(24px); }
+.blur-2xl { filter: blur(40px); }
+.blur-3xl { filter: blur(64px); }
+
+// ----------------------------------------
+// Brightness
+// ----------------------------------------
+.brightness-0 { filter: brightness(0); }
+.brightness-50 { filter: brightness(0.5); }
+.brightness-75 { filter: brightness(0.75); }
+.brightness-90 { filter: brightness(0.9); }
+.brightness-95 { filter: brightness(0.95); }
+.brightness-100 { filter: brightness(1); }
+.brightness-105 { filter: brightness(1.05); }
+.brightness-110 { filter: brightness(1.1); }
+.brightness-125 { filter: brightness(1.25); }
+.brightness-150 { filter: brightness(1.5); }
+.brightness-200 { filter: brightness(2); }
+
+// ----------------------------------------
+// Contrast
+// ----------------------------------------
+.contrast-0 { filter: contrast(0); }
+.contrast-50 { filter: contrast(0.5); }
+.contrast-75 { filter: contrast(0.75); }
+.contrast-100 { filter: contrast(1); }
+.contrast-125 { filter: contrast(1.25); }
+.contrast-150 { filter: contrast(1.5); }
+.contrast-200 { filter: contrast(2); }
+
+// ----------------------------------------
+// Grayscale
+// ----------------------------------------
+.grayscale-0 { filter: grayscale(0); }
+.grayscale { filter: grayscale(100%); }
+.grayscale-25 { filter: grayscale(25%); }
+.grayscale-50 { filter: grayscale(50%); }
+.grayscale-75 { filter: grayscale(75%); }
+
+// ----------------------------------------
+// Hue Rotate
+// ----------------------------------------
+.hue-rotate-0 { filter: hue-rotate(0deg); }
+.hue-rotate-15 { filter: hue-rotate(15deg); }
+.hue-rotate-30 { filter: hue-rotate(30deg); }
+.hue-rotate-60 { filter: hue-rotate(60deg); }
+.hue-rotate-90 { filter: hue-rotate(90deg); }
+.hue-rotate-180 { filter: hue-rotate(180deg); }
+
+.-hue-rotate-15 { filter: hue-rotate(-15deg); }
+.-hue-rotate-30 { filter: hue-rotate(-30deg); }
+.-hue-rotate-60 { filter: hue-rotate(-60deg); }
+.-hue-rotate-90 { filter: hue-rotate(-90deg); }
+.-hue-rotate-180 { filter: hue-rotate(-180deg); }
+
+// ----------------------------------------
+// Invert
+// ----------------------------------------
+.invert-0 { filter: invert(0); }
+.invert { filter: invert(100%); }
+.invert-25 { filter: invert(25%); }
+.invert-50 { filter: invert(50%); }
+.invert-75 { filter: invert(75%); }
+
+// ----------------------------------------
+// Saturate
+// ----------------------------------------
+.saturate-0 { filter: saturate(0); }
+.saturate-50 { filter: saturate(0.5); }
+.saturate-100 { filter: saturate(1); }
+.saturate-150 { filter: saturate(1.5); }
+.saturate-200 { filter: saturate(2); }
+
+// ----------------------------------------
+// Sepia
+// ----------------------------------------
+.sepia-0 { filter: sepia(0); }
+.sepia { filter: sepia(100%); }
+.sepia-25 { filter: sepia(25%); }
+.sepia-50 { filter: sepia(50%); }
+.sepia-75 { filter: sepia(75%); }
+
+// ----------------------------------------
+// Drop Shadow
+// ----------------------------------------
+.drop-shadow-none { filter: drop-shadow(0 0 0 transparent); }
+.drop-shadow-sm { filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05)); }
+.drop-shadow { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06)); }
+.drop-shadow-md { filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06)); }
+.drop-shadow-lg { filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1)); }
+.drop-shadow-xl { filter: drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08)); }
+.drop-shadow-2xl { filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15)); }
+
+// Colored drop shadows
+.drop-shadow-primary { filter: drop-shadow(0 4px 6px rgba(var(--primary-rgb), 0.25)); }
+.drop-shadow-success { filter: drop-shadow(0 4px 6px rgba(var(--success-rgb), 0.25)); }
+.drop-shadow-warning { filter: drop-shadow(0 4px 6px rgba(var(--warning-rgb), 0.25)); }
+.drop-shadow-danger { filter: drop-shadow(0 4px 6px rgba(var(--danger-rgb), 0.25)); }
+.drop-shadow-info { filter: drop-shadow(0 4px 6px rgba(var(--info-rgb), 0.25)); }
+
+// ----------------------------------------
+// Filter None
+// ----------------------------------------
+.filter-none { filter: none; }
+
+// ----------------------------------------
+// Backdrop Blur
+// ----------------------------------------
+.backdrop-blur-none { backdrop-filter: blur(0); }
+.backdrop-blur-sm { backdrop-filter: blur(4px); }
+.backdrop-blur { backdrop-filter: blur(8px); }
+.backdrop-blur-md { backdrop-filter: blur(12px); }
+.backdrop-blur-lg { backdrop-filter: blur(16px); }
+.backdrop-blur-xl { backdrop-filter: blur(24px); }
+.backdrop-blur-2xl { backdrop-filter: blur(40px); }
+.backdrop-blur-3xl { backdrop-filter: blur(64px); }
+
+// ----------------------------------------
+// Backdrop Brightness
+// ----------------------------------------
+.backdrop-brightness-0 { backdrop-filter: brightness(0); }
+.backdrop-brightness-50 { backdrop-filter: brightness(0.5); }
+.backdrop-brightness-75 { backdrop-filter: brightness(0.75); }
+.backdrop-brightness-90 { backdrop-filter: brightness(0.9); }
+.backdrop-brightness-95 { backdrop-filter: brightness(0.95); }
+.backdrop-brightness-100 { backdrop-filter: brightness(1); }
+.backdrop-brightness-105 { backdrop-filter: brightness(1.05); }
+.backdrop-brightness-110 { backdrop-filter: brightness(1.1); }
+.backdrop-brightness-125 { backdrop-filter: brightness(1.25); }
+.backdrop-brightness-150 { backdrop-filter: brightness(1.5); }
+.backdrop-brightness-200 { backdrop-filter: brightness(2); }
+
+// ----------------------------------------
+// Backdrop Contrast
+// ----------------------------------------
+.backdrop-contrast-0 { backdrop-filter: contrast(0); }
+.backdrop-contrast-50 { backdrop-filter: contrast(0.5); }
+.backdrop-contrast-75 { backdrop-filter: contrast(0.75); }
+.backdrop-contrast-100 { backdrop-filter: contrast(1); }
+.backdrop-contrast-125 { backdrop-filter: contrast(1.25); }
+.backdrop-contrast-150 { backdrop-filter: contrast(1.5); }
+.backdrop-contrast-200 { backdrop-filter: contrast(2); }
+
+// ----------------------------------------
+// Backdrop Grayscale
+// ----------------------------------------
+.backdrop-grayscale-0 { backdrop-filter: grayscale(0); }
+.backdrop-grayscale { backdrop-filter: grayscale(100%); }
+
+// ----------------------------------------
+// Backdrop Hue Rotate
+// ----------------------------------------
+.backdrop-hue-rotate-0 { backdrop-filter: hue-rotate(0deg); }
+.backdrop-hue-rotate-15 { backdrop-filter: hue-rotate(15deg); }
+.backdrop-hue-rotate-30 { backdrop-filter: hue-rotate(30deg); }
+.backdrop-hue-rotate-60 { backdrop-filter: hue-rotate(60deg); }
+.backdrop-hue-rotate-90 { backdrop-filter: hue-rotate(90deg); }
+.backdrop-hue-rotate-180 { backdrop-filter: hue-rotate(180deg); }
+
+// ----------------------------------------
+// Backdrop Invert
+// ----------------------------------------
+.backdrop-invert-0 { backdrop-filter: invert(0); }
+.backdrop-invert { backdrop-filter: invert(100%); }
+
+// ----------------------------------------
+// Backdrop Opacity
+// ----------------------------------------
+.backdrop-opacity-0 { backdrop-filter: opacity(0); }
+.backdrop-opacity-5 { backdrop-filter: opacity(0.05); }
+.backdrop-opacity-10 { backdrop-filter: opacity(0.1); }
+.backdrop-opacity-25 { backdrop-filter: opacity(0.25); }
+.backdrop-opacity-50 { backdrop-filter: opacity(0.5); }
+.backdrop-opacity-75 { backdrop-filter: opacity(0.75); }
+.backdrop-opacity-100 { backdrop-filter: opacity(1); }
+
+// ----------------------------------------
+// Backdrop Saturate
+// ----------------------------------------
+.backdrop-saturate-0 { backdrop-filter: saturate(0); }
+.backdrop-saturate-50 { backdrop-filter: saturate(0.5); }
+.backdrop-saturate-100 { backdrop-filter: saturate(1); }
+.backdrop-saturate-150 { backdrop-filter: saturate(1.5); }
+.backdrop-saturate-200 { backdrop-filter: saturate(2); }
+
+// ----------------------------------------
+// Backdrop Sepia
+// ----------------------------------------
+.backdrop-sepia-0 { backdrop-filter: sepia(0); }
+.backdrop-sepia { backdrop-filter: sepia(100%); }
+
+// ----------------------------------------
+// Backdrop Filter None
+// ----------------------------------------
+.backdrop-filter-none { backdrop-filter: none; }
+
+// ----------------------------------------
+// Hover Filter Utilities
+// ----------------------------------------
+.hover\:brightness-110:hover { filter: brightness(1.1); }
+.hover\:brightness-125:hover { filter: brightness(1.25); }
+.hover\:brightness-90:hover { filter: brightness(0.9); }
+.hover\:brightness-75:hover { filter: brightness(0.75); }
+.hover\:contrast-125:hover { filter: contrast(1.25); }
+.hover\:saturate-150:hover { filter: saturate(1.5); }
+.hover\:saturate-200:hover { filter: saturate(2); }
+.hover\:grayscale-0:hover { filter: grayscale(0); }
+.hover\:grayscale:hover { filter: grayscale(100%); }
+.hover\:blur-none:hover { filter: blur(0); }
+
+// ----------------------------------------
+// Group Hover Filters
+// ----------------------------------------
+.group:hover .group-hover\:brightness-110 { filter: brightness(1.1); }
+.group:hover .group-hover\:saturate-150 { filter: saturate(1.5); }
+.group:hover .group-hover\:grayscale-0 { filter: grayscale(0); }
+
+// ----------------------------------------
+// Filter Combinations (Common Presets)
+// ----------------------------------------
+.filter-vintage {
+  filter: sepia(50%) contrast(95%) brightness(90%) saturate(150%);
+}
+
+.filter-cool {
+  filter: hue-rotate(180deg) saturate(80%) brightness(105%);
+}
+
+.filter-warm {
+  filter: sepia(20%) saturate(140%) brightness(105%) hue-rotate(-10deg);
+}
+
+.filter-dramatic {
+  filter: contrast(150%) saturate(120%) brightness(90%);
+}
+
+.filter-muted {
+  filter: saturate(50%) brightness(95%) contrast(95%);
+}
+
+.filter-noir {
+  filter: grayscale(100%) contrast(120%) brightness(90%);
+}
+
+.filter-vivid {
+  filter: saturate(200%) contrast(110%) brightness(105%);
+}
+
+.filter-faded {
+  filter: saturate(80%) brightness(110%) contrast(90%);
+}
+
+// ----------------------------------------
+// Glassmorphism Helper
+// ----------------------------------------
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+// ----------------------------------------
+// Responsive Filters
+// ----------------------------------------
+@media (min-width: 576px) {
+  .sm\:blur-none { filter: blur(0); }
+  .sm\:blur { filter: blur(8px); }
+  .sm\:grayscale-0 { filter: grayscale(0); }
+  .sm\:grayscale { filter: grayscale(100%); }
+}
+
+@media (min-width: 768px) {
+  .md\:blur-none { filter: blur(0); }
+  .md\:blur { filter: blur(8px); }
+  .md\:grayscale-0 { filter: grayscale(0); }
+  .md\:grayscale { filter: grayscale(100%); }
+}
+
+@media (min-width: 992px) {
+  .lg\:blur-none { filter: blur(0); }
+  .lg\:blur { filter: blur(8px); }
+  .lg\:grayscale-0 { filter: grayscale(0); }
+  .lg\:grayscale { filter: grayscale(100%); }
+}
+
+@media (min-width: 1200px) {
+  .xl\:blur-none { filter: blur(0); }
+  .xl\:blur { filter: blur(8px); }
+  .xl\:grayscale-0 { filter: grayscale(0); }
+  .xl\:grayscale { filter: grayscale(100%); }
+}
+
+// ----------------------------------------
+// Motion Reduce
+// ----------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .motion-reduce\:filter-none {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

@@ -1,0 +1,237 @@
+// ========================================
+// ZenKit - Placeholders (Skeleton Loaders)
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Placeholder
+// ----------------------------------------
+.placeholder {
+  display: inline-block;
+  min-height: 1em;
+  vertical-align: middle;
+  cursor: wait;
+  background-color: currentColor;
+  opacity: 0.5;
+
+  &.btn::before {
+    display: inline-block;
+    content: "";
+  }
+}
+
+// ----------------------------------------
+// Placeholder with Text
+// ----------------------------------------
+a.placeholder {
+  pointer-events: none;
+}
+
+// ----------------------------------------
+// Placeholder Sizing
+// ----------------------------------------
+.placeholder-xs {
+  min-height: 0.6em;
+}
+
+.placeholder-sm {
+  min-height: 0.8em;
+}
+
+.placeholder-lg {
+  min-height: 1.2em;
+}
+
+// ----------------------------------------
+// Placeholder Widths
+// ----------------------------------------
+.placeholder-w-25 { width: 25%; }
+.placeholder-w-50 { width: 50%; }
+.placeholder-w-75 { width: 75%; }
+.placeholder-w-100 { width: 100%; }
+
+// ----------------------------------------
+// Placeholder Glow Animation
+// ----------------------------------------
+.placeholder-glow .placeholder {
+  animation: placeholder-glow 2s ease-in-out infinite;
+}
+
+@keyframes placeholder-glow {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+// ----------------------------------------
+// Placeholder Wave Animation
+// ----------------------------------------
+.placeholder-wave {
+  mask-image: linear-gradient(
+    130deg,
+    #000 55%,
+    rgba(0, 0, 0, 0.8) 75%,
+    #000 95%
+  );
+  mask-size: 200% 100%;
+  animation: placeholder-wave 2s linear infinite;
+}
+
+@keyframes placeholder-wave {
+  100% {
+    mask-position: -200% 0%;
+  }
+}
+
+// ----------------------------------------
+// Skeleton Card
+// ----------------------------------------
+.skeleton-card {
+  .skeleton-img {
+    width: 100%;
+    height: 200px;
+    background-color: var(--gray-200);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .skeleton-body {
+    padding: 1rem;
+  }
+
+  .skeleton-title {
+    height: 1.5rem;
+    width: 60%;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.75rem;
+  }
+
+  .skeleton-text {
+    height: 1rem;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      width: 80%;
+    }
+  }
+}
+
+// ----------------------------------------
+// Skeleton Avatar
+// ----------------------------------------
+.skeleton-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--gray-200);
+}
+
+.skeleton-avatar-sm {
+  width: 2rem;
+  height: 2rem;
+}
+
+.skeleton-avatar-lg {
+  width: 4rem;
+  height: 4rem;
+}
+
+// ----------------------------------------
+// Skeleton Button
+// ----------------------------------------
+.skeleton-btn {
+  display: inline-block;
+  height: 2.5rem;
+  width: 6rem;
+  background-color: var(--gray-200);
+  border-radius: var(--radius);
+}
+
+.skeleton-btn-sm {
+  height: 2rem;
+  width: 4rem;
+}
+
+.skeleton-btn-lg {
+  height: 3rem;
+  width: 8rem;
+}
+
+// ----------------------------------------
+// Skeleton List
+// ----------------------------------------
+.skeleton-list {
+  .skeleton-list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .skeleton-list-avatar {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--gray-200);
+  }
+
+  .skeleton-list-content {
+    flex: 1;
+  }
+
+  .skeleton-list-title {
+    height: 0.875rem;
+    width: 40%;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+  }
+
+  .skeleton-list-subtitle {
+    height: 0.75rem;
+    width: 60%;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+  }
+}
+
+// ----------------------------------------
+// Animated Skeleton (Shimmer Effect)
+// ----------------------------------------
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--gray-200);
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: skeleton-shimmer 1.5s infinite;
+    content: "";
+  }
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

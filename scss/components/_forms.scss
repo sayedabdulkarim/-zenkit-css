@@ -1,0 +1,753 @@
+// ========================================
+// ZenKit - Forms
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Form Control (Input, Textarea, Select)
+// ----------------------------------------
+.form-control {
+  @include form-control;
+}
+
+// Sizes
+.form-control-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-sm);
+}
+
+.form-control-lg {
+  padding: 0.875rem 1rem;
+  font-size: var(--text-lg);
+  border-radius: var(--radius-md);
+}
+
+// ----------------------------------------
+// Form Label
+// ----------------------------------------
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+}
+
+.form-label-required::after {
+  content: " *";
+  color: var(--danger);
+}
+
+// ----------------------------------------
+// Form Group
+// ----------------------------------------
+.form-group {
+  margin-bottom: 1rem;
+}
+
+// ----------------------------------------
+// Form Text (Help Text)
+// ----------------------------------------
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Form Validation States
+// ----------------------------------------
+.form-control.is-valid {
+  border-color: var(--success);
+
+  &:focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba($success, 0.15);
+  }
+}
+
+.form-control.is-invalid {
+  border-color: var(--danger);
+
+  &:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba($danger, 0.15);
+  }
+}
+
+.valid-feedback {
+  display: none;
+  margin-top: 0.25rem;
+  font-size: var(--text-sm);
+  color: var(--success);
+}
+
+.invalid-feedback {
+  display: none;
+  margin-top: 0.25rem;
+  font-size: var(--text-sm);
+  color: var(--danger);
+}
+
+.is-valid ~ .valid-feedback,
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+// ----------------------------------------
+// Select
+// ----------------------------------------
+.form-select {
+  @include form-control;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23475569' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-select-sm {
+  padding: 0.375rem 2rem 0.375rem 0.75rem;
+  font-size: var(--text-sm);
+}
+
+.form-select-lg {
+  padding: 0.875rem 2.5rem 0.875rem 1rem;
+  font-size: var(--text-lg);
+}
+
+// ----------------------------------------
+// Checkbox & Radio
+// ----------------------------------------
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.125rem;
+  appearance: none;
+  background-color: var(--bg);
+  border: 2px solid var(--border-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease-in-out;
+
+  &[type="checkbox"] {
+    border-radius: var(--radius-sm);
+  }
+
+  &[type="radio"] {
+    border-radius: 50%;
+  }
+
+  &:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  &[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M10.28 2.28L4.5 8.06 1.72 5.28a.75.75 0 00-1.06 1.06l3.25 3.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.75rem;
+  }
+
+  &[type="radio"]:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle fill='white' cx='4' cy='4' r='4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.form-check-label {
+  font-size: var(--text-base);
+  color: var(--text);
+  cursor: pointer;
+}
+
+// Inline checkboxes
+.form-check-inline {
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+// ----------------------------------------
+// Switch
+// ----------------------------------------
+.form-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-switch-input {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 1.375rem;
+  appearance: none;
+  background-color: var(--gray-300);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background-color var(--transition-fast) ease-in-out;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--white);
+    border-radius: 50%;
+    transition: transform var(--transition-fast) ease-in-out;
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:checked {
+    background-color: var(--primary);
+
+    &::before {
+      transform: translateX(1.125rem);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ----------------------------------------
+// Range
+// ----------------------------------------
+.form-range {
+  width: 100%;
+  height: 1.5rem;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-track {
+    height: 0.5rem;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-full);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: -0.375rem;
+    background-color: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform var(--transition-fast) ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &::-moz-range-track {
+    height: 0.5rem;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-full);
+  }
+
+  &::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ----------------------------------------
+// Input Group
+// ----------------------------------------
+.input-group {
+  display: flex;
+  width: 100%;
+
+  > .form-control {
+    flex: 1;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: var(--radius);
+      border-bottom-left-radius: var(--radius);
+    }
+
+    &:last-child {
+      border-top-right-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+    }
+
+    &:not(:last-child) {
+      border-right: none;
+    }
+
+    &:focus {
+      z-index: 1;
+    }
+  }
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 0.875rem;
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  background-color: var(--bg-muted);
+  border: $border-width solid var(--border);
+
+  &:first-child {
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    border-right: none;
+  }
+
+  &:last-child {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    border-left: none;
+  }
+}
+
+// ----------------------------------------
+// Floating Labels
+// ----------------------------------------
+.form-floating {
+  position: relative;
+
+  > .form-control {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.875rem;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      padding-top: 1.625rem;
+      padding-bottom: 0.375rem;
+    }
+
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label {
+      opacity: 0.65;
+      transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    }
+  }
+
+  > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.875rem;
+    pointer-events: none;
+    border: $border-width solid transparent;
+    transform-origin: 0 0;
+    transition: opacity var(--transition-fast) ease-in-out,
+                transform var(--transition-fast) ease-in-out;
+    color: var(--text-muted);
+  }
+}
+
+// ----------------------------------------
+// File Input
+// ----------------------------------------
+.form-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.form-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(2.5rem + 2px);
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.form-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  height: calc(2.5rem + 2px);
+  border: $border-width solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--bg);
+}
+
+.form-file-text {
+  display: block;
+  flex-grow: 1;
+  padding: 0.625rem 0.875rem;
+  overflow: hidden;
+  font-weight: $font-weight-normal;
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form-file-button {
+  display: block;
+  flex-shrink: 0;
+  padding: 0.625rem 0.875rem;
+  color: var(--text);
+  background-color: var(--bg-muted);
+  border-left: $border-width solid var(--border);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+// ----------------------------------------
+// Color Picker
+// ----------------------------------------
+.form-control-color {
+  width: 3rem;
+  height: calc(2.5rem + 2px);
+  padding: 0.375rem;
+  background-color: var(--bg);
+  border: $border-width solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+
+  &::-moz-color-swatch {
+    border: 0;
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: 0;
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.form-control-color-lg {
+  width: 4rem;
+  height: calc(3rem + 2px);
+}
+
+.form-control-color-sm {
+  width: 2.5rem;
+  height: calc(2rem + 2px);
+}
+
+// ----------------------------------------
+// Plaintext Form Control
+// ----------------------------------------
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0;
+  margin-bottom: 0;
+  line-height: $line-height-normal;
+  color: var(--text);
+  background-color: transparent;
+  border: solid transparent;
+  border-width: $border-width 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.form-control-sm {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+// ----------------------------------------
+// Button Check (Toggle Buttons)
+// ----------------------------------------
+.btn-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+
+  &[disabled] + .btn,
+  &:disabled + .btn {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.65;
+  }
+}
+
+// Solid button check styles
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary {
+  background-color: var(--primary-700);
+  border-color: var(--primary-700);
+}
+
+.btn-check:checked + .btn-secondary,
+.btn-check:active + .btn-secondary {
+  background-color: var(--gray-700);
+  border-color: var(--gray-700);
+}
+
+.btn-check:checked + .btn-success,
+.btn-check:active + .btn-success {
+  background-color: var(--success-dark);
+  border-color: var(--success-dark);
+}
+
+.btn-check:checked + .btn-danger,
+.btn-check:active + .btn-danger {
+  background-color: var(--danger-dark);
+  border-color: var(--danger-dark);
+}
+
+.btn-check:checked + .btn-warning,
+.btn-check:active + .btn-warning {
+  background-color: var(--warning-dark);
+  border-color: var(--warning-dark);
+}
+
+.btn-check:checked + .btn-info,
+.btn-check:active + .btn-info {
+  background-color: var(--info-dark);
+  border-color: var(--info-dark);
+}
+
+// Outline button check styles
+.btn-check:checked + .btn-outline-primary,
+.btn-check:active + .btn-outline-primary {
+  color: var(--white);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-check:checked + .btn-outline-secondary,
+.btn-check:active + .btn-outline-secondary {
+  color: var(--white);
+  background-color: var(--gray-600);
+  border-color: var(--gray-600);
+}
+
+.btn-check:checked + .btn-outline-success,
+.btn-check:active + .btn-outline-success {
+  color: var(--white);
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.btn-check:checked + .btn-outline-danger,
+.btn-check:active + .btn-outline-danger {
+  color: var(--white);
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-check:checked + .btn-outline-warning,
+.btn-check:active + .btn-outline-warning {
+  color: var(--gray-900);
+  background-color: var(--warning);
+  border-color: var(--warning);
+}
+
+.btn-check:checked + .btn-outline-info,
+.btn-check:active + .btn-outline-info {
+  color: var(--white);
+  background-color: var(--info);
+  border-color: var(--info);
+}
+
+.btn-check:checked + .btn-outline-dark,
+.btn-check:active + .btn-outline-dark {
+  color: var(--white);
+  background-color: var(--gray-900);
+  border-color: var(--gray-900);
+}
+
+.btn-check:checked + .btn-outline-light,
+.btn-check:active + .btn-outline-light {
+  color: var(--gray-900);
+  background-color: var(--gray-100);
+  border-color: var(--gray-100);
+}
+
+// Focus state for btn-check
+.btn-check:focus + .btn {
+  box-shadow: 0 0 0 0.25rem rgba($primary, 0.25);
+}
+
+.btn-check:focus:not(:checked) + .btn-outline-primary {
+  color: var(--primary);
+}
+
+.btn-check:focus:not(:checked) + .btn-outline-secondary {
+  color: var(--gray-600);
+}
+
+// ----------------------------------------
+// Input Group Sizes
+// ----------------------------------------
+.input-group-sm {
+  > .form-control,
+  > .form-select {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--text-sm);
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: var(--radius-sm);
+      border-bottom-left-radius: var(--radius-sm);
+    }
+
+    &:last-child {
+      border-top-right-radius: var(--radius-sm);
+      border-bottom-right-radius: var(--radius-sm);
+    }
+  }
+
+  > .input-group-text {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  > .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+}
+
+.input-group-lg {
+  > .form-control,
+  > .form-select {
+    padding: 0.875rem 1rem;
+    font-size: var(--text-lg);
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: var(--radius-lg);
+      border-bottom-left-radius: var(--radius-lg);
+    }
+
+    &:last-child {
+      border-top-right-radius: var(--radius-lg);
+      border-bottom-right-radius: var(--radius-lg);
+    }
+  }
+
+  > .input-group-text {
+    padding: 0.875rem 1rem;
+    font-size: var(--text-lg);
+  }
+
+  > .btn {
+    padding: 0.875rem 1rem;
+    font-size: var(--text-lg);
+  }
+}
+
+// ----------------------------------------
+// Input Group with Button
+// ----------------------------------------
+.input-group {
+  > .btn {
+    position: relative;
+    z-index: 2;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: var(--radius);
+      border-bottom-left-radius: var(--radius);
+    }
+
+    &:last-child {
+      border-top-right-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+    }
+  }
+
+  > .form-control:focus,
+  > .form-select:focus {
+    z-index: 3;
+  }
+
+  > .btn:focus {
+    z-index: 4;
+  }
+}
+
+// Multiple inputs
+.input-group > .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+// ----------------------------------------
+// Form Readonly
+// ----------------------------------------
+.form-control[readonly] {
+  background-color: var(--bg-muted);
+  opacity: 1;
+}

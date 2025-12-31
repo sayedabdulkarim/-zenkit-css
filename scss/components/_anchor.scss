@@ -1,0 +1,438 @@
+// ========================================
+// ZenKit - Anchor Component
+// Table of contents / Anchor navigation
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Anchor Container
+// ----------------------------------------
+.anchor {
+  position: relative;
+  padding-left: 2px;
+}
+
+// ----------------------------------------
+// Anchor Ink (Active Indicator Line)
+// ----------------------------------------
+.anchor-ink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.anchor-ink-ball {
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: top 0.2s ease;
+}
+
+// Alternative: Line indicator
+.anchor-ink-line {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 20px;
+  background-color: var(--primary);
+  transition: top 0.2s ease;
+}
+
+// ----------------------------------------
+// Anchor Links Container
+// ----------------------------------------
+.anchor-links {
+  padding-left: 1rem;
+  margin: 0;
+  list-style: none;
+}
+
+// ----------------------------------------
+// Anchor Link
+// ----------------------------------------
+.anchor-link {
+  margin-bottom: 0.25rem;
+}
+
+.anchor-link-title {
+  display: block;
+  padding: 0.375rem 0;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  .anchor-link.is-active > & {
+    color: var(--primary);
+    font-weight: 500;
+  }
+}
+
+// ----------------------------------------
+// Anchor Nested Links
+// ----------------------------------------
+.anchor-link .anchor-links {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+
+.anchor-link .anchor-link .anchor-link-title {
+  font-size: 0.8125rem;
+}
+
+.anchor-link .anchor-link .anchor-link .anchor-link-title {
+  font-size: 0.75rem;
+}
+
+// ----------------------------------------
+// Anchor Horizontal
+// ----------------------------------------
+.anchor-horizontal {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--border-color);
+
+  .anchor-ink {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+
+  .anchor-ink-line {
+    top: auto;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    transition: left 0.2s ease;
+  }
+
+  .anchor-links {
+    display: flex;
+    padding-left: 0;
+    gap: 1.5rem;
+  }
+
+  .anchor-link {
+    margin-bottom: 0;
+  }
+
+  .anchor-link-title {
+    padding: 0.5rem 0;
+  }
+
+  .anchor-link .anchor-links {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Anchor Fixed
+// ----------------------------------------
+.anchor-fixed {
+  position: fixed;
+  z-index: $z-sticky;
+}
+
+.anchor-fixed-top {
+  top: 1rem;
+}
+
+.anchor-fixed-right {
+  right: 1rem;
+}
+
+// ----------------------------------------
+// Anchor Affix Wrapper
+// ----------------------------------------
+.anchor-wrapper {
+  position: relative;
+}
+
+.anchor-wrapper-affix {
+  position: fixed;
+  z-index: $z-sticky;
+}
+
+// ----------------------------------------
+// Anchor Sizes
+// ----------------------------------------
+.anchor-sm {
+  .anchor-link-title {
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+  }
+
+  .anchor-link .anchor-link .anchor-link-title {
+    font-size: 0.6875rem;
+  }
+
+  .anchor-links {
+    padding-left: 0.75rem;
+  }
+}
+
+.anchor-lg {
+  .anchor-link-title {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .anchor-link .anchor-link .anchor-link-title {
+    font-size: 0.875rem;
+  }
+
+  .anchor-links {
+    padding-left: 1.25rem;
+  }
+}
+
+// ----------------------------------------
+// Anchor Without Ink
+// ----------------------------------------
+.anchor-no-ink {
+  padding-left: 0;
+
+  .anchor-ink {
+    display: none;
+  }
+
+  .anchor-links {
+    padding-left: 0;
+  }
+
+  .anchor-link .anchor-links {
+    padding-left: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Anchor Bordered
+// ----------------------------------------
+.anchor-bordered {
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+
+  .anchor-ink {
+    left: 1rem;
+  }
+
+  .anchor-links {
+    padding-left: 1.5rem;
+  }
+}
+
+// ----------------------------------------
+// Anchor Card Style
+// ----------------------------------------
+.anchor-card {
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-sm;
+}
+
+.anchor-card-title {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+// ----------------------------------------
+// Anchor Replace URL
+// ----------------------------------------
+// This is handled by JS, no specific CSS needed
+
+// ----------------------------------------
+// Anchor Target Offset
+// ----------------------------------------
+// Applied via JS scroll offset calculation
+
+// ----------------------------------------
+// Anchor Click Highlight
+// ----------------------------------------
+.anchor-highlight-target {
+  animation: anchor-highlight 2s ease-out;
+}
+
+@keyframes anchor-highlight {
+  0% {
+    background-color: rgba(var(--primary-rgb), 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+// ----------------------------------------
+// Anchor Direction (RTL Support)
+// ----------------------------------------
+.anchor-rtl {
+  padding-left: 0;
+  padding-right: 2px;
+
+  .anchor-ink {
+    left: auto;
+    right: 0;
+  }
+
+  .anchor-links {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+
+  .anchor-link .anchor-links {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Anchor Indicators Variants
+// ----------------------------------------
+// Dot indicator
+.anchor-dot {
+  .anchor-ink-ball {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border: none;
+  }
+}
+
+// Square indicator
+.anchor-square {
+  .anchor-ink-ball {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 0;
+  }
+}
+
+// ----------------------------------------
+// Anchor Sticky Behavior
+// ----------------------------------------
+.anchor-sticky {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+// ----------------------------------------
+// Anchor Scrollspy Styles
+// ----------------------------------------
+// These classes are toggled by JS based on scroll position
+
+.anchor-link[data-depth="1"] .anchor-link-title {
+  font-weight: 500;
+}
+
+.anchor-link[data-depth="2"] .anchor-link-title {
+  padding-left: 0.5rem;
+}
+
+.anchor-link[data-depth="3"] .anchor-link-title {
+  padding-left: 1rem;
+}
+
+// ----------------------------------------
+// Anchor Progress Indicator
+// ----------------------------------------
+.anchor-progress {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: var(--anchor-progress, 0%);
+    background-color: var(--primary);
+    transition: height 0.1s ease;
+  }
+}
+
+// ----------------------------------------
+// Anchor Compact Mode
+// ----------------------------------------
+.anchor-compact {
+  .anchor-link-title {
+    padding: 0.25rem 0;
+    font-size: 0.8125rem;
+  }
+
+  .anchor-links {
+    padding-left: 0.75rem;
+  }
+}
+
+// ----------------------------------------
+// Anchor Responsive
+// ----------------------------------------
+@media (max-width: 991.98px) {
+  .anchor-hide-mobile {
+    display: none;
+  }
+}
+
+// Mobile bottom bar anchor
+.anchor-mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-fixed;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  box-shadow: $shadow-lg;
+
+  .anchor-links {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-left: 0;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .anchor-link-title {
+    white-space: nowrap;
+  }
+
+  .anchor-link .anchor-links {
+    display: none;
+  }
+}

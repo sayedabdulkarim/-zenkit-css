@@ -1,0 +1,263 @@
+// ========================================
+// ZenKit - Display Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Display
+// ----------------------------------------
+.d-none { display: none; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+.d-grid { display: grid; }
+.d-inline-grid { display: inline-grid; }
+.d-table { display: table; }
+.d-table-row { display: table-row; }
+.d-table-cell { display: table-cell; }
+.d-contents { display: contents; }
+
+// ----------------------------------------
+// Visibility
+// ----------------------------------------
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+// ----------------------------------------
+// Opacity
+// ----------------------------------------
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+// ----------------------------------------
+// Overflow
+// ----------------------------------------
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-scroll { overflow: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+.overflow-y-hidden { overflow-y: hidden; }
+
+// ----------------------------------------
+// Position
+// ----------------------------------------
+.position-static { position: static; }
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-fixed { position: fixed; }
+.position-sticky { position: sticky; }
+
+// Shorthand
+.static { position: static; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+// ----------------------------------------
+// Position Helpers
+// ----------------------------------------
+.inset-0 { inset: 0; }
+.inset-auto { inset: auto; }
+.top-0 { top: 0; }
+.right-0 { right: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+.top-50 { top: 50%; }
+.left-50 { left: 50%; }
+.top-100 { top: 100%; }
+.left-100 { left: 100%; }
+.right-50 { right: 50%; }
+.right-100 { right: 100%; }
+.bottom-50 { bottom: 50%; }
+.bottom-100 { bottom: 100%; }
+
+// Logical positions (RTL-friendly)
+.start-0 { inset-inline-start: 0; }
+.start-50 { inset-inline-start: 50%; }
+.start-100 { inset-inline-start: 100%; }
+.end-0 { inset-inline-end: 0; }
+.end-50 { inset-inline-end: 50%; }
+.end-100 { inset-inline-end: 100%; }
+
+// ----------------------------------------
+// Translate / Transform
+// ----------------------------------------
+.translate-middle {
+  transform: translate(-50%, -50%);
+}
+
+.translate-middle-x {
+  transform: translateX(-50%);
+}
+
+.translate-middle-y {
+  transform: translateY(-50%);
+}
+
+// ----------------------------------------
+// Float
+// ----------------------------------------
+.float-left { float: left; }
+.float-right { float: right; }
+.float-none { float: none; }
+.clearfix {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+// ----------------------------------------
+// Z-Index
+// ----------------------------------------
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+.z-auto { z-index: auto; }
+.z-dropdown { z-index: var(--z-dropdown); }
+.z-sticky { z-index: var(--z-sticky); }
+.z-fixed { z-index: var(--z-fixed); }
+.z-modal { z-index: var(--z-modal); }
+
+// ----------------------------------------
+// Responsive Display
+// ----------------------------------------
+@include sm {
+  .sm\:d-none { display: none; }
+  .sm\:d-inline { display: inline; }
+  .sm\:d-inline-block { display: inline-block; }
+  .sm\:d-block { display: block; }
+  .sm\:d-flex { display: flex; }
+  .sm\:d-inline-flex { display: inline-flex; }
+  .sm\:d-grid { display: grid; }
+}
+
+@include md {
+  .md\:d-none { display: none; }
+  .md\:d-inline { display: inline; }
+  .md\:d-inline-block { display: inline-block; }
+  .md\:d-block { display: block; }
+  .md\:d-flex { display: flex; }
+  .md\:d-inline-flex { display: inline-flex; }
+  .md\:d-grid { display: grid; }
+}
+
+@include lg {
+  .lg\:d-none { display: none; }
+  .lg\:d-inline { display: inline; }
+  .lg\:d-inline-block { display: inline-block; }
+  .lg\:d-block { display: block; }
+  .lg\:d-flex { display: flex; }
+  .lg\:d-inline-flex { display: inline-flex; }
+  .lg\:d-grid { display: grid; }
+}
+
+@include xl {
+  .xl\:d-none { display: none; }
+  .xl\:d-inline { display: inline; }
+  .xl\:d-inline-block { display: inline-block; }
+  .xl\:d-block { display: block; }
+  .xl\:d-flex { display: flex; }
+  .xl\:d-inline-flex { display: inline-flex; }
+  .xl\:d-grid { display: grid; }
+}
+
+// ----------------------------------------
+// Print Utilities
+// ----------------------------------------
+@media print {
+  .d-print-none { display: none !important; }
+  .d-print-block { display: block !important; }
+  .d-print-inline { display: inline !important; }
+  .d-print-inline-block { display: inline-block !important; }
+}
+
+// ----------------------------------------
+// Screen Reader Only
+// ----------------------------------------
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable {
+  &:active,
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+// ----------------------------------------
+// RTL Support
+// ----------------------------------------
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }
+
+// RTL-aware float
+[dir="rtl"] {
+  .float-start { float: right; }
+  .float-end { float: left; }
+}
+
+[dir="ltr"],
+:root:not([dir="rtl"]) {
+  .float-start { float: left; }
+  .float-end { float: right; }
+}
+
+// ----------------------------------------
+// Prefers Color Scheme Detection
+// ----------------------------------------
+@media (prefers-color-scheme: dark) {
+  .dark\:d-none { display: none; }
+  .dark\:d-block { display: block; }
+  .dark\:d-flex { display: flex; }
+}
+
+@media (prefers-color-scheme: light) {
+  .light\:d-none { display: none; }
+  .light\:d-block { display: block; }
+  .light\:d-flex { display: flex; }
+}
+
+// ----------------------------------------
+// Prefers Contrast
+// ----------------------------------------
+@media (prefers-contrast: more) {
+  .contrast\:border-2 { border-width: 2px !important; }
+  .contrast\:font-bold { font-weight: 700 !important; }
+}
+
+// ----------------------------------------
+// Forced Colors Mode (High Contrast)
+// ----------------------------------------
+@media (forced-colors: active) {
+  .forced-colors\:visible { visibility: visible !important; }
+}

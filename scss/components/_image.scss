@@ -1,0 +1,497 @@
+// ========================================
+// ZenKit - Image Component
+// Image with preview, fallback, and loading
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Image Container
+// ----------------------------------------
+.image {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+// ----------------------------------------
+// Image Element
+// ----------------------------------------
+.image-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// ----------------------------------------
+// Image Placeholder / Loading
+// ----------------------------------------
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+}
+
+.image-placeholder-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.image-loading {
+  .image-placeholder-icon {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.25; }
+}
+
+// ----------------------------------------
+// Image Error / Fallback
+// ----------------------------------------
+.image-error {
+  .image-img {
+    display: none;
+  }
+
+  .image-placeholder {
+    position: static;
+  }
+}
+
+.image-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+}
+
+.image-fallback-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.image-fallback-text {
+  font-size: 0.75rem;
+}
+
+// ----------------------------------------
+// Image Preview Overlay
+// ----------------------------------------
+.image-preview-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+
+  .image:hover & {
+    opacity: 1;
+  }
+}
+
+.image-preview-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.image-preview-text {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+// ----------------------------------------
+// Image Preview Modal
+// ----------------------------------------
+.image-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.85);
+
+  &.is-open {
+    display: flex;
+  }
+}
+
+.image-preview-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.image-preview-modal-img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+// ----------------------------------------
+// Image Preview Controls
+// ----------------------------------------
+.image-preview-controls {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: $border-radius;
+}
+
+.image-preview-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.image-preview-control-divider {
+  width: 1px;
+  height: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+// ----------------------------------------
+// Image Preview Close
+// ----------------------------------------
+.image-preview-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+// ----------------------------------------
+// Image Preview Navigation
+// ----------------------------------------
+.image-preview-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.image-preview-nav-prev {
+  left: 1rem;
+}
+
+.image-preview-nav-next {
+  right: 1rem;
+}
+
+// ----------------------------------------
+// Image Preview Counter
+// ----------------------------------------
+.image-preview-counter {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// Image Shapes
+// ----------------------------------------
+.image-rounded {
+  border-radius: $border-radius;
+
+  .image-img,
+  .image-placeholder,
+  .image-preview-overlay {
+    border-radius: inherit;
+  }
+}
+
+.image-circle {
+  border-radius: 50%;
+
+  .image-img,
+  .image-placeholder,
+  .image-preview-overlay {
+    border-radius: inherit;
+  }
+}
+
+// ----------------------------------------
+// Image Sizes
+// ----------------------------------------
+.image-sm {
+  width: 64px;
+  height: 64px;
+
+  .image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.image-md {
+  width: 128px;
+  height: 128px;
+
+  .image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.image-lg {
+  width: 256px;
+  height: 256px;
+
+  .image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.image-fluid {
+  width: 100%;
+
+  .image-img {
+    width: 100%;
+  }
+}
+
+// ----------------------------------------
+// Image Fit Modes
+// ----------------------------------------
+.image-fit-contain .image-img {
+  object-fit: contain;
+}
+
+.image-fit-cover .image-img {
+  object-fit: cover;
+}
+
+.image-fit-fill .image-img {
+  object-fit: fill;
+}
+
+.image-fit-none .image-img {
+  object-fit: none;
+}
+
+.image-fit-scale-down .image-img {
+  object-fit: scale-down;
+}
+
+// ----------------------------------------
+// Image Bordered
+// ----------------------------------------
+.image-bordered {
+  border: 1px solid var(--border-color);
+}
+
+// ----------------------------------------
+// Image Shadow
+// ----------------------------------------
+.image-shadow {
+  box-shadow: $shadow-md;
+}
+
+// ----------------------------------------
+// Image Hover Effects
+// ----------------------------------------
+.image-hover-zoom:hover .image-img {
+  transform: scale(1.1);
+}
+
+.image-hover-brightness:hover .image-img {
+  filter: brightness(1.1);
+}
+
+.image-hover-grayscale {
+  .image-img {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+
+  &:hover .image-img {
+    filter: grayscale(0%);
+  }
+}
+
+.image-hover-blur {
+  .image-img {
+    transition: filter 0.3s ease;
+  }
+
+  &:hover .image-img {
+    filter: blur(2px);
+  }
+}
+
+// ----------------------------------------
+// Image Group
+// ----------------------------------------
+.image-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.image-group-item {
+  position: relative;
+}
+
+.image-group-more {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+// ----------------------------------------
+// Image Lazy Loading
+// ----------------------------------------
+.image-lazy {
+  .image-img {
+    opacity: 0;
+  }
+
+  &.is-loaded .image-img {
+    opacity: 1;
+  }
+
+  &.is-loaded .image-placeholder {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Image Caption
+// ----------------------------------------
+.image-caption {
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  background-color: var(--bg-secondary);
+}
+
+// ----------------------------------------
+// Image Figure
+// ----------------------------------------
+.image-figure {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.image-figure-caption {
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+// ----------------------------------------
+// Image Thumbnail
+// ----------------------------------------
+.image-thumbnail {
+  padding: 0.25rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+}

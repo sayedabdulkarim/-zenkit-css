@@ -1,0 +1,400 @@
+// ========================================
+// ZenKit - FloatButton Component
+// Floating action button (FAB)
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// FloatButton Container / Group
+// ----------------------------------------
+.float-button-group {
+  position: fixed;
+  z-index: $z-fixed;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1rem;
+}
+
+// Group positions
+.float-button-group-right {
+  right: 24px;
+  bottom: 48px;
+}
+
+.float-button-group-left {
+  left: 24px;
+  bottom: 48px;
+}
+
+.float-button-group-right-top {
+  right: 24px;
+  top: 48px;
+  flex-direction: column;
+}
+
+.float-button-group-left-top {
+  left: 24px;
+  top: 48px;
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// FloatButton Base
+// ----------------------------------------
+.float-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--text-muted);
+  background-color: var(--bg-primary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+              0 3px 6px -4px rgba(0, 0, 0, 0.12),
+              0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.12),
+                0 4px 8px -4px rgba(0, 0, 0, 0.15),
+                0 12px 32px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Standalone float button
+.float-button-single {
+  position: fixed;
+  z-index: $z-fixed;
+}
+
+.float-button-single-right {
+  right: 24px;
+  bottom: 48px;
+}
+
+.float-button-single-left {
+  left: 24px;
+  bottom: 48px;
+}
+
+// ----------------------------------------
+// FloatButton Icon
+// ----------------------------------------
+.float-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+// ----------------------------------------
+// FloatButton Variants
+// ----------------------------------------
+// Primary
+.float-button-primary {
+  color: #fff;
+  background-color: var(--primary);
+
+  &:hover {
+    color: #fff;
+    background-color: var(--primary-dark);
+  }
+}
+
+// Default (with border)
+.float-button-default {
+  border: 1px solid var(--border-color);
+
+  &:hover {
+    border-color: var(--primary);
+  }
+}
+
+// Circle (emphasized)
+.float-button-circle {
+  width: 56px;
+  height: 56px;
+
+  .float-button-icon {
+    font-size: 1.5rem;
+  }
+}
+
+// Square
+.float-button-square {
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// FloatButton Sizes
+// ----------------------------------------
+.float-button-sm {
+  width: 32px;
+  height: 32px;
+
+  .float-button-icon {
+    font-size: 0.875rem;
+  }
+}
+
+.float-button-lg {
+  width: 56px;
+  height: 56px;
+
+  .float-button-icon {
+    font-size: 1.5rem;
+  }
+}
+
+// ----------------------------------------
+// FloatButton with Text
+// ----------------------------------------
+.float-button-with-text {
+  width: auto;
+  min-width: 40px;
+  height: auto;
+  min-height: 40px;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  gap: 0.5rem;
+}
+
+.float-button-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+// ----------------------------------------
+// FloatButton Description
+// ----------------------------------------
+.float-button-with-description {
+  width: auto;
+  min-width: 56px;
+  height: auto;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: $border-radius-lg;
+}
+
+.float-button-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// FloatButton Badge
+// ----------------------------------------
+.float-button-badge {
+  position: relative;
+}
+
+.float-button-badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--danger);
+  border: 2px solid var(--bg-primary);
+  border-radius: 50%;
+}
+
+.float-button-badge-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--danger);
+  border: 2px solid var(--bg-primary);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ----------------------------------------
+// FloatButton Trigger (Expandable)
+// ----------------------------------------
+.float-button-trigger {
+  position: relative;
+}
+
+.float-button-trigger-icon {
+  transition: transform 0.3s ease;
+
+  .float-button-group.is-open & {
+    transform: rotate(45deg);
+  }
+}
+
+// ----------------------------------------
+// FloatButton Menu
+// ----------------------------------------
+.float-button-menu {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5);
+  transform-origin: bottom center;
+  transition: all 0.3s ease;
+
+  .float-button-group.is-open & {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+.float-button-menu-item {
+  position: relative;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.2s ease;
+
+  .float-button-group.is-open & {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  // Staggered animation
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+// ----------------------------------------
+// FloatButton Tooltip
+// ----------------------------------------
+.float-button-tooltip {
+  position: relative;
+
+  &::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: $border-radius-sm;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.float-button-group-left .float-button-tooltip::before {
+  right: auto;
+  left: calc(100% + 8px);
+}
+
+// ----------------------------------------
+// FloatButton Dark Theme
+// ----------------------------------------
+.float-button-dark {
+  color: rgba(255, 255, 255, 0.85);
+  background-color: #1f1f1f;
+
+  &:hover {
+    color: #fff;
+    background-color: #333;
+  }
+}
+
+// ----------------------------------------
+// FloatButton Loading
+// ----------------------------------------
+.float-button-loading {
+  pointer-events: none;
+
+  .float-button-icon {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ----------------------------------------
+// FloatButton Shape Variants
+// ----------------------------------------
+.float-button-group-horizontal {
+  flex-direction: row;
+  gap: 0.75rem;
+
+  .float-button-menu {
+    flex-direction: row;
+    transform-origin: right center;
+  }
+}
+
+// ----------------------------------------
+// FloatButton Responsive
+// ----------------------------------------
+@media (max-width: 575.98px) {
+  .float-button-group-right,
+  .float-button-single-right {
+    right: 16px;
+    bottom: 32px;
+  }
+
+  .float-button-group-left,
+  .float-button-single-left {
+    left: 16px;
+    bottom: 32px;
+  }
+
+  .float-button-hide-mobile {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// FloatButton in Container
+// ----------------------------------------
+.float-button-container {
+  position: absolute;
+}
+
+// ----------------------------------------
+// FloatButton Divider
+// ----------------------------------------
+.float-button-divider {
+  width: 24px;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.25rem 0;
+}

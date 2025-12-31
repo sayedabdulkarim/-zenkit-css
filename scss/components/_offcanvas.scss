@@ -1,0 +1,274 @@
+// ========================================
+// ZenKit - Offcanvas
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Offcanvas Variables
+// ----------------------------------------
+.offcanvas,
+.offcanvas-xxl,
+.offcanvas-xl,
+.offcanvas-lg,
+.offcanvas-md,
+.offcanvas-sm {
+  --offcanvas-zindex: #{$z-modal};
+  --offcanvas-width: 400px;
+  --offcanvas-height: 30vh;
+  --offcanvas-padding-x: 1rem;
+  --offcanvas-padding-y: 1rem;
+  --offcanvas-color: var(--text);
+  --offcanvas-bg: var(--bg-card);
+  --offcanvas-border-width: #{$border-width};
+  --offcanvas-border-color: var(--border);
+  --offcanvas-box-shadow: #{$shadow-xl};
+  --offcanvas-transition: transform 0.3s ease-in-out;
+  --offcanvas-title-line-height: 1.5;
+}
+
+// ----------------------------------------
+// Offcanvas Base
+// ----------------------------------------
+.offcanvas {
+  position: fixed;
+  bottom: 0;
+  z-index: var(--offcanvas-zindex);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  color: var(--offcanvas-color);
+  visibility: hidden;
+  background-color: var(--offcanvas-bg);
+  background-clip: padding-box;
+  outline: 0;
+  box-shadow: var(--offcanvas-box-shadow);
+  transition: var(--offcanvas-transition);
+
+  &.showing,
+  &.show:not(.hiding) {
+    transform: none;
+  }
+
+  &.showing,
+  &.hiding,
+  &.show {
+    visibility: visible;
+  }
+}
+
+// ----------------------------------------
+// Offcanvas Backdrop
+// ----------------------------------------
+.offcanvas-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: calc(var(--offcanvas-zindex) - 1);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &.fade {
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+// ----------------------------------------
+// Offcanvas Positions
+// ----------------------------------------
+.offcanvas-start {
+  top: 0;
+  left: 0;
+  width: var(--offcanvas-width);
+  border-right: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+  transform: translateX(-100%);
+}
+
+.offcanvas-end {
+  top: 0;
+  right: 0;
+  width: var(--offcanvas-width);
+  border-left: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+  transform: translateX(100%);
+}
+
+.offcanvas-top {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--offcanvas-height);
+  max-height: 100%;
+  border-bottom: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+  transform: translateY(-100%);
+}
+
+.offcanvas-bottom {
+  right: 0;
+  left: 0;
+  height: var(--offcanvas-height);
+  max-height: 100%;
+  border-top: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+  transform: translateY(100%);
+}
+
+// ----------------------------------------
+// Offcanvas Header
+// ----------------------------------------
+.offcanvas-header {
+  display: flex;
+  align-items: center;
+  padding: var(--offcanvas-padding-y) var(--offcanvas-padding-x);
+  border-bottom: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+
+  .btn-close {
+    padding: calc(var(--offcanvas-padding-y) * 0.5) calc(var(--offcanvas-padding-x) * 0.5);
+    margin: calc(-0.5 * var(--offcanvas-padding-y)) calc(-0.5 * var(--offcanvas-padding-x)) calc(-0.5 * var(--offcanvas-padding-y)) auto;
+  }
+}
+
+// ----------------------------------------
+// Offcanvas Title
+// ----------------------------------------
+.offcanvas-title {
+  margin-bottom: 0;
+  line-height: var(--offcanvas-title-line-height);
+  font-weight: $font-weight-semibold;
+  font-size: var(--text-lg);
+}
+
+// ----------------------------------------
+// Offcanvas Body
+// ----------------------------------------
+.offcanvas-body {
+  flex-grow: 1;
+  padding: var(--offcanvas-padding-y) var(--offcanvas-padding-x);
+  overflow-y: auto;
+}
+
+// ----------------------------------------
+// Offcanvas Footer
+// ----------------------------------------
+.offcanvas-footer {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--offcanvas-padding-y) var(--offcanvas-padding-x);
+  border-top: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+  gap: 0.5rem;
+}
+
+// ----------------------------------------
+// Responsive Offcanvas
+// ----------------------------------------
+@each $breakpoint, $value in $breakpoints {
+  @media (max-width: #{$value - 0.02px}) {
+    .offcanvas-#{$breakpoint} {
+      position: fixed;
+      bottom: 0;
+      z-index: var(--offcanvas-zindex);
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      color: var(--offcanvas-color);
+      visibility: hidden;
+      background-color: var(--offcanvas-bg);
+      background-clip: padding-box;
+      outline: 0;
+      box-shadow: var(--offcanvas-box-shadow);
+      transition: var(--offcanvas-transition);
+
+      &.showing,
+      &.show:not(.hiding) {
+        transform: none;
+      }
+
+      &.showing,
+      &.hiding,
+      &.show {
+        visibility: visible;
+      }
+    }
+
+    .offcanvas-#{$breakpoint}.offcanvas-start {
+      top: 0;
+      left: 0;
+      width: var(--offcanvas-width);
+      border-right: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+      transform: translateX(-100%);
+    }
+
+    .offcanvas-#{$breakpoint}.offcanvas-end {
+      top: 0;
+      right: 0;
+      width: var(--offcanvas-width);
+      border-left: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+      transform: translateX(100%);
+    }
+
+    .offcanvas-#{$breakpoint}.offcanvas-top {
+      top: 0;
+      right: 0;
+      left: 0;
+      height: var(--offcanvas-height);
+      max-height: 100%;
+      border-bottom: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+      transform: translateY(-100%);
+    }
+
+    .offcanvas-#{$breakpoint}.offcanvas-bottom {
+      right: 0;
+      left: 0;
+      height: var(--offcanvas-height);
+      max-height: 100%;
+      border-top: var(--offcanvas-border-width) solid var(--offcanvas-border-color);
+      transform: translateY(100%);
+    }
+  }
+
+  @media (min-width: $value) {
+    .offcanvas-#{$breakpoint} {
+      --offcanvas-height: auto;
+      --offcanvas-border-width: 0;
+      background-color: transparent !important;
+      box-shadow: none;
+
+      .offcanvas-header {
+        display: none;
+      }
+
+      .offcanvas-body {
+        display: flex;
+        flex-grow: 0;
+        padding: 0;
+        overflow-y: visible;
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+// ----------------------------------------
+// Offcanvas Sizes
+// ----------------------------------------
+.offcanvas-sm {
+  --offcanvas-width: 300px;
+}
+
+.offcanvas-lg {
+  --offcanvas-width: 500px;
+}
+
+.offcanvas-xl {
+  --offcanvas-width: 600px;
+}
+
+.offcanvas-fullwidth {
+  --offcanvas-width: 100%;
+}

@@ -1,0 +1,556 @@
+// ========================================
+// ZenKit - Transfer Component
+// Dual list transfer selection
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Transfer Container
+// ----------------------------------------
+.transfer {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+// ----------------------------------------
+// Transfer List (Source/Target)
+// ----------------------------------------
+.transfer-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// Transfer List Header
+// ----------------------------------------
+.transfer-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+.transfer-list-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.transfer-list-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.transfer-list-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.transfer-list-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.transfer-list-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// ----------------------------------------
+// Transfer List Search
+// ----------------------------------------
+.transfer-list-search {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.transfer-list-search-input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgba(var(--primary-rgb), 0.25);
+  }
+}
+
+// ----------------------------------------
+// Transfer List Body
+// ----------------------------------------
+.transfer-list-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.transfer-list-content {
+  padding: 0.25rem 0;
+  margin: 0;
+  list-style: none;
+}
+
+// ----------------------------------------
+// Transfer List Item
+// ----------------------------------------
+.transfer-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-selected {
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+
+  &.is-disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.transfer-list-item-checkbox {
+  flex-shrink: 0;
+}
+
+.transfer-list-item-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.transfer-list-item-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.transfer-list-item-remove {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  opacity: 0;
+
+  .transfer-list-item:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--danger);
+    background-color: rgba(var(--danger-rgb), 0.1);
+  }
+}
+
+// ----------------------------------------
+// Transfer List Empty
+// ----------------------------------------
+.transfer-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+.transfer-list-empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+.transfer-list-empty-text {
+  font-size: 0.875rem;
+}
+
+// ----------------------------------------
+// Transfer List Footer
+// ----------------------------------------
+.transfer-list-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  border-radius: 0 0 $border-radius $border-radius;
+}
+
+.transfer-list-footer-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Transfer Operation Buttons
+// ----------------------------------------
+.transfer-operation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.transfer-operation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  &:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+// Move all buttons
+.transfer-operation-move-all {
+  font-size: 0.75rem;
+}
+
+// ----------------------------------------
+// Transfer Pagination
+// ----------------------------------------
+.transfer-list-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.transfer-list-pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    color: var(--primary);
+    background-color: var(--bg-secondary);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.transfer-list-pagination-info {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
+}
+
+// ----------------------------------------
+// Transfer Sizes
+// ----------------------------------------
+.transfer-sm {
+  gap: 0.75rem;
+
+  .transfer-list {
+    min-width: 160px;
+  }
+
+  .transfer-list-header {
+    padding: 0.5rem;
+  }
+
+  .transfer-list-title {
+    font-size: 0.75rem;
+  }
+
+  .transfer-list-item {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .transfer-list-item-text {
+    font-size: 0.75rem;
+  }
+
+  .transfer-operation-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.transfer-lg {
+  gap: 1.5rem;
+
+  .transfer-list {
+    min-width: 280px;
+  }
+
+  .transfer-list-header {
+    padding: 1rem;
+  }
+
+  .transfer-list-title {
+    font-size: 1rem;
+  }
+
+  .transfer-list-item {
+    padding: 0.75rem 1rem;
+  }
+
+  .transfer-list-item-text {
+    font-size: 1rem;
+  }
+
+  .transfer-operation-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+// ----------------------------------------
+// Transfer One Way
+// ----------------------------------------
+.transfer-one-way {
+  .transfer-operation {
+    gap: 0.25rem;
+  }
+}
+
+// ----------------------------------------
+// Transfer Tree Mode
+// ----------------------------------------
+.transfer-tree {
+  .transfer-list-content {
+    padding: 0.5rem;
+  }
+}
+
+.transfer-tree-node {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0;
+}
+
+.transfer-tree-node-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.is-expanded {
+    transform: rotate(90deg);
+  }
+
+  &.is-leaf {
+    visibility: hidden;
+  }
+}
+
+.transfer-tree-node-checkbox {
+  flex-shrink: 0;
+}
+
+.transfer-tree-node-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+}
+
+.transfer-tree-node-icon {
+  color: var(--text-muted);
+}
+
+.transfer-tree-node-text {
+  flex: 1;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transfer-tree-children {
+  padding-left: 1.25rem;
+}
+
+// ----------------------------------------
+// Transfer Table Mode
+// ----------------------------------------
+.transfer-table {
+  .transfer-list-body {
+    overflow-x: auto;
+  }
+}
+
+.transfer-table-head {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.transfer-table-head-cell {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.transfer-table-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-selected {
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+.transfer-table-cell {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transfer-table-checkbox-cell {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ----------------------------------------
+// Transfer Status
+// ----------------------------------------
+.transfer-error {
+  .transfer-list {
+    border-color: var(--danger);
+  }
+}
+
+// ----------------------------------------
+// Transfer Disabled
+// ----------------------------------------
+.transfer-disabled {
+  opacity: 0.65;
+  pointer-events: none;
+
+  .transfer-list {
+    background-color: var(--bg-secondary);
+  }
+}
+
+// ----------------------------------------
+// Transfer Responsive
+// ----------------------------------------
+@media (max-width: 767.98px) {
+  .transfer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .transfer-operation {
+    flex-direction: row;
+    padding: 0.5rem 0;
+  }
+
+  .transfer-operation-btn {
+    transform: rotate(90deg);
+  }
+}

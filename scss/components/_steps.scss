@@ -1,0 +1,343 @@
+// ========================================
+// ZenKit - Steps / Stepper
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Base Steps Container
+// ----------------------------------------
+.steps {
+  --steps-icon-size: 2rem;
+  --steps-line-color: var(--border);
+  --steps-active-color: var(--primary);
+  --steps-completed-color: var(--success);
+  --steps-pending-color: var(--gray-400);
+
+  display: flex;
+  width: 100%;
+}
+
+// ----------------------------------------
+// Step Item
+// ----------------------------------------
+.step {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  // Connector line
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--steps-icon-size) / 2);
+    left: calc(50% + var(--steps-icon-size) / 2 + 0.5rem);
+    right: calc(-50% + var(--steps-icon-size) / 2 + 0.5rem);
+    height: 2px;
+    background-color: var(--steps-line-color);
+    z-index: 0;
+  }
+}
+
+// ----------------------------------------
+// Step Icon
+// ----------------------------------------
+.step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--steps-icon-size);
+  height: var(--steps-icon-size);
+  border-radius: var(--radius-full);
+  background-color: var(--gray-100);
+  color: var(--steps-pending-color);
+  font-size: var(--text-sm);
+  font-weight: $font-weight-semibold;
+  border: 2px solid var(--steps-line-color);
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base) ease-in-out;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Step Content
+// ----------------------------------------
+.step-content {
+  margin-top: 0.75rem;
+  max-width: 150px;
+}
+
+.step-title {
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.step-description {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Step States
+// ----------------------------------------
+
+// Active Step
+.step-active {
+  .step-icon {
+    background-color: var(--primary-50);
+    border-color: var(--steps-active-color);
+    color: var(--steps-active-color);
+  }
+
+  .step-title {
+    color: var(--steps-active-color);
+  }
+}
+
+// Completed Step
+.step-completed {
+  .step-icon {
+    background-color: var(--steps-completed-color);
+    border-color: var(--steps-completed-color);
+    color: var(--white);
+  }
+
+  // Completed connector line
+  &:not(:last-child)::after {
+    background-color: var(--steps-completed-color);
+  }
+}
+
+// Error Step
+.step-error {
+  .step-icon {
+    background-color: var(--danger-light);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .step-title {
+    color: var(--danger);
+  }
+}
+
+// ----------------------------------------
+// Steps Sizes
+// ----------------------------------------
+.steps-sm {
+  --steps-icon-size: 1.5rem;
+
+  .step-icon {
+    font-size: var(--text-xs);
+
+    svg {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+  }
+
+  .step-content {
+    margin-top: 0.5rem;
+  }
+
+  .step-title {
+    font-size: var(--text-xs);
+  }
+
+  .step-description {
+    font-size: 0.625rem;
+  }
+}
+
+.steps-lg {
+  --steps-icon-size: 2.5rem;
+
+  .step-icon {
+    font-size: var(--text-base);
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .step-title {
+    font-size: var(--text-base);
+  }
+
+  .step-description {
+    font-size: var(--text-sm);
+  }
+}
+
+// ----------------------------------------
+// Vertical Steps
+// ----------------------------------------
+.steps-vertical {
+  flex-direction: column;
+
+  .step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    padding-bottom: 2rem;
+
+    &:not(:last-child)::after {
+      top: calc(var(--steps-icon-size) + 0.5rem);
+      left: calc(var(--steps-icon-size) / 2 - 1px);
+      right: auto;
+      width: 2px;
+      height: calc(100% - var(--steps-icon-size) - 0.5rem);
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .step-content {
+    margin-top: 0;
+    margin-left: 1rem;
+    max-width: none;
+  }
+}
+
+// ----------------------------------------
+// Steps with Dot (Minimal)
+// ----------------------------------------
+.steps-dot {
+  --steps-icon-size: 0.75rem;
+
+  .step-icon {
+    border-width: 0;
+    background-color: var(--steps-line-color);
+  }
+
+  .step-active .step-icon {
+    background-color: var(--steps-active-color);
+    box-shadow: 0 0 0 4px var(--primary-100);
+  }
+
+  .step-completed .step-icon {
+    background-color: var(--steps-completed-color);
+  }
+}
+
+// ----------------------------------------
+// Steps with Navigation (Clickable)
+// ----------------------------------------
+.steps-nav {
+  .step {
+    cursor: pointer;
+
+    &:hover:not(.step-completed):not(.step-active) {
+      .step-icon {
+        border-color: var(--gray-400);
+        background-color: var(--gray-50);
+      }
+    }
+  }
+}
+
+// ----------------------------------------
+// Steps Progress Bar Style
+// ----------------------------------------
+.steps-progress {
+  position: relative;
+  padding-top: 2rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--steps-icon-size) / 2 + 2rem);
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-full);
+  }
+
+  .step {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.steps-progress-bar {
+  position: absolute;
+  top: calc(var(--steps-icon-size) / 2 + 2rem);
+  left: 0;
+  height: 4px;
+  background-color: var(--steps-active-color);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow) ease-in-out;
+}
+
+// ----------------------------------------
+// Inline Steps (Compact)
+// ----------------------------------------
+.steps-inline {
+  .step {
+    flex-direction: row;
+    align-items: center;
+    flex: none;
+    gap: 0.5rem;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .step-content {
+    margin-top: 0;
+    max-width: none;
+  }
+
+  .step-description {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Steps Color Variants
+// ----------------------------------------
+.steps-primary {
+  --steps-active-color: var(--primary);
+  --steps-completed-color: var(--primary);
+}
+
+.steps-success {
+  --steps-active-color: var(--success);
+  --steps-completed-color: var(--success);
+}
+
+.steps-info {
+  --steps-active-color: var(--info);
+  --steps-completed-color: var(--info);
+}
+
+.steps-warning {
+  --steps-active-color: var(--warning);
+  --steps-completed-color: var(--warning);
+}
+
+.steps-danger {
+  --steps-active-color: var(--danger);
+  --steps-completed-color: var(--danger);
+}

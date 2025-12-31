@@ -1,0 +1,510 @@
+// ========================================
+// ZenKit - Cascader Component
+// Multi-level dropdown selection
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Cascader Wrapper
+// ----------------------------------------
+.cascader {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+// ----------------------------------------
+// Cascader Trigger
+// ----------------------------------------
+.cascader-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &:focus,
+  &.is-open {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+  }
+
+  &.is-disabled {
+    background-color: var(--bg-secondary);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+.cascader-trigger-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.cascader-trigger-placeholder {
+  color: var(--text-muted);
+}
+
+.cascader-trigger-separator {
+  color: var(--text-muted);
+}
+
+.cascader-trigger-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.cascader-trigger-clear {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+  }
+}
+
+.cascader-trigger-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+
+  .is-open & {
+    transform: rotate(180deg);
+  }
+}
+
+// ----------------------------------------
+// Cascader Dropdown
+// ----------------------------------------
+.cascader-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: $z-dropdown;
+  display: none;
+  margin-top: 4px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+
+  &.is-open {
+    display: flex;
+  }
+
+  &.cascader-dropdown-up {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 4px;
+  }
+}
+
+// ----------------------------------------
+// Cascader Menus (Columns)
+// ----------------------------------------
+.cascader-menus {
+  display: flex;
+}
+
+.cascader-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  max-height: 256px;
+  overflow-y: auto;
+  border-right: 1px solid var(--border-color);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.cascader-menu-list {
+  padding: 0.25rem 0;
+  margin: 0;
+  list-style: none;
+}
+
+// ----------------------------------------
+// Cascader Option
+// ----------------------------------------
+.cascader-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-selected {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+    font-weight: 500;
+  }
+
+  &.is-active {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.cascader-option-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.cascader-option-checkbox {
+  margin-right: 0.5rem;
+}
+
+.cascader-option-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.cascader-option-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cascader-option-arrow {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+}
+
+.cascader-option-loading {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// ----------------------------------------
+// Cascader Search
+// ----------------------------------------
+.cascader-search {
+  position: sticky;
+  top: 0;
+  padding: 0.5rem;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cascader-search-input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgba(var(--primary-rgb), 0.25);
+  }
+}
+
+// ----------------------------------------
+// Cascader Search Results
+// ----------------------------------------
+.cascader-search-results {
+  min-width: 200px;
+  max-height: 256px;
+  overflow-y: auto;
+}
+
+.cascader-search-option {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-selected {
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+.cascader-search-option-path {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.cascader-search-option-separator {
+  color: var(--text-muted);
+}
+
+.cascader-search-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+// ----------------------------------------
+// Cascader Empty
+// ----------------------------------------
+.cascader-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Cascader Multiple
+// ----------------------------------------
+.cascader-multiple .cascader-trigger {
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  min-height: calc(2.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+}
+
+.cascader-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.cascader-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.875rem;
+  background-color: var(--bg-tertiary);
+  border-radius: $border-radius-sm;
+}
+
+.cascader-tag-path {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.cascader-tag-separator {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.cascader-tag-remove {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem;
+  margin-left: 0.125rem;
+  margin-right: -0.25rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--danger);
+    background-color: rgba(var(--danger-rgb), 0.1);
+  }
+}
+
+.cascader-max-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  border-radius: $border-radius-sm;
+}
+
+// ----------------------------------------
+// Cascader Footer
+// ----------------------------------------
+.cascader-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+// ----------------------------------------
+// Cascader Sizes
+// ----------------------------------------
+.cascader-sm .cascader-trigger {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  min-height: calc(1.875rem + 2px);
+}
+
+.cascader-sm .cascader-option {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.cascader-sm .cascader-menu {
+  min-width: 100px;
+}
+
+.cascader-lg .cascader-trigger {
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+  min-height: calc(3rem + 2px);
+}
+
+.cascader-lg .cascader-option {
+  padding: 0.625rem 1rem;
+  font-size: 1.125rem;
+}
+
+.cascader-lg .cascader-menu {
+  min-width: 150px;
+}
+
+// ----------------------------------------
+// Cascader States
+// ----------------------------------------
+.cascader-error .cascader-trigger {
+  border-color: var(--danger);
+
+  &:focus,
+  &.is-open {
+    box-shadow: 0 0 0 0.2rem rgba(var(--danger-rgb), 0.25);
+  }
+}
+
+.cascader-warning .cascader-trigger {
+  border-color: var(--warning);
+
+  &:focus,
+  &.is-open {
+    box-shadow: 0 0 0 0.2rem rgba(var(--warning-rgb), 0.25);
+  }
+}
+
+// ----------------------------------------
+// Cascader Variants
+// ----------------------------------------
+// Borderless
+.cascader-borderless .cascader-trigger {
+  border-color: transparent;
+  background-color: transparent;
+
+  &:hover,
+  &:focus,
+  &.is-open {
+    border-color: transparent;
+    background-color: var(--bg-secondary);
+    box-shadow: none;
+  }
+}
+
+// Filled
+.cascader-filled .cascader-trigger {
+  border-color: transparent;
+  background-color: var(--bg-secondary);
+
+  &:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  &:focus,
+  &.is-open {
+    border-color: var(--primary);
+    background-color: var(--bg-primary);
+  }
+}
+
+// ----------------------------------------
+// Cascader Panel (Inline)
+// ----------------------------------------
+.cascader-panel {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  background-color: var(--bg-primary);
+}
+
+.cascader-panel .cascader-menus {
+  width: 100%;
+}
+
+// ----------------------------------------
+// Cascader Hover Expand
+// ----------------------------------------
+.cascader-hover-expand {
+  .cascader-option {
+    &:hover .cascader-option-arrow {
+      color: var(--primary);
+    }
+  }
+}
+
+// ----------------------------------------
+// Cascader Click Expand
+// ----------------------------------------
+.cascader-click-expand {
+  .cascader-option {
+    cursor: pointer;
+  }
+}

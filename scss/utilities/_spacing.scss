@@ -1,0 +1,207 @@
+// ========================================
+// ZenKit - Spacing Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Spacing Map
+// ----------------------------------------
+$spacing-values: (
+  0: 0,
+  1: var(--space-1),
+  2: var(--space-2),
+  3: var(--space-3),
+  4: var(--space-4),
+  5: var(--space-5),
+  6: var(--space-6),
+  8: var(--space-8),
+  10: var(--space-10),
+  12: var(--space-12),
+  16: var(--space-16),
+  20: var(--space-20),
+  24: var(--space-24),
+  auto: auto
+);
+
+// ----------------------------------------
+// Margin Utilities
+// ----------------------------------------
+@each $key, $value in $spacing-values {
+  // All sides
+  .m-#{$key} { margin: $value; }
+
+  // Horizontal (x-axis)
+  .mx-#{$key} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  // Vertical (y-axis)
+  .my-#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  // Individual sides
+  .mt-#{$key} { margin-top: $value; }
+  .mr-#{$key} { margin-right: $value; }
+  .mb-#{$key} { margin-bottom: $value; }
+  .ml-#{$key} { margin-left: $value; }
+
+  // Logical properties
+  .ms-#{$key} { margin-inline-start: $value; }
+  .me-#{$key} { margin-inline-end: $value; }
+}
+
+// Negative margins (except auto and 0)
+@each $key, $value in $spacing-values {
+  @if $key != auto and $key != 0 {
+    .-m-#{$key} { margin: calc($value * -1); }
+    .-mx-#{$key} {
+      margin-left: calc($value * -1);
+      margin-right: calc($value * -1);
+    }
+    .-my-#{$key} {
+      margin-top: calc($value * -1);
+      margin-bottom: calc($value * -1);
+    }
+    .-mt-#{$key} { margin-top: calc($value * -1); }
+    .-mr-#{$key} { margin-right: calc($value * -1); }
+    .-mb-#{$key} { margin-bottom: calc($value * -1); }
+    .-ml-#{$key} { margin-left: calc($value * -1); }
+  }
+}
+
+// ----------------------------------------
+// Padding Utilities
+// ----------------------------------------
+@each $key, $value in $spacing-values {
+  @if $key != auto {
+    // All sides
+    .p-#{$key} { padding: $value; }
+
+    // Horizontal (x-axis)
+    .px-#{$key} {
+      padding-left: $value;
+      padding-right: $value;
+    }
+
+    // Vertical (y-axis)
+    .py-#{$key} {
+      padding-top: $value;
+      padding-bottom: $value;
+    }
+
+    // Individual sides
+    .pt-#{$key} { padding-top: $value; }
+    .pr-#{$key} { padding-right: $value; }
+    .pb-#{$key} { padding-bottom: $value; }
+    .pl-#{$key} { padding-left: $value; }
+
+    // Logical properties
+    .ps-#{$key} { padding-inline-start: $value; }
+    .pe-#{$key} { padding-inline-end: $value; }
+  }
+}
+
+// ----------------------------------------
+// Gap Utilities
+// ----------------------------------------
+@each $key, $value in $spacing-values {
+  @if $key != auto {
+    .gap-#{$key} { gap: $value; }
+    .gap-x-#{$key} { column-gap: $value; }
+    .gap-y-#{$key} { row-gap: $value; }
+  }
+}
+
+// ----------------------------------------
+// Responsive Spacing
+// ----------------------------------------
+@include sm {
+  @each $key, $value in $spacing-values {
+    .sm\:m-#{$key} { margin: $value; }
+    .sm\:mx-#{$key} { margin-left: $value; margin-right: $value; }
+    .sm\:my-#{$key} { margin-top: $value; margin-bottom: $value; }
+    .sm\:mt-#{$key} { margin-top: $value; }
+    .sm\:mb-#{$key} { margin-bottom: $value; }
+    .sm\:ml-#{$key} { margin-left: $value; }
+    .sm\:mr-#{$key} { margin-right: $value; }
+
+    @if $key != auto {
+      .sm\:p-#{$key} { padding: $value; }
+      .sm\:px-#{$key} { padding-left: $value; padding-right: $value; }
+      .sm\:py-#{$key} { padding-top: $value; padding-bottom: $value; }
+      .sm\:pt-#{$key} { padding-top: $value; }
+      .sm\:pb-#{$key} { padding-bottom: $value; }
+      .sm\:pl-#{$key} { padding-left: $value; }
+      .sm\:pr-#{$key} { padding-right: $value; }
+      .sm\:gap-#{$key} { gap: $value; }
+    }
+  }
+}
+
+@include md {
+  @each $key, $value in $spacing-values {
+    .md\:m-#{$key} { margin: $value; }
+    .md\:mx-#{$key} { margin-left: $value; margin-right: $value; }
+    .md\:my-#{$key} { margin-top: $value; margin-bottom: $value; }
+    .md\:mt-#{$key} { margin-top: $value; }
+    .md\:mb-#{$key} { margin-bottom: $value; }
+    .md\:ml-#{$key} { margin-left: $value; }
+    .md\:mr-#{$key} { margin-right: $value; }
+
+    @if $key != auto {
+      .md\:p-#{$key} { padding: $value; }
+      .md\:px-#{$key} { padding-left: $value; padding-right: $value; }
+      .md\:py-#{$key} { padding-top: $value; padding-bottom: $value; }
+      .md\:pt-#{$key} { padding-top: $value; }
+      .md\:pb-#{$key} { padding-bottom: $value; }
+      .md\:pl-#{$key} { padding-left: $value; }
+      .md\:pr-#{$key} { padding-right: $value; }
+      .md\:gap-#{$key} { gap: $value; }
+    }
+  }
+}
+
+@include lg {
+  @each $key, $value in $spacing-values {
+    .lg\:m-#{$key} { margin: $value; }
+    .lg\:mx-#{$key} { margin-left: $value; margin-right: $value; }
+    .lg\:my-#{$key} { margin-top: $value; margin-bottom: $value; }
+    .lg\:mt-#{$key} { margin-top: $value; }
+    .lg\:mb-#{$key} { margin-bottom: $value; }
+    .lg\:ml-#{$key} { margin-left: $value; }
+    .lg\:mr-#{$key} { margin-right: $value; }
+
+    @if $key != auto {
+      .lg\:p-#{$key} { padding: $value; }
+      .lg\:px-#{$key} { padding-left: $value; padding-right: $value; }
+      .lg\:py-#{$key} { padding-top: $value; padding-bottom: $value; }
+      .lg\:pt-#{$key} { padding-top: $value; }
+      .lg\:pb-#{$key} { padding-bottom: $value; }
+      .lg\:pl-#{$key} { padding-left: $value; }
+      .lg\:pr-#{$key} { padding-right: $value; }
+      .lg\:gap-#{$key} { gap: $value; }
+    }
+  }
+}
+
+@include xl {
+  @each $key, $value in $spacing-values {
+    .xl\:m-#{$key} { margin: $value; }
+    .xl\:mx-#{$key} { margin-left: $value; margin-right: $value; }
+    .xl\:my-#{$key} { margin-top: $value; margin-bottom: $value; }
+    .xl\:mt-#{$key} { margin-top: $value; }
+    .xl\:mb-#{$key} { margin-bottom: $value; }
+
+    @if $key != auto {
+      .xl\:p-#{$key} { padding: $value; }
+      .xl\:px-#{$key} { padding-left: $value; padding-right: $value; }
+      .xl\:py-#{$key} { padding-top: $value; padding-bottom: $value; }
+      .xl\:gap-#{$key} { gap: $value; }
+    }
+  }
+}

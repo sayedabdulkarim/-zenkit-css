@@ -1,0 +1,479 @@
+// ========================================
+// ZenKit - Mentions Component
+// @ mentions input for tagging users
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Mentions Wrapper
+// ----------------------------------------
+.mentions {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+// ----------------------------------------
+// Mentions Textarea
+// ----------------------------------------
+.mentions-textarea {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  resize: vertical;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--bg-secondary);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  &:read-only {
+    background-color: var(--bg-secondary);
+  }
+}
+
+// ----------------------------------------
+// Mentions Input (Single Line)
+// ----------------------------------------
+.mentions-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+  }
+
+  &:disabled {
+    background-color: var(--bg-secondary);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+// ----------------------------------------
+// Mentions Measure (for positioning)
+// ----------------------------------------
+.mentions-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  min-height: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// ----------------------------------------
+// Mentions Dropdown
+// ----------------------------------------
+.mentions-dropdown {
+  position: absolute;
+  z-index: $z-dropdown;
+  display: none;
+  min-width: 160px;
+  max-width: 280px;
+  max-height: 256px;
+  overflow-y: auto;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+
+  &.is-open {
+    display: block;
+  }
+}
+
+// ----------------------------------------
+// Mentions Options List
+// ----------------------------------------
+.mentions-options {
+  padding: 0.25rem 0;
+  margin: 0;
+  list-style: none;
+}
+
+// ----------------------------------------
+// Mentions Option
+// ----------------------------------------
+.mentions-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &.is-highlighted {
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-selected {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+
+  &.is-disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.mentions-option-avatar {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--bg-tertiary);
+}
+
+.mentions-option-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.mentions-option-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mentions-option-username {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ----------------------------------------
+// Mentions Loading
+// ----------------------------------------
+.mentions-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--text-muted);
+}
+
+.mentions-loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ----------------------------------------
+// Mentions Empty
+// ----------------------------------------
+.mentions-empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Mentions Highlighted Text
+// ----------------------------------------
+.mentions-highlight {
+  display: inline;
+  padding: 0.125rem 0.25rem;
+  color: var(--primary);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  border-radius: $border-radius-sm;
+}
+
+// ----------------------------------------
+// Mentions Sizes
+// ----------------------------------------
+.mentions-sm {
+  .mentions-textarea,
+  .mentions-input {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    min-height: 60px;
+  }
+
+  .mentions-option {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .mentions-option-avatar {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mentions-option-name {
+    font-size: 0.75rem;
+  }
+
+  .mentions-option-username {
+    font-size: 0.625rem;
+  }
+}
+
+.mentions-lg {
+  .mentions-textarea,
+  .mentions-input {
+    padding: 0.75rem 1rem;
+    font-size: 1.125rem;
+    min-height: 100px;
+  }
+
+  .mentions-option {
+    padding: 0.625rem 1rem;
+  }
+
+  .mentions-option-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mentions-option-name {
+    font-size: 1rem;
+  }
+
+  .mentions-option-username {
+    font-size: 0.875rem;
+  }
+}
+
+// ----------------------------------------
+// Mentions States
+// ----------------------------------------
+.mentions-error {
+  .mentions-textarea,
+  .mentions-input {
+    border-color: var(--danger);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--danger-rgb), 0.25);
+    }
+  }
+}
+
+.mentions-warning {
+  .mentions-textarea,
+  .mentions-input {
+    border-color: var(--warning);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--warning-rgb), 0.25);
+    }
+  }
+}
+
+.mentions-success {
+  .mentions-textarea,
+  .mentions-input {
+    border-color: var(--success);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(var(--success-rgb), 0.25);
+    }
+  }
+}
+
+// ----------------------------------------
+// Mentions Variants
+// ----------------------------------------
+// Borderless
+.mentions-borderless {
+  .mentions-textarea,
+  .mentions-input {
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+      background-color: var(--bg-secondary);
+      box-shadow: none;
+    }
+  }
+}
+
+// Filled
+.mentions-filled {
+  .mentions-textarea,
+  .mentions-input {
+    border-color: transparent;
+    background-color: var(--bg-secondary);
+
+    &:hover {
+      background-color: var(--bg-tertiary);
+    }
+
+    &:focus {
+      border-color: var(--primary);
+      background-color: var(--bg-primary);
+    }
+  }
+}
+
+// ----------------------------------------
+// Mentions Custom Triggers
+// ----------------------------------------
+// For different trigger characters like # or :
+.mentions-hash {
+  .mentions-highlight {
+    color: var(--info);
+    background-color: rgba(var(--info-rgb), 0.1);
+  }
+}
+
+.mentions-emoji {
+  .mentions-option-avatar {
+    font-size: 1.25rem;
+    background: transparent;
+  }
+}
+
+// ----------------------------------------
+// Mentions Read-Only Display
+// ----------------------------------------
+.mentions-readonly {
+  .mentions-highlight {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ----------------------------------------
+// Mentions Group Header
+// ----------------------------------------
+.mentions-group {
+  padding-top: 0.5rem;
+
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+.mentions-group-label {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// ----------------------------------------
+// Mentions with Avatar Badge
+// ----------------------------------------
+.mentions-option-avatar-wrapper {
+  position: relative;
+}
+
+.mentions-option-avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--bg-primary);
+  border-radius: 50%;
+
+  &.is-online {
+    background-color: var(--success);
+  }
+
+  &.is-offline {
+    background-color: var(--text-muted);
+  }
+
+  &.is-busy {
+    background-color: var(--danger);
+  }
+
+  &.is-away {
+    background-color: var(--warning);
+  }
+}
+
+// ----------------------------------------
+// Mentions Character Count
+// ----------------------------------------
+.mentions-count {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+
+  &.is-over-limit {
+    color: var(--danger);
+  }
+}

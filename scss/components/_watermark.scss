@@ -1,0 +1,314 @@
+// ========================================
+// ZenKit - Watermark Component
+// Background watermark overlay
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Watermark Container
+// ----------------------------------------
+.watermark {
+  position: relative;
+}
+
+// ----------------------------------------
+// Watermark Overlay
+// ----------------------------------------
+.watermark-content {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+// ----------------------------------------
+// Watermark Pattern
+// ----------------------------------------
+// The actual watermark pattern is typically generated via JS/Canvas
+// These are CSS-only fallback patterns
+
+.watermark-pattern {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  // Background image is set via inline style (JS generated)
+}
+
+// ----------------------------------------
+// Watermark Text (CSS Only)
+// ----------------------------------------
+.watermark-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 100px;
+  padding: 50px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.08);
+  transform: rotate(-22deg);
+  user-select: none;
+  overflow: hidden;
+}
+
+.watermark-text-item {
+  white-space: nowrap;
+}
+
+// ----------------------------------------
+// Watermark Image
+// ----------------------------------------
+.watermark-image {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  background-size: 200px auto;
+  opacity: 0.05;
+}
+
+// ----------------------------------------
+// Watermark Grayscale
+// ----------------------------------------
+.watermark-grayscale .watermark-image {
+  filter: grayscale(100%);
+}
+
+// ----------------------------------------
+// Watermark Opacity Variants
+// ----------------------------------------
+.watermark-opacity-5 .watermark-text,
+.watermark-opacity-5 .watermark-image {
+  opacity: 0.05;
+}
+
+.watermark-opacity-10 .watermark-text,
+.watermark-opacity-10 .watermark-image {
+  opacity: 0.1;
+}
+
+.watermark-opacity-15 .watermark-text,
+.watermark-opacity-15 .watermark-image {
+  opacity: 0.15;
+}
+
+.watermark-opacity-20 .watermark-text,
+.watermark-opacity-20 .watermark-image {
+  opacity: 0.2;
+}
+
+.watermark-opacity-25 .watermark-text,
+.watermark-opacity-25 .watermark-image {
+  opacity: 0.25;
+}
+
+// ----------------------------------------
+// Watermark Colors
+// ----------------------------------------
+.watermark-light .watermark-text {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.watermark-dark .watermark-text {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.watermark-primary .watermark-text {
+  color: rgba(var(--primary-rgb), 0.1);
+}
+
+// ----------------------------------------
+// Watermark Font Sizes
+// ----------------------------------------
+.watermark-sm .watermark-text {
+  font-size: 12px;
+  gap: 60px;
+  padding: 30px;
+}
+
+.watermark-lg .watermark-text {
+  font-size: 20px;
+  gap: 120px;
+  padding: 60px;
+}
+
+.watermark-xl .watermark-text {
+  font-size: 28px;
+  gap: 160px;
+  padding: 80px;
+}
+
+// ----------------------------------------
+// Watermark Font Weight
+// ----------------------------------------
+.watermark-bold .watermark-text {
+  font-weight: 600;
+}
+
+.watermark-light-weight .watermark-text {
+  font-weight: 300;
+}
+
+// ----------------------------------------
+// Watermark Rotation
+// ----------------------------------------
+.watermark-rotate-0 .watermark-text,
+.watermark-rotate-0 .watermark-pattern {
+  transform: rotate(0deg);
+}
+
+.watermark-rotate-15 .watermark-text,
+.watermark-rotate-15 .watermark-pattern {
+  transform: rotate(-15deg);
+}
+
+.watermark-rotate-30 .watermark-text,
+.watermark-rotate-30 .watermark-pattern {
+  transform: rotate(-30deg);
+}
+
+.watermark-rotate-45 .watermark-text,
+.watermark-rotate-45 .watermark-pattern {
+  transform: rotate(-45deg);
+}
+
+// ----------------------------------------
+// Watermark Gap / Density
+// ----------------------------------------
+.watermark-dense .watermark-text {
+  gap: 50px;
+  padding: 25px;
+}
+
+.watermark-sparse .watermark-text {
+  gap: 150px;
+  padding: 75px;
+}
+
+// ----------------------------------------
+// Watermark Position
+// ----------------------------------------
+.watermark-center {
+  .watermark-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .watermark-text {
+    position: static;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: 0;
+  }
+
+  .watermark-text-item {
+    font-size: 3rem;
+    opacity: 0.1;
+  }
+}
+
+// ----------------------------------------
+// Watermark Full Page
+// ----------------------------------------
+.watermark-fullpage {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+// ----------------------------------------
+// Watermark Inherit (within container)
+// ----------------------------------------
+.watermark-inherit .watermark-content {
+  z-index: inherit;
+}
+
+// ----------------------------------------
+// Watermark Anti-Tamper
+// ----------------------------------------
+// Prevents easy removal via developer tools
+.watermark-secure {
+  .watermark-content {
+    // MutationObserver is used in JS to detect tampering
+    // This class is for identification
+  }
+}
+
+// ----------------------------------------
+// Watermark with Children Styling
+// ----------------------------------------
+.watermark-children {
+  position: relative;
+  z-index: 1;
+}
+
+// ----------------------------------------
+// Watermark Mask Gradient
+// ----------------------------------------
+.watermark-fade-edges {
+  .watermark-content {
+    mask-image: radial-gradient(
+      ellipse at center,
+      black 30%,
+      transparent 70%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 30%,
+      transparent 70%
+    );
+  }
+}
+
+.watermark-fade-bottom {
+  .watermark-content {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+// ----------------------------------------
+// Watermark Print
+// ----------------------------------------
+@media print {
+  .watermark-hide-print .watermark-content {
+    display: none;
+  }
+
+  .watermark-print-only {
+    .watermark-content {
+      display: block;
+    }
+  }
+}
+
+// ----------------------------------------
+// Watermark Responsive
+// ----------------------------------------
+@media (max-width: 767.98px) {
+  .watermark-text {
+    font-size: 12px;
+    gap: 60px;
+    padding: 30px;
+  }
+
+  .watermark-hide-mobile .watermark-content {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Watermark Z-Index Control
+// ----------------------------------------
+.watermark-z-low .watermark-content {
+  z-index: 1;
+}
+
+.watermark-z-high .watermark-content {
+  z-index: 9999;
+}

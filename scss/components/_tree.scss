@@ -1,0 +1,518 @@
+// ========================================
+// ZenKit - Tree Component
+// Hierarchical tree view
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Tree Container
+// ----------------------------------------
+.tree {
+  display: flex;
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// Tree List
+// ----------------------------------------
+.tree-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// ----------------------------------------
+// Tree Node
+// ----------------------------------------
+.tree-node {
+  display: flex;
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// Tree Node Content (Single Row)
+// ----------------------------------------
+.tree-node-content {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+// ----------------------------------------
+// Tree Node Indent
+// ----------------------------------------
+.tree-indent {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+.tree-indent-unit {
+  display: inline-block;
+  width: 24px;
+}
+
+// ----------------------------------------
+// Tree Switcher (Expand/Collapse)
+// ----------------------------------------
+.tree-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.2s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  &.is-expanded {
+    transform: rotate(90deg);
+  }
+
+  &.is-loading {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tree-switcher-leaf {
+  visibility: hidden;
+}
+
+.tree-switcher-noop {
+  width: 24px;
+}
+
+// ----------------------------------------
+// Tree Checkbox
+// ----------------------------------------
+.tree-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+
+// ----------------------------------------
+// Tree Node Icon
+// ----------------------------------------
+.tree-node-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  color: var(--text-muted);
+}
+
+.tree-node.is-folder > .tree-node-content .tree-node-icon {
+  color: var(--warning);
+}
+
+// ----------------------------------------
+// Tree Node Title
+// ----------------------------------------
+.tree-node-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  .tree-node.is-selected > .tree-node-content & {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+
+  .tree-node.is-disabled > .tree-node-content & {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.tree-node-title-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ----------------------------------------
+// Tree Node Extra (Actions)
+// ----------------------------------------
+.tree-node-extra {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+
+  .tree-node-content:hover & {
+    opacity: 1;
+  }
+}
+
+.tree-node-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--primary);
+    background-color: var(--bg-tertiary);
+  }
+
+  &.tree-node-action-delete:hover {
+    color: var(--danger);
+    background-color: rgba(var(--danger-rgb), 0.1);
+  }
+}
+
+// ----------------------------------------
+// Tree Node Children
+// ----------------------------------------
+.tree-node-children {
+  display: none;
+
+  .tree-node.is-expanded > & {
+    display: block;
+  }
+}
+
+// ----------------------------------------
+// Tree with Lines
+// ----------------------------------------
+.tree-show-lines {
+  .tree-indent-unit {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background-color: var(--border-color);
+    }
+  }
+
+  .tree-node:last-child > .tree-node-content .tree-indent-unit::before {
+    height: 50%;
+  }
+
+  .tree-switcher::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    width: 12px;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+}
+
+// ----------------------------------------
+// Tree Draggable
+// ----------------------------------------
+.tree-draggable {
+  .tree-node-title {
+    cursor: grab;
+  }
+
+  .tree-node.is-dragging {
+    opacity: 0.5;
+  }
+
+  .tree-node.is-drag-over > .tree-node-content .tree-node-title {
+    background-color: rgba(var(--primary-rgb), 0.2);
+  }
+}
+
+.tree-drop-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary);
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+  }
+}
+
+// ----------------------------------------
+// Tree Directory Style
+// ----------------------------------------
+.tree-directory {
+  .tree-node-title {
+    padding: 0.375rem 0.75rem;
+  }
+
+  .tree-node.is-selected > .tree-node-content .tree-node-title {
+    color: #fff;
+    background-color: var(--primary);
+  }
+}
+
+// ----------------------------------------
+// Tree Block Node
+// ----------------------------------------
+.tree-block-node {
+  .tree-node-content {
+    display: flex;
+    width: 100%;
+  }
+
+  .tree-node-title {
+    flex: 1;
+  }
+
+  .tree-node.is-selected > .tree-node-content {
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+// ----------------------------------------
+// Tree Virtual (for large lists)
+// ----------------------------------------
+.tree-virtual {
+  position: relative;
+  overflow-y: auto;
+}
+
+.tree-virtual-list {
+  position: relative;
+}
+
+.tree-virtual-node {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+// ----------------------------------------
+// Tree Searchable
+// ----------------------------------------
+.tree-search {
+  margin-bottom: 0.5rem;
+}
+
+.tree-search-input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgba(var(--primary-rgb), 0.25);
+  }
+}
+
+.tree-search-highlight {
+  color: var(--primary);
+  font-weight: 600;
+  background-color: transparent;
+}
+
+// ----------------------------------------
+// Tree Empty
+// ----------------------------------------
+.tree-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+.tree-empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+.tree-empty-text {
+  font-size: 0.875rem;
+}
+
+// ----------------------------------------
+// Tree Sizes
+// ----------------------------------------
+.tree-sm {
+  .tree-indent-unit,
+  .tree-switcher {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tree-node-title {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.75rem;
+  }
+
+  .tree-node-icon {
+    font-size: 0.875rem;
+  }
+}
+
+.tree-lg {
+  .tree-indent-unit,
+  .tree-switcher {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tree-node-title {
+    padding: 0.375rem 0.625rem;
+    font-size: 1rem;
+  }
+
+  .tree-node-icon {
+    font-size: 1.25rem;
+  }
+}
+
+// ----------------------------------------
+// Tree Bordered
+// ----------------------------------------
+.tree-bordered {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// Tree Card Style
+// ----------------------------------------
+.tree-card {
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-sm;
+}
+
+.tree-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tree-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tree-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+// ----------------------------------------
+// Tree Scrollable
+// ----------------------------------------
+.tree-scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+// ----------------------------------------
+// Tree Loading State
+// ----------------------------------------
+.tree-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.tree-loading-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tree-loading-switcher,
+.tree-loading-icon,
+.tree-loading-title {
+  background-color: var(--bg-tertiary);
+  border-radius: $border-radius-sm;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.tree-loading-switcher {
+  width: 16px;
+  height: 16px;
+}
+
+.tree-loading-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.tree-loading-title {
+  flex: 1;
+  height: 16px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

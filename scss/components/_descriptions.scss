@@ -1,0 +1,453 @@
+// ========================================
+// ZenKit - Descriptions Component
+// Key-value pair display list
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Descriptions Container
+// ----------------------------------------
+.descriptions {
+  width: 100%;
+}
+
+// ----------------------------------------
+// Descriptions Header
+// ----------------------------------------
+.descriptions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.descriptions-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.descriptions-extra {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// ----------------------------------------
+// Descriptions Table (Default Layout)
+// ----------------------------------------
+.descriptions-view {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.descriptions-row {
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// ----------------------------------------
+// Descriptions Item
+// ----------------------------------------
+.descriptions-item {
+  padding: 0;
+  vertical-align: top;
+}
+
+.descriptions-item-label {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  white-space: nowrap;
+  width: 1%;
+}
+
+.descriptions-item-content {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+// ----------------------------------------
+// Descriptions Bordered
+// ----------------------------------------
+.descriptions-bordered {
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  .descriptions-row {
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .descriptions-item-label {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .descriptions-item-content {
+    border-right: 1px solid var(--border-color);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+// ----------------------------------------
+// Descriptions Colon
+// ----------------------------------------
+.descriptions-colon .descriptions-item-label::after {
+  content: ':';
+  margin-left: 0.25rem;
+}
+
+// ----------------------------------------
+// Descriptions Vertical Layout
+// ----------------------------------------
+.descriptions-vertical {
+  .descriptions-row {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .descriptions-item-label {
+    padding: 0.5rem 1rem;
+    width: auto;
+  }
+
+  .descriptions-item-content {
+    padding: 0.5rem 1rem;
+    padding-top: 0;
+  }
+
+  &.descriptions-bordered {
+    .descriptions-item-label {
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .descriptions-item-content {
+      border-right: none;
+    }
+  }
+}
+
+// ----------------------------------------
+// Descriptions Inline Layout
+// ----------------------------------------
+.descriptions-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .descriptions-view {
+    display: contents;
+  }
+
+  .descriptions-row {
+    display: contents;
+    border-bottom: none;
+  }
+
+  .descriptions-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .descriptions-item-label {
+    padding: 0;
+    background: transparent;
+  }
+
+  .descriptions-item-content {
+    padding: 0;
+  }
+}
+
+// ----------------------------------------
+// Descriptions Grid Layout
+// ----------------------------------------
+.descriptions-grid {
+  .descriptions-view {
+    display: grid;
+    gap: 0;
+  }
+
+  .descriptions-row {
+    display: contents;
+  }
+}
+
+// Column variations
+.descriptions-col-1 .descriptions-view {
+  grid-template-columns: auto 1fr;
+}
+
+.descriptions-col-2 .descriptions-view {
+  grid-template-columns: repeat(2, auto 1fr);
+}
+
+.descriptions-col-3 .descriptions-view {
+  grid-template-columns: repeat(3, auto 1fr);
+}
+
+.descriptions-col-4 .descriptions-view {
+  grid-template-columns: repeat(4, auto 1fr);
+}
+
+// ----------------------------------------
+// Descriptions Sizes
+// ----------------------------------------
+.descriptions-sm {
+  .descriptions-item-label,
+  .descriptions-item-content {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+.descriptions-lg {
+  .descriptions-item-label,
+  .descriptions-item-content {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Descriptions Label Alignment
+// ----------------------------------------
+.descriptions-label-left .descriptions-item-label {
+  text-align: left;
+}
+
+.descriptions-label-right .descriptions-item-label {
+  text-align: right;
+}
+
+.descriptions-label-center .descriptions-item-label {
+  text-align: center;
+}
+
+// ----------------------------------------
+// Descriptions Content Alignment
+// ----------------------------------------
+.descriptions-content-left .descriptions-item-content {
+  text-align: left;
+}
+
+.descriptions-content-right .descriptions-item-content {
+  text-align: right;
+}
+
+.descriptions-content-center .descriptions-item-content {
+  text-align: center;
+}
+
+// ----------------------------------------
+// Descriptions Card Style
+// ----------------------------------------
+.descriptions-card {
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-sm;
+
+  .descriptions-header {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+// ----------------------------------------
+// Descriptions Item Span
+// ----------------------------------------
+.descriptions-item-span-2 {
+  grid-column: span 2;
+}
+
+.descriptions-item-span-3 {
+  grid-column: span 3;
+}
+
+.descriptions-item-span-4 {
+  grid-column: span 4;
+}
+
+.descriptions-item-span-full {
+  grid-column: 1 / -1;
+}
+
+// ----------------------------------------
+// Descriptions Empty Value
+// ----------------------------------------
+.descriptions-item-empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+// ----------------------------------------
+// Descriptions Editable
+// ----------------------------------------
+.descriptions-editable {
+  .descriptions-item-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.descriptions-edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+
+  .descriptions-item-content:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.descriptions-item-editing {
+  .descriptions-item-content {
+    padding: 0.5rem;
+  }
+}
+
+.descriptions-edit-input {
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--primary);
+  border-radius: $border-radius-sm;
+  outline: none;
+}
+
+// ----------------------------------------
+// Descriptions Copy Button
+// ----------------------------------------
+.descriptions-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+
+  .descriptions-item-content:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  &.is-copied {
+    color: var(--success);
+  }
+}
+
+// ----------------------------------------
+// Descriptions Striped
+// ----------------------------------------
+.descriptions-striped {
+  .descriptions-row:nth-child(even) {
+    background-color: var(--bg-secondary);
+  }
+
+  .descriptions-row:nth-child(even) .descriptions-item-label {
+    background-color: var(--bg-tertiary);
+  }
+}
+
+// ----------------------------------------
+// Descriptions Compact
+// ----------------------------------------
+.descriptions-compact {
+  .descriptions-item-label,
+  .descriptions-item-content {
+    padding: 0.375rem 0.75rem;
+  }
+
+  .descriptions-item-label {
+    background-color: transparent;
+    font-weight: 600;
+  }
+}
+
+// ----------------------------------------
+// Descriptions Responsive
+// ----------------------------------------
+@media (max-width: 767.98px) {
+  .descriptions-col-2 .descriptions-view,
+  .descriptions-col-3 .descriptions-view,
+  .descriptions-col-4 .descriptions-view {
+    grid-template-columns: auto 1fr;
+  }
+
+  .descriptions-item-span-2,
+  .descriptions-item-span-3,
+  .descriptions-item-span-4 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .descriptions:not(.descriptions-inline) {
+    .descriptions-view {
+      display: block;
+    }
+
+    .descriptions-row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .descriptions-item-label {
+      width: auto;
+      border-right: none;
+    }
+
+    .descriptions-item-content {
+      border-right: none;
+    }
+  }
+}

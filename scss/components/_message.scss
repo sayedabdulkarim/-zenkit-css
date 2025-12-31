@@ -1,0 +1,412 @@
+// ========================================
+// ZenKit - Message Component
+// Global message alerts (toast-like)
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Message Container (holds all messages)
+// ----------------------------------------
+.message-container {
+  position: fixed;
+  z-index: $z-toast;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+// Position variants
+.message-container-top {
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.message-container-top-left {
+  top: 24px;
+  left: 24px;
+  align-items: flex-start;
+}
+
+.message-container-top-right {
+  top: 24px;
+  right: 24px;
+  align-items: flex-end;
+}
+
+.message-container-bottom {
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.message-container-bottom-left {
+  bottom: 24px;
+  left: 24px;
+  align-items: flex-start;
+}
+
+.message-container-bottom-right {
+  bottom: 24px;
+  right: 24px;
+  align-items: flex-end;
+}
+
+// ----------------------------------------
+// Message Item
+// ----------------------------------------
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border-radius: $border-radius;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+              0 3px 6px -4px rgba(0, 0, 0, 0.12),
+              0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  pointer-events: auto;
+  animation: message-fade-in 0.3s ease;
+}
+
+@keyframes message-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-leaving {
+  animation: message-fade-out 0.3s ease forwards;
+}
+
+@keyframes message-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+// ----------------------------------------
+// Message Icon
+// ----------------------------------------
+.message-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+// Type colors
+.message-info .message-icon {
+  color: var(--info);
+}
+
+.message-success .message-icon {
+  color: var(--success);
+}
+
+.message-warning .message-icon {
+  color: var(--warning);
+}
+
+.message-error .message-icon {
+  color: var(--danger);
+}
+
+.message-loading .message-icon {
+  color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ----------------------------------------
+// Message Content
+// ----------------------------------------
+.message-content {
+  flex: 1;
+  line-height: 1.5;
+}
+
+// ----------------------------------------
+// Message Close Button
+// ----------------------------------------
+.message-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+}
+
+// ----------------------------------------
+// Message Variants
+// ----------------------------------------
+// Filled / Solid background
+.message-filled {
+  color: #fff;
+
+  &.message-info {
+    background-color: var(--info);
+  }
+
+  &.message-success {
+    background-color: var(--success);
+  }
+
+  &.message-warning {
+    background-color: var(--warning);
+    color: var(--text-primary);
+  }
+
+  &.message-error {
+    background-color: var(--danger);
+  }
+
+  .message-icon {
+    color: inherit;
+  }
+
+  .message-close {
+    color: inherit;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+// Outlined / Bordered
+.message-outlined {
+  border: 1px solid var(--border-color);
+  box-shadow: $shadow-sm;
+
+  &.message-info {
+    border-color: var(--info);
+    background-color: rgba(var(--info-rgb), 0.1);
+  }
+
+  &.message-success {
+    border-color: var(--success);
+    background-color: rgba(var(--success-rgb), 0.1);
+  }
+
+  &.message-warning {
+    border-color: var(--warning);
+    background-color: rgba(var(--warning-rgb), 0.1);
+  }
+
+  &.message-error {
+    border-color: var(--danger);
+    background-color: rgba(var(--danger-rgb), 0.1);
+  }
+}
+
+// ----------------------------------------
+// Message with Progress
+// ----------------------------------------
+.message-with-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.message-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: currentColor;
+  opacity: 0.3;
+  animation: message-progress linear forwards;
+}
+
+@keyframes message-progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+// ----------------------------------------
+// Message with Action
+// ----------------------------------------
+.message-action {
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+}
+
+// ----------------------------------------
+// Message with Title
+// ----------------------------------------
+.message-with-title {
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .message-icon {
+    position: absolute;
+  }
+}
+
+.message-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-left: 1.5rem;
+}
+
+.message-with-title .message-content {
+  margin-left: 1.5rem;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Message Stacking
+// ----------------------------------------
+.message-stacked {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    height: 4px;
+    background-color: var(--bg-primary);
+    border-radius: 0 0 $border-radius $border-radius;
+    opacity: 0.6;
+    z-index: -1;
+  }
+
+  &::before {
+    bottom: -4px;
+  }
+
+  &::after {
+    bottom: -8px;
+    left: 16px;
+    right: 16px;
+    opacity: 0.3;
+  }
+}
+
+// ----------------------------------------
+// Message Dark Theme
+// ----------------------------------------
+.message-dark {
+  background-color: #1f1f1f;
+  color: rgba(255, 255, 255, 0.85);
+
+  .message-close {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// ----------------------------------------
+// Message Compact
+// ----------------------------------------
+.message-compact {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+
+  .message-icon {
+    font-size: 0.875rem;
+  }
+}
+
+// ----------------------------------------
+// Message Max Width
+// ----------------------------------------
+.message {
+  max-width: 400px;
+}
+
+.message-wide {
+  max-width: 600px;
+}
+
+.message-full {
+  max-width: calc(100vw - 48px);
+}
+
+// ----------------------------------------
+// Message Responsive
+// ----------------------------------------
+@media (max-width: 575.98px) {
+  .message-container {
+    left: 12px;
+    right: 12px;
+    transform: none;
+  }
+
+  .message-container-top,
+  .message-container-top-left,
+  .message-container-top-right {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    align-items: stretch;
+  }
+
+  .message-container-bottom,
+  .message-container-bottom-left,
+  .message-container-bottom-right {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    align-items: stretch;
+  }
+
+  .message {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "zenkit",
+  "version": "1.0.0",
+  "description": "A minimal, modern CSS framework for peaceful development",
+  "main": "dist/zenkit.css",
+  "scripts": {
+    "build": "sass scss/zenkit.scss dist/zenkit.css --style=expanded",
+    "build:min": "sass scss/zenkit.scss dist/zenkit.min.css --style=compressed",
+    "watch": "sass --watch scss/zenkit.scss dist/zenkit.css",
+    "dev": "concurrently \"npm run watch\" \"npx live-server . --port=3333 --open=docs/index.html\"",
+    "clean": "rm -rf dist/*.css dist/*.map",
+    "prepare": "npm run build && npm run build:min"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "scss",
+    "sass",
+    "responsive",
+    "utilities",
+    "components",
+    "grid",
+    "flexbox",
+    "dark-mode"
+  ],
+  "author": "Sayed Abdul Karim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sayedabdulkarim/zenkit"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0",
+    "concurrently": "^8.2.0",
+    "live-server": "^1.2.2"
+  },
+  "files": [
+    "dist",
+    "scss"
+  ]
+}

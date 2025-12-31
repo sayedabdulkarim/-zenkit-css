@@ -1,0 +1,317 @@
+// ========================================
+// ZenKit - Tags
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Tag
+// ----------------------------------------
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  color: var(--gray-700);
+  background-color: var(--gray-100);
+  border: $border-width solid transparent;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: all var(--transition-fast) ease-in-out;
+}
+
+// ----------------------------------------
+// Tag Sizes
+// ----------------------------------------
+.tag-sm {
+  padding: 0.125rem 0.375rem;
+  font-size: 0.625rem;
+}
+
+.tag-lg {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-sm);
+}
+
+// ----------------------------------------
+// Tag Colors
+// ----------------------------------------
+.tag-primary {
+  color: var(--primary-700);
+  background-color: var(--primary-50);
+}
+
+.tag-secondary {
+  color: var(--gray-700);
+  background-color: var(--gray-100);
+}
+
+.tag-success {
+  color: $success-dark;
+  background-color: $success-light;
+}
+
+.tag-danger {
+  color: $danger-dark;
+  background-color: $danger-light;
+}
+
+.tag-warning {
+  color: $warning-dark;
+  background-color: $warning-light;
+}
+
+.tag-info {
+  color: $info-dark;
+  background-color: $info-light;
+}
+
+.tag-dark {
+  color: var(--white);
+  background-color: var(--gray-800);
+}
+
+.tag-light {
+  color: var(--gray-700);
+  background-color: var(--gray-50);
+  border-color: var(--gray-200);
+}
+
+// ----------------------------------------
+// Solid Tags
+// ----------------------------------------
+.tag-solid-primary {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.tag-solid-success {
+  color: var(--white);
+  background-color: $success;
+}
+
+.tag-solid-danger {
+  color: var(--white);
+  background-color: $danger;
+}
+
+.tag-solid-warning {
+  color: var(--gray-900);
+  background-color: $warning;
+}
+
+.tag-solid-info {
+  color: var(--white);
+  background-color: $info;
+}
+
+// ----------------------------------------
+// Outlined Tags
+// ----------------------------------------
+.tag-outline-primary {
+  color: var(--primary);
+  background-color: transparent;
+  border-color: var(--primary);
+}
+
+.tag-outline-success {
+  color: $success;
+  background-color: transparent;
+  border-color: $success;
+}
+
+.tag-outline-danger {
+  color: $danger;
+  background-color: transparent;
+  border-color: $danger;
+}
+
+.tag-outline-warning {
+  color: $warning-dark;
+  background-color: transparent;
+  border-color: $warning;
+}
+
+.tag-outline-info {
+  color: $info;
+  background-color: transparent;
+  border-color: $info;
+}
+
+.tag-outline-dark {
+  color: var(--gray-800);
+  background-color: transparent;
+  border-color: var(--gray-800);
+}
+
+// ----------------------------------------
+// Rounded Tags (Pill)
+// ----------------------------------------
+.tag-rounded {
+  border-radius: var(--radius-full);
+}
+
+// ----------------------------------------
+// Tag with Icon
+// ----------------------------------------
+.tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ----------------------------------------
+// Closable Tag
+// ----------------------------------------
+.tag-closable {
+  padding-right: 0.25rem;
+}
+
+.tag-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.125rem;
+  padding: 0;
+  color: currentColor;
+  opacity: 0.6;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity var(--transition-fast) ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}
+
+// ----------------------------------------
+// Tag Group
+// ----------------------------------------
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-group-sm {
+  gap: 0.25rem;
+}
+
+// ----------------------------------------
+// Clickable/Interactive Tag
+// ----------------------------------------
+.tag-clickable {
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ----------------------------------------
+// Checkable Tag
+// ----------------------------------------
+.tag-checkable {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    border-color: var(--primary);
+  }
+}
+
+.tag-checkable-checked {
+  color: var(--white);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+// ----------------------------------------
+// Tag with Dot/Status
+// ----------------------------------------
+.tag-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  &::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+}
+
+.tag-dot-success::before {
+  background-color: $success;
+}
+
+.tag-dot-danger::before {
+  background-color: $danger;
+}
+
+.tag-dot-warning::before {
+  background-color: $warning;
+}
+
+.tag-dot-info::before {
+  background-color: $info;
+}
+
+// ----------------------------------------
+// Borderless Tag
+// ----------------------------------------
+.tag-borderless {
+  border-color: transparent;
+  background-color: transparent;
+  padding: 0.25rem 0;
+}
+
+// ----------------------------------------
+// Tag with Avatar
+// ----------------------------------------
+.tag-avatar {
+  padding-left: 0.125rem;
+
+  img {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.tag-lg.tag-avatar img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.tag-sm.tag-avatar img {
+  width: 1rem;
+  height: 1rem;
+}

@@ -1,0 +1,194 @@
+// ========================================
+// ZenKit - Color Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Text Colors
+// ----------------------------------------
+.text-primary { color: var(--primary); }
+.text-primary-50 { color: var(--primary-50); }
+.text-primary-100 { color: var(--primary-100); }
+.text-primary-200 { color: var(--primary-200); }
+.text-primary-300 { color: var(--primary-300); }
+.text-primary-400 { color: var(--primary-400); }
+.text-primary-500 { color: var(--primary-500); }
+.text-primary-600 { color: var(--primary-600); }
+.text-primary-700 { color: var(--primary-700); }
+.text-primary-800 { color: var(--primary-800); }
+.text-primary-900 { color: var(--primary-900); }
+
+.text-gray-50 { color: var(--gray-50); }
+.text-gray-100 { color: var(--gray-100); }
+.text-gray-200 { color: var(--gray-200); }
+.text-gray-300 { color: var(--gray-300); }
+.text-gray-400 { color: var(--gray-400); }
+.text-gray-500 { color: var(--gray-500); }
+.text-gray-600 { color: var(--gray-600); }
+.text-gray-700 { color: var(--gray-700); }
+.text-gray-800 { color: var(--gray-800); }
+.text-gray-900 { color: var(--gray-900); }
+
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-danger { color: var(--danger); }
+.text-info { color: var(--info); }
+
+.text-white { color: var(--white); }
+.text-black { color: var(--black); }
+
+// Semantic text colors
+.text-body { color: var(--text); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-link { color: var(--link); }
+
+.text-inherit { color: inherit; }
+.text-current { color: currentColor; }
+.text-transparent { color: transparent; }
+
+// ----------------------------------------
+// Background Colors
+// ----------------------------------------
+.bg-primary { background-color: var(--primary); }
+.bg-primary-50 { background-color: var(--primary-50); }
+.bg-primary-100 { background-color: var(--primary-100); }
+.bg-primary-200 { background-color: var(--primary-200); }
+.bg-primary-300 { background-color: var(--primary-300); }
+.bg-primary-400 { background-color: var(--primary-400); }
+.bg-primary-500 { background-color: var(--primary-500); }
+.bg-primary-600 { background-color: var(--primary-600); }
+.bg-primary-700 { background-color: var(--primary-700); }
+.bg-primary-800 { background-color: var(--primary-800); }
+.bg-primary-900 { background-color: var(--primary-900); }
+
+.bg-gray-50 { background-color: var(--gray-50); }
+.bg-gray-100 { background-color: var(--gray-100); }
+.bg-gray-200 { background-color: var(--gray-200); }
+.bg-gray-300 { background-color: var(--gray-300); }
+.bg-gray-400 { background-color: var(--gray-400); }
+.bg-gray-500 { background-color: var(--gray-500); }
+.bg-gray-600 { background-color: var(--gray-600); }
+.bg-gray-700 { background-color: var(--gray-700); }
+.bg-gray-800 { background-color: var(--gray-800); }
+.bg-gray-900 { background-color: var(--gray-900); }
+
+.bg-success { background-color: var(--success); }
+.bg-success-light { background-color: var(--success-light); }
+.bg-warning { background-color: var(--warning); }
+.bg-warning-light { background-color: var(--warning-light); }
+.bg-danger { background-color: var(--danger); }
+.bg-danger-light { background-color: var(--danger-light); }
+.bg-info { background-color: var(--info); }
+.bg-info-light { background-color: var(--info-light); }
+
+.bg-white { background-color: var(--white); }
+.bg-black { background-color: var(--black); }
+
+// Semantic background colors
+.bg-body { background-color: var(--bg); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-card { background-color: var(--bg-card); }
+.bg-muted { background-color: var(--bg-muted); }
+
+.bg-transparent { background-color: transparent; }
+.bg-inherit { background-color: inherit; }
+
+// ----------------------------------------
+// Background Opacity
+// ----------------------------------------
+.bg-opacity-10 { --bg-opacity: 0.1; }
+.bg-opacity-25 { --bg-opacity: 0.25; }
+.bg-opacity-50 { --bg-opacity: 0.5; }
+.bg-opacity-75 { --bg-opacity: 0.75; }
+.bg-opacity-100 { --bg-opacity: 1; }
+
+// ----------------------------------------
+// Text Opacity
+// ----------------------------------------
+.text-opacity-25 { opacity: 0.25; }
+.text-opacity-50 { opacity: 0.5; }
+.text-opacity-75 { opacity: 0.75; }
+.text-opacity-100 { opacity: 1; }
+
+// ----------------------------------------
+// Gradient Backgrounds
+// ----------------------------------------
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, var(--gray-700), var(--gray-900));
+}
+
+.bg-gradient-light {
+  background: linear-gradient(135deg, var(--gray-50), var(--gray-200));
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, $success, darken($success, 15%));
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(135deg, $danger, darken($danger, 15%));
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, $warning, darken($warning, 15%));
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, $info, darken($info, 15%));
+}
+
+// Gradient directions
+.bg-gradient-to-t { background-image: linear-gradient(to top, var(--gradient-stops)); }
+.bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--gradient-stops)); }
+.bg-gradient-to-r { background-image: linear-gradient(to right, var(--gradient-stops)); }
+.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--gradient-stops)); }
+.bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--gradient-stops)); }
+.bg-gradient-to-bl { background-image: linear-gradient(to bottom left, var(--gradient-stops)); }
+.bg-gradient-to-l { background-image: linear-gradient(to left, var(--gradient-stops)); }
+.bg-gradient-to-tl { background-image: linear-gradient(to top left, var(--gradient-stops)); }
+
+// Gradient color stops
+.from-primary { --gradient-from: var(--primary); --gradient-stops: var(--gradient-from), var(--gradient-to, transparent); }
+.from-gray-900 { --gradient-from: var(--gray-900); --gradient-stops: var(--gradient-from), var(--gradient-to, transparent); }
+.from-transparent { --gradient-from: transparent; --gradient-stops: var(--gradient-from), var(--gradient-to, transparent); }
+
+.to-primary { --gradient-to: var(--primary); }
+.to-gray-900 { --gradient-to: var(--gray-900); }
+.to-transparent { --gradient-to: transparent; }
+
+// ----------------------------------------
+// Hover Colors
+// ----------------------------------------
+.hover\:text-primary:hover { color: var(--primary); }
+.hover\:text-white:hover { color: var(--white); }
+.hover\:text-gray-900:hover { color: var(--gray-900); }
+
+.hover\:bg-primary:hover { background-color: var(--primary); }
+.hover\:bg-primary-700:hover { background-color: var(--primary-700); }
+.hover\:bg-gray-100:hover { background-color: var(--gray-100); }
+.hover\:bg-gray-200:hover { background-color: var(--gray-200); }
+
+// ----------------------------------------
+// Focus Colors
+// ----------------------------------------
+.focus\:text-primary:focus { color: var(--primary); }
+.focus\:bg-primary:focus { background-color: var(--primary); }
+
+// ----------------------------------------
+// Dark Mode Specific
+// ----------------------------------------
+[data-theme="dark"] {
+  .dark\:text-white { color: var(--white); }
+  .dark\:text-gray-100 { color: var(--gray-100); }
+  .dark\:text-gray-400 { color: var(--gray-400); }
+
+  .dark\:bg-gray-800 { background-color: var(--gray-800); }
+  .dark\:bg-gray-900 { background-color: var(--gray-900); }
+}

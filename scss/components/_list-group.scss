@@ -1,0 +1,227 @@
+// ========================================
+// ZenKit - List Group
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base List Group
+// ----------------------------------------
+.list-group {
+  --list-group-color: var(--text);
+  --list-group-bg: var(--bg-card);
+  --list-group-border-color: var(--border);
+  --list-group-border-width: #{$border-width};
+  --list-group-border-radius: var(--radius-lg);
+  --list-group-item-padding-x: 1rem;
+  --list-group-item-padding-y: 0.75rem;
+  --list-group-action-color: var(--text);
+  --list-group-action-hover-color: var(--text);
+  --list-group-action-hover-bg: var(--bg-muted);
+  --list-group-action-active-color: var(--text);
+  --list-group-action-active-bg: var(--gray-200);
+  --list-group-disabled-color: var(--text-muted);
+  --list-group-disabled-bg: var(--bg-card);
+  --list-group-active-color: var(--white);
+  --list-group-active-bg: var(--primary);
+  --list-group-active-border-color: var(--primary);
+
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: var(--list-group-border-radius);
+}
+
+// ----------------------------------------
+// List Group Item
+// ----------------------------------------
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: var(--list-group-item-padding-y) var(--list-group-item-padding-x);
+  color: var(--list-group-color);
+  text-decoration: none;
+  background-color: var(--list-group-bg);
+  border: var(--list-group-border-width) solid var(--list-group-border-color);
+
+  &:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  &:last-child {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: var(--list-group-disabled-color);
+    pointer-events: none;
+    background-color: var(--list-group-disabled-bg);
+  }
+
+  &.active {
+    z-index: 2;
+    color: var(--list-group-active-color);
+    background-color: var(--list-group-active-bg);
+    border-color: var(--list-group-active-border-color);
+  }
+
+  & + & {
+    border-top-width: 0;
+
+    &.active {
+      margin-top: calc(-1 * var(--list-group-border-width));
+      border-top-width: var(--list-group-border-width);
+    }
+  }
+}
+
+// ----------------------------------------
+// List Group Item Action (Clickable)
+// ----------------------------------------
+.list-group-item-action {
+  width: 100%;
+  color: var(--list-group-action-color);
+  text-align: inherit;
+  cursor: pointer;
+  transition: color $transition-fast ease-in-out,
+              background-color $transition-fast ease-in-out,
+              border-color $transition-fast ease-in-out;
+
+  &:hover,
+  &:focus {
+    z-index: 1;
+    color: var(--list-group-action-hover-color);
+    text-decoration: none;
+    background-color: var(--list-group-action-hover-bg);
+  }
+
+  &:active {
+    color: var(--list-group-action-active-color);
+    background-color: var(--list-group-action-active-bg);
+  }
+}
+
+// ----------------------------------------
+// Flush (No outer borders/radius)
+// ----------------------------------------
+.list-group-flush {
+  border-radius: 0;
+
+  > .list-group-item {
+    border-width: 0 0 var(--list-group-border-width);
+
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
+}
+
+// ----------------------------------------
+// Numbered List Group
+// ----------------------------------------
+.list-group-numbered {
+  list-style-type: none;
+  counter-reset: section;
+
+  > .list-group-item::before {
+    content: counters(section, ".") ". ";
+    counter-increment: section;
+  }
+}
+
+// ----------------------------------------
+// Horizontal List Group
+// ----------------------------------------
+.list-group-horizontal {
+  flex-direction: row;
+
+  > .list-group-item {
+    &:first-child:not(:last-child) {
+      border-bottom-left-radius: var(--list-group-border-radius);
+      border-top-right-radius: 0;
+    }
+
+    &:last-child:not(:first-child) {
+      border-top-right-radius: var(--list-group-border-radius);
+      border-bottom-left-radius: 0;
+    }
+
+    &.active {
+      margin-top: 0;
+    }
+
+    + .list-group-item {
+      border-top-width: var(--list-group-border-width);
+      border-left-width: 0;
+
+      &.active {
+        margin-left: calc(-1 * var(--list-group-border-width));
+        border-left-width: var(--list-group-border-width);
+      }
+    }
+  }
+}
+
+// ----------------------------------------
+// Contextual Variants
+// ----------------------------------------
+.list-group-item-primary {
+  --list-group-color: var(--primary-900);
+  --list-group-bg: var(--primary-50);
+  --list-group-border-color: var(--primary-200);
+  --list-group-action-hover-color: var(--primary-900);
+  --list-group-action-hover-bg: var(--primary-100);
+  --list-group-action-active-bg: var(--primary-200);
+}
+
+.list-group-item-secondary {
+  --list-group-color: var(--gray-800);
+  --list-group-bg: var(--gray-100);
+  --list-group-border-color: var(--gray-200);
+  --list-group-action-hover-bg: var(--gray-200);
+}
+
+.list-group-item-success {
+  --list-group-color: #{$success-dark};
+  --list-group-bg: var(--success-light);
+  --list-group-border-color: #{$success};
+  --list-group-action-hover-bg: #{rgba($success, 0.2)};
+}
+
+.list-group-item-danger {
+  --list-group-color: #{$danger-dark};
+  --list-group-bg: var(--danger-light);
+  --list-group-border-color: #{$danger};
+  --list-group-action-hover-bg: #{rgba($danger, 0.2)};
+}
+
+.list-group-item-warning {
+  --list-group-color: #{$warning-dark};
+  --list-group-bg: var(--warning-light);
+  --list-group-border-color: #{$warning};
+  --list-group-action-hover-bg: #{rgba($warning, 0.2)};
+}
+
+.list-group-item-info {
+  --list-group-color: #{$info-dark};
+  --list-group-bg: var(--info-light);
+  --list-group-border-color: #{$info};
+  --list-group-action-hover-bg: #{rgba($info, 0.2)};
+}
+
+.list-group-item-light {
+  --list-group-color: var(--gray-700);
+  --list-group-bg: var(--gray-50);
+  --list-group-border-color: var(--gray-200);
+}
+
+.list-group-item-dark {
+  --list-group-color: var(--white);
+  --list-group-bg: var(--gray-800);
+  --list-group-border-color: var(--gray-700);
+  --list-group-action-hover-bg: var(--gray-700);
+}

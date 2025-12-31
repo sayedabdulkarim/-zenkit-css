@@ -1,0 +1,174 @@
+// ========================================
+// ZenKit - Functions
+// ========================================
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:string';
+@use 'variables' as *;
+
+// ----------------------------------------
+// Color Functions
+// ----------------------------------------
+
+// Get color from map
+@function color($name) {
+  @if map.has-key($colors, $name) {
+    @return map.get($colors, $name);
+  }
+  @warn "Color '#{$name}' not found in $colors map.";
+  @return null;
+}
+
+// Lighten a color
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+// Darken a color
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+// Calculate contrast color (black or white)
+@function contrast-color($background) {
+  $luminance: color.lightness($background);
+  @if $luminance > 50% {
+    @return $black;
+  } @else {
+    @return $white;
+  }
+}
+
+// ----------------------------------------
+// Spacing Functions
+// ----------------------------------------
+
+// Get spacing value from map
+@function spacing($key) {
+  @if map.has-key($spacers, $key) {
+    @return map.get($spacers, $key);
+  }
+  @warn "Spacing '#{$key}' not found in $spacers map.";
+  @return null;
+}
+
+// ----------------------------------------
+// Breakpoint Functions
+// ----------------------------------------
+
+// Get breakpoint value
+@function breakpoint($name) {
+  @if map.has-key($breakpoints, $name) {
+    @return map.get($breakpoints, $name);
+  }
+  @warn "Breakpoint '#{$name}' not found in $breakpoints map.";
+  @return null;
+}
+
+// Get next breakpoint
+@function breakpoint-next($name) {
+  $breakpoint-names: map.keys($breakpoints);
+  $n: list.index($breakpoint-names, $name);
+  @if $n and $n < list.length($breakpoint-names) {
+    @return list.nth($breakpoint-names, $n + 1);
+  }
+  @return null;
+}
+
+// ----------------------------------------
+// Math Functions
+// ----------------------------------------
+
+// Convert px to rem
+@function rem($pixels, $base: 16) {
+  @return math.div($pixels, $base) * 1rem;
+}
+
+// Convert px to em
+@function em($pixels, $base: 16) {
+  @return math.div($pixels, $base) * 1em;
+}
+
+// Calculate percentage
+@function pct($part, $whole) {
+  @return math.percentage(math.div($part, $whole));
+}
+
+// Strip unit from value
+@function strip-unit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+// ----------------------------------------
+// String Functions
+// ----------------------------------------
+
+// Replace string
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// ----------------------------------------
+// List Functions
+// ----------------------------------------
+
+// Check if list contains value
+@function list-contains($list, $value) {
+  @return list.index($list, $value) != null;
+}
+
+// ----------------------------------------
+// Map Functions
+// ----------------------------------------
+
+// Deep get from nested map
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    @if type-of($map) != 'map' {
+      @return null;
+    }
+    $map: map.get($map, $key);
+  }
+  @return $map;
+}
+
+// Merge multiple maps
+@function map-collect($maps...) {
+  $collection: ();
+
+  @each $map in $maps {
+    $collection: map.merge($collection, $map);
+  }
+
+  @return $collection;
+}
+
+// ----------------------------------------
+// Z-Index Function
+// ----------------------------------------
+
+$z-indexes: (
+  dropdown: $z-dropdown,
+  sticky: $z-sticky,
+  fixed: $z-fixed,
+  modal-backdrop: $z-modal-backdrop,
+  modal: $z-modal,
+  tooltip: $z-tooltip
+);
+
+@function z($name) {
+  @if map.has-key($z-indexes, $name) {
+    @return map.get($z-indexes, $name);
+  }
+  @warn "Z-index '#{$name}' not found.";
+  @return null;
+}

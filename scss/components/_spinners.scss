@@ -1,0 +1,229 @@
+// ========================================
+// ZenKit - Spinners
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Spinner Border (Default)
+// ----------------------------------------
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -0.125em;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ----------------------------------------
+// Spinner Grow
+// ----------------------------------------
+.spinner-grow {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  animation: spinner-grow 0.75s linear infinite;
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+// ----------------------------------------
+// Spinner Sizes
+// ----------------------------------------
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2em;
+}
+
+.spinner-grow-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.spinner-border-lg {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
+}
+
+.spinner-grow-lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+// ----------------------------------------
+// Spinner Colors
+// ----------------------------------------
+.spinner-primary {
+  color: var(--primary);
+}
+
+.spinner-secondary {
+  color: var(--gray-600);
+}
+
+.spinner-success {
+  color: var(--success);
+}
+
+.spinner-danger {
+  color: var(--danger);
+}
+
+.spinner-warning {
+  color: var(--warning);
+}
+
+.spinner-info {
+  color: var(--info);
+}
+
+.spinner-light {
+  color: var(--gray-100);
+}
+
+.spinner-dark {
+  color: var(--gray-800);
+}
+
+.spinner-white {
+  color: var(--white);
+}
+
+// ----------------------------------------
+// Dots Spinner
+// ----------------------------------------
+.spinner-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+
+  span {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: currentColor;
+    border-radius: 50%;
+    animation: spinner-dots 1.4s infinite ease-in-out both;
+
+    &:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+  }
+}
+
+@keyframes spinner-dots {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+// ----------------------------------------
+// Pulse Spinner
+// ----------------------------------------
+.spinner-pulse {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: spinner-pulse 1s ease-in-out infinite;
+}
+
+@keyframes spinner-pulse {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+// ----------------------------------------
+// Ring Spinner
+// ----------------------------------------
+.spinner-ring {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--gray-200);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+// ----------------------------------------
+// Loading Overlay
+// ----------------------------------------
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+}
+
+.loading-overlay-light {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+// ----------------------------------------
+// Button Spinner
+// ----------------------------------------
+.btn .spinner-border,
+.btn .spinner-grow {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+  vertical-align: middle;
+}
+
+.btn-sm .spinner-border,
+.btn-sm .spinner-grow {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.btn-lg .spinner-border,
+.btn-lg .spinner-grow {
+  width: 1.25rem;
+  height: 1.25rem;
+}

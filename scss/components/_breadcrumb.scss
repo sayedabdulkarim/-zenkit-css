@@ -1,0 +1,102 @@
+// ========================================
+// ZenKit - Breadcrumb
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Breadcrumb Container
+// ----------------------------------------
+.breadcrumb {
+  --breadcrumb-padding-x: 0;
+  --breadcrumb-padding-y: 0;
+  --breadcrumb-margin-bottom: 1rem;
+  --breadcrumb-divider-color: var(--text-muted);
+  --breadcrumb-item-padding-x: 0.5rem;
+  --breadcrumb-item-active-color: var(--text-muted);
+
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--breadcrumb-padding-y) var(--breadcrumb-padding-x);
+  margin-bottom: var(--breadcrumb-margin-bottom);
+  font-size: var(--text-sm);
+  list-style: none;
+  background-color: transparent;
+  border-radius: var(--radius);
+}
+
+// ----------------------------------------
+// Breadcrumb Item
+// ----------------------------------------
+.breadcrumb-item {
+  + .breadcrumb-item {
+    padding-left: var(--breadcrumb-item-padding-x);
+
+    &::before {
+      float: left;
+      padding-right: var(--breadcrumb-item-padding-x);
+      color: var(--breadcrumb-divider-color);
+      content: var(--breadcrumb-divider, "/");
+    }
+  }
+
+  &.active {
+    color: var(--breadcrumb-item-active-color);
+  }
+
+  a {
+    color: var(--link);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+  }
+}
+
+// ----------------------------------------
+// Breadcrumb Divider Variants
+// ----------------------------------------
+
+// Arrow divider
+.breadcrumb-arrow {
+  --breadcrumb-divider: "›";
+}
+
+// Chevron divider
+.breadcrumb-chevron {
+  --breadcrumb-divider: "»";
+}
+
+// Pipe divider
+.breadcrumb-pipe {
+  --breadcrumb-divider: "|";
+}
+
+// Dot divider
+.breadcrumb-dot {
+  --breadcrumb-divider: "•";
+}
+
+// ----------------------------------------
+// Breadcrumb with Background
+// ----------------------------------------
+.breadcrumb-bg {
+  --breadcrumb-padding-x: 1rem;
+  --breadcrumb-padding-y: 0.75rem;
+  background-color: var(--bg-muted);
+}
+
+// ----------------------------------------
+// Breadcrumb Sizes
+// ----------------------------------------
+.breadcrumb-sm {
+  font-size: var(--text-xs);
+  --breadcrumb-item-padding-x: 0.375rem;
+}
+
+.breadcrumb-lg {
+  font-size: var(--text-base);
+  --breadcrumb-item-padding-x: 0.625rem;
+}

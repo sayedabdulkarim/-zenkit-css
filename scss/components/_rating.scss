@@ -1,0 +1,314 @@
+// ========================================
+// ZenKit - Rating / Stars
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Rating Container
+// ----------------------------------------
+.rating {
+  --rating-size: 1.5rem;
+  --rating-gap: 0.25rem;
+  --rating-color: var(--gray-300);
+  --rating-active-color: #FBBF24; // Amber/Gold
+  --rating-hover-color: #F59E0B;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rating-gap);
+}
+
+// ----------------------------------------
+// Rating Item (Star)
+// ----------------------------------------
+.rating-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rating-size);
+  height: var(--rating-size);
+  color: var(--rating-color);
+  cursor: pointer;
+  transition: color var(--transition-fast) ease-in-out,
+              transform var(--transition-fast) ease-in-out;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// Active/Filled State
+.rating-item-active,
+.rating-item-filled {
+  color: var(--rating-active-color);
+}
+
+// Half-filled (for half-star ratings)
+.rating-item-half {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  svg:first-child {
+    color: var(--rating-active-color);
+    clip-path: inset(0 50% 0 0);
+  }
+
+  svg:last-child {
+    position: absolute;
+    color: var(--rating-color);
+    clip-path: inset(0 0 0 50%);
+  }
+}
+
+// ----------------------------------------
+// Rating Sizes
+// ----------------------------------------
+.rating-xs {
+  --rating-size: 0.875rem;
+  --rating-gap: 0.125rem;
+}
+
+.rating-sm {
+  --rating-size: 1.125rem;
+  --rating-gap: 0.125rem;
+}
+
+.rating-md {
+  --rating-size: 1.5rem;
+  --rating-gap: 0.25rem;
+}
+
+.rating-lg {
+  --rating-size: 2rem;
+  --rating-gap: 0.375rem;
+}
+
+.rating-xl {
+  --rating-size: 2.5rem;
+  --rating-gap: 0.5rem;
+}
+
+// ----------------------------------------
+// Interactive Rating (Hover Effect)
+// ----------------------------------------
+.rating-interactive {
+  // On hover, fill all items up to and including hovered item
+  .rating-item:hover,
+  .rating-item:hover ~ .rating-item-reverse,
+  &:hover .rating-item:not(:hover):not(.rating-item ~ .rating-item) {
+    color: var(--rating-hover-color);
+  }
+}
+
+// For right-to-left hover fill effect
+.rating-interactive:not(:hover) .rating-item-active {
+  color: var(--rating-active-color);
+}
+
+// ----------------------------------------
+// Rating with Input (For Forms)
+// ----------------------------------------
+.rating-input {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: var(--rating-gap);
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: inline-flex;
+    width: var(--rating-size);
+    height: var(--rating-size);
+    color: var(--rating-color);
+    cursor: pointer;
+    transition: color var(--transition-fast) ease-in-out;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    &:hover,
+    &:hover ~ label {
+      color: var(--rating-hover-color);
+    }
+  }
+
+  input:checked ~ label {
+    color: var(--rating-active-color);
+  }
+}
+
+// ----------------------------------------
+// Rating Read-only
+// ----------------------------------------
+.rating-readonly {
+  .rating-item {
+    cursor: default;
+    pointer-events: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// ----------------------------------------
+// Rating Color Variants
+// ----------------------------------------
+.rating-primary {
+  --rating-active-color: var(--primary);
+  --rating-hover-color: var(--primary-600);
+}
+
+.rating-success {
+  --rating-active-color: var(--success);
+  --rating-hover-color: #{$success-dark};
+}
+
+.rating-danger {
+  --rating-active-color: var(--danger);
+  --rating-hover-color: #{$danger-dark};
+}
+
+.rating-info {
+  --rating-active-color: var(--info);
+  --rating-hover-color: #{$info-dark};
+}
+
+// ----------------------------------------
+// Rating with Count
+// ----------------------------------------
+.rating-with-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-count {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.rating-average {
+  font-size: var(--text-base);
+  font-weight: $font-weight-semibold;
+  color: var(--text);
+}
+
+// ----------------------------------------
+// Rating Display (Show Value)
+// ----------------------------------------
+.rating-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--gray-100);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--rating-active-color);
+    fill: currentColor;
+  }
+}
+
+// ----------------------------------------
+// Rating Bar (Progress Style)
+// ----------------------------------------
+.rating-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--text-sm);
+}
+
+.rating-bar-label {
+  flex-shrink: 0;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--rating-active-color);
+    fill: currentColor;
+  }
+}
+
+.rating-bar-track {
+  flex: 1;
+  height: 0.5rem;
+  background-color: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background-color: var(--rating-active-color);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow) ease-in-out;
+}
+
+.rating-bar-count {
+  flex-shrink: 0;
+  width: 2.5rem;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Emoji Rating
+// ----------------------------------------
+.rating-emoji {
+  --rating-size: 2rem;
+
+  .rating-item {
+    font-size: var(--rating-size);
+    opacity: 0.4;
+    filter: grayscale(100%);
+    transition: opacity var(--transition-fast) ease-in-out,
+                filter var(--transition-fast) ease-in-out,
+                transform var(--transition-fast) ease-in-out;
+
+    &:hover,
+    &.rating-item-active {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+  }
+}

@@ -1,0 +1,67 @@
+// ========================================
+// ZenKit - Shadow Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Box Shadow
+// ----------------------------------------
+.shadow-none { box-shadow: none; }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+// Inner shadow
+.shadow-inner {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+// ----------------------------------------
+// Colored Shadows
+// ----------------------------------------
+.shadow-primary {
+  box-shadow: 0 4px 14px 0 rgba($primary, 0.25);
+}
+
+.shadow-success {
+  box-shadow: 0 4px 14px 0 rgba($success, 0.25);
+}
+
+.shadow-danger {
+  box-shadow: 0 4px 14px 0 rgba($danger, 0.25);
+}
+
+.shadow-warning {
+  box-shadow: 0 4px 14px 0 rgba($warning, 0.25);
+}
+
+// ----------------------------------------
+// Hover Shadows
+// ----------------------------------------
+.hover\:shadow-none:hover { box-shadow: none; }
+.hover\:shadow-sm:hover { box-shadow: var(--shadow-sm); }
+.hover\:shadow:hover { box-shadow: var(--shadow); }
+.hover\:shadow-md:hover { box-shadow: var(--shadow-md); }
+.hover\:shadow-lg:hover { box-shadow: var(--shadow-lg); }
+.hover\:shadow-xl:hover { box-shadow: var(--shadow-xl); }
+
+// ----------------------------------------
+// Drop Shadow (for images/SVGs)
+// ----------------------------------------
+.drop-shadow-none { filter: drop-shadow(0 0 0 transparent); }
+.drop-shadow-sm { filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05)); }
+.drop-shadow { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06)); }
+.drop-shadow-md { filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06)); }
+.drop-shadow-lg { filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1)); }
+.drop-shadow-xl { filter: drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08)); }
+
+// ----------------------------------------
+// Transition for Shadows
+// ----------------------------------------
+.transition-shadow {
+  transition: box-shadow var(--transition-base) ease-in-out;
+}

@@ -1,0 +1,253 @@
+// ========================================
+// ZenKit - Divider
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Divider (Horizontal)
+// ----------------------------------------
+.divider {
+  --divider-color: var(--border);
+  --divider-thickness: 1px;
+  --divider-spacing: 1rem;
+
+  display: flex;
+  align-items: center;
+  margin: var(--divider-spacing) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: var(--divider-thickness);
+    background-color: var(--divider-color);
+  }
+
+  &:empty::before {
+    margin-right: 0;
+  }
+
+  &:empty::after {
+    margin-left: 0;
+  }
+
+  &:not(:empty)::before {
+    margin-right: 1rem;
+  }
+
+  &:not(:empty)::after {
+    margin-left: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Simple Divider (No Text)
+// ----------------------------------------
+hr.divider,
+.divider-line {
+  border: none;
+  height: var(--divider-thickness, 1px);
+  background-color: var(--divider-color, var(--border));
+  margin: var(--divider-spacing, 1rem) 0;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Vertical Divider
+// ----------------------------------------
+.divider-vertical {
+  --divider-spacing: 0 1rem;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  margin: var(--divider-spacing);
+  min-height: 1rem;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    width: var(--divider-thickness, 1px);
+    background-color: var(--divider-color, var(--border));
+  }
+
+  &:not(:empty)::before {
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+
+  &:not(:empty)::after {
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+}
+
+// ----------------------------------------
+// Divider Spacing Variants
+// ----------------------------------------
+.divider-sm {
+  --divider-spacing: 0.5rem;
+}
+
+.divider-lg {
+  --divider-spacing: 1.5rem;
+}
+
+.divider-xl {
+  --divider-spacing: 2rem;
+}
+
+// ----------------------------------------
+// Divider Thickness Variants
+// ----------------------------------------
+.divider-thin {
+  --divider-thickness: 1px;
+}
+
+.divider-thick {
+  --divider-thickness: 2px;
+}
+
+.divider-bold {
+  --divider-thickness: 4px;
+}
+
+// ----------------------------------------
+// Divider Style Variants
+// ----------------------------------------
+.divider-dashed {
+  &::before,
+  &::after {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--divider-color, var(--border)),
+      var(--divider-color, var(--border)) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    height: var(--divider-thickness, 1px);
+  }
+}
+
+.divider-dotted {
+  &::before,
+  &::after {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--divider-color, var(--border)),
+      var(--divider-color, var(--border)) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    height: var(--divider-thickness, 1px);
+  }
+}
+
+// Vertical dashed/dotted
+.divider-vertical.divider-dashed {
+  &::before,
+  &::after {
+    background: repeating-linear-gradient(
+      180deg,
+      var(--divider-color, var(--border)),
+      var(--divider-color, var(--border)) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    width: var(--divider-thickness, 1px);
+    height: auto;
+  }
+}
+
+.divider-vertical.divider-dotted {
+  &::before,
+  &::after {
+    background: repeating-linear-gradient(
+      180deg,
+      var(--divider-color, var(--border)),
+      var(--divider-color, var(--border)) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    width: var(--divider-thickness, 1px);
+    height: auto;
+  }
+}
+
+// ----------------------------------------
+// Divider Color Variants
+// ----------------------------------------
+.divider-primary {
+  --divider-color: var(--primary);
+  color: var(--primary);
+}
+
+.divider-secondary {
+  --divider-color: var(--gray-400);
+  color: var(--gray-500);
+}
+
+.divider-success {
+  --divider-color: var(--success);
+  color: var(--success);
+}
+
+.divider-danger {
+  --divider-color: var(--danger);
+  color: var(--danger);
+}
+
+.divider-warning {
+  --divider-color: var(--warning);
+  color: var(--warning);
+}
+
+.divider-info {
+  --divider-color: var(--info);
+  color: var(--info);
+}
+
+.divider-dark {
+  --divider-color: var(--gray-700);
+  color: var(--gray-700);
+}
+
+.divider-light {
+  --divider-color: var(--gray-200);
+  color: var(--gray-400);
+}
+
+// ----------------------------------------
+// Divider Text Alignment
+// ----------------------------------------
+.divider-left {
+  &::before {
+    flex: 0 0 2rem;
+  }
+}
+
+.divider-right {
+  &::after {
+    flex: 0 0 2rem;
+  }
+}
+
+// ----------------------------------------
+// Divider with Icon
+// ----------------------------------------
+.divider-icon {
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.25rem;
+  }
+}

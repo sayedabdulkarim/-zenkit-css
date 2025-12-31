@@ -1,0 +1,256 @@
+// ========================================
+// ZenKit - Avatar
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Avatar
+// ----------------------------------------
+.avatar {
+  --avatar-size: 2.5rem;
+  --avatar-font-size: 1rem;
+  --avatar-bg: var(--gray-200);
+  --avatar-color: var(--gray-600);
+  --avatar-border-color: var(--white);
+  --avatar-border-width: 2px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  font-size: var(--avatar-font-size);
+  font-weight: $font-weight-medium;
+  color: var(--avatar-color);
+  background-color: var(--avatar-bg);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// ----------------------------------------
+// Avatar Sizes
+// ----------------------------------------
+.avatar-xs {
+  --avatar-size: 1.5rem;
+  --avatar-font-size: 0.625rem;
+}
+
+.avatar-sm {
+  --avatar-size: 2rem;
+  --avatar-font-size: 0.75rem;
+}
+
+.avatar-md {
+  --avatar-size: 2.5rem;
+  --avatar-font-size: 1rem;
+}
+
+.avatar-lg {
+  --avatar-size: 3rem;
+  --avatar-font-size: 1.125rem;
+}
+
+.avatar-xl {
+  --avatar-size: 4rem;
+  --avatar-font-size: 1.5rem;
+}
+
+.avatar-2xl {
+  --avatar-size: 5rem;
+  --avatar-font-size: 1.875rem;
+}
+
+// ----------------------------------------
+// Avatar Shapes
+// ----------------------------------------
+.avatar-rounded {
+  border-radius: var(--radius-lg);
+}
+
+.avatar-square {
+  border-radius: var(--radius);
+}
+
+// ----------------------------------------
+// Avatar Colors
+// ----------------------------------------
+.avatar-primary {
+  --avatar-bg: var(--primary-100);
+  --avatar-color: var(--primary-700);
+}
+
+.avatar-secondary {
+  --avatar-bg: var(--gray-200);
+  --avatar-color: var(--gray-700);
+}
+
+.avatar-success {
+  --avatar-bg: var(--success-light);
+  --avatar-color: #{$success-dark};
+}
+
+.avatar-danger {
+  --avatar-bg: var(--danger-light);
+  --avatar-color: #{$danger-dark};
+}
+
+.avatar-warning {
+  --avatar-bg: var(--warning-light);
+  --avatar-color: #{$warning-dark};
+}
+
+.avatar-info {
+  --avatar-bg: var(--info-light);
+  --avatar-color: #{$info-dark};
+}
+
+.avatar-dark {
+  --avatar-bg: var(--gray-800);
+  --avatar-color: var(--white);
+}
+
+.avatar-light {
+  --avatar-bg: var(--gray-100);
+  --avatar-color: var(--gray-600);
+}
+
+// ----------------------------------------
+// Avatar with Status Badge
+// ----------------------------------------
+.avatar-status {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 25%;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: var(--radius-full);
+    border: var(--avatar-border-width) solid var(--avatar-border-color);
+    background-color: var(--gray-400);
+  }
+}
+
+.avatar-status-online::after {
+  background-color: var(--success);
+}
+
+.avatar-status-offline::after {
+  background-color: var(--gray-400);
+}
+
+.avatar-status-busy::after {
+  background-color: var(--danger);
+}
+
+.avatar-status-away::after {
+  background-color: var(--warning);
+}
+
+// ----------------------------------------
+// Avatar Group
+// ----------------------------------------
+.avatar-group {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  .avatar {
+    border: var(--avatar-border-width) solid var(--avatar-border-color);
+    margin-left: -0.75rem;
+    transition: transform var(--transition-fast) ease-in-out;
+
+    &:last-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      z-index: 1;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.avatar-group-sm .avatar {
+  margin-left: -0.5rem;
+}
+
+.avatar-group-lg .avatar {
+  margin-left: -1rem;
+}
+
+// Avatar group counter
+.avatar-group-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size, 2.5rem);
+  height: var(--avatar-size, 2.5rem);
+  font-size: var(--avatar-font-size, 0.875rem);
+  font-weight: $font-weight-medium;
+  color: var(--gray-600);
+  background-color: var(--gray-100);
+  border: var(--avatar-border-width) solid var(--avatar-border-color);
+  border-radius: var(--radius-full);
+  margin-left: -0.75rem;
+}
+
+// ----------------------------------------
+// Avatar with Ring
+// ----------------------------------------
+.avatar-ring {
+  box-shadow: 0 0 0 3px var(--primary-100), 0 0 0 4px var(--primary);
+}
+
+.avatar-ring-success {
+  box-shadow: 0 0 0 3px var(--success-light), 0 0 0 4px var(--success);
+}
+
+.avatar-ring-danger {
+  box-shadow: 0 0 0 3px var(--danger-light), 0 0 0 4px var(--danger);
+}
+
+.avatar-ring-warning {
+  box-shadow: 0 0 0 3px var(--warning-light), 0 0 0 4px var(--warning);
+}
+
+// ----------------------------------------
+// Avatar Placeholder (Icon Fallback)
+// ----------------------------------------
+.avatar-placeholder {
+  svg {
+    width: 60%;
+    height: 60%;
+    color: var(--avatar-color);
+  }
+}
+
+// ----------------------------------------
+// Stacked Avatar (Vertical)
+// ----------------------------------------
+.avatar-stack {
+  display: flex;
+  flex-direction: column;
+
+  .avatar {
+    border: var(--avatar-border-width) solid var(--avatar-border-color);
+    margin-top: -0.75rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+// ========================================
+// ZenKit - Float Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Float
+// ----------------------------------------
+.float-start { float: left; }
+.float-end { float: right; }
+.float-none { float: none; }
+
+// Legacy naming
+.float-left { float: left; }
+.float-right { float: right; }
+
+// ----------------------------------------
+// Clear
+// ----------------------------------------
+.clear-start { clear: left; }
+.clear-end { clear: right; }
+.clear-both { clear: both; }
+.clear-none { clear: none; }
+
+// Legacy naming
+.clear-left { clear: left; }
+.clear-right { clear: right; }
+
+// ----------------------------------------
+// Clearfix
+// ----------------------------------------
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+// ----------------------------------------
+// Responsive Float Utilities
+// ----------------------------------------
+@media (min-width: 576px) {
+  .sm\:float-start { float: left; }
+  .sm\:float-end { float: right; }
+  .sm\:float-none { float: none; }
+}
+
+@media (min-width: 768px) {
+  .md\:float-start { float: left; }
+  .md\:float-end { float: right; }
+  .md\:float-none { float: none; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:float-start { float: left; }
+  .lg\:float-end { float: right; }
+  .lg\:float-none { float: none; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:float-start { float: left; }
+  .xl\:float-end { float: right; }
+  .xl\:float-none { float: none; }
+}
+
+@media (min-width: 1536px) {
+  .xxl\:float-start { float: left; }
+  .xxl\:float-end { float: right; }
+  .xxl\:float-none { float: none; }
+}

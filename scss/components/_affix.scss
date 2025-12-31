@@ -1,0 +1,278 @@
+// ========================================
+// ZenKit - Affix Component
+// Sticky wrapper / Fixed position helper
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Affix Container
+// ----------------------------------------
+.affix {
+  // Default state - flows normally
+}
+
+// ----------------------------------------
+// Affix Fixed State
+// ----------------------------------------
+.affix-fixed {
+  position: fixed;
+  z-index: $z-sticky;
+}
+
+// Fixed positions
+.affix-fixed-top {
+  top: 0;
+}
+
+.affix-fixed-bottom {
+  bottom: 0;
+}
+
+// ----------------------------------------
+// Affix with Offset
+// ----------------------------------------
+// These are typically set dynamically via JS, but providing CSS utility classes
+
+.affix-offset-8 {
+  &.affix-fixed-top { top: 8px; }
+  &.affix-fixed-bottom { bottom: 8px; }
+}
+
+.affix-offset-16 {
+  &.affix-fixed-top { top: 16px; }
+  &.affix-fixed-bottom { bottom: 16px; }
+}
+
+.affix-offset-24 {
+  &.affix-fixed-top { top: 24px; }
+  &.affix-fixed-bottom { bottom: 24px; }
+}
+
+.affix-offset-32 {
+  &.affix-fixed-top { top: 32px; }
+  &.affix-fixed-bottom { bottom: 32px; }
+}
+
+.affix-offset-48 {
+  &.affix-fixed-top { top: 48px; }
+  &.affix-fixed-bottom { bottom: 48px; }
+}
+
+.affix-offset-64 {
+  &.affix-fixed-top { top: 64px; }
+  &.affix-fixed-bottom { bottom: 64px; }
+}
+
+// ----------------------------------------
+// Affix Placeholder
+// ----------------------------------------
+// Used to prevent layout shift when element becomes fixed
+.affix-placeholder {
+  // Height is set dynamically via JS
+}
+
+// ----------------------------------------
+// Affix Transitions
+// ----------------------------------------
+.affix-animated {
+  transition: top 0.2s ease, bottom 0.2s ease;
+}
+
+// ----------------------------------------
+// Affix Shadow (visual feedback)
+// ----------------------------------------
+.affix-shadow {
+  &.affix-fixed {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.affix-shadow-bottom {
+  &.affix-fixed {
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ----------------------------------------
+// Affix Full Width
+// ----------------------------------------
+.affix-full-width {
+  &.affix-fixed {
+    left: 0;
+    right: 0;
+  }
+}
+
+// ----------------------------------------
+// Affix Container Bound
+// ----------------------------------------
+// When affix is bound to a specific container
+.affix-container {
+  position: relative;
+}
+
+.affix-absolute {
+  position: absolute;
+}
+
+.affix-absolute-top {
+  top: 0;
+}
+
+.affix-absolute-bottom {
+  bottom: 0;
+}
+
+// ----------------------------------------
+// Affix Background
+// ----------------------------------------
+.affix-bg {
+  &.affix-fixed {
+    background-color: var(--bg-primary);
+  }
+}
+
+.affix-bg-blur {
+  &.affix-fixed {
+    background-color: rgba(var(--bg-primary-rgb, 255, 255, 255), 0.8);
+    backdrop-filter: blur(8px);
+  }
+}
+
+// ----------------------------------------
+// Affix Border
+// ----------------------------------------
+.affix-border-bottom {
+  &.affix-fixed {
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.affix-border-top {
+  &.affix-fixed {
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+// ----------------------------------------
+// Affix Padding
+// ----------------------------------------
+.affix-padding {
+  &.affix-fixed {
+    padding: 0.75rem 1rem;
+  }
+}
+
+// ----------------------------------------
+// Affix Common Use Cases
+// ----------------------------------------
+// Sticky header
+.affix-header {
+  &.affix-fixed {
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Sticky sidebar
+.affix-sidebar {
+  &.affix-fixed {
+    width: inherit;
+    max-width: inherit;
+  }
+}
+
+// Sticky footer / action bar
+.affix-action-bar {
+  &.affix-fixed {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+  }
+}
+
+// ----------------------------------------
+// Affix Z-Index Variants
+// ----------------------------------------
+.affix-z-dropdown {
+  &.affix-fixed {
+    z-index: $z-dropdown;
+  }
+}
+
+.affix-z-fixed {
+  &.affix-fixed {
+    z-index: $z-fixed;
+  }
+}
+
+.affix-z-modal {
+  &.affix-fixed {
+    z-index: $z-modal;
+  }
+}
+
+// ----------------------------------------
+// Affix Responsive
+// ----------------------------------------
+@media (max-width: 767.98px) {
+  .affix-mobile-disabled {
+    &.affix-fixed {
+      position: static;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .affix-desktop-only {
+    &.affix-fixed {
+      position: fixed;
+    }
+  }
+}
+
+// ----------------------------------------
+// Affix Hide on Scroll
+// ----------------------------------------
+.affix-hide-on-scroll-down {
+  &.affix-fixed {
+    transition: transform 0.3s ease;
+  }
+
+  &.is-hidden {
+    transform: translateY(-100%);
+  }
+}
+
+.affix-hide-on-scroll-up {
+  &.affix-fixed {
+    transition: transform 0.3s ease;
+  }
+
+  &.is-hidden {
+    transform: translateY(100%);
+  }
+}
+
+// ----------------------------------------
+// Affix Shrink on Scroll
+// ----------------------------------------
+.affix-shrink {
+  &.affix-fixed {
+    transition: padding 0.3s ease;
+  }
+
+  &.is-shrunk {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}

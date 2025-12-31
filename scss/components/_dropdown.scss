@@ -1,0 +1,323 @@
+// ========================================
+// ZenKit - Dropdown
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Dropdown Container
+// ----------------------------------------
+.dropdown,
+.dropup,
+.dropend,
+.dropstart,
+.dropdown-center,
+.dropup-center {
+  position: relative;
+}
+
+// Center aligned dropdown
+.dropdown-center {
+  .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+// Center aligned dropup
+.dropup-center {
+  .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+// ----------------------------------------
+// Dropdown Toggle
+// ----------------------------------------
+.dropdown-toggle {
+  white-space: nowrap;
+
+  &::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+
+  &:empty::after {
+    margin-left: 0;
+  }
+}
+
+// ----------------------------------------
+// Dropdown Menu
+// ----------------------------------------
+.dropdown-menu {
+  --dropdown-zindex: #{$z-dropdown};
+  --dropdown-min-width: 10rem;
+  --dropdown-padding-x: 0;
+  --dropdown-padding-y: 0.5rem;
+  --dropdown-spacer: 0.125rem;
+  --dropdown-font-size: var(--text-base);
+  --dropdown-color: var(--text);
+  --dropdown-bg: var(--bg-card);
+  --dropdown-border-color: var(--border);
+  --dropdown-border-radius: var(--radius);
+  --dropdown-border-width: #{$border-width};
+  --dropdown-inner-border-radius: calc(var(--radius) - #{$border-width});
+  --dropdown-divider-bg: var(--border);
+  --dropdown-divider-margin-y: 0.5rem;
+  --dropdown-box-shadow: #{$shadow-lg};
+  --dropdown-link-color: var(--text);
+  --dropdown-link-hover-color: var(--text);
+  --dropdown-link-hover-bg: var(--bg-muted);
+  --dropdown-link-active-color: var(--white);
+  --dropdown-link-active-bg: var(--primary);
+  --dropdown-link-disabled-color: var(--text-muted);
+  --dropdown-item-padding-x: 1rem;
+  --dropdown-item-padding-y: 0.25rem;
+  --dropdown-header-color: var(--text-muted);
+  --dropdown-header-padding-x: 1rem;
+  --dropdown-header-padding-y: 0.5rem;
+
+  position: absolute;
+  z-index: var(--dropdown-zindex);
+  display: none;
+  min-width: var(--dropdown-min-width);
+  padding: var(--dropdown-padding-y) var(--dropdown-padding-x);
+  margin: 0;
+  font-size: var(--dropdown-font-size);
+  color: var(--dropdown-color);
+  text-align: left;
+  list-style: none;
+  background-color: var(--dropdown-bg);
+  background-clip: padding-box;
+  border: var(--dropdown-border-width) solid var(--dropdown-border-color);
+  border-radius: var(--dropdown-border-radius);
+  box-shadow: var(--dropdown-box-shadow);
+
+  &[data-show],
+  &.show {
+    display: block;
+  }
+}
+
+// ----------------------------------------
+// Dropdown Directions
+// ----------------------------------------
+// Dropup
+.dropup .dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0.3em solid;
+  border-left: 0.3em solid transparent;
+}
+
+.dropup .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: var(--dropdown-spacer);
+}
+
+// Dropend (right)
+.dropend .dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0;
+  border-bottom: 0.3em solid transparent;
+  border-left: 0.3em solid;
+}
+
+.dropend .dropdown-menu {
+  top: 0;
+  right: auto;
+  left: 100%;
+  margin-top: 0;
+  margin-left: var(--dropdown-spacer);
+}
+
+// Dropstart (left)
+.dropstart .dropdown-toggle::after {
+  display: none;
+}
+
+.dropstart .dropdown-toggle::before {
+  display: inline-block;
+  margin-right: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0.3em solid;
+  border-bottom: 0.3em solid transparent;
+}
+
+.dropstart .dropdown-menu {
+  top: 0;
+  right: 100%;
+  left: auto;
+  margin-top: 0;
+  margin-right: var(--dropdown-spacer);
+}
+
+// ----------------------------------------
+// Dropdown Items
+// ----------------------------------------
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: var(--dropdown-item-padding-y) var(--dropdown-item-padding-x);
+  clear: both;
+  font-weight: $font-weight-normal;
+  color: var(--dropdown-link-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--dropdown-inner-border-radius);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--dropdown-link-hover-color);
+    background-color: var(--dropdown-link-hover-bg);
+  }
+
+  &.active,
+  &:active {
+    color: var(--dropdown-link-active-color);
+    text-decoration: none;
+    background-color: var(--dropdown-link-active-bg);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: var(--dropdown-link-disabled-color);
+    pointer-events: none;
+    background-color: transparent;
+  }
+}
+
+// ----------------------------------------
+// Dropdown Header
+// ----------------------------------------
+.dropdown-header {
+  display: block;
+  padding: var(--dropdown-header-padding-y) var(--dropdown-header-padding-x);
+  margin-bottom: 0;
+  font-size: var(--text-sm);
+  color: var(--dropdown-header-color);
+  white-space: nowrap;
+}
+
+// ----------------------------------------
+// Dropdown Divider
+// ----------------------------------------
+.dropdown-divider {
+  height: 0;
+  margin: var(--dropdown-divider-margin-y) 0;
+  overflow: hidden;
+  border-top: 1px solid var(--dropdown-divider-bg);
+  opacity: 1;
+}
+
+// ----------------------------------------
+// Dropdown Text
+// ----------------------------------------
+.dropdown-item-text {
+  display: block;
+  padding: var(--dropdown-item-padding-y) var(--dropdown-item-padding-x);
+  color: var(--dropdown-link-color);
+}
+
+// ----------------------------------------
+// Dark Dropdown
+// ----------------------------------------
+.dropdown-menu-dark {
+  --dropdown-color: var(--gray-300);
+  --dropdown-bg: var(--gray-800);
+  --dropdown-border-color: var(--gray-700);
+  --dropdown-box-shadow: none;
+  --dropdown-link-color: var(--gray-300);
+  --dropdown-link-hover-color: var(--white);
+  --dropdown-link-hover-bg: #{rgba(#fff, 0.15)};
+  --dropdown-link-active-color: var(--white);
+  --dropdown-link-active-bg: var(--primary);
+  --dropdown-link-disabled-color: var(--gray-500);
+  --dropdown-divider-bg: var(--gray-700);
+  --dropdown-header-color: var(--gray-500);
+}
+
+// ----------------------------------------
+// Dropdown Alignment
+// ----------------------------------------
+.dropdown-menu-start {
+  --position: start;
+  right: auto;
+  left: 0;
+}
+
+.dropdown-menu-end {
+  --position: end;
+  right: 0;
+  left: auto;
+}
+
+// Responsive alignment
+@each $breakpoint in (sm, md, lg, xl, 2xl) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    .dropdown-menu-#{$breakpoint}-start {
+      --position: start;
+      right: auto;
+      left: 0;
+    }
+
+    .dropdown-menu-#{$breakpoint}-end {
+      --position: end;
+      right: 0;
+      left: auto;
+    }
+  }
+}
+
+// ----------------------------------------
+// Auto-close behavior classes
+// ----------------------------------------
+.dropdown-menu[data-autoclose="outside"] {
+  // Styles for outside click closing
+}
+
+.dropdown-menu[data-autoclose="inside"] {
+  // Styles for inside click closing
+}
+
+// ----------------------------------------
+// Dropdown with Icons
+// ----------------------------------------
+.dropdown-item-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg,
+  i {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.7;
+  }
+}

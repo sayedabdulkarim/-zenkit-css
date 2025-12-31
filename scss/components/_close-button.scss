@@ -1,0 +1,106 @@
+// ========================================
+// ZenKit - Close Button
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Close Button
+// ----------------------------------------
+.btn-close {
+  --btn-close-color: var(--text);
+  --btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+  --btn-close-opacity: 0.5;
+  --btn-close-hover-opacity: 0.75;
+  --btn-close-focus-shadow: 0 0 0 0.25rem #{rgba($primary, 0.25)};
+  --btn-close-focus-opacity: 1;
+  --btn-close-disabled-opacity: 0.25;
+
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em;
+  color: var(--btn-close-color);
+  background: transparent var(--btn-close-bg) center / 1em auto no-repeat;
+  border: 0;
+  border-radius: var(--radius);
+  opacity: var(--btn-close-opacity);
+  cursor: pointer;
+  transition: opacity $transition-fast ease-in-out;
+
+  &:hover {
+    color: var(--btn-close-color);
+    text-decoration: none;
+    opacity: var(--btn-close-hover-opacity);
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: var(--btn-close-focus-shadow);
+    opacity: var(--btn-close-focus-opacity);
+  }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+    user-select: none;
+    opacity: var(--btn-close-disabled-opacity);
+  }
+}
+
+// ----------------------------------------
+// White Close Button (for dark backgrounds)
+// ----------------------------------------
+.btn-close-white {
+  --btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+  --btn-close-color: var(--white);
+}
+
+// ----------------------------------------
+// Close Button Sizes
+// ----------------------------------------
+.btn-close-sm {
+  width: 0.75em;
+  height: 0.75em;
+  padding: 0.125em;
+}
+
+.btn-close-lg {
+  width: 1.25em;
+  height: 1.25em;
+  padding: 0.375em;
+}
+
+// ----------------------------------------
+// Alternative Close Button (X text)
+// ----------------------------------------
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  color: var(--text);
+  text-shadow: 0 1px 0 var(--white);
+  opacity: 0.5;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+
+  &:hover {
+    color: var(--text);
+    text-decoration: none;
+    opacity: 0.75;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    &:hover,
+    &:focus {
+      opacity: 0.75;
+    }
+  }
+}

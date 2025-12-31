@@ -1,0 +1,204 @@
+// ========================================
+// ZenKit - Overflow Utilities
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Overflow
+// ----------------------------------------
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-scroll { overflow: scroll; }
+.overflow-clip { overflow: clip; }
+
+// ----------------------------------------
+// Overflow X
+// ----------------------------------------
+.overflow-x-auto { overflow-x: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-x-visible { overflow-x: visible; }
+.overflow-x-scroll { overflow-x: scroll; }
+.overflow-x-clip { overflow-x: clip; }
+
+// ----------------------------------------
+// Overflow Y
+// ----------------------------------------
+.overflow-y-auto { overflow-y: auto; }
+.overflow-y-hidden { overflow-y: hidden; }
+.overflow-y-visible { overflow-y: visible; }
+.overflow-y-scroll { overflow-y: scroll; }
+.overflow-y-clip { overflow-y: clip; }
+
+// ----------------------------------------
+// Text Overflow
+// ----------------------------------------
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.text-clip {
+  text-overflow: clip;
+}
+
+// ----------------------------------------
+// Line Clamp (Multi-line Truncation)
+// ----------------------------------------
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-6 {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-none {
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  overflow: visible;
+}
+
+// ----------------------------------------
+// Overscroll Behavior
+// ----------------------------------------
+.overscroll-auto { overscroll-behavior: auto; }
+.overscroll-contain { overscroll-behavior: contain; }
+.overscroll-none { overscroll-behavior: none; }
+
+.overscroll-x-auto { overscroll-behavior-x: auto; }
+.overscroll-x-contain { overscroll-behavior-x: contain; }
+.overscroll-x-none { overscroll-behavior-x: none; }
+
+.overscroll-y-auto { overscroll-behavior-y: auto; }
+.overscroll-y-contain { overscroll-behavior-y: contain; }
+.overscroll-y-none { overscroll-behavior-y: none; }
+
+// ----------------------------------------
+// Scroll Behavior
+// ----------------------------------------
+.scroll-auto { scroll-behavior: auto; }
+.scroll-smooth { scroll-behavior: smooth; }
+
+// ----------------------------------------
+// Scroll Snap
+// ----------------------------------------
+.snap-start { scroll-snap-align: start; }
+.snap-end { scroll-snap-align: end; }
+.snap-center { scroll-snap-align: center; }
+.snap-align-none { scroll-snap-align: none; }
+
+.snap-normal { scroll-snap-stop: normal; }
+.snap-always { scroll-snap-stop: always; }
+
+.snap-none { scroll-snap-type: none; }
+.snap-x { scroll-snap-type: x var(--snap-strictness, mandatory); }
+.snap-y { scroll-snap-type: y var(--snap-strictness, mandatory); }
+.snap-both { scroll-snap-type: both var(--snap-strictness, mandatory); }
+
+.snap-mandatory { --snap-strictness: mandatory; }
+.snap-proximity { --snap-strictness: proximity; }
+
+// ----------------------------------------
+// Word Break
+// ----------------------------------------
+.break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.break-keep {
+  word-break: keep-all;
+}
+
+// ----------------------------------------
+// Whitespace
+// ----------------------------------------
+.whitespace-normal { white-space: normal; }
+.whitespace-nowrap { white-space: nowrap; }
+.whitespace-pre { white-space: pre; }
+.whitespace-pre-line { white-space: pre-line; }
+.whitespace-pre-wrap { white-space: pre-wrap; }
+.whitespace-break-spaces { white-space: break-spaces; }
+
+// ----------------------------------------
+// Responsive Overflow Utilities
+// ----------------------------------------
+@media (min-width: 576px) {
+  .sm\:overflow-auto { overflow: auto; }
+  .sm\:overflow-hidden { overflow: hidden; }
+  .sm\:text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (min-width: 768px) {
+  .md\:overflow-auto { overflow: auto; }
+  .md\:overflow-hidden { overflow: hidden; }
+  .md\:text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:overflow-auto { overflow: auto; }
+  .lg\:overflow-hidden { overflow: hidden; }
+  .lg\:text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:overflow-auto { overflow: auto; }
+  .xl\:overflow-hidden { overflow: hidden; }
+  .xl\:text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (min-width: 1536px) {
+  .xxl\:overflow-auto { overflow: auto; }
+  .xxl\:overflow-hidden { overflow: hidden; }
+  .xxl\:text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}

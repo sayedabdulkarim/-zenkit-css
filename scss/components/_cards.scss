@@ -1,0 +1,265 @@
+// ========================================
+// ZenKit - Cards
+// ========================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----------------------------------------
+// Base Card
+// ----------------------------------------
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ----------------------------------------
+// Card Sections
+// ----------------------------------------
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: $border-width solid var(--border);
+  background-color: var(--bg-muted);
+
+  &:first-child {
+    border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  }
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card-footer {
+  padding: 1rem 1.25rem;
+  border-top: $border-width solid var(--border);
+  background-color: var(--bg-muted);
+
+  &:last-child {
+    border-radius: 0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);
+  }
+}
+
+// ----------------------------------------
+// Card Title & Text
+// ----------------------------------------
+.card-title {
+  margin-bottom: 0.5rem;
+  font-size: var(--text-xl);
+  font-weight: $font-weight-semibold;
+  color: var(--text);
+}
+
+.card-subtitle {
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.card-text {
+  color: var(--text-secondary);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ----------------------------------------
+// Card Image
+// ----------------------------------------
+.card-img-top {
+  width: 100%;
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+}
+
+.card-img-bottom {
+  width: 100%;
+  border-radius: 0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);
+}
+
+.card-img {
+  width: 100%;
+}
+
+// Card image overlay
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  border-radius: calc(var(--radius-lg) - 1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--white);
+
+  .card-title,
+  .card-text {
+    color: var(--white);
+  }
+}
+
+// ----------------------------------------
+// Card Variants
+// ----------------------------------------
+.card-hover {
+  transition: transform var(--transition-base) ease-in-out,
+              box-shadow var(--transition-base) ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.card-clickable {
+  cursor: pointer;
+  transition: transform var(--transition-base) ease-in-out,
+              box-shadow var(--transition-base) ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ----------------------------------------
+// Card Sizes
+// ----------------------------------------
+.card-sm {
+  .card-header,
+  .card-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+.card-lg {
+  .card-header,
+  .card-footer {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+// ----------------------------------------
+// Card Colors
+// ----------------------------------------
+.card-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+
+  .card-header,
+  .card-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .card-title,
+  .card-text {
+    color: var(--white);
+  }
+}
+
+.card-success {
+  background-color: var(--success-light);
+  border-color: var(--success);
+
+  .card-header {
+    background-color: var(--success);
+    color: var(--white);
+    border-color: var(--success);
+  }
+}
+
+.card-danger {
+  background-color: var(--danger-light);
+  border-color: var(--danger);
+
+  .card-header {
+    background-color: var(--danger);
+    color: var(--white);
+    border-color: var(--danger);
+  }
+}
+
+.card-warning {
+  background-color: var(--warning-light);
+  border-color: var(--warning);
+
+  .card-header {
+    background-color: var(--warning);
+    color: var(--gray-900);
+    border-color: var(--warning);
+  }
+}
+
+.card-info {
+  background-color: var(--info-light);
+  border-color: var(--info);
+
+  .card-header {
+    background-color: var(--info);
+    color: var(--white);
+    border-color: var(--info);
+  }
+}
+
+// ----------------------------------------
+// Horizontal Card
+// ----------------------------------------
+.card-horizontal {
+  flex-direction: row;
+
+  .card-img-left {
+    width: 40%;
+    object-fit: cover;
+    border-radius: calc(var(--radius-lg) - 1px) 0 0 calc(var(--radius-lg) - 1px);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+// ----------------------------------------
+// Card Group
+// ----------------------------------------
+.card-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  > .card {
+    flex: 1 1 300px;
+  }
+}
+
+// ----------------------------------------
+// Card Grid
+// ----------------------------------------
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}

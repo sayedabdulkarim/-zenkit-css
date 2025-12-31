@@ -1,0 +1,441 @@
+// ========================================
+// ZenKit - Segmented Component
+// Toggle button group / Tab-like selector
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Segmented Container
+// ----------------------------------------
+.segmented {
+  display: inline-flex;
+  align-items: stretch;
+  padding: 2px;
+  background-color: var(--bg-secondary);
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// Segmented Options
+// ----------------------------------------
+.segmented-options {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+}
+
+// ----------------------------------------
+// Segmented Thumb (Animated Background)
+// ----------------------------------------
+.segmented-thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: var(--bg-primary);
+  border-radius: calc($border-radius - 2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: left 0.2s ease, width 0.2s ease;
+}
+
+// ----------------------------------------
+// Segmented Option
+// ----------------------------------------
+.segmented-option {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: calc($border-radius - 2px);
+  cursor: pointer;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.is-selected {
+    color: var(--text-primary);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.segmented-option-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.segmented-option-label {
+  font-weight: 500;
+}
+
+// ----------------------------------------
+// Segmented Without Animation (Static)
+// ----------------------------------------
+.segmented-static {
+  .segmented-thumb {
+    display: none;
+  }
+
+  .segmented-option.is-selected {
+    background-color: var(--bg-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ----------------------------------------
+// Segmented Block (Full Width)
+// ----------------------------------------
+.segmented-block {
+  display: flex;
+  width: 100%;
+
+  .segmented-options {
+    flex: 1;
+  }
+
+  .segmented-option {
+    flex: 1;
+  }
+}
+
+// ----------------------------------------
+// Segmented Sizes
+// ----------------------------------------
+.segmented-sm {
+  padding: 1px;
+
+  .segmented-option {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .segmented-option-icon {
+    font-size: 0.875rem;
+  }
+}
+
+.segmented-lg {
+  padding: 3px;
+
+  .segmented-option {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .segmented-option-icon {
+    font-size: 1.25rem;
+  }
+}
+
+// ----------------------------------------
+// Segmented Variants
+// ----------------------------------------
+// Outlined
+.segmented-outlined {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+
+  .segmented-thumb {
+    box-shadow: none;
+    border: 1px solid var(--primary);
+  }
+
+  &.segmented-static .segmented-option.is-selected {
+    box-shadow: none;
+    border: 1px solid var(--primary);
+  }
+}
+
+// Filled / Solid selected
+.segmented-filled {
+  .segmented-thumb {
+    background-color: var(--primary);
+  }
+
+  .segmented-option.is-selected {
+    color: #fff;
+  }
+
+  &.segmented-static .segmented-option.is-selected {
+    color: #fff;
+    background-color: var(--primary);
+  }
+}
+
+// Pill shape
+.segmented-pill {
+  border-radius: 9999px;
+
+  .segmented-thumb {
+    border-radius: 9999px;
+  }
+
+  .segmented-option {
+    border-radius: 9999px;
+  }
+}
+
+// ----------------------------------------
+// Segmented Icon Only
+// ----------------------------------------
+.segmented-icon-only {
+  .segmented-option {
+    padding: 0.5rem;
+  }
+
+  .segmented-option-label {
+    display: none;
+  }
+
+  &.segmented-sm .segmented-option {
+    padding: 0.375rem;
+  }
+
+  &.segmented-lg .segmented-option {
+    padding: 0.625rem;
+  }
+}
+
+// ----------------------------------------
+// Segmented Vertical
+// ----------------------------------------
+.segmented-vertical {
+  flex-direction: column;
+
+  .segmented-options {
+    flex-direction: column;
+  }
+
+  .segmented-thumb {
+    top: auto;
+    left: 0;
+    right: 0;
+    transition: top 0.2s ease, height 0.2s ease;
+  }
+}
+
+// ----------------------------------------
+// Segmented with Badge
+// ----------------------------------------
+.segmented-option-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+  margin-left: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--danger);
+  border-radius: 8px;
+}
+
+// ----------------------------------------
+// Segmented Colors
+// ----------------------------------------
+.segmented-primary {
+  .segmented-thumb {
+    background-color: var(--primary);
+  }
+
+  .segmented-option.is-selected {
+    color: #fff;
+  }
+}
+
+.segmented-success {
+  .segmented-thumb {
+    background-color: var(--success);
+  }
+
+  .segmented-option.is-selected {
+    color: #fff;
+  }
+}
+
+.segmented-warning {
+  .segmented-thumb {
+    background-color: var(--warning);
+  }
+
+  .segmented-option.is-selected {
+    color: var(--text-primary);
+  }
+}
+
+.segmented-danger {
+  .segmented-thumb {
+    background-color: var(--danger);
+  }
+
+  .segmented-option.is-selected {
+    color: #fff;
+  }
+}
+
+// ----------------------------------------
+// Segmented Dark Theme
+// ----------------------------------------
+.segmented-dark {
+  background-color: #1f1f1f;
+
+  .segmented-option {
+    color: rgba(255, 255, 255, 0.65);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    &.is-selected {
+      color: #fff;
+    }
+  }
+
+  .segmented-thumb {
+    background-color: #434343;
+  }
+}
+
+// ----------------------------------------
+// Segmented with Tooltip
+// ----------------------------------------
+.segmented-option[data-tooltip] {
+  position: relative;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: $border-radius-sm;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    margin-bottom: 0.25rem;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ----------------------------------------
+// Segmented Loading
+// ----------------------------------------
+.segmented-option.is-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ----------------------------------------
+// Segmented Responsive
+// ----------------------------------------
+@media (max-width: 575.98px) {
+  .segmented-responsive {
+    flex-direction: column;
+
+    .segmented-options {
+      flex-direction: column;
+    }
+
+    .segmented-thumb {
+      top: auto;
+      left: 0;
+      right: 0;
+      transition: top 0.2s ease, height 0.2s ease;
+    }
+  }
+
+  .segmented-responsive-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .segmented-options {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+// ----------------------------------------
+// Segmented Bordered
+// ----------------------------------------
+.segmented-bordered {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+}
+
+// ----------------------------------------
+// Segmented Ghost
+// ----------------------------------------
+.segmented-ghost {
+  background-color: transparent;
+  padding: 0;
+
+  .segmented-thumb {
+    background-color: var(--bg-secondary);
+  }
+
+  .segmented-option {
+    padding: 0.5rem 1rem;
+  }
+}
+
+// ----------------------------------------
+// Segmented Card Style
+// ----------------------------------------
+.segmented-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  padding: 4px;
+}

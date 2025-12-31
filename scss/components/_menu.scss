@@ -1,0 +1,510 @@
+// ========================================
+// ZenKit - Menu Component
+// Navigation menu (horizontal/vertical)
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Menu Base
+// ----------------------------------------
+.menu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+// ----------------------------------------
+// Menu Item
+// ----------------------------------------
+.menu-item {
+  position: relative;
+}
+
+.menu-item-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: var(--primary);
+    background-color: var(--bg-secondary);
+  }
+
+  .menu-item.is-active > & {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  .menu-item.is-disabled > & {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.menu-item-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.menu-item-label {
+  flex: 1;
+}
+
+.menu-item-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+
+  .menu-item.is-open > .menu-item-link & {
+    transform: rotate(180deg);
+  }
+}
+
+.menu-item-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--danger);
+  border-radius: 10px;
+}
+
+// ----------------------------------------
+// Menu Horizontal (Default)
+// ----------------------------------------
+.menu-horizontal {
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-color);
+
+  > .menu-item > .menu-item-link {
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  > .menu-item.is-active > .menu-item-link {
+    border-bottom-color: var(--primary);
+  }
+
+  .menu-item-arrow {
+    transform: rotate(0deg);
+
+    .menu-item.is-open > .menu-item-link & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ----------------------------------------
+// Menu Vertical
+// ----------------------------------------
+.menu-vertical {
+  flex-direction: column;
+  width: 100%;
+  border-right: 1px solid var(--border-color);
+
+  .menu-item-link {
+    padding: 0.625rem 1rem;
+  }
+
+  > .menu-item.is-active > .menu-item-link {
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+
+  .menu-item-arrow {
+    transform: rotate(-90deg);
+
+    .menu-item.is-open > .menu-item-link & {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+// ----------------------------------------
+// Menu Inline (Vertical with submenu inline)
+// ----------------------------------------
+.menu-inline {
+  flex-direction: column;
+  width: 100%;
+
+  .menu-item-link {
+    padding: 0.625rem 1rem;
+  }
+
+  .menu-item.is-active > .menu-item-link {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+// ----------------------------------------
+// Submenu
+// ----------------------------------------
+.menu-submenu {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .menu-item.is-open > & {
+    display: block;
+  }
+}
+
+// Horizontal submenu (dropdown)
+.menu-horizontal .menu-submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: $z-dropdown;
+  min-width: 160px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+
+  .menu-item-link {
+    padding: 0.5rem 1rem;
+    border-bottom: none;
+  }
+}
+
+// Vertical submenu (dropdown)
+.menu-vertical .menu-submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: $z-dropdown;
+  min-width: 160px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+
+  .menu-item-link {
+    padding: 0.5rem 1rem;
+  }
+}
+
+// Inline submenu (nested)
+.menu-inline .menu-submenu {
+  position: static;
+  padding-left: 1.5rem;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+
+  .menu-item-link {
+    padding: 0.5rem 1rem;
+  }
+}
+
+// ----------------------------------------
+// Menu Divider
+// ----------------------------------------
+.menu-divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  background-color: var(--border-color);
+}
+
+.menu-horizontal .menu-divider {
+  width: 1px;
+  height: auto;
+  margin: 0 0.5rem;
+}
+
+// ----------------------------------------
+// Menu Group
+// ----------------------------------------
+.menu-group {
+  padding-top: 0.5rem;
+}
+
+.menu-group-title {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// ----------------------------------------
+// Menu Collapsed (Icon Only)
+// ----------------------------------------
+.menu-collapsed {
+  width: auto;
+
+  .menu-item-label,
+  .menu-item-arrow,
+  .menu-group-title {
+    display: none;
+  }
+
+  .menu-item-link {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .menu-item-icon {
+    font-size: 1.25rem;
+  }
+
+  // Show submenu on hover
+  .menu-submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    min-width: 160px;
+    padding-left: 0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: $shadow-lg;
+
+    .menu-item-label {
+      display: block;
+    }
+  }
+
+  .menu-item:hover > .menu-submenu {
+    display: block;
+  }
+}
+
+// ----------------------------------------
+// Menu Themes
+// ----------------------------------------
+// Dark theme
+.menu-dark {
+  color: rgba(255, 255, 255, 0.85);
+  background-color: #001529;
+
+  .menu-item-link {
+    color: rgba(255, 255, 255, 0.65);
+
+    &:hover {
+      color: #fff;
+      background-color: transparent;
+    }
+  }
+
+  .menu-item.is-active > .menu-item-link {
+    color: #fff;
+    background-color: var(--primary);
+  }
+
+  .menu-submenu {
+    background-color: #000c17;
+  }
+
+  .menu-divider {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-group-title {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &.menu-horizontal {
+    border-bottom-color: transparent;
+
+    > .menu-item.is-active > .menu-item-link {
+      background-color: transparent;
+      border-bottom-color: var(--primary);
+    }
+  }
+
+  &.menu-vertical,
+  &.menu-inline {
+    border-right-color: transparent;
+  }
+}
+
+// Light theme (explicit)
+.menu-light {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+// ----------------------------------------
+// Menu Sizes
+// ----------------------------------------
+.menu-sm {
+  .menu-item-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .menu-item-icon {
+    font-size: 0.875rem;
+  }
+}
+
+.menu-lg {
+  .menu-item-link {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .menu-item-icon {
+    font-size: 1.25rem;
+  }
+}
+
+// ----------------------------------------
+// Menu Borderless
+// ----------------------------------------
+.menu-borderless {
+  border: none;
+
+  &.menu-horizontal {
+    border-bottom: none;
+
+    > .menu-item > .menu-item-link {
+      border-bottom: none;
+    }
+
+    > .menu-item.is-active > .menu-item-link {
+      background-color: rgba(var(--primary-rgb), 0.1);
+      border-radius: $border-radius;
+    }
+  }
+
+  &.menu-vertical,
+  &.menu-inline {
+    border-right: none;
+  }
+}
+
+// ----------------------------------------
+// Menu Rounded Items
+// ----------------------------------------
+.menu-rounded {
+  .menu-item-link {
+    margin: 0.25rem 0.5rem;
+    border-radius: $border-radius;
+  }
+
+  &.menu-horizontal > .menu-item > .menu-item-link {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+
+// ----------------------------------------
+// Menu Overflow (for horizontal)
+// ----------------------------------------
+.menu-overflow {
+  position: relative;
+}
+
+.menu-overflow-item {
+  display: none;
+
+  &.is-visible {
+    display: block;
+  }
+}
+
+.menu-overflow-submenu {
+  .menu-item-link {
+    padding: 0.5rem 1rem;
+  }
+}
+
+// ----------------------------------------
+// Menu Selected Indicator
+// ----------------------------------------
+.menu-indicator {
+  &.menu-vertical .menu-item.is-active::before,
+  &.menu-inline .menu-item.is-active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 0 3px 3px 0;
+  }
+}
+
+// ----------------------------------------
+// Menu Accordion (Only one submenu open)
+// ----------------------------------------
+.menu-accordion {
+  .menu-submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  .menu-item.is-open > .menu-submenu {
+    max-height: 500px;
+  }
+}
+
+// ----------------------------------------
+// Menu Popup (for collapsed)
+// ----------------------------------------
+.menu-popup {
+  position: absolute;
+  z-index: $z-dropdown;
+  min-width: 160px;
+  padding: 0.25rem 0;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+  list-style: none;
+  margin: 0;
+}
+
+// ----------------------------------------
+// Menu Responsive
+// ----------------------------------------
+@media (max-width: 767.98px) {
+  .menu-horizontal {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+
+    > .menu-item > .menu-item-link {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    > .menu-item.is-active > .menu-item-link {
+      border-bottom-color: transparent;
+      background-color: rgba(var(--primary-rgb), 0.1);
+    }
+
+    .menu-submenu {
+      position: static;
+      padding-left: 1.5rem;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}

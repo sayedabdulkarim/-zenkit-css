@@ -1,0 +1,279 @@
+// ========================================
+// ZenKit - Toast
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Toast Container
+// ----------------------------------------
+.toast-container {
+  --toast-zindex: #{$z-toast};
+  position: fixed;
+  z-index: var(--toast-zindex);
+  width: max-content;
+  max-width: 100%;
+  pointer-events: none;
+
+  > :not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Toast Container Positions
+.toast-container-top-start {
+  top: 1rem;
+  left: 1rem;
+}
+
+.toast-container-top-center {
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-container-top-end {
+  top: 1rem;
+  right: 1rem;
+}
+
+.toast-container-middle-start {
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.toast-container-middle-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toast-container-middle-end {
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}
+
+.toast-container-bottom-start {
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.toast-container-bottom-center {
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-container-bottom-end {
+  bottom: 1rem;
+  right: 1rem;
+}
+
+// ----------------------------------------
+// Toast
+// ----------------------------------------
+.toast {
+  --toast-zindex: #{$z-toast};
+  --toast-padding-x: 0.75rem;
+  --toast-padding-y: 0.5rem;
+  --toast-spacing: 1.5rem;
+  --toast-max-width: 350px;
+  --toast-font-size: var(--text-sm);
+  --toast-color: var(--text);
+  --toast-bg: var(--bg-card);
+  --toast-border-width: #{$border-width};
+  --toast-border-color: var(--border);
+  --toast-border-radius: var(--radius);
+  --toast-box-shadow: #{$shadow-lg};
+  --toast-header-color: var(--text-muted);
+  --toast-header-bg: #{rgba(#fff, 0.85)};
+  --toast-header-border-color: var(--border);
+
+  width: var(--toast-max-width);
+  max-width: 100%;
+  font-size: var(--toast-font-size);
+  color: var(--toast-color);
+  pointer-events: auto;
+  background-color: var(--toast-bg);
+  background-clip: padding-box;
+  border: var(--toast-border-width) solid var(--toast-border-color);
+  box-shadow: var(--toast-box-shadow);
+  border-radius: var(--toast-border-radius);
+
+  &.showing {
+    opacity: 0;
+  }
+
+  &:not(.show) {
+    display: none;
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+// ----------------------------------------
+// Toast Header
+// ----------------------------------------
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: var(--toast-padding-y) var(--toast-padding-x);
+  color: var(--toast-header-color);
+  background-color: var(--toast-header-bg);
+  background-clip: padding-box;
+  border-bottom: var(--toast-border-width) solid var(--toast-header-border-color);
+  border-top-left-radius: calc(var(--toast-border-radius) - var(--toast-border-width));
+  border-top-right-radius: calc(var(--toast-border-radius) - var(--toast-border-width));
+
+  .btn-close {
+    margin-right: calc(-0.5 * var(--toast-padding-x));
+    margin-left: var(--toast-padding-x);
+  }
+}
+
+// ----------------------------------------
+// Toast Body
+// ----------------------------------------
+.toast-body {
+  padding: var(--toast-padding-x);
+  word-wrap: break-word;
+}
+
+// ----------------------------------------
+// Toast Colors
+// ----------------------------------------
+.toast-primary {
+  --toast-bg: #{rgba($primary, 0.95)};
+  --toast-color: var(--white);
+  --toast-border-color: var(--primary);
+  --toast-header-bg: var(--primary);
+  --toast-header-color: var(--white);
+  --toast-header-border-color: #{rgba(#fff, 0.2)};
+}
+
+.toast-success {
+  --toast-bg: #{rgba($success, 0.95)};
+  --toast-color: var(--white);
+  --toast-border-color: var(--success);
+  --toast-header-bg: var(--success);
+  --toast-header-color: var(--white);
+  --toast-header-border-color: #{rgba(#fff, 0.2)};
+}
+
+.toast-danger {
+  --toast-bg: #{rgba($danger, 0.95)};
+  --toast-color: var(--white);
+  --toast-border-color: var(--danger);
+  --toast-header-bg: var(--danger);
+  --toast-header-color: var(--white);
+  --toast-header-border-color: #{rgba(#fff, 0.2)};
+}
+
+.toast-warning {
+  --toast-bg: #{rgba($warning, 0.95)};
+  --toast-color: var(--gray-900);
+  --toast-border-color: var(--warning);
+  --toast-header-bg: var(--warning);
+  --toast-header-color: var(--gray-900);
+  --toast-header-border-color: #{rgba(#000, 0.1)};
+}
+
+.toast-info {
+  --toast-bg: #{rgba($info, 0.95)};
+  --toast-color: var(--white);
+  --toast-border-color: var(--info);
+  --toast-header-bg: var(--info);
+  --toast-header-color: var(--white);
+  --toast-header-border-color: #{rgba(#fff, 0.2)};
+}
+
+.toast-dark {
+  --toast-bg: var(--gray-800);
+  --toast-color: var(--white);
+  --toast-border-color: var(--gray-700);
+  --toast-header-bg: var(--gray-900);
+  --toast-header-color: var(--gray-300);
+  --toast-header-border-color: var(--gray-700);
+}
+
+.toast-light {
+  --toast-bg: var(--gray-100);
+  --toast-color: var(--gray-900);
+  --toast-border-color: var(--gray-200);
+  --toast-header-bg: var(--gray-200);
+  --toast-header-color: var(--gray-700);
+  --toast-header-border-color: var(--gray-300);
+}
+
+// ----------------------------------------
+// Toast Fade Animation
+// ----------------------------------------
+.toast.fade {
+  opacity: 0;
+  transition: opacity $transition-fast linear;
+}
+
+.toast.fade.show {
+  opacity: 1;
+}
+
+// ----------------------------------------
+// Stacking Toasts
+// ----------------------------------------
+.toast-stacked {
+  position: relative;
+
+  .toast {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+// ----------------------------------------
+// Simple Toast (No header)
+// ----------------------------------------
+.toast-simple {
+  .toast-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+}
+
+// ----------------------------------------
+// Toast with Icon
+// ----------------------------------------
+.toast-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: var(--toast-padding-x);
+
+  .toast-icon-wrapper {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .toast-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-title {
+    font-weight: $font-weight-semibold;
+    margin-bottom: 0.25rem;
+  }
+
+  .toast-message {
+    color: var(--text-muted);
+  }
+}

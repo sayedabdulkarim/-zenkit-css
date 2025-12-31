@@ -1,0 +1,38 @@
+// ========================================
+// ZenKit - Figures
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Figure
+// ----------------------------------------
+.figure {
+  display: inline-block;
+}
+
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.figure-caption {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Figure Variants
+// ----------------------------------------
+.figure-centered {
+  text-align: center;
+}
+
+.figure-bordered {
+  .figure-img {
+    padding: 0.25rem;
+    background-color: var(--bg);
+    border: $border-width solid var(--border);
+    border-radius: var(--radius);
+  }
+}

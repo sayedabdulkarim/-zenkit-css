@@ -1,0 +1,336 @@
+// ========================================
+// ZenKit - Statistic / Stats
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Base Statistic
+// ----------------------------------------
+.statistic {
+  display: flex;
+  flex-direction: column;
+}
+
+// ----------------------------------------
+// Statistic Title
+// ----------------------------------------
+.statistic-title {
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+// ----------------------------------------
+// Statistic Value
+// ----------------------------------------
+.statistic-value {
+  font-size: var(--text-3xl);
+  font-weight: $font-weight-bold;
+  color: var(--text);
+  line-height: $line-height-tight;
+}
+
+// ----------------------------------------
+// Statistic Prefix/Suffix
+// ----------------------------------------
+.statistic-prefix,
+.statistic-suffix {
+  font-size: var(--text-xl);
+  font-weight: $font-weight-semibold;
+}
+
+.statistic-prefix {
+  margin-right: 0.25rem;
+}
+
+.statistic-suffix {
+  margin-left: 0.25rem;
+}
+
+// ----------------------------------------
+// Statistic with Icon
+// ----------------------------------------
+.statistic-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+  background-color: var(--primary-50);
+  border-radius: var(--radius-lg);
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.statistic-icon-success {
+  color: $success;
+  background-color: $success-light;
+}
+
+.statistic-icon-danger {
+  color: $danger;
+  background-color: $danger-light;
+}
+
+.statistic-icon-warning {
+  color: $warning-dark;
+  background-color: $warning-light;
+}
+
+.statistic-icon-info {
+  color: $info;
+  background-color: $info-light;
+}
+
+// ----------------------------------------
+// Statistic Sizes
+// ----------------------------------------
+.statistic-sm {
+  .statistic-title {
+    font-size: var(--text-xs);
+  }
+
+  .statistic-value {
+    font-size: var(--text-xl);
+  }
+
+  .statistic-prefix,
+  .statistic-suffix {
+    font-size: var(--text-base);
+  }
+
+  .statistic-icon {
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.statistic-lg {
+  .statistic-title {
+    font-size: var(--text-base);
+  }
+
+  .statistic-value {
+    font-size: var(--text-5xl);
+  }
+
+  .statistic-prefix,
+  .statistic-suffix {
+    font-size: var(--text-2xl);
+  }
+
+  .statistic-icon {
+    width: 4rem;
+    height: 4rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+// ----------------------------------------
+// Statistic Trend
+// ----------------------------------------
+.statistic-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  margin-top: 0.25rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.statistic-trend-up {
+  color: $success;
+}
+
+.statistic-trend-down {
+  color: $danger;
+}
+
+.statistic-trend-neutral {
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Statistic Description
+// ----------------------------------------
+.statistic-description {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+// ----------------------------------------
+// Horizontal Statistic
+// ----------------------------------------
+.statistic-horizontal {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+
+  .statistic-icon {
+    margin-bottom: 0;
+  }
+
+  .statistic-content {
+    flex: 1;
+  }
+}
+
+// ----------------------------------------
+// Statistic Group
+// ----------------------------------------
+.statistic-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.statistic-group-divider {
+  > .statistic:not(:last-child) {
+    padding-right: 2rem;
+    border-right: $border-width solid var(--border);
+  }
+}
+
+// ----------------------------------------
+// Statistic Card
+// ----------------------------------------
+.statistic-card {
+  padding: 1.5rem;
+  background-color: var(--bg);
+  border: $border-width solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.statistic-card-shadow {
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+
+// ----------------------------------------
+// Statistic Colors
+// ----------------------------------------
+.statistic-primary {
+  .statistic-value {
+    color: var(--primary);
+  }
+}
+
+.statistic-success {
+  .statistic-value {
+    color: $success;
+  }
+}
+
+.statistic-danger {
+  .statistic-value {
+    color: $danger;
+  }
+}
+
+.statistic-warning {
+  .statistic-value {
+    color: $warning-dark;
+  }
+}
+
+.statistic-info {
+  .statistic-value {
+    color: $info;
+  }
+}
+
+// ----------------------------------------
+// Countdown Style Statistic
+// ----------------------------------------
+.statistic-countdown {
+  display: flex;
+  gap: 0.5rem;
+
+  .statistic-countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 3rem;
+  }
+
+  .statistic-countdown-value {
+    font-size: var(--text-2xl);
+    font-weight: $font-weight-bold;
+    color: var(--text);
+  }
+
+  .statistic-countdown-label {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .statistic-countdown-separator {
+    font-size: var(--text-2xl);
+    font-weight: $font-weight-bold;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+}
+
+// ----------------------------------------
+// Progress Statistic
+// ----------------------------------------
+.statistic-progress {
+  .statistic-progress-bar {
+    height: 0.5rem;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-full);
+    margin-top: 0.75rem;
+    overflow: hidden;
+  }
+
+  .statistic-progress-fill {
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow) ease-in-out;
+  }
+
+  .statistic-progress-fill-success {
+    background-color: $success;
+  }
+
+  .statistic-progress-fill-danger {
+    background-color: $danger;
+  }
+
+  .statistic-progress-fill-warning {
+    background-color: $warning;
+  }
+}
+
+// ----------------------------------------
+// Centered Statistic
+// ----------------------------------------
+.statistic-centered {
+  text-align: center;
+  align-items: center;
+}

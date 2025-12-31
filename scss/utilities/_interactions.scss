@@ -1,0 +1,249 @@
+// ========================================
+// ZenKit - Interaction Utilities
+// (Cursor, User Select, Pointer Events, Z-Index, Vertical Align, Object Fit, Aspect Ratio)
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Cursor
+// ----------------------------------------
+.cursor-auto { cursor: auto; }
+.cursor-default { cursor: default; }
+.cursor-pointer { cursor: pointer; }
+.cursor-wait { cursor: wait; }
+.cursor-text { cursor: text; }
+.cursor-move { cursor: move; }
+.cursor-grab { cursor: grab; }
+.cursor-grabbing { cursor: grabbing; }
+.cursor-help { cursor: help; }
+.cursor-not-allowed { cursor: not-allowed; }
+.cursor-none { cursor: none; }
+.cursor-progress { cursor: progress; }
+.cursor-cell { cursor: cell; }
+.cursor-crosshair { cursor: crosshair; }
+.cursor-zoom-in { cursor: zoom-in; }
+.cursor-zoom-out { cursor: zoom-out; }
+.cursor-col-resize { cursor: col-resize; }
+.cursor-row-resize { cursor: row-resize; }
+.cursor-n-resize { cursor: n-resize; }
+.cursor-e-resize { cursor: e-resize; }
+.cursor-s-resize { cursor: s-resize; }
+.cursor-w-resize { cursor: w-resize; }
+.cursor-ne-resize { cursor: ne-resize; }
+.cursor-nw-resize { cursor: nw-resize; }
+.cursor-se-resize { cursor: se-resize; }
+.cursor-sw-resize { cursor: sw-resize; }
+.cursor-ew-resize { cursor: ew-resize; }
+.cursor-ns-resize { cursor: ns-resize; }
+
+// ----------------------------------------
+// User Select
+// ----------------------------------------
+.user-select-none { user-select: none; }
+.user-select-text { user-select: text; }
+.user-select-all { user-select: all; }
+.user-select-auto { user-select: auto; }
+
+// Short aliases
+.select-none { user-select: none; }
+.select-text { user-select: text; }
+.select-all { user-select: all; }
+.select-auto { user-select: auto; }
+
+// ----------------------------------------
+// Pointer Events
+// ----------------------------------------
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+
+// Short aliases
+.pe-none { pointer-events: none; }
+.pe-auto { pointer-events: auto; }
+
+// ----------------------------------------
+// Touch Action
+// ----------------------------------------
+.touch-auto { touch-action: auto; }
+.touch-none { touch-action: none; }
+.touch-pan-x { touch-action: pan-x; }
+.touch-pan-y { touch-action: pan-y; }
+.touch-pan-left { touch-action: pan-left; }
+.touch-pan-right { touch-action: pan-right; }
+.touch-pan-up { touch-action: pan-up; }
+.touch-pan-down { touch-action: pan-down; }
+.touch-pinch-zoom { touch-action: pinch-zoom; }
+.touch-manipulation { touch-action: manipulation; }
+
+// ----------------------------------------
+// Resize
+// ----------------------------------------
+.resize-none { resize: none; }
+.resize { resize: both; }
+.resize-x { resize: horizontal; }
+.resize-y { resize: vertical; }
+
+// ----------------------------------------
+// Z-Index
+// ----------------------------------------
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+.z-auto { z-index: auto; }
+
+// Negative z-index
+.-z-10 { z-index: -10; }
+.-z-1 { z-index: -1; }
+
+// Framework z-index values
+.z-dropdown { z-index: $z-dropdown; }
+.z-sticky { z-index: $z-sticky; }
+.z-fixed { z-index: $z-fixed; }
+.z-modal-backdrop { z-index: $z-modal-backdrop; }
+.z-modal { z-index: $z-modal; }
+.z-popover { z-index: $z-popover; }
+.z-tooltip { z-index: $z-tooltip; }
+.z-toast { z-index: $z-toast; }
+
+// ----------------------------------------
+// Vertical Align
+// ----------------------------------------
+.align-baseline { vertical-align: baseline; }
+.align-top { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+.align-text-top { vertical-align: text-top; }
+.align-text-bottom { vertical-align: text-bottom; }
+.align-sub { vertical-align: sub; }
+.align-super { vertical-align: super; }
+
+// ----------------------------------------
+// Object Fit
+// ----------------------------------------
+.object-contain { object-fit: contain; }
+.object-cover { object-fit: cover; }
+.object-fill { object-fit: fill; }
+.object-none { object-fit: none; }
+.object-scale-down { object-fit: scale-down; }
+
+// ----------------------------------------
+// Object Position
+// ----------------------------------------
+.object-bottom { object-position: bottom; }
+.object-center { object-position: center; }
+.object-left { object-position: left; }
+.object-left-bottom { object-position: left bottom; }
+.object-left-top { object-position: left top; }
+.object-right { object-position: right; }
+.object-right-bottom { object-position: right bottom; }
+.object-right-top { object-position: right top; }
+.object-top { object-position: top; }
+
+// ----------------------------------------
+// Aspect Ratio
+// ----------------------------------------
+.aspect-auto { aspect-ratio: auto; }
+.aspect-square { aspect-ratio: 1 / 1; }
+.aspect-video { aspect-ratio: 16 / 9; }
+.aspect-4-3 { aspect-ratio: 4 / 3; }
+.aspect-3-2 { aspect-ratio: 3 / 2; }
+.aspect-2-1 { aspect-ratio: 2 / 1; }
+.aspect-21-9 { aspect-ratio: 21 / 9; }
+.aspect-1-1 { aspect-ratio: 1 / 1; }
+.aspect-3-4 { aspect-ratio: 3 / 4; }
+.aspect-2-3 { aspect-ratio: 2 / 3; }
+.aspect-9-16 { aspect-ratio: 9 / 16; }
+
+// ----------------------------------------
+// Will Change (Performance Hint)
+// ----------------------------------------
+.will-change-auto { will-change: auto; }
+.will-change-scroll { will-change: scroll-position; }
+.will-change-contents { will-change: contents; }
+.will-change-transform { will-change: transform; }
+.will-change-opacity { will-change: opacity; }
+
+// ----------------------------------------
+// Contain
+// ----------------------------------------
+.contain-none { contain: none; }
+.contain-content { contain: content; }
+.contain-strict { contain: strict; }
+.contain-size { contain: size; }
+.contain-layout { contain: layout; }
+.contain-paint { contain: paint; }
+.contain-style { contain: style; }
+
+// ----------------------------------------
+// Appearance
+// ----------------------------------------
+.appearance-none { appearance: none; }
+.appearance-auto { appearance: auto; }
+
+// ----------------------------------------
+// Caret Color
+// ----------------------------------------
+.caret-transparent { caret-color: transparent; }
+.caret-current { caret-color: currentColor; }
+.caret-primary { caret-color: var(--primary); }
+
+// ----------------------------------------
+// Accent Color
+// ----------------------------------------
+.accent-auto { accent-color: auto; }
+.accent-primary { accent-color: var(--primary); }
+.accent-success { accent-color: $success; }
+.accent-danger { accent-color: $danger; }
+.accent-warning { accent-color: $warning; }
+.accent-info { accent-color: $info; }
+
+// ----------------------------------------
+// Responsive Interaction Utilities
+// ----------------------------------------
+@media (min-width: 576px) {
+  .sm\:cursor-pointer { cursor: pointer; }
+  .sm\:pointer-events-none { pointer-events: none; }
+  .sm\:pointer-events-auto { pointer-events: auto; }
+  .sm\:select-none { user-select: none; }
+  .sm\:object-cover { object-fit: cover; }
+  .sm\:aspect-video { aspect-ratio: 16 / 9; }
+}
+
+@media (min-width: 768px) {
+  .md\:cursor-pointer { cursor: pointer; }
+  .md\:pointer-events-none { pointer-events: none; }
+  .md\:pointer-events-auto { pointer-events: auto; }
+  .md\:select-none { user-select: none; }
+  .md\:object-cover { object-fit: cover; }
+  .md\:aspect-video { aspect-ratio: 16 / 9; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:cursor-pointer { cursor: pointer; }
+  .lg\:pointer-events-none { pointer-events: none; }
+  .lg\:pointer-events-auto { pointer-events: auto; }
+  .lg\:select-none { user-select: none; }
+  .lg\:object-cover { object-fit: cover; }
+  .lg\:aspect-video { aspect-ratio: 16 / 9; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:cursor-pointer { cursor: pointer; }
+  .xl\:pointer-events-none { pointer-events: none; }
+  .xl\:pointer-events-auto { pointer-events: auto; }
+  .xl\:select-none { user-select: none; }
+  .xl\:object-cover { object-fit: cover; }
+  .xl\:aspect-video { aspect-ratio: 16 / 9; }
+}
+
+@media (min-width: 1536px) {
+  .xxl\:cursor-pointer { cursor: pointer; }
+  .xxl\:pointer-events-none { pointer-events: none; }
+  .xxl\:pointer-events-auto { pointer-events: auto; }
+  .xxl\:select-none { user-select: none; }
+  .xxl\:object-cover { object-fit: cover; }
+  .xxl\:aspect-video { aspect-ratio: 16 / 9; }
+}
