@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://sayedabdulkarim.github.io/-zenkit-css/docs/">
+  <a href="https://sayedabdulkarim.github.io/-zenkit-css/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/npm/zenkit-css@latest/docs/zenkit-logo.svg">
       <img src="https://cdn.jsdelivr.net/npm/zenkit-css@latest/docs/zenkit-logo.svg" alt="ZenKit" width="120">
@@ -12,7 +12,7 @@
 <p align="center">
   Sleek, intuitive, and lightweight CSS framework for faster web development.
   <br>
-  <a href="https://sayedabdulkarim.github.io/-zenkit-css/docs/"><strong>Explore ZenKit docs »</strong></a>
+  <a href="https://sayedabdulkarim.github.io/-zenkit-css/"><strong>Explore ZenKit docs »</strong></a>
   <br>
   <br>
   <a href="https://github.com/sayedabdulkarim/-zenkit-css/issues/new?labels=bug">Report bug</a>

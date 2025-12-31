@@ -37,6 +37,7 @@
   "files": [
     "dist",
     "scss",
+    "js",
     "docs/zenkit-logo.svg"
   ]
 }
