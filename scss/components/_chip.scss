@@ -1,0 +1,454 @@
+// ========================================
+// ZenKit - Chip Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Chip Base
+// ----------------------------------------
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--gray-100);
+  border: 1px solid transparent;
+  border-radius: $border-radius-full;
+  transition: all $transition-fast $transition-timing;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+// ----------------------------------------
+// Chip Sizes
+// ----------------------------------------
+.chip-xs {
+  padding: 0.125rem 0.5rem;
+  font-size: var(--text-xs);
+  gap: 0.25rem;
+}
+
+.chip-sm {
+  padding: 0.1875rem 0.625rem;
+  font-size: var(--text-xs);
+}
+
+.chip-md {
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-sm);
+}
+
+.chip-lg {
+  padding: 0.375rem 1rem;
+  font-size: var(--text-base);
+}
+
+// ----------------------------------------
+// Chip Colors
+// ----------------------------------------
+.chip-primary {
+  background-color: var(--primary-100);
+  color: var(--primary-700);
+}
+
+.chip-secondary {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.chip-success {
+  background-color: var(--success-100);
+  color: var(--success-700);
+}
+
+.chip-danger {
+  background-color: var(--danger-100);
+  color: var(--danger-700);
+}
+
+.chip-warning {
+  background-color: var(--warning-100);
+  color: var(--warning-700);
+}
+
+.chip-info {
+  background-color: var(--info-100);
+  color: var(--info-700);
+}
+
+// ----------------------------------------
+// Chip Variants
+// ----------------------------------------
+
+// Filled
+.chip-filled {
+  &.chip-primary {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+
+  &.chip-secondary {
+    background-color: var(--gray-600);
+    color: var(--white);
+  }
+
+  &.chip-success {
+    background-color: var(--success);
+    color: var(--white);
+  }
+
+  &.chip-danger {
+    background-color: var(--danger);
+    color: var(--white);
+  }
+
+  &.chip-warning {
+    background-color: var(--warning);
+    color: var(--gray-900);
+  }
+
+  &.chip-info {
+    background-color: var(--info);
+    color: var(--white);
+  }
+}
+
+// Outlined
+.chip-outlined {
+  background-color: transparent;
+  border-color: var(--border);
+
+  &.chip-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  &.chip-secondary {
+    border-color: var(--gray-400);
+    color: var(--gray-600);
+  }
+
+  &.chip-success {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  &.chip-danger {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  &.chip-warning {
+    border-color: var(--warning);
+    color: var(--warning-700);
+  }
+
+  &.chip-info {
+    border-color: var(--info);
+    color: var(--info);
+  }
+}
+
+// ----------------------------------------
+// Chip with Avatar
+// ----------------------------------------
+.chip-avatar {
+  padding-left: 0.25rem;
+}
+
+.chip-avatar-img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.125rem;
+}
+
+.chip-sm .chip-avatar-img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.chip-lg .chip-avatar-img {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+// ----------------------------------------
+// Chip with Icon
+// ----------------------------------------
+.chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.chip-icon-left {
+  margin-left: -0.125rem;
+}
+
+.chip-icon-right {
+  margin-right: -0.125rem;
+}
+
+// ----------------------------------------
+// Chip Delete Button
+// ----------------------------------------
+.chip-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-left: 0.125rem;
+  margin-right: -0.375rem;
+  padding: 0;
+  font-size: 0.875rem;
+  color: currentColor;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all $transition-fast $transition-timing;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+    opacity: 1;
+  }
+
+  svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &::before {
+    content: "×";
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
+
+.chip-delete-icon::before {
+  content: none;
+}
+
+// ----------------------------------------
+// Clickable Chip
+// ----------------------------------------
+.chip-clickable {
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--gray-200);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.chip-primary:hover {
+    background-color: var(--primary-200);
+  }
+
+  &.chip-success:hover {
+    background-color: var(--success-200);
+  }
+
+  &.chip-danger:hover {
+    background-color: var(--danger-200);
+  }
+
+  &.chip-warning:hover {
+    background-color: var(--warning-200);
+  }
+
+  &.chip-info:hover {
+    background-color: var(--info-200);
+  }
+
+  &.chip-filled:hover {
+    filter: brightness(0.9);
+  }
+
+  &.chip-outlined:hover {
+    background-color: var(--gray-50);
+  }
+}
+
+// ----------------------------------------
+// Selected Chip
+// ----------------------------------------
+.chip-selected {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+
+  .chip-delete:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// ----------------------------------------
+// Disabled Chip
+// ----------------------------------------
+.chip-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ----------------------------------------
+// Chip Group
+// ----------------------------------------
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip-group-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+// Chip group spacing variants
+.chip-group-xs {
+  gap: 0.25rem;
+}
+
+.chip-group-sm {
+  gap: 0.375rem;
+}
+
+.chip-group-lg {
+  gap: 0.75rem;
+}
+
+// ----------------------------------------
+// Chip Input (for TagsInput)
+// ----------------------------------------
+.chip-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+  min-height: 2.5rem;
+  cursor: text;
+  transition: border-color $transition-fast $transition-timing,
+              box-shadow $transition-fast $transition-timing;
+
+  &:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+}
+
+.chip-input {
+  flex: 1;
+  min-width: 60px;
+  border: none;
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--text);
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+// ----------------------------------------
+// Chip Truncate
+// ----------------------------------------
+.chip-truncate {
+  .chip-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+  }
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .chip {
+    background-color: var(--gray-800);
+    color: var(--gray-200);
+  }
+
+  .chip-primary {
+    background-color: rgba($primary, 0.2);
+    color: var(--primary-300);
+  }
+
+  .chip-secondary {
+    background-color: var(--gray-700);
+    color: var(--gray-300);
+  }
+
+  .chip-success {
+    background-color: rgba($success, 0.2);
+    color: var(--success-300);
+  }
+
+  .chip-danger {
+    background-color: rgba($danger, 0.2);
+    color: var(--danger-300);
+  }
+
+  .chip-warning {
+    background-color: rgba($warning, 0.2);
+    color: var(--warning-300);
+  }
+
+  .chip-info {
+    background-color: rgba($info, 0.2);
+    color: var(--info-300);
+  }
+
+  .chip-outlined {
+    border-color: var(--gray-600);
+  }
+
+  .chip-clickable:hover {
+    background-color: var(--gray-700);
+  }
+
+  .chip-delete:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .chip-input-wrapper {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+
+    &:focus-within {
+      border-color: var(--primary);
+    }
+  }
+}

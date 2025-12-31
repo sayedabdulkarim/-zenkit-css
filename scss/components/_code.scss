@@ -1,0 +1,404 @@
+// ========================================
+// ZenKit - Code Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Inline Code
+// ----------------------------------------
+.code {
+  display: inline;
+  padding: 0.125rem 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: $font-weight-medium;
+  color: var(--danger-600);
+  background-color: var(--gray-100);
+  border-radius: $border-radius-sm;
+  word-wrap: break-word;
+}
+
+// ----------------------------------------
+// Code Colors
+// ----------------------------------------
+.code-primary {
+  color: var(--primary-700);
+  background-color: var(--primary-50);
+}
+
+.code-secondary {
+  color: var(--gray-700);
+  background-color: var(--gray-100);
+}
+
+.code-success {
+  color: var(--success-700);
+  background-color: var(--success-50);
+}
+
+.code-danger {
+  color: var(--danger-700);
+  background-color: var(--danger-50);
+}
+
+.code-warning {
+  color: var(--warning-700);
+  background-color: var(--warning-50);
+}
+
+.code-info {
+  color: var(--info-700);
+  background-color: var(--info-50);
+}
+
+// ----------------------------------------
+// Code Block
+// ----------------------------------------
+.code-block {
+  display: block;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--gray-100);
+  background-color: var(--gray-900);
+  border-radius: $border-radius-lg;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+
+  code {
+    display: block;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    border-radius: 0;
+  }
+}
+
+// ----------------------------------------
+// Code Block with Header
+// ----------------------------------------
+.code-wrapper {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  border: 1px solid var(--gray-800);
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: var(--gray-800);
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.code-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--gray-400);
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.code-language {
+  font-size: var(--text-xs);
+  font-weight: $font-weight-medium;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-wrapper .code-block {
+  border-radius: 0;
+  border: none;
+}
+
+// ----------------------------------------
+// Code Copy Button
+// ----------------------------------------
+.code-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  font-size: var(--text-xs);
+  font-weight: $font-weight-medium;
+  color: var(--gray-400);
+  background-color: var(--gray-700);
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: all $transition-fast $transition-timing;
+
+  &:hover {
+    color: var(--gray-200);
+    background-color: var(--gray-600);
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.code-copy-success {
+  color: var(--success) !important;
+}
+
+// Floating copy button
+.code-block-copy {
+  position: relative;
+
+  .code-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    transition: opacity $transition-fast $transition-timing;
+  }
+
+  &:hover .code-copy {
+    opacity: 1;
+  }
+}
+
+// ----------------------------------------
+// Code with Line Numbers
+// ----------------------------------------
+.code-line-numbers {
+  display: flex;
+}
+
+.code-lines {
+  flex-shrink: 0;
+  padding: 1rem 0;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid var(--gray-700);
+  color: var(--gray-600);
+  font-size: var(--text-sm);
+
+  span {
+    display: block;
+    padding: 0 0.75rem;
+    line-height: 1.6;
+  }
+}
+
+.code-line-numbers .code-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-x: auto;
+
+  code {
+    display: block;
+    line-height: 1.6;
+  }
+}
+
+// ----------------------------------------
+// Code Highlight Line
+// ----------------------------------------
+.code-highlight-line {
+  display: block;
+  background-color: rgba($primary, 0.15);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  border-left: 3px solid var(--primary);
+}
+
+// ----------------------------------------
+// Code Diff
+// ----------------------------------------
+.code-diff-add {
+  background-color: rgba($success, 0.15);
+
+  &::before {
+    content: "+";
+    color: var(--success);
+    margin-right: 0.5rem;
+  }
+}
+
+.code-diff-remove {
+  background-color: rgba($danger, 0.15);
+
+  &::before {
+    content: "-";
+    color: var(--danger);
+    margin-right: 0.5rem;
+  }
+}
+
+// ----------------------------------------
+// Code Snippet (Compact)
+// ----------------------------------------
+.code-snippet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--gray-100);
+  background-color: var(--gray-900);
+  border-radius: $border-radius;
+  max-width: 100%;
+}
+
+.code-snippet-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.code-snippet-copy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  color: var(--gray-500);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: color $transition-fast $transition-timing;
+
+  &:hover {
+    color: var(--gray-300);
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+// ----------------------------------------
+// Terminal Style
+// ----------------------------------------
+.code-terminal {
+  position: relative;
+  padding-top: 2rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    background-color: var(--gray-800);
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    background-color: var(--danger);
+    border-radius: 50%;
+    box-shadow: 1rem 0 0 var(--warning),
+                2rem 0 0 var(--success);
+  }
+}
+
+.code-terminal .code-block {
+  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+}
+
+.code-prompt {
+  color: var(--success);
+  user-select: none;
+
+  &::before {
+    content: "$ ";
+  }
+}
+
+// ----------------------------------------
+// Light Theme Code Block
+// ----------------------------------------
+.code-block-light {
+  color: var(--gray-800);
+  background-color: var(--gray-50);
+  border: 1px solid var(--border);
+}
+
+.code-wrapper-light {
+  border-color: var(--border);
+
+  .code-header {
+    background-color: var(--gray-100);
+    border-color: var(--border);
+  }
+
+  .code-filename {
+    color: var(--gray-600);
+  }
+
+  .code-copy {
+    background-color: var(--gray-200);
+    color: var(--gray-600);
+
+    &:hover {
+      background-color: var(--gray-300);
+      color: var(--gray-800);
+    }
+  }
+}
+
+// ----------------------------------------
+// Dark Mode (for inline code)
+// ----------------------------------------
+[data-theme="dark"] {
+  .code {
+    background-color: var(--gray-800);
+    color: var(--danger-300);
+  }
+
+  .code-primary {
+    background-color: rgba($primary, 0.2);
+    color: var(--primary-300);
+  }
+
+  .code-secondary {
+    background-color: var(--gray-800);
+    color: var(--gray-300);
+  }
+
+  .code-success {
+    background-color: rgba($success, 0.2);
+    color: var(--success-300);
+  }
+
+  .code-danger {
+    background-color: rgba($danger, 0.2);
+    color: var(--danger-300);
+  }
+
+  .code-warning {
+    background-color: rgba($warning, 0.2);
+    color: var(--warning-300);
+  }
+
+  .code-info {
+    background-color: rgba($info, 0.2);
+    color: var(--info-300);
+  }
+}

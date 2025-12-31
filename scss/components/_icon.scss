@@ -1,0 +1,338 @@
+// ========================================
+// ZenKit - Icon Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Icon Base
+// ----------------------------------------
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: currentColor;
+  fill: currentColor;
+  vertical-align: middle;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+}
+
+// ----------------------------------------
+// Icon Sizes
+// ----------------------------------------
+.icon-xs {
+  font-size: 0.75rem;
+}
+
+.icon-sm {
+  font-size: 1rem;
+}
+
+.icon-md {
+  font-size: 1.25rem;
+}
+
+.icon-lg {
+  font-size: 1.5rem;
+}
+
+.icon-xl {
+  font-size: 2rem;
+}
+
+.icon-2xl {
+  font-size: 2.5rem;
+}
+
+.icon-3xl {
+  font-size: 3rem;
+}
+
+// Custom size via CSS variable
+.icon-custom {
+  font-size: var(--icon-size, 1.25rem);
+}
+
+// ----------------------------------------
+// Icon Colors
+// ----------------------------------------
+.icon-primary {
+  color: var(--primary);
+}
+
+.icon-secondary {
+  color: var(--gray-600);
+}
+
+.icon-success {
+  color: var(--success);
+}
+
+.icon-danger {
+  color: var(--danger);
+}
+
+.icon-warning {
+  color: var(--warning);
+}
+
+.icon-info {
+  color: var(--info);
+}
+
+.icon-muted {
+  color: var(--text-muted);
+}
+
+.icon-white {
+  color: var(--white);
+}
+
+.icon-black {
+  color: var(--black);
+}
+
+// ----------------------------------------
+// Icon Animations
+// ----------------------------------------
+.icon-spin {
+  animation: icon-spin 1s linear infinite;
+}
+
+@keyframes icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-pulse {
+  animation: icon-pulse 1s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.icon-bounce {
+  animation: icon-bounce 1s ease infinite;
+}
+
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.icon-shake {
+  animation: icon-shake 0.5s ease-in-out infinite;
+}
+
+@keyframes icon-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+// ----------------------------------------
+// Icon Rotate
+// ----------------------------------------
+.icon-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.icon-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.icon-rotate-270 {
+  transform: rotate(270deg);
+}
+
+// ----------------------------------------
+// Icon Flip
+// ----------------------------------------
+.icon-flip-h {
+  transform: scaleX(-1);
+}
+
+.icon-flip-v {
+  transform: scaleY(-1);
+}
+
+.icon-flip-both {
+  transform: scale(-1);
+}
+
+// ----------------------------------------
+// Icon with Text
+// ----------------------------------------
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.icon-text-left .icon {
+  order: -1;
+}
+
+.icon-text-right .icon {
+  order: 1;
+}
+
+// ----------------------------------------
+// Icon Stack
+// ----------------------------------------
+.icon-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+}
+
+.icon-stack-bg {
+  position: absolute;
+  font-size: 2em;
+}
+
+.icon-stack-fg {
+  position: absolute;
+  font-size: 1em;
+}
+
+// ----------------------------------------
+// Icon Badge
+// ----------------------------------------
+.icon-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon-badge-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--danger);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+.icon-badge-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  line-height: 16px;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--danger);
+  border-radius: 999px;
+}
+
+// ----------------------------------------
+// Icon Button Reset (for clickable icons)
+// ----------------------------------------
+.icon-clickable {
+  cursor: pointer;
+  transition: color $transition-fast $transition-timing,
+              transform $transition-fast $transition-timing;
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+// ----------------------------------------
+// Icon in Inputs
+// ----------------------------------------
+.icon-input-prefix,
+.icon-input-suffix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.icon-input-prefix {
+  left: 0.75rem;
+}
+
+.icon-input-suffix {
+  right: 0.75rem;
+}
+
+// ----------------------------------------
+// Icon List
+// ----------------------------------------
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    .icon {
+      flex-shrink: 0;
+      margin-top: 0.125em;
+    }
+  }
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .icon-badge-dot,
+  .icon-badge-count {
+    border-color: var(--gray-900);
+  }
+
+  .icon-muted {
+    color: var(--gray-500);
+  }
+}

@@ -1,0 +1,401 @@
+// ========================================
+// ZenKit - Toggle Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Toggle Base
+// ----------------------------------------
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+  background-color: transparent;
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-fast $transition-timing;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background-color: var(--gray-100);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-200);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ----------------------------------------
+// Toggle Pressed State
+// ----------------------------------------
+.toggle-pressed,
+.toggle[aria-pressed="true"],
+.toggle.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--primary-600);
+    border-color: var(--primary-600);
+  }
+}
+
+// ----------------------------------------
+// Toggle Disabled
+// ----------------------------------------
+.toggle:disabled,
+.toggle-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ----------------------------------------
+// Toggle Sizes
+// ----------------------------------------
+.toggle-xs {
+  padding: 0.25rem 0.5rem;
+  font-size: var(--text-xs);
+}
+
+.toggle-sm {
+  padding: 0.375rem 0.625rem;
+  font-size: var(--text-xs);
+}
+
+.toggle-md {
+  padding: 0.5rem 0.75rem;
+  font-size: var(--text-sm);
+}
+
+.toggle-lg {
+  padding: 0.625rem 1rem;
+  font-size: var(--text-base);
+}
+
+// ----------------------------------------
+// Toggle with Icon
+// ----------------------------------------
+.toggle-icon {
+  padding: 0.5rem;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.toggle-icon-sm {
+  padding: 0.375rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.toggle-icon-lg {
+  padding: 0.625rem;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+// Icon with text
+.toggle-icon-text {
+  gap: 0.375rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ----------------------------------------
+// Toggle Variants
+// ----------------------------------------
+
+// Outline (default)
+.toggle-outline {
+  background-color: transparent;
+
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+}
+
+// Ghost
+.toggle-ghost {
+  border-color: transparent;
+
+  &:hover {
+    background-color: var(--gray-100);
+  }
+
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--primary-100);
+    color: var(--primary);
+    border-color: transparent;
+  }
+}
+
+// Soft
+.toggle-soft {
+  background-color: var(--gray-100);
+  border-color: transparent;
+
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--primary-100);
+    color: var(--primary);
+  }
+}
+
+// ----------------------------------------
+// Toggle Colors
+// ----------------------------------------
+.toggle-primary {
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+  }
+}
+
+.toggle-secondary {
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--gray-600);
+    border-color: var(--gray-600);
+    color: var(--white);
+  }
+}
+
+.toggle-success {
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: var(--white);
+  }
+}
+
+.toggle-danger {
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--danger);
+    border-color: var(--danger);
+    color: var(--white);
+  }
+}
+
+.toggle-warning {
+  &.toggle-pressed,
+  &[aria-pressed="true"] {
+    background-color: var(--warning);
+    border-color: var(--warning);
+    color: var(--gray-900);
+  }
+}
+
+// ----------------------------------------
+// Toggle Group
+// ----------------------------------------
+.toggle-group {
+  display: inline-flex;
+  border-radius: $border-radius;
+}
+
+.toggle-group .toggle {
+  border-radius: 0;
+
+  &:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  &:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+
+  &:not(:first-child) {
+    margin-left: -1px;
+  }
+
+  &:hover,
+  &:focus,
+  &.toggle-pressed {
+    z-index: 1;
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Vertical
+// ----------------------------------------
+.toggle-group-vertical {
+  flex-direction: column;
+
+  .toggle {
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      border-bottom-left-radius: 0;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      border-top-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      margin-left: 0;
+      margin-top: -1px;
+    }
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Spaced
+// ----------------------------------------
+.toggle-group-spaced {
+  gap: 0.375rem;
+
+  .toggle {
+    border-radius: $border-radius;
+    margin: 0;
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Single Select
+// ----------------------------------------
+.toggle-group-single {
+  .toggle.toggle-pressed:not(:hover):not(:focus) {
+    z-index: 1;
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Multiple Select
+// ----------------------------------------
+.toggle-group-multiple {
+  .toggle.toggle-pressed {
+    z-index: 1;
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Full Width
+// ----------------------------------------
+.toggle-group-full {
+  width: 100%;
+  display: flex;
+
+  .toggle {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+// ----------------------------------------
+// Toggle Group Sizes
+// ----------------------------------------
+.toggle-group-sm .toggle {
+  padding: 0.375rem 0.625rem;
+  font-size: var(--text-xs);
+}
+
+.toggle-group-lg .toggle {
+  padding: 0.625rem 1rem;
+  font-size: var(--text-base);
+}
+
+// ----------------------------------------
+// Toggle Group Variants
+// ----------------------------------------
+.toggle-group-outline {
+  .toggle {
+    background-color: transparent;
+  }
+}
+
+.toggle-group-soft {
+  padding: 0.25rem;
+  background-color: var(--gray-100);
+  border: none;
+  border-radius: $border-radius-lg;
+
+  .toggle {
+    border: none;
+    background-color: transparent;
+
+    &.toggle-pressed {
+      background-color: var(--bg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .toggle {
+    border-color: var(--gray-600);
+    color: var(--gray-300);
+
+    &:hover {
+      background-color: var(--gray-800);
+    }
+  }
+
+  .toggle-ghost:hover {
+    background-color: var(--gray-800);
+  }
+
+  .toggle-ghost.toggle-pressed,
+  .toggle-ghost[aria-pressed="true"] {
+    background-color: rgba($primary, 0.2);
+    color: var(--primary-300);
+  }
+
+  .toggle-soft {
+    background-color: var(--gray-800);
+
+    &.toggle-pressed,
+    &[aria-pressed="true"] {
+      background-color: rgba($primary, 0.2);
+      color: var(--primary-300);
+    }
+  }
+
+  .toggle-group-soft {
+    background-color: var(--gray-800);
+
+    .toggle.toggle-pressed {
+      background-color: var(--gray-700);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

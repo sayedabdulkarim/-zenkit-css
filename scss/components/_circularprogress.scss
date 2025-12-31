@@ -1,0 +1,355 @@
+// ========================================
+// ZenKit - Circular Progress Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Circular Progress Container
+// ----------------------------------------
+.circular-progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+}
+
+// ----------------------------------------
+// Circular Progress SVG
+// ----------------------------------------
+.circular-progress-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-progress-track {
+  fill: none;
+  stroke: var(--gray-200);
+  stroke-width: 4;
+}
+
+.circular-progress-indicator {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+// ----------------------------------------
+// Circular Progress Sizes
+// ----------------------------------------
+.circular-progress-xs {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 3;
+  }
+}
+
+.circular-progress-sm {
+  width: 2rem;
+  height: 2rem;
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 3;
+  }
+}
+
+.circular-progress-md {
+  width: 3rem;
+  height: 3rem;
+}
+
+.circular-progress-lg {
+  width: 4rem;
+  height: 4rem;
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 5;
+  }
+}
+
+.circular-progress-xl {
+  width: 5rem;
+  height: 5rem;
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 6;
+  }
+}
+
+.circular-progress-2xl {
+  width: 6rem;
+  height: 6rem;
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 6;
+  }
+}
+
+// ----------------------------------------
+// Circular Progress Label
+// ----------------------------------------
+.circular-progress-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-xs);
+  font-weight: $font-weight-semibold;
+  color: var(--text);
+}
+
+.circular-progress-lg .circular-progress-label {
+  font-size: var(--text-sm);
+}
+
+.circular-progress-xl .circular-progress-label,
+.circular-progress-2xl .circular-progress-label {
+  font-size: var(--text-base);
+}
+
+// ----------------------------------------
+// Circular Progress Colors
+// ----------------------------------------
+.circular-progress-primary .circular-progress-indicator {
+  stroke: var(--primary);
+}
+
+.circular-progress-secondary .circular-progress-indicator {
+  stroke: var(--gray-600);
+}
+
+.circular-progress-success .circular-progress-indicator {
+  stroke: var(--success);
+}
+
+.circular-progress-danger .circular-progress-indicator {
+  stroke: var(--danger);
+}
+
+.circular-progress-warning .circular-progress-indicator {
+  stroke: var(--warning);
+}
+
+.circular-progress-info .circular-progress-indicator {
+  stroke: var(--info);
+}
+
+// ----------------------------------------
+// Circular Progress Gradient
+// ----------------------------------------
+.circular-progress-gradient .circular-progress-indicator {
+  stroke: url(#circular-progress-gradient);
+}
+
+// ----------------------------------------
+// Circular Progress Variants
+// ----------------------------------------
+
+// Thick stroke
+.circular-progress-thick {
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 8;
+  }
+}
+
+// Thin stroke
+.circular-progress-thin {
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-width: 2;
+  }
+}
+
+// No track
+.circular-progress-no-track .circular-progress-track {
+  stroke: transparent;
+}
+
+// Square linecap
+.circular-progress-square .circular-progress-indicator {
+  stroke-linecap: butt;
+}
+
+// ----------------------------------------
+// Indeterminate Progress
+// ----------------------------------------
+.circular-progress-indeterminate {
+  animation: circular-progress-rotate 2s linear infinite;
+
+  .circular-progress-indicator {
+    animation: circular-progress-dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes circular-progress-rotate {
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes circular-progress-dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+// ----------------------------------------
+// Circular Progress with Icon
+// ----------------------------------------
+.circular-progress-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.circular-progress-lg .circular-progress-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.circular-progress-xl .circular-progress-icon svg,
+.circular-progress-2xl .circular-progress-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+// ----------------------------------------
+// Circular Progress Wrapper
+// ----------------------------------------
+.circular-progress-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.circular-progress-text {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Circular Progress in Card
+// ----------------------------------------
+.circular-progress-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius-lg;
+  text-align: center;
+}
+
+.circular-progress-card-title {
+  margin-top: 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+}
+
+.circular-progress-card-description {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Circular Progress Semi Circle
+// ----------------------------------------
+.circular-progress-semi {
+  .circular-progress-svg {
+    transform: rotate(-180deg);
+  }
+
+  .circular-progress-track,
+  .circular-progress-indicator {
+    stroke-dasharray: 157, 314; // Half circle
+  }
+
+  .circular-progress-label {
+    top: 70%;
+  }
+}
+
+// ----------------------------------------
+// Multiple Progress Rings
+// ----------------------------------------
+.circular-progress-rings {
+  position: relative;
+}
+
+.circular-progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ----------------------------------------
+// Circular Progress States
+// ----------------------------------------
+.circular-progress-complete {
+  .circular-progress-indicator {
+    stroke: var(--success);
+  }
+
+  .circular-progress-icon {
+    color: var(--success);
+  }
+}
+
+.circular-progress-error {
+  .circular-progress-indicator {
+    stroke: var(--danger);
+  }
+
+  .circular-progress-icon {
+    color: var(--danger);
+  }
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .circular-progress-track {
+    stroke: var(--gray-700);
+  }
+
+  .circular-progress-card {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+  }
+}
