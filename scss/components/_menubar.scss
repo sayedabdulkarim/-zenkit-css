@@ -1,0 +1,370 @@
+// ========================================
+// ZenKit - Menubar Component
+// ========================================
+
+@use '../abstracts/variables' as *;
+
+// ----------------------------------------
+// Menubar Container
+// ----------------------------------------
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+}
+
+// ----------------------------------------
+// Menubar Item (Top Level)
+// ----------------------------------------
+.menubar-item {
+  position: relative;
+}
+
+.menubar-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: $font-weight-medium;
+  color: var(--text);
+  background-color: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast $transition-timing;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: var(--gray-100);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--gray-100);
+  }
+
+  &[aria-expanded="true"] {
+    background-color: var(--gray-100);
+  }
+}
+
+.menubar-trigger-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-muted);
+}
+
+// ----------------------------------------
+// Menubar Dropdown
+// ----------------------------------------
+.menubar-content {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  padding: 0.375rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity $transition-fast $transition-timing,
+              visibility $transition-fast $transition-timing,
+              transform $transition-fast $transition-timing;
+}
+
+.menubar-item:hover .menubar-content,
+.menubar-item:focus-within .menubar-content,
+.menubar-content.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+// ----------------------------------------
+// Menu Items
+// ----------------------------------------
+.menubar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color $transition-fast $transition-timing;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background-color: var(--gray-100);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--gray-100);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.menubar-menu-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.menubar-menu-label {
+  flex: 1;
+}
+
+.menubar-menu-shortcut {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+// ----------------------------------------
+// Submenu
+// ----------------------------------------
+.menubar-submenu {
+  position: relative;
+}
+
+.menubar-submenu-trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &::after {
+    content: "";
+    margin-left: auto;
+    border: solid var(--text-muted);
+    border-width: 0 1.5px 1.5px 0;
+    padding: 2.5px;
+    transform: rotate(-45deg);
+  }
+}
+
+.menubar-submenu-content {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: -0.375rem;
+  min-width: 180px;
+  padding: 0.375rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $border-radius;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-4px);
+  transition: opacity $transition-fast $transition-timing,
+              visibility $transition-fast $transition-timing,
+              transform $transition-fast $transition-timing;
+}
+
+.menubar-submenu:hover .menubar-submenu-content,
+.menubar-submenu:focus-within .menubar-submenu-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+// ----------------------------------------
+// Separator
+// ----------------------------------------
+.menubar-separator {
+  height: 1px;
+  background-color: var(--border);
+  margin: 0.375rem 0;
+}
+
+// ----------------------------------------
+// Group Label
+// ----------------------------------------
+.menubar-group-label {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-xs);
+  font-weight: $font-weight-medium;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// ----------------------------------------
+// Checkbox Item
+// ----------------------------------------
+.menubar-checkbox {
+  position: relative;
+  padding-left: 1.75rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    transition: all $transition-fast $transition-timing;
+  }
+
+  &[data-checked="true"]::before {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  &[data-checked="true"]::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-60%) rotate(45deg);
+    width: 4px;
+    height: 8px;
+    border: solid var(--white);
+    border-width: 0 2px 2px 0;
+  }
+}
+
+// ----------------------------------------
+// Radio Item
+// ----------------------------------------
+.menubar-radio {
+  position: relative;
+  padding-left: 1.75rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    transition: all $transition-fast $transition-timing;
+  }
+
+  &[data-checked="true"]::before {
+    border-color: var(--primary);
+  }
+
+  &[data-checked="true"]::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+  }
+}
+
+// ----------------------------------------
+// Menubar Sizes
+// ----------------------------------------
+.menubar-sm {
+  padding: 0.125rem;
+
+  .menubar-trigger {
+    padding: 0.25rem 0.5rem;
+    font-size: var(--text-xs);
+  }
+
+  .menubar-menu-item {
+    padding: 0.375rem 0.5rem;
+    font-size: var(--text-xs);
+  }
+}
+
+.menubar-lg {
+  padding: 0.375rem;
+
+  .menubar-trigger {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-base);
+  }
+
+  .menubar-menu-item {
+    padding: 0.625rem 1rem;
+    font-size: var(--text-base);
+  }
+}
+
+// ----------------------------------------
+// Menubar Variants
+// ----------------------------------------
+
+// Borderless
+.menubar-borderless {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+// Filled
+.menubar-filled {
+  background-color: var(--gray-50);
+}
+
+// ----------------------------------------
+// Dark Mode
+// ----------------------------------------
+[data-theme="dark"] {
+  .menubar {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+  }
+
+  .menubar-trigger:hover,
+  .menubar-trigger:focus,
+  .menubar-trigger[aria-expanded="true"] {
+    background-color: var(--gray-800);
+  }
+
+  .menubar-content {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .menubar-menu-item:hover,
+  .menubar-menu-item:focus {
+    background-color: var(--gray-800);
+  }
+
+  .menubar-submenu-content {
+    background-color: var(--gray-900);
+    border-color: var(--gray-700);
+  }
+
+  .menubar-separator {
+    background-color: var(--gray-700);
+  }
+
+  .menubar-filled {
+    background-color: var(--gray-800);
+  }
+}
