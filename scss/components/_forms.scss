@@ -751,3 +751,330 @@
   background-color: var(--bg-muted);
   opacity: 1;
 }
+
+// ----------------------------------------
+// Input with Prefix/Suffix Icons
+// ----------------------------------------
+.form-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .form-control {
+    width: 100%;
+  }
+
+  &.has-prefix .form-control {
+    padding-left: 2.5rem;
+  }
+
+  &.has-suffix .form-control {
+    padding-right: 2.5rem;
+  }
+
+  &.has-prefix.has-suffix .form-control {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.form-input-prefix,
+.form-input-suffix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 100%;
+  color: var(--text-muted);
+  pointer-events: none;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.form-input-prefix {
+  left: 0;
+}
+
+.form-input-suffix {
+  right: 0;
+}
+
+// Clickable suffix (for buttons)
+.form-input-suffix-clickable {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color $transition-fast ease-in-out;
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+// Size variants
+.form-input-wrapper-sm {
+  &.has-prefix .form-control {
+    padding-left: 2rem;
+  }
+
+  &.has-suffix .form-control {
+    padding-right: 2rem;
+  }
+
+  .form-input-prefix,
+  .form-input-suffix {
+    width: 2rem;
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+}
+
+.form-input-wrapper-lg {
+  &.has-prefix .form-control {
+    padding-left: 3rem;
+  }
+
+  &.has-suffix .form-control {
+    padding-right: 3rem;
+  }
+
+  .form-input-prefix,
+  .form-input-suffix {
+    width: 3rem;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}
+
+// ----------------------------------------
+// Input Clear Button
+// ----------------------------------------
+.form-input-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  color: var(--text-muted);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-fast ease-in-out,
+              visibility $transition-fast ease-in-out,
+              color $transition-fast ease-in-out,
+              background-color $transition-fast ease-in-out;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  &:hover {
+    color: var(--text);
+    background-color: var(--gray-200);
+  }
+}
+
+.form-input-wrapper:hover .form-input-clear,
+.form-input-wrapper:focus-within .form-input-clear,
+.form-control:not(:placeholder-shown) ~ .form-input-clear {
+  opacity: 1;
+  visibility: visible;
+}
+
+// Clear button with suffix
+.form-input-wrapper.has-suffix .form-input-clear {
+  right: 2.5rem;
+}
+
+// ----------------------------------------
+// Character Counter
+// ----------------------------------------
+.form-character-counter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.25rem;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.form-character-counter-warning {
+  color: var(--warning);
+}
+
+.form-character-counter-danger {
+  color: var(--danger);
+}
+
+.form-character-counter-left {
+  justify-content: flex-start;
+}
+
+.form-character-counter-between {
+  justify-content: space-between;
+}
+
+// ----------------------------------------
+// Textarea Auto-grow
+// ----------------------------------------
+.form-textarea-wrapper {
+  position: relative;
+  display: grid;
+
+  &::after {
+    content: attr(data-replicated-value) " ";
+    white-space: pre-wrap;
+    visibility: hidden;
+    grid-area: 1 / 1 / 2 / 2;
+    padding: 0.625rem 0.875rem;
+    font: inherit;
+    border: $border-width solid transparent;
+  }
+
+  .form-control {
+    resize: none;
+    overflow: hidden;
+    grid-area: 1 / 1 / 2 / 2;
+  }
+}
+
+.form-textarea-auto-grow {
+  resize: none;
+  min-height: 80px;
+  overflow-y: hidden;
+}
+
+// ----------------------------------------
+// Form Input States with Icons
+// ----------------------------------------
+.form-input-wrapper .form-control.is-valid ~ .form-input-suffix {
+  color: var(--success);
+}
+
+.form-input-wrapper .form-control.is-invalid ~ .form-input-suffix {
+  color: var(--danger);
+}
+
+// ----------------------------------------
+// Search Input
+// ----------------------------------------
+.form-search {
+  position: relative;
+
+  .form-control {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .form-search-icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .form-search-clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity $transition-fast ease-in-out;
+
+    &:hover {
+      color: var(--text);
+      background-color: var(--gray-200);
+    }
+
+    svg {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+  }
+
+  &:focus-within .form-search-clear,
+  .form-control:not(:placeholder-shown) ~ .form-search-clear {
+    opacity: 1;
+  }
+}
+
+// ----------------------------------------
+// Form Input Loading State
+// ----------------------------------------
+.form-input-loading {
+  position: relative;
+
+  .form-control {
+    padding-right: 2.5rem;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: form-input-spin 0.6s linear infinite;
+  }
+}
+
+@keyframes form-input-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+// ----------------------------------------
+// Dark Mode Enhancements
+// ----------------------------------------
+[data-theme="dark"] {
+  .form-input-clear:hover {
+    background-color: var(--gray-700);
+  }
+
+  .form-search-clear:hover {
+    background-color: var(--gray-700);
+  }
+}

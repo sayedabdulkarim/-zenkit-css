@@ -116,6 +116,10 @@
 @use 'components/fieldset';
 @use 'components/pininput';
 @use 'components/editable';
+@use 'components/sheet';
+@use 'components/daterange';
+@use 'components/snippet';
+@use 'components/imagelist';
 
 // ----------------------------------------
 // 6. Components - JavaScript Enhanced
@@ -150,3 +154,4 @@
 @use 'utilities/animations';
 @use 'utilities/transforms';
 @use 'utilities/filters';
+@use 'utilities/accessibility';
