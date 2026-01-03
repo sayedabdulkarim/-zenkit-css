@@ -1,0 +1,73 @@
+// ========================================
+// Spoiler Component
+// ========================================
+
+.spoiler {
+  --zk-spoiler-transition-duration: 0.2s;
+
+  position: relative;
+
+  &-content {
+    overflow: hidden;
+    transition: max-height var(--zk-spoiler-transition-duration) ease;
+  }
+
+  &-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(transparent, var(--zk-bg-primary));
+    pointer-events: none;
+    transition: opacity var(--zk-spoiler-transition-duration) ease;
+  }
+
+  &-expanded &-gradient {
+    opacity: 0;
+  }
+
+  &-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--zk-primary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--zk-primary-dark);
+      text-decoration: underline;
+    }
+
+    &-icon {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--zk-spoiler-transition-duration) ease;
+    }
+  }
+
+  &-expanded &-control-icon {
+    transform: rotate(180deg);
+  }
+
+  // Inline variant
+  &-inline {
+    display: inline;
+
+    .spoiler-content {
+      display: inline;
+    }
+
+    .spoiler-control {
+      display: inline;
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+}

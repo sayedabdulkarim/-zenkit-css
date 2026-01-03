@@ -1,0 +1,51 @@
+// ========================================
+// SkipNavLink Component (Chakra-style)
+// ========================================
+
+.skip-nav-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--zk-bg-primary);
+  color: var(--zk-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--zk-primary);
+  border-radius: 0 0 var(--zk-radius-md) 0;
+  box-shadow: var(--zk-shadow-lg);
+  transform: translateY(-100%);
+  transition: transform 0.2s ease;
+
+  &:focus {
+    transform: translateY(0);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--zk-primary);
+    outline-offset: 2px;
+  }
+
+  // Alternative positioning
+  &-center {
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    border-radius: 0 0 var(--zk-radius-md) var(--zk-radius-md);
+
+    &:focus {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+// Skip nav content target
+.skip-nav-content {
+  scroll-margin-top: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,171 @@
+// ========================================
+// Indicator Component
+// ========================================
+
+.indicator {
+  --zk-indicator-size: 10px;
+  --zk-indicator-color: var(--zk-danger);
+  --zk-indicator-offset: 0;
+
+  position: relative;
+  display: inline-flex;
+
+  &-dot {
+    position: absolute;
+    width: var(--zk-indicator-size);
+    height: var(--zk-indicator-size);
+    background: var(--zk-indicator-color);
+    border-radius: 50%;
+    border: 2px solid var(--zk-bg-primary);
+    z-index: 1;
+
+    // Positions
+    &.top-start {
+      top: var(--zk-indicator-offset);
+      left: var(--zk-indicator-offset);
+    }
+
+    &.top-center {
+      top: var(--zk-indicator-offset);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.top-end {
+      top: var(--zk-indicator-offset);
+      right: var(--zk-indicator-offset);
+    }
+
+    &.middle-start {
+      top: 50%;
+      left: var(--zk-indicator-offset);
+      transform: translateY(-50%);
+    }
+
+    &.middle-center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.middle-end {
+      top: 50%;
+      right: var(--zk-indicator-offset);
+      transform: translateY(-50%);
+    }
+
+    &.bottom-start {
+      bottom: var(--zk-indicator-offset);
+      left: var(--zk-indicator-offset);
+    }
+
+    &.bottom-center {
+      bottom: var(--zk-indicator-offset);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.bottom-end {
+      bottom: var(--zk-indicator-offset);
+      right: var(--zk-indicator-offset);
+    }
+  }
+
+  &-label {
+    position: absolute;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+    background: var(--zk-indicator-color);
+    border-radius: 9px;
+    border: 2px solid var(--zk-bg-primary);
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  // Sizes
+  &-xs {
+    --zk-indicator-size: 6px;
+  }
+
+  &-sm {
+    --zk-indicator-size: 8px;
+  }
+
+  &-md {
+    --zk-indicator-size: 10px;
+  }
+
+  &-lg {
+    --zk-indicator-size: 12px;
+  }
+
+  &-xl {
+    --zk-indicator-size: 16px;
+  }
+
+  // Colors
+  &-primary {
+    --zk-indicator-color: var(--zk-primary);
+  }
+
+  &-success {
+    --zk-indicator-color: var(--zk-success);
+  }
+
+  &-warning {
+    --zk-indicator-color: var(--zk-warning);
+  }
+
+  &-danger {
+    --zk-indicator-color: var(--zk-danger);
+  }
+
+  &-info {
+    --zk-indicator-color: var(--zk-info);
+  }
+
+  // Processing animation
+  &-processing {
+    .indicator-dot {
+      animation: indicator-pulse 1.5s ease-in-out infinite;
+    }
+  }
+
+  // Disabled
+  &-disabled {
+    .indicator-dot,
+    .indicator-label {
+      opacity: 0.5;
+    }
+  }
+
+  // Inline mode
+  &-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .indicator-dot {
+      position: static;
+      border: none;
+    }
+  }
+}
+
+@keyframes indicator-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}

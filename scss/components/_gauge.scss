@@ -1,0 +1,143 @@
+// ========================================
+// Gauge Component
+// ========================================
+
+.gauge {
+  --zk-gauge-size: 200px;
+  --zk-gauge-track-color: var(--zk-bg-secondary);
+  --zk-gauge-fill-color: var(--zk-primary);
+  --zk-gauge-track-width: 20px;
+
+  position: relative;
+  width: var(--zk-gauge-size);
+  height: calc(var(--zk-gauge-size) / 2 + var(--zk-gauge-track-width));
+
+  &-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--zk-gauge-size);
+    height: var(--zk-gauge-size);
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--zk-gauge-track-color) 0deg,
+      var(--zk-gauge-track-color) 180deg,
+      transparent 180deg
+    );
+    transform: rotate(180deg);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: var(--zk-gauge-track-width);
+      left: var(--zk-gauge-track-width);
+      right: var(--zk-gauge-track-width);
+      bottom: var(--zk-gauge-track-width);
+      background: var(--zk-bg-primary);
+      border-radius: 50%;
+    }
+  }
+
+  &-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--zk-gauge-size);
+    height: var(--zk-gauge-size);
+    border-radius: 50%;
+    transform: rotate(180deg);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  }
+
+  &-needle {
+    position: absolute;
+    bottom: var(--zk-gauge-track-width);
+    left: 50%;
+    width: 4px;
+    height: calc(var(--zk-gauge-size) / 2 - var(--zk-gauge-track-width) - 10px);
+    background: var(--zk-text-primary);
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(-90deg);
+    border-radius: 2px;
+    transition: transform 0.5s ease-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--zk-text-primary);
+      border-radius: 50%;
+    }
+  }
+
+  &-value {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    &-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--zk-text-primary);
+    }
+
+    &-label {
+      font-size: 0.75rem;
+      color: var(--zk-text-muted);
+    }
+  }
+
+  &-labels {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    color: var(--zk-text-muted);
+  }
+
+  // Sizes
+  &-sm {
+    --zk-gauge-size: 120px;
+    --zk-gauge-track-width: 12px;
+
+    .gauge-value-number {
+      font-size: 1rem;
+    }
+  }
+
+  &-lg {
+    --zk-gauge-size: 280px;
+    --zk-gauge-track-width: 28px;
+
+    .gauge-value-number {
+      font-size: 2rem;
+    }
+  }
+
+  // Color variants
+  &-success {
+    --zk-gauge-fill-color: var(--zk-success);
+  }
+
+  &-warning {
+    --zk-gauge-fill-color: var(--zk-warning);
+  }
+
+  &-danger {
+    --zk-gauge-fill-color: var(--zk-danger);
+  }
+
+  &-info {
+    --zk-gauge-fill-color: var(--zk-info);
+  }
+}

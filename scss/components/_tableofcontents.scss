@@ -1,0 +1,107 @@
+// ========================================
+// TableOfContents Component
+// ========================================
+
+.toc {
+  --zk-toc-active-color: var(--zk-primary);
+  --zk-toc-border-color: var(--zk-border-color);
+
+  position: relative;
+
+  &-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &-item {
+    position: relative;
+  }
+
+  &-link {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+    color: var(--zk-text-secondary);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: var(--zk-text-primary);
+      background: var(--zk-bg-secondary);
+    }
+
+    &-active {
+      color: var(--zk-toc-active-color);
+      border-left-color: var(--zk-toc-active-color);
+      font-weight: 500;
+    }
+  }
+
+  // Nested levels
+  &-level-1 &-link {
+    padding-left: 1rem;
+  }
+
+  &-level-2 &-link {
+    padding-left: 1.75rem;
+    font-size: 0.8125rem;
+  }
+
+  &-level-3 &-link {
+    padding-left: 2.5rem;
+    font-size: 0.8125rem;
+  }
+
+  &-level-4 &-link {
+    padding-left: 3.25rem;
+    font-size: 0.75rem;
+  }
+
+  // Indicator line
+  &-indicator {
+    position: absolute;
+    left: 0;
+    width: 2px;
+    background: var(--zk-toc-active-color);
+    transition: top 0.2s ease, height 0.2s ease;
+    border-radius: 1px;
+  }
+
+  // Border variant
+  &-bordered {
+    border-left: 1px solid var(--zk-toc-border-color);
+
+    .toc-link {
+      border-left: none;
+      margin-left: -1px;
+      padding-left: calc(1rem + 1px);
+
+      &-active {
+        border-left: 2px solid var(--zk-toc-active-color);
+        margin-left: -2px;
+      }
+    }
+  }
+
+  // Sticky positioning
+  &-sticky {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  // With title
+  &-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--zk-text-muted);
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.25rem;
+  }
+}

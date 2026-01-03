@@ -1,0 +1,137 @@
+// ========================================
+// AppShell Component
+// ========================================
+
+.appshell {
+  --zk-appshell-header-height: 60px;
+  --zk-appshell-footer-height: 60px;
+  --zk-appshell-navbar-width: 250px;
+  --zk-appshell-aside-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--zk-bg-primary);
+
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--zk-appshell-header-height);
+    background: var(--zk-bg-primary);
+    border-bottom: 1px solid var(--zk-border-color);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  &-navbar {
+    position: fixed;
+    top: var(--zk-appshell-header-height);
+    left: 0;
+    bottom: 0;
+    width: var(--zk-appshell-navbar-width);
+    background: var(--zk-bg-primary);
+    border-right: 1px solid var(--zk-border-color);
+    z-index: 900;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+
+    &-collapsed {
+      width: 60px;
+    }
+
+    &-hidden {
+      transform: translateX(-100%);
+    }
+  }
+
+  &-aside {
+    position: fixed;
+    top: var(--zk-appshell-header-height);
+    right: 0;
+    bottom: 0;
+    width: var(--zk-appshell-aside-width);
+    background: var(--zk-bg-primary);
+    border-left: 1px solid var(--zk-border-color);
+    z-index: 900;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+
+    &-hidden {
+      transform: translateX(100%);
+    }
+  }
+
+  &-main {
+    flex: 1;
+    margin-top: var(--zk-appshell-header-height);
+    margin-left: var(--zk-appshell-navbar-width);
+    margin-right: 0;
+    padding: 1rem;
+    transition: margin 0.3s ease;
+
+    &.with-aside {
+      margin-right: var(--zk-appshell-aside-width);
+    }
+  }
+
+  &-footer {
+    position: fixed;
+    bottom: 0;
+    left: var(--zk-appshell-navbar-width);
+    right: 0;
+    height: var(--zk-appshell-footer-height);
+    background: var(--zk-bg-primary);
+    border-top: 1px solid var(--zk-border-color);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  // Without header
+  &-no-header {
+    .appshell-navbar,
+    .appshell-aside {
+      top: 0;
+    }
+
+    .appshell-main {
+      margin-top: 0;
+    }
+  }
+
+  // Without navbar
+  &-no-navbar {
+    .appshell-main {
+      margin-left: 0;
+    }
+
+    .appshell-footer {
+      left: 0;
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    &-navbar {
+      transform: translateX(-100%);
+
+      &-open {
+        transform: translateX(0);
+      }
+    }
+
+    &-main {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &-footer {
+      left: 0;
+    }
+  }
+}

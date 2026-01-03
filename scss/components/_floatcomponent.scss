@@ -1,0 +1,128 @@
+// ========================================
+// Float Component (Chakra-style)
+// ========================================
+
+.float {
+  position: absolute;
+
+  // Placement - horizontal
+  &-left {
+    left: 0;
+  }
+
+  &-right {
+    right: 0;
+  }
+
+  &-center-x {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  // Placement - vertical
+  &-top {
+    top: 0;
+  }
+
+  &-bottom {
+    bottom: 0;
+  }
+
+  &-center-y {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // Combined center
+  &-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  // Corner positions
+  &-top-left {
+    top: 0;
+    left: 0;
+  }
+
+  &-top-right {
+    top: 0;
+    right: 0;
+  }
+
+  &-bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+
+  &-bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  // Edge positions (middle of edge)
+  &-top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-left-center {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-right-center {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // Offset variants
+  &-offset-1 {
+    margin: 0.25rem;
+  }
+
+  &-offset-2 {
+    margin: 0.5rem;
+  }
+
+  &-offset-3 {
+    margin: 0.75rem;
+  }
+
+  &-offset-4 {
+    margin: 1rem;
+  }
+
+  // Placement outside container
+  &-outside {
+    &.float-top {
+      top: auto;
+      bottom: 100%;
+    }
+
+    &.float-bottom {
+      bottom: auto;
+      top: 100%;
+    }
+
+    &.float-left {
+      left: auto;
+      right: 100%;
+    }
+
+    &.float-right {
+      right: auto;
+      left: 100%;
+    }
+  }
+}

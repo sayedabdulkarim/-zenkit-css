@@ -1,0 +1,118 @@
+// ========================================
+// VirtualList Component
+// ========================================
+
+.virtual-list {
+  position: relative;
+  overflow: auto;
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+
+  &-container {
+    position: relative;
+    width: 100%;
+  }
+
+  &-item {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    will-change: transform;
+  }
+
+  &-placeholder {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--zk-bg-secondary);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--zk-border-color);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--zk-text-muted);
+    }
+  }
+
+  // Loading states
+  &-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    color: var(--zk-text-muted);
+  }
+
+  &-loader-top,
+  &-loader-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  // Empty state
+  &-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--zk-text-muted);
+    text-align: center;
+  }
+
+  // Horizontal variant
+  &-horizontal {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .virtual-list-container {
+      display: flex;
+      height: 100%;
+    }
+
+    .virtual-list-item {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  // Grid variant
+  &-grid {
+    .virtual-list-container {
+      display: grid;
+    }
+
+    .virtual-list-item {
+      position: relative;
+    }
+  }
+
+  // With gap
+  &-gap-sm {
+    gap: 0.5rem;
+  }
+
+  &-gap-md {
+    gap: 1rem;
+  }
+
+  &-gap-lg {
+    gap: 1.5rem;
+  }
+}

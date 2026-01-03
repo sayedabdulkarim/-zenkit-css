@@ -1,0 +1,75 @@
+// ========================================
+// AngleSlider Component
+// ========================================
+
+.angle-slider {
+  --zk-angle-slider-size: 120px;
+  --zk-angle-slider-track-color: var(--zk-border-color);
+  --zk-angle-slider-thumb-color: var(--zk-primary);
+  --zk-angle-slider-thumb-size: 16px;
+
+  position: relative;
+  width: var(--zk-angle-slider-size);
+  height: var(--zk-angle-slider-size);
+  border-radius: 50%;
+  border: 2px solid var(--zk-angle-slider-track-color);
+  background: var(--zk-bg-secondary);
+  cursor: pointer;
+  touch-action: none;
+
+  &-thumb {
+    position: absolute;
+    width: var(--zk-angle-slider-thumb-size);
+    height: var(--zk-angle-slider-thumb-size);
+    background: var(--zk-angle-slider-thumb-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--zk-shadow-sm);
+    transition: transform 0.1s ease;
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+
+  &-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--zk-text-primary);
+  }
+
+  &-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &-mark {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--zk-angle-slider-track-color);
+  }
+
+  // Sizes
+  &-sm {
+    --zk-angle-slider-size: 80px;
+    --zk-angle-slider-thumb-size: 12px;
+  }
+
+  &-lg {
+    --zk-angle-slider-size: 160px;
+    --zk-angle-slider-thumb-size: 20px;
+  }
+
+  // Disabled state
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

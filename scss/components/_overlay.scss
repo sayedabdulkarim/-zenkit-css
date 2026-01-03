@@ -1,0 +1,97 @@
+// ========================================
+// Overlay Component (Mantine-style)
+// ========================================
+
+.overlay {
+  --zk-overlay-bg: rgba(0, 0, 0, 0.6);
+  --zk-overlay-blur: 0;
+  --zk-overlay-z-index: 200;
+
+  position: absolute;
+  inset: 0;
+  background: var(--zk-overlay-bg);
+  backdrop-filter: blur(var(--zk-overlay-blur));
+  z-index: var(--zk-overlay-z-index);
+
+  // Fixed position
+  &-fixed {
+    position: fixed;
+  }
+
+  // With center content
+  &-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Opacity variants
+  &-opacity-10 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.1);
+  }
+  &-opacity-20 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.2);
+  }
+  &-opacity-30 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.3);
+  }
+  &-opacity-40 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.4);
+  }
+  &-opacity-50 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.5);
+  }
+  &-opacity-60 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.6);
+  }
+  &-opacity-70 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+  &-opacity-80 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.8);
+  }
+  &-opacity-90 {
+    --zk-overlay-bg: rgba(0, 0, 0, 0.9);
+  }
+
+  // Blur variants
+  &-blur-xs {
+    --zk-overlay-blur: 2px;
+  }
+  &-blur-sm {
+    --zk-overlay-blur: 4px;
+  }
+  &-blur-md {
+    --zk-overlay-blur: 8px;
+  }
+  &-blur-lg {
+    --zk-overlay-blur: 12px;
+  }
+  &-blur-xl {
+    --zk-overlay-blur: 16px;
+  }
+
+  // Color variants
+  &-white {
+    --zk-overlay-bg: rgba(255, 255, 255, 0.6);
+  }
+
+  &-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
+  // Radius (for non-full overlays)
+  &-radius-sm {
+    border-radius: var(--zk-radius-sm);
+  }
+  &-radius-md {
+    border-radius: var(--zk-radius-md);
+  }
+  &-radius-lg {
+    border-radius: var(--zk-radius-lg);
+  }
+}

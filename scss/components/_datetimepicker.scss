@@ -1,0 +1,123 @@
+// ========================================
+// DateTimePicker Component
+// ========================================
+
+.datetime-picker {
+  --zk-datetime-picker-bg: var(--zk-bg-primary);
+  --zk-datetime-picker-border-color: var(--zk-border-color);
+
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+
+  &-input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    background: var(--zk-datetime-picker-bg);
+    border: 1px solid var(--zk-datetime-picker-border-color);
+    border-radius: var(--zk-radius-md);
+    color: var(--zk-text-primary);
+    outline: none;
+
+    &:focus {
+      border-color: var(--zk-primary);
+      box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+    }
+
+    &::placeholder {
+      color: var(--zk-text-muted);
+    }
+  }
+
+  &-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--zk-text-muted);
+    pointer-events: none;
+  }
+
+  &-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.25rem;
+    background: var(--zk-datetime-picker-bg);
+    border: 1px solid var(--zk-datetime-picker-border-color);
+    border-radius: var(--zk-radius-md);
+    box-shadow: var(--zk-shadow-lg);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-panels {
+    display: flex;
+  }
+
+  &-date-panel {
+    padding: 0.75rem;
+    border-right: 1px solid var(--zk-datetime-picker-border-color);
+  }
+
+  &-time-panel {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 120px;
+  }
+
+  &-time-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+
+    &-item {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      text-align: center;
+      cursor: pointer;
+      border-radius: var(--zk-radius-sm);
+
+      &:hover {
+        background: var(--zk-bg-secondary);
+      }
+
+      &-selected {
+        background: var(--zk-primary);
+        color: #fff;
+      }
+
+      &-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--zk-datetime-picker-border-color);
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // Error
+  &-error {
+    .datetime-picker-input {
+      border-color: var(--zk-danger);
+    }
+  }
+}

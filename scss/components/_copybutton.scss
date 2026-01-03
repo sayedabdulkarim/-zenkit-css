@@ -1,0 +1,117 @@
+// ========================================
+// CopyButton Component
+// ========================================
+
+.copy-button {
+  --zk-copy-button-size: 32px;
+  --zk-copy-button-bg: var(--zk-bg-secondary);
+  --zk-copy-button-hover-bg: var(--zk-bg-tertiary);
+  --zk-copy-button-color: var(--zk-text-secondary);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--zk-copy-button-size);
+  height: var(--zk-copy-button-size);
+  padding: 0;
+  background: var(--zk-copy-button-bg);
+  border: 1px solid var(--zk-border-color);
+  border-radius: var(--zk-radius-sm);
+  color: var(--zk-copy-button-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--zk-copy-button-hover-bg);
+    color: var(--zk-text-primary);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  // Copied state
+  &-copied {
+    background: var(--zk-success);
+    border-color: var(--zk-success);
+    color: #fff;
+
+    &:hover {
+      background: var(--zk-success);
+      color: #fff;
+    }
+  }
+
+  // Sizes
+  &-xs {
+    --zk-copy-button-size: 24px;
+
+    .copy-button-icon {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &-sm {
+    --zk-copy-button-size: 28px;
+
+    .copy-button-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &-lg {
+    --zk-copy-button-size: 40px;
+
+    .copy-button-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // With text
+  &-with-text {
+    width: auto;
+    padding: 0 0.75rem;
+    gap: 0.5rem;
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: var(--zk-copy-button-bg);
+    }
+  }
+}
+
+// Tooltip for copy button
+.copy-button-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  background: var(--zk-bg-tertiary);
+  border-radius: var(--zk-radius-sm);
+  font-size: 0.75rem;
+  color: var(--zk-text-primary);
+  white-space: nowrap;
+  margin-bottom: 0.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  .copy-button:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+}

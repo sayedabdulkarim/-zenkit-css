@@ -1,0 +1,77 @@
+// ========================================
+// Label Component
+// ========================================
+
+.label {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--zk-text-primary);
+  line-height: 1.4;
+
+  // Required indicator
+  &-required {
+    &::after {
+      content: " *";
+      color: var(--zk-danger);
+    }
+  }
+
+  // Sizes
+  &-xs {
+    font-size: 0.75rem;
+  }
+
+  &-sm {
+    font-size: 0.8125rem;
+  }
+
+  &-md {
+    font-size: 0.875rem;
+  }
+
+  &-lg {
+    font-size: 1rem;
+  }
+
+  // Optional indicator
+  &-optional {
+    &::after {
+      content: " (optional)";
+      font-size: 0.75em;
+      color: var(--zk-text-muted);
+      font-weight: 400;
+    }
+  }
+
+  // With description
+  &-with-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  &-description {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--zk-text-muted);
+  }
+
+  // Inline style
+  &-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  // Disabled state
+  &-disabled {
+    color: var(--zk-text-muted);
+    cursor: not-allowed;
+  }
+
+  // Error state
+  &-error {
+    color: var(--zk-danger);
+  }
+}

@@ -1,0 +1,72 @@
+// ========================================
+// Mark Component (Mantine-style)
+// ========================================
+
+.mark {
+  --zk-mark-bg: rgba(var(--zk-warning-rgb), 0.4);
+  --zk-mark-color: inherit;
+
+  background-color: var(--zk-mark-bg);
+  color: var(--zk-mark-color);
+  padding: 0 0.125em;
+  border-radius: 2px;
+
+  // Color variants
+  &-yellow {
+    --zk-mark-bg: rgba(255, 235, 59, 0.5);
+  }
+
+  &-blue {
+    --zk-mark-bg: rgba(var(--zk-info-rgb), 0.3);
+  }
+
+  &-cyan {
+    --zk-mark-bg: rgba(0, 188, 212, 0.3);
+  }
+
+  &-green {
+    --zk-mark-bg: rgba(var(--zk-success-rgb), 0.3);
+  }
+
+  &-lime {
+    --zk-mark-bg: rgba(139, 195, 74, 0.4);
+  }
+
+  &-orange {
+    --zk-mark-bg: rgba(255, 152, 0, 0.4);
+  }
+
+  &-pink {
+    --zk-mark-bg: rgba(233, 30, 99, 0.3);
+  }
+
+  &-red {
+    --zk-mark-bg: rgba(var(--zk-danger-rgb), 0.3);
+  }
+
+  &-grape {
+    --zk-mark-bg: rgba(156, 39, 176, 0.3);
+  }
+
+  &-violet {
+    --zk-mark-bg: rgba(103, 58, 183, 0.3);
+  }
+
+  &-indigo {
+    --zk-mark-bg: rgba(63, 81, 181, 0.3);
+  }
+
+  &-teal {
+    --zk-mark-bg: rgba(0, 150, 136, 0.3);
+  }
+
+  // Dark variant (for light backgrounds)
+  &-dark {
+    --zk-mark-bg: rgba(0, 0, 0, 0.1);
+  }
+
+  // Light variant (for dark backgrounds)
+  &-light {
+    --zk-mark-bg: rgba(255, 255, 255, 0.2);
+  }
+}

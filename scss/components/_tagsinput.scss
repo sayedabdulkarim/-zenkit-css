@@ -1,0 +1,158 @@
+// ========================================
+// TagsInput Component
+// ========================================
+
+.tags-input {
+  --zk-tags-input-bg: var(--zk-bg-primary);
+  --zk-tags-input-border-color: var(--zk-border-color);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 38px;
+  padding: 0.25rem 0.5rem;
+  background: var(--zk-tags-input-bg);
+  border: 1px solid var(--zk-tags-input-border-color);
+  border-radius: var(--zk-radius-md);
+  cursor: text;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: var(--zk-primary);
+    box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+  }
+
+  &-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.25rem 0.125rem 0.5rem;
+    background: var(--zk-bg-secondary);
+    border-radius: var(--zk-radius-sm);
+    font-size: 0.8125rem;
+    color: var(--zk-text-primary);
+    max-width: 200px;
+
+    &-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--zk-text-muted);
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        background: var(--zk-bg-tertiary);
+        color: var(--zk-danger);
+      }
+    }
+  }
+
+  &-input {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.25rem;
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    outline: none;
+
+    &::placeholder {
+      color: var(--zk-text-muted);
+    }
+  }
+
+  // With max tags indicator
+  &-count {
+    font-size: 0.75rem;
+    color: var(--zk-text-muted);
+    margin-left: auto;
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Error state
+  &-error {
+    border-color: var(--zk-danger);
+
+    &:focus-within {
+      border-color: var(--zk-danger);
+      box-shadow: 0 0 0 3px rgba(var(--zk-danger-rgb), 0.1);
+    }
+  }
+
+  // Clearable
+  &-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--zk-text-muted);
+    margin-left: auto;
+    border-radius: 50%;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+      color: var(--zk-text-primary);
+    }
+  }
+
+  // Dropdown suggestions
+  &-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    background: var(--zk-tags-input-bg);
+    border: 1px solid var(--zk-tags-input-border-color);
+    border-radius: var(--zk-radius-md);
+    box-shadow: var(--zk-shadow-lg);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1050;
+  }
+
+  &-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+    }
+
+    &-selected {
+      background: rgba(var(--zk-primary-rgb), 0.1);
+    }
+  }
+
+  // Wrapper for positioning
+  &-wrapper {
+    position: relative;
+    width: 100%;
+  }
+}

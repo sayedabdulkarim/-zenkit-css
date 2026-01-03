@@ -1,0 +1,49 @@
+// ========================================
+// FloatingIndicator Component (Mantine-style)
+// ========================================
+
+.floating-indicator {
+  --zk-indicator-bg: var(--zk-bg-primary);
+  --zk-indicator-shadow: var(--zk-shadow-sm);
+  --zk-indicator-radius: var(--zk-radius-md);
+
+  position: absolute;
+  background: var(--zk-indicator-bg);
+  box-shadow: var(--zk-indicator-shadow);
+  border-radius: var(--zk-indicator-radius);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 0;
+
+  // Parent container needs relative positioning
+  &-container {
+    position: relative;
+  }
+
+  // Variants
+  &-filled {
+    --zk-indicator-bg: var(--zk-primary);
+  }
+
+  &-light {
+    --zk-indicator-bg: rgba(var(--zk-primary-rgb), 0.1);
+    --zk-indicator-shadow: none;
+  }
+
+  &-outline {
+    --zk-indicator-bg: transparent;
+    --zk-indicator-shadow: none;
+    border: 2px solid var(--zk-primary);
+  }
+
+  // No transition (for immediate position updates)
+  &-no-transition {
+    transition: none;
+  }
+
+  // Hidden state
+  &-hidden {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

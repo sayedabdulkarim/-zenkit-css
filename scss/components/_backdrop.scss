@@ -1,0 +1,66 @@
+// ========================================
+// Backdrop Component
+// ========================================
+
+.backdrop {
+  --zk-backdrop-bg: rgba(0, 0, 0, 0.5);
+  --zk-backdrop-blur: 0;
+  --zk-backdrop-z-index: 1040;
+
+  position: fixed;
+  inset: 0;
+  background: var(--zk-backdrop-bg);
+  backdrop-filter: blur(var(--zk-backdrop-blur));
+  z-index: var(--zk-backdrop-z-index);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Animation
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  &-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Variants
+  &-blur {
+    --zk-backdrop-blur: 4px;
+  }
+
+  &-blur-sm {
+    --zk-backdrop-blur: 2px;
+  }
+
+  &-blur-lg {
+    --zk-backdrop-blur: 8px;
+  }
+
+  &-transparent {
+    --zk-backdrop-bg: transparent;
+  }
+
+  &-light {
+    --zk-backdrop-bg: rgba(255, 255, 255, 0.7);
+  }
+
+  &-dark {
+    --zk-backdrop-bg: rgba(0, 0, 0, 0.8);
+  }
+
+  // Invisible (only captures clicks)
+  &-invisible {
+    --zk-backdrop-bg: transparent;
+    --zk-backdrop-blur: 0;
+  }
+
+  // Center content
+  &-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

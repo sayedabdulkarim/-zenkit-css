@@ -1,0 +1,94 @@
+// ========================================
+// ColorSwatch Component
+// ========================================
+
+.color-swatch {
+  --zk-swatch-size: 24px;
+  --zk-swatch-radius: var(--zk-radius-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--zk-swatch-size);
+  height: var(--zk-swatch-size);
+  border-radius: var(--zk-swatch-radius);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: var(--zk-shadow-md);
+  }
+
+  // Sizes
+  &-xs {
+    --zk-swatch-size: 16px;
+  }
+
+  &-sm {
+    --zk-swatch-size: 20px;
+  }
+
+  &-md {
+    --zk-swatch-size: 24px;
+  }
+
+  &-lg {
+    --zk-swatch-size: 32px;
+  }
+
+  &-xl {
+    --zk-swatch-size: 40px;
+  }
+
+  // Shapes
+  &-circle {
+    --zk-swatch-radius: 50%;
+  }
+
+  &-square {
+    --zk-swatch-radius: 0;
+  }
+
+  // Selected state
+  &-selected {
+    box-shadow: 0 0 0 2px var(--zk-bg-primary), 0 0 0 4px var(--zk-primary);
+  }
+
+  // With alpha (checkerboard)
+  &-alpha {
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+      linear-gradient(-45deg, #ccc 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #ccc 75%),
+      linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: inherit;
+    }
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // Group
+  &-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

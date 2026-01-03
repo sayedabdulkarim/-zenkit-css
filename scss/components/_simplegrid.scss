@@ -1,0 +1,129 @@
+// ========================================
+// SimpleGrid Component
+// ========================================
+
+.simple-grid {
+  --zk-simple-grid-cols: 1;
+  --zk-simple-grid-spacing: 1rem;
+  --zk-simple-grid-spacing-y: var(--zk-simple-grid-spacing);
+
+  display: grid;
+  grid-template-columns: repeat(var(--zk-simple-grid-cols), minmax(0, 1fr));
+  gap: var(--zk-simple-grid-spacing-y) var(--zk-simple-grid-spacing);
+
+  // Column variants
+  &-cols-1 {
+    --zk-simple-grid-cols: 1;
+  }
+  &-cols-2 {
+    --zk-simple-grid-cols: 2;
+  }
+  &-cols-3 {
+    --zk-simple-grid-cols: 3;
+  }
+  &-cols-4 {
+    --zk-simple-grid-cols: 4;
+  }
+  &-cols-5 {
+    --zk-simple-grid-cols: 5;
+  }
+  &-cols-6 {
+    --zk-simple-grid-cols: 6;
+  }
+
+  // Spacing variants
+  &-spacing-xs {
+    --zk-simple-grid-spacing: 0.5rem;
+  }
+  &-spacing-sm {
+    --zk-simple-grid-spacing: 0.75rem;
+  }
+  &-spacing-md {
+    --zk-simple-grid-spacing: 1rem;
+  }
+  &-spacing-lg {
+    --zk-simple-grid-spacing: 1.5rem;
+  }
+  &-spacing-xl {
+    --zk-simple-grid-spacing: 2rem;
+  }
+
+  // Responsive breakpoints
+  @media (min-width: 576px) {
+    &-sm-cols-1 {
+      --zk-simple-grid-cols: 1;
+    }
+    &-sm-cols-2 {
+      --zk-simple-grid-cols: 2;
+    }
+    &-sm-cols-3 {
+      --zk-simple-grid-cols: 3;
+    }
+    &-sm-cols-4 {
+      --zk-simple-grid-cols: 4;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &-md-cols-1 {
+      --zk-simple-grid-cols: 1;
+    }
+    &-md-cols-2 {
+      --zk-simple-grid-cols: 2;
+    }
+    &-md-cols-3 {
+      --zk-simple-grid-cols: 3;
+    }
+    &-md-cols-4 {
+      --zk-simple-grid-cols: 4;
+    }
+    &-md-cols-5 {
+      --zk-simple-grid-cols: 5;
+    }
+    &-md-cols-6 {
+      --zk-simple-grid-cols: 6;
+    }
+  }
+
+  @media (min-width: 992px) {
+    &-lg-cols-1 {
+      --zk-simple-grid-cols: 1;
+    }
+    &-lg-cols-2 {
+      --zk-simple-grid-cols: 2;
+    }
+    &-lg-cols-3 {
+      --zk-simple-grid-cols: 3;
+    }
+    &-lg-cols-4 {
+      --zk-simple-grid-cols: 4;
+    }
+    &-lg-cols-5 {
+      --zk-simple-grid-cols: 5;
+    }
+    &-lg-cols-6 {
+      --zk-simple-grid-cols: 6;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    &-xl-cols-1 {
+      --zk-simple-grid-cols: 1;
+    }
+    &-xl-cols-2 {
+      --zk-simple-grid-cols: 2;
+    }
+    &-xl-cols-3 {
+      --zk-simple-grid-cols: 3;
+    }
+    &-xl-cols-4 {
+      --zk-simple-grid-cols: 4;
+    }
+    &-xl-cols-5 {
+      --zk-simple-grid-cols: 5;
+    }
+    &-xl-cols-6 {
+      --zk-simple-grid-cols: 6;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+// ========================================
+// JsonInput Component
+// ========================================
+
+.json-input {
+  --zk-json-input-bg: var(--zk-bg-secondary);
+  --zk-json-input-border-color: var(--zk-border-color);
+  --zk-json-input-font: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--zk-text-primary);
+  }
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 0.75rem;
+    font-family: var(--zk-json-input-font);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    background: var(--zk-json-input-bg);
+    border: 1px solid var(--zk-json-input-border-color);
+    border-radius: var(--zk-radius-md);
+    color: var(--zk-text-primary);
+    resize: vertical;
+    outline: none;
+
+    &:focus {
+      border-color: var(--zk-primary);
+      box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+    }
+
+    &::placeholder {
+      color: var(--zk-text-muted);
+    }
+  }
+
+  &-format-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    background: var(--zk-bg-primary);
+    border: 1px solid var(--zk-border-color);
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    color: var(--zk-text-secondary);
+
+    &:hover {
+      background: var(--zk-bg-tertiary);
+    }
+  }
+
+  &-error {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--zk-danger);
+    margin-top: 0.25rem;
+  }
+
+  &-valid {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--zk-success);
+    margin-top: 0.25rem;
+  }
+
+  // Syntax highlighting (line numbers)
+  &-with-lines {
+    .json-input-textarea {
+      padding-left: 3rem;
+    }
+  }
+
+  &-lines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    padding: 0.75rem 0.5rem;
+    background: var(--zk-bg-tertiary);
+    border-right: 1px solid var(--zk-border-color);
+    border-radius: var(--zk-radius-md) 0 0 var(--zk-radius-md);
+    font-family: var(--zk-json-input-font);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--zk-text-muted);
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+
+    .json-input-textarea {
+      cursor: not-allowed;
+    }
+  }
+
+  // Readonly
+  &-readonly {
+    .json-input-textarea {
+      background: var(--zk-bg-tertiary);
+    }
+  }
+}

@@ -1,0 +1,116 @@
+// ========================================
+// SemiCircleProgress Component
+// ========================================
+
+.semicircle-progress {
+  --zk-semicircle-size: 200px;
+  --zk-semicircle-thickness: 16px;
+  --zk-semicircle-track-color: var(--zk-bg-tertiary);
+  --zk-semicircle-fill-color: var(--zk-primary);
+
+  position: relative;
+  width: var(--zk-semicircle-size);
+  height: calc(var(--zk-semicircle-size) / 2 + 20px);
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  &-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  &-track {
+    fill: none;
+    stroke: var(--zk-semicircle-track-color);
+    stroke-width: var(--zk-semicircle-thickness);
+    stroke-linecap: round;
+  }
+
+  &-fill {
+    fill: none;
+    stroke: var(--zk-semicircle-fill-color);
+    stroke-width: var(--zk-semicircle-thickness);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+
+  &-label {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    &-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--zk-text-primary);
+      line-height: 1;
+    }
+
+    &-text {
+      font-size: 0.875rem;
+      color: var(--zk-text-muted);
+      margin-top: 0.25rem;
+    }
+  }
+
+  // Sizes
+  &-xs {
+    --zk-semicircle-size: 100px;
+    --zk-semicircle-thickness: 8px;
+
+    .semicircle-progress-label-value {
+      font-size: 1rem;
+    }
+  }
+
+  &-sm {
+    --zk-semicircle-size: 140px;
+    --zk-semicircle-thickness: 10px;
+
+    .semicircle-progress-label-value {
+      font-size: 1.25rem;
+    }
+  }
+
+  &-md {
+    --zk-semicircle-size: 200px;
+    --zk-semicircle-thickness: 16px;
+  }
+
+  &-lg {
+    --zk-semicircle-size: 260px;
+    --zk-semicircle-thickness: 20px;
+
+    .semicircle-progress-label-value {
+      font-size: 2.5rem;
+    }
+  }
+
+  // Gradient fill
+  &-gradient {
+    .semicircle-progress-fill {
+      stroke: url(#semicircle-gradient);
+    }
+  }
+
+  // Color variants
+  &-success {
+    --zk-semicircle-fill-color: var(--zk-success);
+  }
+
+  &-warning {
+    --zk-semicircle-fill-color: var(--zk-warning);
+  }
+
+  &-danger {
+    --zk-semicircle-fill-color: var(--zk-danger);
+  }
+
+  &-info {
+    --zk-semicircle-fill-color: var(--zk-info);
+  }
+}

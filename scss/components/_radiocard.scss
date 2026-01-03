@@ -1,0 +1,122 @@
+// ========================================
+// RadioCard Component
+// ========================================
+
+.radio-card {
+  --zk-radio-card-bg: var(--zk-bg-primary);
+  --zk-radio-card-border-color: var(--zk-border-color);
+  --zk-radio-card-checked-border-color: var(--zk-primary);
+  --zk-radio-card-checked-bg: rgba(var(--zk-primary-rgb), 0.05);
+
+  display: block;
+  position: relative;
+  padding: 1rem;
+  background: var(--zk-radio-card-bg);
+  border: 2px solid var(--zk-radio-card-border-color);
+  border-radius: var(--zk-radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--zk-primary);
+  }
+
+  // Hidden input
+  &-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .radio-card-content {
+      .radio-card-indicator {
+        border-color: var(--zk-primary);
+
+        &::after {
+          transform: scale(1);
+        }
+      }
+    }
+
+    &:focus-visible + .radio-card-content {
+      outline: 2px solid var(--zk-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled + .radio-card-content {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &-checked {
+    border-color: var(--zk-radio-card-checked-border-color);
+    background: var(--zk-radio-card-checked-bg);
+  }
+
+  &-content {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &-indicator {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--zk-border-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: var(--zk-primary);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &-body {
+    flex: 1;
+  }
+
+  &-title {
+    font-weight: 600;
+    color: var(--zk-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  &-description {
+    font-size: 0.875rem;
+    color: var(--zk-text-muted);
+  }
+
+  &-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--zk-bg-secondary);
+    border-radius: var(--zk-radius-sm);
+    margin-bottom: 0.5rem;
+    color: var(--zk-primary);
+  }
+
+  // Group
+  &-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &-vertical {
+      flex-direction: column;
+    }
+  }
+}

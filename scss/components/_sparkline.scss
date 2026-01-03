@@ -1,0 +1,124 @@
+// ========================================
+// Sparkline Component
+// ========================================
+
+.sparkline {
+  --zk-sparkline-color: var(--zk-primary);
+  --zk-sparkline-fill-color: rgba(var(--zk-primary-rgb), 0.1);
+  --zk-sparkline-stroke-width: 2px;
+
+  display: inline-flex;
+  align-items: center;
+
+  &-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &-line {
+    fill: none;
+    stroke: var(--zk-sparkline-color);
+    stroke-width: var(--zk-sparkline-stroke-width);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &-area {
+    fill: var(--zk-sparkline-fill-color);
+    stroke: none;
+  }
+
+  &-dot {
+    fill: var(--zk-sparkline-color);
+
+    &-current {
+      fill: var(--zk-sparkline-color);
+      stroke: var(--zk-bg-primary);
+      stroke-width: 2;
+    }
+  }
+
+  // Sizes
+  &-xs {
+    width: 50px;
+    height: 16px;
+  }
+
+  &-sm {
+    width: 80px;
+    height: 20px;
+  }
+
+  &-md {
+    width: 120px;
+    height: 32px;
+  }
+
+  &-lg {
+    width: 160px;
+    height: 48px;
+  }
+
+  // With value
+  &-with-value {
+    gap: 0.5rem;
+  }
+
+  &-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--zk-text-primary);
+    white-space: nowrap;
+  }
+
+  &-change {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+
+    &-positive {
+      color: var(--zk-success);
+    }
+
+    &-negative {
+      color: var(--zk-danger);
+    }
+
+    &-neutral {
+      color: var(--zk-text-muted);
+    }
+  }
+
+  // Types
+  &-bar {
+    .sparkline-bar {
+      fill: var(--zk-sparkline-color);
+
+      &-negative {
+        fill: var(--zk-danger);
+      }
+    }
+  }
+
+  // Color variants
+  &-success {
+    --zk-sparkline-color: var(--zk-success);
+    --zk-sparkline-fill-color: rgba(var(--zk-success-rgb), 0.1);
+  }
+
+  &-warning {
+    --zk-sparkline-color: var(--zk-warning);
+    --zk-sparkline-fill-color: rgba(var(--zk-warning-rgb), 0.1);
+  }
+
+  &-danger {
+    --zk-sparkline-color: var(--zk-danger);
+    --zk-sparkline-fill-color: rgba(var(--zk-danger-rgb), 0.1);
+  }
+
+  &-info {
+    --zk-sparkline-color: var(--zk-info);
+    --zk-sparkline-fill-color: rgba(var(--zk-info-rgb), 0.1);
+  }
+}

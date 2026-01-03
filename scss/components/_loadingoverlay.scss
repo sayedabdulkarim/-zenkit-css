@@ -1,0 +1,80 @@
+// ========================================
+// LoadingOverlay Component
+// ========================================
+
+.loading-overlay {
+  --zk-loading-overlay-bg: rgba(255, 255, 255, 0.8);
+  --zk-loading-overlay-z-index: 400;
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--zk-loading-overlay-bg);
+  z-index: var(--zk-loading-overlay-z-index);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  &-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &-spinner {
+    margin-bottom: 0.75rem;
+  }
+
+  &-text {
+    font-size: 0.875rem;
+    color: var(--zk-text-secondary);
+  }
+
+  // Blur effect
+  &-blur {
+    backdrop-filter: blur(2px);
+  }
+
+  // Variants
+  &-dark {
+    --zk-loading-overlay-bg: rgba(0, 0, 0, 0.5);
+
+    .loading-overlay-text {
+      color: #fff;
+    }
+  }
+
+  &-light {
+    --zk-loading-overlay-bg: rgba(255, 255, 255, 0.9);
+  }
+
+  // With custom loader
+  &-custom {
+    .loading-overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  // Fixed position (for full page)
+  &-fixed {
+    position: fixed;
+  }
+
+  // Relative container
+  &-container {
+    position: relative;
+    min-height: 100px;
+  }
+}
+
+// Dark mode
+[data-theme="dark"] {
+  .loading-overlay {
+    --zk-loading-overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+}

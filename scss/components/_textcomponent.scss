@@ -1,0 +1,183 @@
+// ========================================
+// Text Component
+// ========================================
+
+.text {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--zk-text-primary);
+
+  // Sizes
+  &-xs {
+    font-size: 0.75rem;
+  }
+
+  &-sm {
+    font-size: 0.875rem;
+  }
+
+  &-md {
+    font-size: 1rem;
+  }
+
+  &-lg {
+    font-size: 1.125rem;
+  }
+
+  &-xl {
+    font-size: 1.25rem;
+  }
+
+  // Weight
+  &-thin {
+    font-weight: 100;
+  }
+
+  &-extralight {
+    font-weight: 200;
+  }
+
+  &-light {
+    font-weight: 300;
+  }
+
+  &-normal {
+    font-weight: 400;
+  }
+
+  &-medium {
+    font-weight: 500;
+  }
+
+  &-semibold {
+    font-weight: 600;
+  }
+
+  &-bold {
+    font-weight: 700;
+  }
+
+  // Colors
+  &-dimmed {
+    color: var(--zk-text-muted);
+  }
+
+  &-primary {
+    color: var(--zk-primary);
+  }
+
+  &-secondary {
+    color: var(--zk-text-secondary);
+  }
+
+  &-success {
+    color: var(--zk-success);
+  }
+
+  &-warning {
+    color: var(--zk-warning);
+  }
+
+  &-danger {
+    color: var(--zk-danger);
+  }
+
+  &-info {
+    color: var(--zk-info);
+  }
+
+  // Alignment
+  &-left {
+    text-align: left;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-justify {
+    text-align: justify;
+  }
+
+  // Transform
+  &-lowercase {
+    text-transform: lowercase;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  // Decoration
+  &-underline {
+    text-decoration: underline;
+  }
+
+  &-line-through {
+    text-decoration: line-through;
+  }
+
+  &-no-underline {
+    text-decoration: none;
+  }
+
+  // Truncation
+  &-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  // Italic
+  &-italic {
+    font-style: italic;
+  }
+
+  // Inherit
+  &-inherit {
+    color: inherit;
+    font-size: inherit;
+  }
+
+  // Gradient
+  &-gradient {
+    background: linear-gradient(135deg, var(--zk-primary), var(--zk-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  // Span inline behavior
+  &-inline {
+    display: inline;
+  }
+}

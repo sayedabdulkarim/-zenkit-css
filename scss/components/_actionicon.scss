@@ -1,0 +1,141 @@
+// ========================================
+// ActionIcon Component (Mantine-style)
+// ========================================
+
+.action-icon {
+  --zk-action-icon-size: 28px;
+  --zk-action-icon-color: var(--zk-text-secondary);
+  --zk-action-icon-bg: transparent;
+  --zk-action-icon-hover-bg: var(--zk-bg-secondary);
+  --zk-action-icon-radius: var(--zk-radius-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--zk-action-icon-size);
+  height: var(--zk-action-icon-size);
+  min-width: var(--zk-action-icon-size);
+  padding: 0;
+  background: var(--zk-action-icon-bg);
+  color: var(--zk-action-icon-color);
+  border: none;
+  border-radius: var(--zk-action-icon-radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--zk-action-icon-hover-bg);
+    color: var(--zk-text-primary);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Sizes
+  &-xs {
+    --zk-action-icon-size: 18px;
+  }
+
+  &-sm {
+    --zk-action-icon-size: 22px;
+  }
+
+  &-md {
+    --zk-action-icon-size: 28px;
+  }
+
+  &-lg {
+    --zk-action-icon-size: 34px;
+  }
+
+  &-xl {
+    --zk-action-icon-size: 44px;
+  }
+
+  // Variants
+  &-filled {
+    --zk-action-icon-bg: var(--zk-primary);
+    --zk-action-icon-color: #fff;
+    --zk-action-icon-hover-bg: var(--zk-primary-dark);
+
+    &:hover:not(:disabled) {
+      color: #fff;
+    }
+  }
+
+  &-light {
+    --zk-action-icon-bg: rgba(var(--zk-primary-rgb), 0.1);
+    --zk-action-icon-color: var(--zk-primary);
+    --zk-action-icon-hover-bg: rgba(var(--zk-primary-rgb), 0.2);
+
+    &:hover:not(:disabled) {
+      color: var(--zk-primary);
+    }
+  }
+
+  &-outline {
+    --zk-action-icon-bg: transparent;
+    --zk-action-icon-color: var(--zk-primary);
+    border: 1px solid var(--zk-primary);
+
+    &:hover:not(:disabled) {
+      --zk-action-icon-bg: rgba(var(--zk-primary-rgb), 0.1);
+      color: var(--zk-primary);
+    }
+  }
+
+  &-subtle {
+    --zk-action-icon-bg: transparent;
+    --zk-action-icon-hover-bg: var(--zk-bg-secondary);
+  }
+
+  &-transparent {
+    --zk-action-icon-bg: transparent;
+    --zk-action-icon-hover-bg: transparent;
+
+    &:hover:not(:disabled) {
+      color: var(--zk-primary);
+    }
+  }
+
+  // Colors
+  &-primary {
+    --zk-action-icon-color: var(--zk-primary);
+  }
+
+  &-success {
+    --zk-action-icon-color: var(--zk-success);
+  }
+
+  &-warning {
+    --zk-action-icon-color: var(--zk-warning);
+  }
+
+  &-danger {
+    --zk-action-icon-color: var(--zk-danger);
+  }
+
+  // Loading
+  &-loading {
+    pointer-events: none;
+
+    .action-icon-loader {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

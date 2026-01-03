@@ -1,0 +1,70 @@
+// ========================================
+// Blockquote Component
+// ========================================
+
+.blockquote {
+  --zk-blockquote-border-color: var(--zk-primary);
+  --zk-blockquote-bg: var(--zk-bg-secondary);
+  --zk-blockquote-text-color: var(--zk-text-primary);
+  --zk-blockquote-cite-color: var(--zk-text-muted);
+
+  margin: 1rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--zk-blockquote-border-color);
+  background: var(--zk-blockquote-bg);
+  border-radius: 0 var(--zk-radius-md) var(--zk-radius-md) 0;
+  color: var(--zk-blockquote-text-color);
+  font-style: italic;
+
+  &-content {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  &-cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    font-style: normal;
+    color: var(--zk-blockquote-cite-color);
+
+    &::before {
+      content: "— ";
+    }
+  }
+
+  &-icon {
+    font-size: 2rem;
+    color: var(--zk-blockquote-border-color);
+    opacity: 0.3;
+    margin-bottom: 0.5rem;
+  }
+
+  // Color variants
+  &-primary {
+    --zk-blockquote-border-color: var(--zk-primary);
+  }
+
+  &-success {
+    --zk-blockquote-border-color: var(--zk-success);
+  }
+
+  &-warning {
+    --zk-blockquote-border-color: var(--zk-warning);
+  }
+
+  &-danger {
+    --zk-blockquote-border-color: var(--zk-danger);
+  }
+
+  &-info {
+    --zk-blockquote-border-color: var(--zk-info);
+  }
+
+  // Without background
+  &-plain {
+    --zk-blockquote-bg: transparent;
+    padding-left: 1rem;
+  }
+}

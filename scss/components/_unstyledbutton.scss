@@ -1,0 +1,43 @@
+// ========================================
+// UnstyledButton Component (Mantine-style)
+// ========================================
+
+.unstyled-button {
+  // Reset all button styles
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--zk-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  // Block variant
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+}

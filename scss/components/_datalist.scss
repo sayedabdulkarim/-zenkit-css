@@ -1,0 +1,104 @@
+// ========================================
+// DataList Component (Chakra-style)
+// ========================================
+
+.data-list {
+  --zk-data-list-gap: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--zk-data-list-gap);
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  &-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--zk-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &-value {
+    font-size: 0.9375rem;
+    color: var(--zk-text-primary);
+  }
+
+  // Horizontal layout
+  &-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .data-list-item {
+      flex: 1;
+      min-width: 150px;
+    }
+  }
+
+  // Inline item layout
+  &-inline {
+    .data-list-item {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .data-list-label {
+      text-transform: none;
+      font-size: 0.875rem;
+    }
+  }
+
+  // With dividers
+  &-divided {
+    .data-list-item {
+      padding-bottom: var(--zk-data-list-gap);
+      border-bottom: 1px solid var(--zk-border-color);
+
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Striped
+  &-striped {
+    .data-list-item:nth-child(even) {
+      padding: 0.5rem;
+      background: var(--zk-bg-secondary);
+      border-radius: var(--zk-radius-sm);
+    }
+  }
+
+  // Dense
+  &-dense {
+    --zk-data-list-gap: 0.5rem;
+
+    .data-list-label {
+      font-size: 0.6875rem;
+    }
+
+    .data-list-value {
+      font-size: 0.875rem;
+    }
+  }
+
+  // Large
+  &-lg {
+    --zk-data-list-gap: 1rem;
+
+    .data-list-label {
+      font-size: 0.8125rem;
+    }
+
+    .data-list-value {
+      font-size: 1rem;
+    }
+  }
+}

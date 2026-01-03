@@ -1,0 +1,140 @@
+// ========================================
+// Toolbar Component
+// ========================================
+
+.toolbar {
+  --zk-toolbar-bg: var(--zk-bg-secondary);
+  --zk-toolbar-border-color: var(--zk-border-color);
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  background: var(--zk-toolbar-bg);
+  border-radius: var(--zk-radius-md);
+  flex-wrap: wrap;
+
+  &-group {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  &-separator {
+    width: 1px;
+    height: 24px;
+    background: var(--zk-toolbar-border-color);
+    margin: 0 0.375rem;
+  }
+
+  &-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    color: var(--zk-text-secondary);
+    transition: all 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--zk-bg-primary);
+      color: var(--zk-text-primary);
+    }
+
+    &-active {
+      background: var(--zk-primary);
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: var(--zk-primary);
+        color: #fff;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &-toggle {
+    @extend .toolbar-button;
+
+    &-pressed {
+      background: rgba(var(--zk-primary-rgb), 0.15);
+      color: var(--zk-primary);
+    }
+  }
+
+  &-link {
+    @extend .toolbar-button;
+    text-decoration: none;
+  }
+
+  // With border
+  &-bordered {
+    border: 1px solid var(--zk-toolbar-border-color);
+  }
+
+  // Vertical
+  &-vertical {
+    flex-direction: column;
+    padding: 0.375rem;
+    width: fit-content;
+
+    .toolbar-separator {
+      width: 24px;
+      height: 1px;
+      margin: 0.375rem 0;
+    }
+  }
+
+  // Sizes
+  &-sm {
+    padding: 0.25rem;
+
+    .toolbar-button {
+      width: 28px;
+      height: 28px;
+    }
+
+    .toolbar-separator {
+      height: 20px;
+    }
+  }
+
+  &-lg {
+    padding: 0.5rem;
+
+    .toolbar-button {
+      width: 40px;
+      height: 40px;
+    }
+
+    .toolbar-separator {
+      height: 32px;
+    }
+  }
+
+  // Sticky
+  &-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  // Floating
+  &-floating {
+    box-shadow: var(--zk-shadow-md);
+  }
+}

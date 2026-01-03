@@ -1,0 +1,60 @@
+// ========================================
+// Highlight Component
+// ========================================
+
+.highlight {
+  --zk-highlight-bg: rgba(var(--zk-warning-rgb), 0.3);
+  --zk-highlight-color: inherit;
+
+  background-color: var(--zk-highlight-bg);
+  color: var(--zk-highlight-color);
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+
+  // Color variants
+  &-yellow {
+    --zk-highlight-bg: rgba(255, 235, 59, 0.4);
+  }
+
+  &-green {
+    --zk-highlight-bg: rgba(var(--zk-success-rgb), 0.3);
+  }
+
+  &-blue {
+    --zk-highlight-bg: rgba(var(--zk-info-rgb), 0.3);
+  }
+
+  &-red {
+    --zk-highlight-bg: rgba(var(--zk-danger-rgb), 0.3);
+  }
+
+  &-cyan {
+    --zk-highlight-bg: rgba(0, 188, 212, 0.3);
+  }
+
+  &-pink {
+    --zk-highlight-bg: rgba(233, 30, 99, 0.3);
+  }
+
+  &-grape {
+    --zk-highlight-bg: rgba(156, 39, 176, 0.3);
+  }
+
+  &-orange {
+    --zk-highlight-bg: rgba(255, 152, 0, 0.3);
+  }
+
+  // Mark element (semantic highlighting)
+  mark.highlight,
+  .highlight-mark {
+    background-color: var(--zk-highlight-bg);
+  }
+}
+
+// Mark styling (global)
+mark {
+  background-color: rgba(var(--zk-warning-rgb), 0.3);
+  color: inherit;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+}

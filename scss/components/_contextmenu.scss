@@ -1,0 +1,150 @@
+// ========================================
+// ContextMenu Component
+// ========================================
+
+.context-menu {
+  --zk-context-menu-bg: var(--zk-bg-primary);
+  --zk-context-menu-border-color: var(--zk-border-color);
+  --zk-context-menu-shadow: var(--zk-shadow-lg);
+  --zk-context-menu-min-width: 180px;
+
+  position: fixed;
+  min-width: var(--zk-context-menu-min-width);
+  background: var(--zk-context-menu-bg);
+  border: 1px solid var(--zk-context-menu-border-color);
+  border-radius: var(--zk-radius-md);
+  box-shadow: var(--zk-context-menu-shadow);
+  padding: 0.25rem;
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transform-origin: top left;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+
+  &-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+    }
+
+    &-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--zk-text-muted);
+    }
+
+    &-label {
+      flex: 1;
+    }
+
+    &-shortcut {
+      font-size: 0.75rem;
+      color: var(--zk-text-muted);
+      margin-left: auto;
+    }
+
+    &-danger {
+      color: var(--zk-danger);
+
+      &:hover {
+        background: rgba(var(--zk-danger-rgb), 0.1);
+      }
+    }
+
+    &-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  &-separator {
+    height: 1px;
+    background: var(--zk-border-color);
+    margin: 0.25rem 0;
+  }
+
+  &-label {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--zk-text-muted);
+    text-transform: uppercase;
+  }
+
+  // Submenu
+  &-submenu {
+    position: relative;
+
+    &-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &::after {
+        content: "›";
+        font-size: 1rem;
+        color: var(--zk-text-muted);
+      }
+    }
+
+    &-content {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      margin-left: 0.25rem;
+    }
+  }
+
+  // Checkbox item
+  &-checkbox {
+    &-indicator {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // Radio item
+  &-radio {
+    &-indicator {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+// Dark mode
+[data-theme="dark"] {
+  .context-menu {
+    --zk-context-menu-bg: var(--zk-bg-secondary);
+  }
+}

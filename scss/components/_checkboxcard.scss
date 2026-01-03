@@ -1,0 +1,105 @@
+// ========================================
+// CheckboxCard Component
+// ========================================
+
+.checkbox-card {
+  --zk-checkbox-card-bg: var(--zk-bg-primary);
+  --zk-checkbox-card-border-color: var(--zk-border-color);
+  --zk-checkbox-card-hover-border-color: var(--zk-primary);
+  --zk-checkbox-card-checked-border-color: var(--zk-primary);
+  --zk-checkbox-card-checked-bg: var(--zk-primary-light);
+
+  display: block;
+  position: relative;
+  padding: 1rem;
+  background: var(--zk-checkbox-card-bg);
+  border: 2px solid var(--zk-checkbox-card-border-color);
+  border-radius: var(--zk-radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--zk-checkbox-card-hover-border-color);
+  }
+
+  // Hidden input
+  &-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .checkbox-card-content {
+      border-color: var(--zk-checkbox-card-checked-border-color);
+      background: var(--zk-checkbox-card-checked-bg);
+    }
+
+    &:focus-visible + .checkbox-card-content {
+      outline: 2px solid var(--zk-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled + .checkbox-card-content {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &-indicator {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--zk-border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &-checked {
+      background: var(--zk-primary);
+      border-color: var(--zk-primary);
+      color: #fff;
+    }
+  }
+
+  &-title {
+    font-weight: 600;
+    color: var(--zk-text-primary);
+  }
+
+  &-description {
+    font-size: 0.875rem;
+    color: var(--zk-text-muted);
+  }
+
+  &-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--zk-bg-secondary);
+    border-radius: var(--zk-radius-sm);
+    margin-bottom: 0.5rem;
+  }
+
+  // Group
+  &-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &-vertical {
+      flex-direction: column;
+    }
+  }
+}

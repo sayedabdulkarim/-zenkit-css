@@ -1,0 +1,176 @@
+// ========================================
+// Dialog Component (Radix-style)
+// ========================================
+
+.dialog {
+  --zk-dialog-bg: var(--zk-bg-primary);
+  --zk-dialog-border-color: var(--zk-border-color);
+  --zk-dialog-shadow: var(--zk-shadow-xl);
+  --zk-dialog-max-width: 500px;
+
+  &-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    // Animation
+    opacity: 0;
+    animation: dialog-overlay-in 0.2s ease forwards;
+
+    &[data-state="closed"] {
+      animation: dialog-overlay-out 0.2s ease forwards;
+    }
+  }
+
+  &-content {
+    position: relative;
+    width: 100%;
+    max-width: var(--zk-dialog-max-width);
+    max-height: calc(100vh - 2rem);
+    background: var(--zk-dialog-bg);
+    border: 1px solid var(--zk-dialog-border-color);
+    border-radius: var(--zk-radius-lg);
+    box-shadow: var(--zk-dialog-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    // Animation
+    opacity: 0;
+    transform: scale(0.95);
+    animation: dialog-content-in 0.2s ease forwards;
+
+    &[data-state="closed"] {
+      animation: dialog-content-out 0.2s ease forwards;
+    }
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--zk-dialog-border-color);
+  }
+
+  &-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--zk-text-primary);
+    margin: 0;
+  }
+
+  &-description {
+    font-size: 0.875rem;
+    color: var(--zk-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  &-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    color: var(--zk-text-muted);
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+      color: var(--zk-text-primary);
+    }
+  }
+
+  &-body {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--zk-dialog-border-color);
+    background: var(--zk-bg-secondary);
+  }
+
+  // Sizes
+  &-sm {
+    --zk-dialog-max-width: 360px;
+  }
+
+  &-lg {
+    --zk-dialog-max-width: 700px;
+  }
+
+  &-xl {
+    --zk-dialog-max-width: 900px;
+  }
+
+  &-fullscreen {
+    --zk-dialog-max-width: none;
+
+    .dialog-content {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+  }
+}
+
+// Animations
+@keyframes dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-content-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-content-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

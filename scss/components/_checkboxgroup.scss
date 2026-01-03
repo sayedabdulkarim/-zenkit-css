@@ -1,0 +1,45 @@
+// ========================================
+// CheckboxGroup Component
+// ========================================
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--zk-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  &-description {
+    font-size: 0.75rem;
+    color: var(--zk-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  &-error {
+    font-size: 0.75rem;
+    color: var(--zk-danger);
+    margin-top: 0.25rem;
+  }
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &-horizontal &-items {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}

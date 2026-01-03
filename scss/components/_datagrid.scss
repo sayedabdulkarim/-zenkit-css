@@ -1,0 +1,200 @@
+// ========================================
+// DataGrid Component
+// ========================================
+
+.datagrid {
+  --zk-datagrid-bg: var(--zk-bg-primary);
+  --zk-datagrid-border-color: var(--zk-border-color);
+  --zk-datagrid-header-bg: var(--zk-bg-secondary);
+  --zk-datagrid-row-hover-bg: var(--zk-bg-secondary);
+  --zk-datagrid-row-selected-bg: rgba(var(--zk-primary-rgb), 0.1);
+  --zk-datagrid-cell-padding: 0.75rem;
+
+  width: 100%;
+  background: var(--zk-datagrid-bg);
+  border: 1px solid var(--zk-datagrid-border-color);
+  border-radius: var(--zk-radius-md);
+  overflow: hidden;
+
+  &-container {
+    overflow-x: auto;
+  }
+
+  &-header {
+    display: flex;
+    background: var(--zk-datagrid-header-bg);
+    border-bottom: 1px solid var(--zk-datagrid-border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    &-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: var(--zk-datagrid-cell-padding);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--zk-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-right: 1px solid var(--zk-datagrid-border-color);
+      user-select: none;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &-sortable {
+        cursor: pointer;
+
+        &:hover {
+          color: var(--zk-text-primary);
+        }
+      }
+
+      &-resizable {
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          cursor: col-resize;
+        }
+      }
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-row {
+    display: flex;
+    border-bottom: 1px solid var(--zk-datagrid-border-color);
+    transition: background-color 0.1s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: var(--zk-datagrid-row-hover-bg);
+    }
+
+    &-selected {
+      background: var(--zk-datagrid-row-selected-bg);
+
+      &:hover {
+        background: var(--zk-datagrid-row-selected-bg);
+      }
+    }
+
+    &-expanded {
+      background: var(--zk-bg-secondary);
+    }
+  }
+
+  &-cell {
+    display: flex;
+    align-items: center;
+    padding: var(--zk-datagrid-cell-padding);
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    border-right: 1px solid var(--zk-datagrid-border-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &-editable {
+      cursor: text;
+
+      &:hover {
+        background: var(--zk-bg-secondary);
+      }
+    }
+  }
+
+  &-expand-row {
+    padding: 1rem;
+    background: var(--zk-bg-secondary);
+    border-bottom: 1px solid var(--zk-datagrid-border-color);
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--zk-datagrid-header-bg);
+    border-top: 1px solid var(--zk-datagrid-border-color);
+  }
+
+  &-pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  &-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--zk-text-muted);
+  }
+
+  // Striped rows
+  &-striped {
+    .datagrid-row:nth-child(even) {
+      background: var(--zk-bg-secondary);
+    }
+  }
+
+  // Bordered
+  &-bordered {
+    .datagrid-cell {
+      border: 1px solid var(--zk-datagrid-border-color);
+    }
+  }
+
+  // Compact
+  &-compact {
+    --zk-datagrid-cell-padding: 0.5rem;
+
+    .datagrid-cell {
+      font-size: 0.8125rem;
+    }
+  }
+
+  // Virtualized
+  &-virtual {
+    .datagrid-body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .datagrid-row {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+  }
+}

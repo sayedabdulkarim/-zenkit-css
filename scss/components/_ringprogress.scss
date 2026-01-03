@@ -1,0 +1,101 @@
+// ========================================
+// RingProgress Component
+// ========================================
+
+.ring-progress {
+  --zk-ring-size: 120px;
+  --zk-ring-thickness: 12px;
+  --zk-ring-track-color: var(--zk-bg-tertiary);
+  --zk-ring-fill-color: var(--zk-primary);
+  --zk-ring-round-caps: 1;
+
+  position: relative;
+  width: var(--zk-ring-size);
+  height: var(--zk-ring-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  &-track {
+    fill: none;
+    stroke: var(--zk-ring-track-color);
+    stroke-width: var(--zk-ring-thickness);
+  }
+
+  &-section {
+    fill: none;
+    stroke-width: var(--zk-ring-thickness);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+
+  &-label {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--zk-text-primary);
+      line-height: 1;
+    }
+
+    &-text {
+      font-size: 0.75rem;
+      color: var(--zk-text-muted);
+      margin-top: 0.25rem;
+    }
+  }
+
+  // Sizes
+  &-xs {
+    --zk-ring-size: 60px;
+    --zk-ring-thickness: 6px;
+
+    .ring-progress-label-value {
+      font-size: 0.875rem;
+    }
+  }
+
+  &-sm {
+    --zk-ring-size: 80px;
+    --zk-ring-thickness: 8px;
+
+    .ring-progress-label-value {
+      font-size: 1rem;
+    }
+  }
+
+  &-md {
+    --zk-ring-size: 120px;
+    --zk-ring-thickness: 12px;
+  }
+
+  &-lg {
+    --zk-ring-size: 160px;
+    --zk-ring-thickness: 16px;
+
+    .ring-progress-label-value {
+      font-size: 2rem;
+    }
+  }
+
+  &-xl {
+    --zk-ring-size: 200px;
+    --zk-ring-thickness: 20px;
+
+    .ring-progress-label-value {
+      font-size: 2.5rem;
+    }
+  }
+}

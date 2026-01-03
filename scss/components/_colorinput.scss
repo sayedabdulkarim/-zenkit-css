@@ -1,0 +1,103 @@
+// ========================================
+// ColorInput Component
+// ========================================
+
+.color-input {
+  --zk-color-input-swatch-size: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--zk-text-primary);
+  }
+
+  &-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--zk-bg-primary);
+    border: 1px solid var(--zk-border-color);
+    border-radius: var(--zk-radius-md);
+    transition: border-color 0.2s ease;
+
+    &:focus-within {
+      border-color: var(--zk-primary);
+      box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+    }
+  }
+
+  &-swatch {
+    width: var(--zk-color-input-swatch-size);
+    height: var(--zk-color-input-swatch-size);
+    border-radius: var(--zk-radius-sm);
+    border: 1px solid var(--zk-border-color);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  &-text {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    outline: none;
+    font-family: monospace;
+    text-transform: uppercase;
+  }
+
+  &-format {
+    font-size: 0.75rem;
+    color: var(--zk-text-muted);
+    text-transform: uppercase;
+  }
+
+  // Swatches
+  &-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+  }
+
+  &-swatch-option {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--zk-radius-sm);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &-selected {
+      border-color: var(--zk-primary);
+    }
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // Error
+  &-error {
+    .color-input-field {
+      border-color: var(--zk-danger);
+    }
+  }
+}

@@ -1,0 +1,127 @@
+// ========================================
+// NavLink Component
+// ========================================
+
+.navlink {
+  --zk-navlink-bg: transparent;
+  --zk-navlink-hover-bg: var(--zk-bg-secondary);
+  --zk-navlink-active-bg: rgba(var(--zk-primary-rgb), 0.1);
+  --zk-navlink-active-color: var(--zk-primary);
+  --zk-navlink-color: var(--zk-text-primary);
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+  color: var(--zk-navlink-color);
+  background: var(--zk-navlink-bg);
+  border-radius: var(--zk-radius-md);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: var(--zk-navlink-hover-bg);
+  }
+
+  &-active {
+    background: var(--zk-navlink-active-bg);
+    color: var(--zk-navlink-active-color);
+    font-weight: 500;
+
+    &:hover {
+      background: var(--zk-navlink-active-bg);
+    }
+  }
+
+  &-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--zk-text-muted);
+  }
+
+  &-active &-icon {
+    color: var(--zk-navlink-active-color);
+  }
+
+  &-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-description {
+    font-size: 0.75rem;
+    color: var(--zk-text-muted);
+    margin-top: 0.125rem;
+  }
+
+  &-right-section {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--zk-text-muted);
+  }
+
+  &-chevron {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  &-expanded &-chevron {
+    transform: rotate(90deg);
+  }
+
+  // Nested links
+  &-children {
+    padding-left: 2.75rem;
+  }
+
+  &-nested {
+    margin-left: 1rem;
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Variants
+  &-light {
+    --zk-navlink-hover-bg: var(--zk-bg-secondary);
+    --zk-navlink-active-bg: rgba(var(--zk-primary-rgb), 0.1);
+  }
+
+  &-filled {
+    --zk-navlink-active-bg: var(--zk-primary);
+    --zk-navlink-active-color: #fff;
+
+    &.navlink-active .navlink-icon {
+      color: #fff;
+    }
+  }
+
+  &-subtle {
+    --zk-navlink-hover-bg: transparent;
+    --zk-navlink-active-bg: transparent;
+
+    &:hover {
+      color: var(--zk-primary);
+    }
+  }
+
+  // Compact
+  &-compact {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+}
