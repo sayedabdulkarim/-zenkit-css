@@ -1,0 +1,182 @@
+// ========================================
+// Disclosure Component (Headless UI-style)
+// ========================================
+// A simple show/hide component for FAQs, details, etc.
+
+.disclosure {
+  border: 1px solid var(--zk-border-color);
+  border-radius: var(--zk-radius-md);
+  overflow: hidden;
+
+  // Button trigger
+  &-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--zk-bg-primary);
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--zk-text-primary);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 2px var(--zk-primary);
+    }
+
+    // Icon
+    &-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--zk-text-muted);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  // Panel content
+  &-panel {
+    padding: 0 1rem 1rem;
+    font-size: 0.875rem;
+    color: var(--zk-text-secondary);
+    line-height: 1.6;
+
+    // Animation
+    &-enter {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    &-enter-active {
+      max-height: 500px;
+      opacity: 1;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+    }
+
+    &-exit {
+      overflow: hidden;
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    &-exit-active {
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+    }
+  }
+
+  // Open state
+  &-open {
+    .disclosure-button-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Variants
+  &-flush {
+    border: none;
+    border-radius: 0;
+
+    .disclosure-button {
+      padding-left: 0;
+      padding-right: 0;
+      background: transparent;
+
+      &:hover {
+        background: transparent;
+        color: var(--zk-primary);
+      }
+    }
+
+    .disclosure-panel {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &-card {
+    background: var(--zk-bg-primary);
+    box-shadow: var(--zk-shadow-sm);
+
+    .disclosure-button {
+      font-weight: 600;
+    }
+  }
+
+  // Group - multiple disclosures stacked
+  &-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    .disclosure {
+      border-radius: 0;
+      margin-top: -1px;
+
+      &:first-child {
+        border-top-left-radius: var(--zk-radius-md);
+        border-top-right-radius: var(--zk-radius-md);
+        margin-top: 0;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: var(--zk-radius-md);
+        border-bottom-right-radius: var(--zk-radius-md);
+      }
+    }
+  }
+
+  // Separated group
+  &-group-separated {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .disclosure {
+      border-radius: var(--zk-radius-md);
+      margin-top: 0;
+    }
+  }
+
+  // Sizes
+  &-sm {
+    .disclosure-button {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+
+    .disclosure-panel {
+      padding: 0 0.75rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  &-lg {
+    .disclosure-button {
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+    }
+
+    .disclosure-panel {
+      padding: 0 1.25rem 1.25rem;
+      font-size: 0.9375rem;
+    }
+  }
+
+  // Disabled
+  &-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

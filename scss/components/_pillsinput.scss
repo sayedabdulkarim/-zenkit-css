@@ -1,0 +1,138 @@
+// ========================================
+// PillsInput Component (Mantine-style)
+// ========================================
+
+.pills-input {
+  --zk-pills-input-min-height: 36px;
+  --zk-pills-input-padding: 0.25rem 0.5rem;
+  --zk-pills-input-gap: 0.375rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--zk-pills-input-gap);
+  min-height: var(--zk-pills-input-min-height);
+  padding: var(--zk-pills-input-padding);
+  background: var(--zk-bg-primary);
+  border: 1px solid var(--zk-border-color);
+  border-radius: var(--zk-radius-md);
+  cursor: text;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover:not(&-disabled) {
+    border-color: var(--zk-border-hover);
+  }
+
+  &:focus-within {
+    border-color: var(--zk-primary);
+    box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+  }
+
+  // Input field
+  &-field {
+    flex: 1;
+    min-width: 60px;
+    padding: 0.25rem;
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    outline: none;
+
+    &::placeholder {
+      color: var(--zk-text-muted);
+    }
+  }
+
+  // Sizes
+  &-xs {
+    --zk-pills-input-min-height: 28px;
+    --zk-pills-input-padding: 0.125rem 0.375rem;
+    --zk-pills-input-gap: 0.25rem;
+
+    .pills-input-field {
+      font-size: 0.75rem;
+    }
+  }
+
+  &-sm {
+    --zk-pills-input-min-height: 32px;
+    --zk-pills-input-padding: 0.1875rem 0.4375rem;
+
+    .pills-input-field {
+      font-size: 0.8125rem;
+    }
+  }
+
+  &-md {
+    --zk-pills-input-min-height: 36px;
+  }
+
+  &-lg {
+    --zk-pills-input-min-height: 42px;
+    --zk-pills-input-padding: 0.375rem 0.625rem;
+    --zk-pills-input-gap: 0.5rem;
+
+    .pills-input-field {
+      font-size: 1rem;
+    }
+  }
+
+  &-xl {
+    --zk-pills-input-min-height: 50px;
+    --zk-pills-input-padding: 0.5rem 0.75rem;
+    --zk-pills-input-gap: 0.5rem;
+
+    .pills-input-field {
+      font-size: 1.125rem;
+    }
+  }
+
+  // States
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: var(--zk-bg-secondary);
+  }
+
+  &-error {
+    border-color: var(--zk-danger);
+
+    &:focus-within {
+      border-color: var(--zk-danger);
+      box-shadow: 0 0 0 3px rgba(var(--zk-danger-rgb), 0.1);
+    }
+  }
+
+  &-readonly {
+    background: var(--zk-bg-secondary);
+    cursor: default;
+  }
+
+  // Variants
+  &-filled {
+    background: var(--zk-bg-secondary);
+    border-color: transparent;
+
+    &:hover:not(.pills-input-disabled) {
+      background: var(--zk-bg-tertiary);
+    }
+
+    &:focus-within {
+      background: var(--zk-bg-primary);
+      border-color: var(--zk-primary);
+    }
+  }
+
+  &-unstyled {
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-height: auto;
+
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+}

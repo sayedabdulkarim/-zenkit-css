@@ -1,0 +1,127 @@
+// ========================================
+// Burger Component (Mantine-style)
+// ========================================
+
+.burger {
+  --zk-burger-size: 24px;
+  --zk-burger-color: var(--zk-text-primary);
+  --zk-burger-line-size: 2px;
+  --zk-burger-transition: 0.3s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--zk-burger-size) + 16px);
+  height: calc(var(--zk-burger-size) + 16px);
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: var(--zk-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--zk-bg-secondary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--zk-primary);
+    outline-offset: 2px;
+  }
+
+  // Inner container
+  &-inner {
+    position: relative;
+    width: var(--zk-burger-size);
+    height: var(--zk-burger-size);
+  }
+
+  // Lines
+  &-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--zk-burger-line-size);
+    background: var(--zk-burger-color);
+    border-radius: var(--zk-burger-line-size);
+    transition: transform var(--zk-burger-transition), opacity var(--zk-burger-transition);
+
+    &:nth-child(1) {
+      top: 20%;
+    }
+
+    &:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:nth-child(3) {
+      bottom: 20%;
+    }
+  }
+
+  // Opened state
+  &-opened {
+    .burger-line {
+      &:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+        transform: translateY(-50%) scaleX(0);
+      }
+
+      &:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+      }
+    }
+  }
+
+  // Sizes
+  &-xs {
+    --zk-burger-size: 16px;
+    --zk-burger-line-size: 1.5px;
+    width: calc(var(--zk-burger-size) + 12px);
+    height: calc(var(--zk-burger-size) + 12px);
+    padding: 6px;
+  }
+
+  &-sm {
+    --zk-burger-size: 20px;
+    --zk-burger-line-size: 2px;
+    width: calc(var(--zk-burger-size) + 14px);
+    height: calc(var(--zk-burger-size) + 14px);
+    padding: 7px;
+  }
+
+  &-md {
+    --zk-burger-size: 24px;
+  }
+
+  &-lg {
+    --zk-burger-size: 32px;
+    --zk-burger-line-size: 3px;
+    width: calc(var(--zk-burger-size) + 20px);
+    height: calc(var(--zk-burger-size) + 20px);
+    padding: 10px;
+  }
+
+  &-xl {
+    --zk-burger-size: 40px;
+    --zk-burger-line-size: 4px;
+    width: calc(var(--zk-burger-size) + 24px);
+    height: calc(var(--zk-burger-size) + 24px);
+    padding: 12px;
+  }
+
+  // Disabled
+  &:disabled,
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,188 @@
+// ========================================
+// Listbox Component (Chakra/Headless-style)
+// ========================================
+
+.listbox {
+  --zk-listbox-bg: var(--zk-bg-primary);
+  --zk-listbox-border: var(--zk-border-color);
+  --zk-listbox-radius: var(--zk-radius-md);
+  --zk-listbox-shadow: var(--zk-shadow-lg);
+  --zk-listbox-max-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  background: var(--zk-listbox-bg);
+  border: 1px solid var(--zk-listbox-border);
+  border-radius: var(--zk-listbox-radius);
+  box-shadow: var(--zk-listbox-shadow);
+  max-height: var(--zk-listbox-max-height);
+  overflow-y: auto;
+  outline: none;
+
+  // Button trigger
+  &-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--zk-bg-primary);
+    border: 1px solid var(--zk-border-color);
+    border-radius: var(--zk-radius-md);
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: var(--zk-border-hover);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--zk-primary);
+      box-shadow: 0 0 0 3px rgba(var(--zk-primary-rgb), 0.1);
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--zk-text-muted);
+      transition: transform 0.15s ease;
+    }
+
+    &[aria-expanded="true"] &-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Options container
+  &-options {
+    padding: 0.25rem;
+    list-style: none;
+    margin: 0;
+  }
+
+  // Option item
+  &-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    user-select: none;
+
+    &:hover,
+    &-active {
+      background: var(--zk-bg-secondary);
+    }
+
+    &-selected {
+      background: rgba(var(--zk-primary-rgb), 0.1);
+      color: var(--zk-primary);
+
+      &:hover {
+        background: rgba(var(--zk-primary-rgb), 0.15);
+      }
+    }
+
+    &-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &-check {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--zk-primary);
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    &-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    &-label {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-description {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--zk-text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // Group
+  &-group {
+    &-label {
+      padding: 0.5rem 0.75rem 0.25rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--zk-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  // Divider
+  &-divider {
+    height: 1px;
+    margin: 0.25rem 0;
+    background: var(--zk-border-color);
+  }
+
+  // Empty state
+  &-empty {
+    padding: 1rem;
+    text-align: center;
+    color: var(--zk-text-muted);
+    font-size: 0.875rem;
+  }
+
+  // Multiple selection
+  &-multiple {
+    .listbox-option-selected {
+      background: transparent;
+
+      &:hover {
+        background: var(--zk-bg-secondary);
+      }
+    }
+  }
+
+  // Sizes
+  &-sm {
+    .listbox-option {
+      padding: 0.375rem 0.5rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  &-lg {
+    .listbox-option {
+      padding: 0.625rem 1rem;
+      font-size: 1rem;
+    }
+  }
+}

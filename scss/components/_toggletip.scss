@@ -1,0 +1,159 @@
+// ========================================
+// Toggletip Component (Chakra-style)
+// ========================================
+// A toggletip is like a tooltip but triggered by click
+// and is more accessible (works with screen readers)
+
+.toggletip {
+  position: relative;
+  display: inline-flex;
+
+  // Trigger button
+  &-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--zk-text-secondary);
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--zk-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--zk-primary);
+      outline-offset: 2px;
+      border-radius: var(--zk-radius-sm);
+    }
+
+    // Icon inside trigger
+    &-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Content panel
+  &-content {
+    --zk-toggletip-bg: var(--zk-bg-elevated);
+    --zk-toggletip-color: var(--zk-text-primary);
+    --zk-toggletip-shadow: var(--zk-shadow-lg);
+    --zk-toggletip-radius: var(--zk-radius-md);
+    --zk-toggletip-padding: 0.75rem 1rem;
+    --zk-toggletip-max-width: 320px;
+
+    position: absolute;
+    z-index: 1000;
+    padding: var(--zk-toggletip-padding);
+    background: var(--zk-toggletip-bg);
+    color: var(--zk-toggletip-color);
+    border-radius: var(--zk-toggletip-radius);
+    box-shadow: var(--zk-toggletip-shadow);
+    max-width: var(--zk-toggletip-max-width);
+    font-size: 0.875rem;
+    line-height: 1.5;
+
+    // Hidden by default
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+
+    // Arrow
+    &::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: inherit;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Open state
+  &-open &-content {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  // Placements
+  &-top &-content {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+      bottom: -4px;
+      left: 50%;
+      margin-left: -4px;
+    }
+  }
+
+  &-bottom &-content {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+      top: -4px;
+      left: 50%;
+      margin-left: -4px;
+    }
+  }
+
+  &-left &-content {
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::before {
+      right: -4px;
+      top: 50%;
+      margin-top: -4px;
+    }
+  }
+
+  &-right &-content {
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::before {
+      left: -4px;
+      top: 50%;
+      margin-top: -4px;
+    }
+  }
+
+  // Close button inside content
+  &-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    color: var(--zk-text-muted);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+      color: var(--zk-text-primary);
+    }
+  }
+
+  // With close button - add padding
+  &-with-close &-content {
+    padding-right: 2.5rem;
+  }
+}

@@ -1,0 +1,267 @@
+// ========================================
+// RangeCalendar Component (HeroUI-style)
+// ========================================
+// Calendar specifically for selecting date ranges
+
+.range-calendar {
+  --zk-rcal-bg: var(--zk-bg-primary);
+  --zk-rcal-border: var(--zk-border-color);
+  --zk-rcal-radius: var(--zk-radius-lg);
+  --zk-rcal-cell-size: 36px;
+  --zk-rcal-gap: 2px;
+
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--zk-rcal-bg);
+  border: 1px solid var(--zk-rcal-border);
+  border-radius: var(--zk-rcal-radius);
+  padding: 1rem;
+  user-select: none;
+
+  // Header with navigation
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  &-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--zk-text-primary);
+  }
+
+  &-nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  &-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    color: var(--zk-text-secondary);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+      color: var(--zk-text-primary);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  // Weekday headers
+  &-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, var(--zk-rcal-cell-size));
+    gap: var(--zk-rcal-gap);
+    margin-bottom: 0.5rem;
+  }
+
+  &-weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--zk-rcal-cell-size);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--zk-text-muted);
+    text-transform: uppercase;
+  }
+
+  // Days grid
+  &-days {
+    display: grid;
+    grid-template-columns: repeat(7, var(--zk-rcal-cell-size));
+    gap: var(--zk-rcal-gap);
+  }
+
+  // Day cell
+  &-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--zk-rcal-cell-size);
+    font-size: 0.875rem;
+    color: var(--zk-text-primary);
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.1s ease, color 0.1s ease;
+    position: relative;
+
+    &:hover:not(&-disabled):not(&-outside) {
+      background: var(--zk-bg-secondary);
+    }
+
+    // Outside current month
+    &-outside {
+      color: var(--zk-text-disabled);
+    }
+
+    // Today
+    &-today {
+      font-weight: 600;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background: var(--zk-primary);
+        border-radius: 50%;
+      }
+    }
+
+    // Disabled
+    &-disabled {
+      color: var(--zk-text-disabled);
+      cursor: not-allowed;
+    }
+
+    // Selected start
+    &-range-start {
+      background: var(--zk-primary);
+      color: #fff;
+      border-radius: var(--zk-radius-sm) 0 0 var(--zk-radius-sm);
+
+      &:hover {
+        background: var(--zk-primary-dark);
+      }
+    }
+
+    // Selected end
+    &-range-end {
+      background: var(--zk-primary);
+      color: #fff;
+      border-radius: 0 var(--zk-radius-sm) var(--zk-radius-sm) 0;
+
+      &:hover {
+        background: var(--zk-primary-dark);
+      }
+    }
+
+    // In range (between start and end)
+    &-in-range {
+      background: rgba(var(--zk-primary-rgb), 0.1);
+      color: var(--zk-primary);
+      border-radius: 0;
+
+      &:hover {
+        background: rgba(var(--zk-primary-rgb), 0.2);
+      }
+    }
+
+    // Single day selected (start equals end)
+    &-range-start.range-calendar-day-range-end {
+      border-radius: var(--zk-radius-sm);
+    }
+
+    // Selection preview on hover
+    &-selection-preview {
+      background: rgba(var(--zk-primary-rgb), 0.05);
+    }
+  }
+
+  // Dual calendar mode
+  &-dual {
+    flex-direction: row;
+    gap: 1.5rem;
+
+    .range-calendar-month {
+      flex: 1;
+    }
+
+    .range-calendar-divider {
+      width: 1px;
+      background: var(--zk-border-color);
+      margin: 0 0.5rem;
+    }
+  }
+
+  // Presets panel
+  &-presets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    border-right: 1px solid var(--zk-border-color);
+    min-width: 140px;
+  }
+
+  &-preset {
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--zk-radius-sm);
+    font-size: 0.8125rem;
+    color: var(--zk-text-secondary);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: var(--zk-bg-secondary);
+      color: var(--zk-text-primary);
+    }
+
+    &-active {
+      background: rgba(var(--zk-primary-rgb), 0.1);
+      color: var(--zk-primary);
+    }
+  }
+
+  // With presets layout
+  &-with-presets {
+    flex-direction: row;
+  }
+
+  // Footer
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--zk-border-color);
+  }
+
+  &-selected-range {
+    font-size: 0.8125rem;
+    color: var(--zk-text-secondary);
+  }
+
+  &-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  // Sizes
+  &-sm {
+    --zk-rcal-cell-size: 28px;
+    padding: 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  &-lg {
+    --zk-rcal-cell-size: 44px;
+    padding: 1.25rem;
+  }
+}

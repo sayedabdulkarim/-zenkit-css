@@ -197,6 +197,18 @@
 @use 'components/floatcomponent';
 
 // ----------------------------------------
+// 5d. Phase 8 Components (100% Library Coverage)
+// ----------------------------------------
+@use 'components/absolutecenter';
+@use 'components/pillsinput';
+@use 'components/burger';
+@use 'components/listbox';
+@use 'components/linkoverlay';
+@use 'components/toggletip';
+@use 'components/disclosure';
+@use 'components/rangecalendar';
+
+// ----------------------------------------
 // 6. Components - JavaScript Enhanced
 // ----------------------------------------
 @use 'components/accordion';

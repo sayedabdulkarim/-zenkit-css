@@ -1,0 +1,46 @@
+// ========================================
+// AbsoluteCenter Component (Chakra-style)
+// ========================================
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  // Axis variants
+  &-horizontal {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-vertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // With specific positioning
+  &-top {
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  &-bottom {
+    top: auto;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+
+  &-left {
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  &-right {
+    left: auto;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}
